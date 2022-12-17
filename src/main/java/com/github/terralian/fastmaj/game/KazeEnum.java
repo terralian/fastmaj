@@ -5,7 +5,7 @@ package com.github.terralian.fastmaj.game;
  * <p>
  * 该类对风从东到北编码[0, 3]，同编码可以直接转换
  * 
- * @author terra.lian 
+ * @author terra.lian
  */
 public enum KazeEnum {
     /**
@@ -82,7 +82,7 @@ public enum KazeEnum {
             order -= 3;
         return getByOrder(order);
     }
-    
+
     /**
      * 获取自己的自风
      * <p>
@@ -94,15 +94,29 @@ public enum KazeEnum {
     public static KazeEnum jiKaze(int position, int oya) {
         // 本场自风
         // 南（-3） 西（-2） 北（-1） 东（0） 南（1） 西（2） 北（3）
-        //     <--       东             南           西           北
+        // <-- 东 南 西 北
         // 计算方式 = 计算目标（如东0） - 当前亲（如南1）
-        //       = -1 if < 0 then + 4
-        //       = 3
+        // = -1 if < 0 then + 4
+        // = 3
         int kazeOffset = position - oya;
         if (kazeOffset < 0) {
             kazeOffset += 4;
         }
         return getByOrder(kazeOffset);
+    }
+
+    /**
+     * 根据自风及庄家获取自风对应的玩家
+     * 
+     * @param jikazeOrder 自风的序号
+     * @param oya 庄家
+     */
+    public static int getKazePlayer(int jikazeOrder, int oya) {
+        int kazeOffset = jikazeOrder + oya;
+        if (kazeOffset >= 4) {
+            kazeOffset -= 4;
+        }
+        return kazeOffset;
     }
 
     @Override

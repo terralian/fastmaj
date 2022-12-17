@@ -669,8 +669,7 @@ public class TenhouStreamMajongGameTest {
         StreamMajongGame majongGame = MajongGameBuilder.withDefault() //
                 .setYamaWorker(new TenhouYamaWorker(builder.getSeed())) //
                 .addGameLogger(new PrintGameLogger().setShortKyokuSummary(true))//
-                .addGameLogger(new PointCheckLogger(allround))
-                .build(players);
+                .addGameLogger(new PointCheckLogger(allround)).build(players);
         majongGame.setConfig(builder.getConfig());
 
         majongGame.startGame();
@@ -945,6 +944,55 @@ public class TenhouStreamMajongGameTest {
     public void test40() throws Exception {
         TenhouTestPlayerBuilder builder = new TenhouTestPlayerBuilder();
         String fileName = "tehou/2021010917gm-0089-0000-d9225d74&tw=1.mjlog";
+        builder.getPaifuParser().parseStream(this.getClass().getClassLoader().getResourceAsStream(fileName));
+
+        List<Integer[]> allround = builder.getAllRoundPoints();
+        List<QueueReplayPlayer> players = builder.getValue();
+        StreamMajongGame majongGame = MajongGameBuilder.withDefault() //
+                .setYamaWorker(new TenhouYamaWorker(builder.getSeed())) //
+                .addGameLogger(new PrintGameLogger().setShortKyokuSummary(false))//
+                .addGameLogger(new PointCheckLogger(allround)).build(players);
+        majongGame.setConfig(builder.getConfig());
+
+        majongGame.startGame();
+
+        int[] expected = builder.getPlayerPoints();
+        int[] actual = majongGame.getGameCore().getPlayerPoints();
+        for (int i = 0; i < players.size(); i++) {
+            assertEquals(expected[i], actual[i]);
+        }
+    }
+
+    /**
+     * 第一巡暗杠后立直
+     */
+    @Test
+    public void test41() throws Exception {
+        TenhouTestPlayerBuilder builder = new TenhouTestPlayerBuilder();
+        String fileName = "tehou/2015012707gm-0029-0000-bf2d93df&tw=2.mjlog";
+        builder.getPaifuParser().parseStream(this.getClass().getClassLoader().getResourceAsStream(fileName));
+
+        List<Integer[]> allround = builder.getAllRoundPoints();
+        List<QueueReplayPlayer> players = builder.getValue();
+        StreamMajongGame majongGame = MajongGameBuilder.withDefault() //
+                .setYamaWorker(new TenhouYamaWorker(builder.getSeed())) //
+                .addGameLogger(new PrintGameLogger().setShortKyokuSummary(false))//
+                .addGameLogger(new PointCheckLogger(allround)).build(players);
+        majongGame.setConfig(builder.getConfig());
+
+        majongGame.startGame();
+
+        int[] expected = builder.getPlayerPoints();
+        int[] actual = majongGame.getGameCore().getPlayerPoints();
+        for (int i = 0; i < players.size(); i++) {
+            assertEquals(expected[i], actual[i]);
+        }
+    }
+
+    @Test
+    public void test42() throws Exception {
+        TenhouTestPlayerBuilder builder = new TenhouTestPlayerBuilder();
+        String fileName = "tehou/2020072511gm-0029-0000-a46d587e&tw=0.mjlog";
         builder.getPaifuParser().parseStream(this.getClass().getClassLoader().getResourceAsStream(fileName));
 
         List<Integer[]> allround = builder.getAllRoundPoints();

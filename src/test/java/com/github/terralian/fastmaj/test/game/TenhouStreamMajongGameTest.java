@@ -989,29 +989,6 @@ public class TenhouStreamMajongGameTest {
         }
     }
 
-    @Test
-    public void test42() throws Exception {
-        TenhouTestPlayerBuilder builder = new TenhouTestPlayerBuilder();
-        String fileName = "tehou/2020072511gm-0029-0000-a46d587e&tw=0.mjlog";
-        builder.getPaifuParser().parseStream(this.getClass().getClassLoader().getResourceAsStream(fileName));
-
-        List<Integer[]> allround = builder.getAllRoundPoints();
-        List<QueueReplayPlayer> players = builder.getValue();
-        StreamMajongGame majongGame = MajongGameBuilder.withDefault() //
-                .setYamaWorker(new TenhouYamaWorker(builder.getSeed())) //
-                .addGameLogger(new PrintGameLogger().setShortKyokuSummary(false))//
-                .addGameLogger(new PointCheckLogger(allround)).build(players);
-        majongGame.setConfig(builder.getConfig());
-
-        majongGame.startGame();
-
-        int[] expected = builder.getPlayerPoints();
-        int[] actual = majongGame.getGameCore().getPlayerPoints();
-        for (int i = 0; i < players.size(); i++) {
-            assertEquals(expected[i], actual[i]);
-        }
-    }
-
     private static class PointCheckLogger implements IGameLogger {
 
         private List<Integer[]> allround;

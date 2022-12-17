@@ -8,8 +8,8 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
- * 牌河处理动作请求参数，如鸣牌荣和等，该类用于存储玩家所选动作的请求参数返回给游戏。创建时应当使用{@link Factory}进行创建。
- * 
+ * 牌河处理动作请求参数，如鸣牌荣和等，该类用于存储玩家所选动作的请求参数返回给游戏。
+ *
  * @author terra.lian
  */
 @Getter

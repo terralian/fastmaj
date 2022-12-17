@@ -1,14 +1,14 @@
 package com.github.terralian.fastmaj.agari;
 
-import java.util.Collection;
-import java.util.List;
-
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.yaku.IYaku;
 
+import java.util.Collection;
+import java.util.List;
+
 /**
  * 点数计算
- * 
+ *
  * @author terra.lian
  */
 public interface IPointCalculator {
@@ -76,7 +76,6 @@ public interface IPointCalculator {
      * @param yakumanMultiple 役满倍数，复合役满或者多倍役满
      * @param fu 符数
      * @param han 番数
-     * @param gameConfig 游戏规则
      */
     int calcBasePoint(int yakumanMultiple, int fu, int han);
 

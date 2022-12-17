@@ -219,7 +219,7 @@ public class Hai implements IHai {
      */
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof IHai ? equals((IHai) obj) : false;
+        return obj instanceof IHai && equals((IHai) obj);
     }
 
     /**

@@ -1,7 +1,5 @@
 package com.github.terralian.fastmaj.game;
 
-import java.util.Set;
-
 import com.github.terralian.fastmaj.game.action.IPlayerAction;
 import com.github.terralian.fastmaj.game.action.river.IRiverAction;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
@@ -13,9 +11,11 @@ import com.github.terralian.fastmaj.game.validator.IPlayerActionValidator;
 import com.github.terralian.fastmaj.game.validator.river.IRiverActionValidator;
 import com.github.terralian.fastmaj.game.validator.tehai.ITehaiActionValidator;
 
+import java.util.Set;
+
 /**
  * 玩家动作管理器，用于管理{@link IPlayerAction}及对应的{@link IPlayerActionValidator}
- * 
+ *
  * @author terra.lian
  * @since 2022-10-25
  */
@@ -46,13 +46,11 @@ public interface IPlayerActionManager {
 
     /**
      * 校验单个动作是否可执行
-     * 
+     *
      * @param actionType 动作类型
      * @param position 当前玩家
-     * @param tehai 玩家的手牌
-     * @param syanten 玩家的向听数
-     * @param isReach 是否立直
      * @param gameConfig 游戏规则
+     * @param gameCore 游戏核心
      */
     boolean validateTehaiAction(TehaiActionType actionType, int position, GameConfig gameConfig, IGameCore gameCore);
 

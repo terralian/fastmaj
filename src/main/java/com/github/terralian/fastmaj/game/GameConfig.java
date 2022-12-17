@@ -4,7 +4,6 @@ import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.option.DoraAddRule;
 import com.github.terralian.fastmaj.game.option.ReachRule;
-
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -117,7 +116,7 @@ public class GameConfig {
         if (tehaiActionType == null && riverActionType == null) {
             return false;
         }
-        if (riverActionType != null && riverActionType == RiverActionType.MINKAN) {
+        if (riverActionType == RiverActionType.MINKAN) {
             return getNewDoraByMinkanRule() == timePoint;
         }
         if (tehaiActionType == TehaiActionType.ANNKAN) {

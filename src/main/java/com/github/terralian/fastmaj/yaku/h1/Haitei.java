@@ -24,7 +24,7 @@ public class Haitei implements IYaku {
         }
         // 岭上和海底不能复合
         DrawFrom lastDrawFrom = holder.getLastDrawFrom();
-        if (lastDrawFrom != null && lastDrawFrom == DrawFrom.RINSYIN) {
+        if (lastDrawFrom == DrawFrom.RINSYIN) {
             return false;
         }
         return holder.getYamaCountdown() == 0 && !holder.isRon();

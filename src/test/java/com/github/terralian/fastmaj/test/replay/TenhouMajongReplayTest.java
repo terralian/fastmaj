@@ -230,11 +230,4 @@ public class TenhouMajongReplayTest extends TenhouMajongReplay {
         String fileName = "tehou/2021100323gm-00a9-0000-d0ac1302&tw=1.mjlog";
         this.getPaifuParser().parseStream(this.getClass().getClassLoader().getResourceAsStream(fileName));
     }
-
-    @Test
-    public void test29() throws Exception {
-        ((PrintGameLogger) gameLogger).setShortKyokuSummary(true);
-        String fileName = "tehou/2020072511gm-0029-0000-a46d587e&tw=0.mjlog";
-        this.getPaifuParser().parseStream(this.getClass().getClassLoader().getResourceAsStream(fileName));
-    }
 }

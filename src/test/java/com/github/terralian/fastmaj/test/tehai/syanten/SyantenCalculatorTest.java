@@ -133,11 +133,11 @@ public class SyantenCalculatorTest {
             String[] splits = string.split(" ");
             int[] value34 = new int[14];
             for (int i = 0; i < 14; i++) {
-                value34[i] = Integer.valueOf(splits[i]);
+                value34[i] = Integer.parseInt(splits[i]);
             }
-            int normal = Integer.valueOf(splits[14]);
-            int kokusi = Integer.valueOf(splits[15]);
-            int tiitoitu = Integer.valueOf(splits[16]);
+            int normal = Integer.parseInt(splits[14]);
+            int kokusi = Integer.parseInt(splits[15]);
+            int tiitoitu = Integer.parseInt(splits[16]);
 
             int minSyantenInput = Math.min(normal, kokusi);
             minSyantenInput = Math.min(minSyantenInput, tiitoitu);

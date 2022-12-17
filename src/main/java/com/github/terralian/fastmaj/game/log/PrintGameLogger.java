@@ -67,7 +67,7 @@ public class PrintGameLogger implements IGameLogger {
             return;
         }
         System.out.println("   对局结束   ");
-        System.out.println("");
+        System.out.println();
     }
 
     @Override
@@ -81,8 +81,8 @@ public class PrintGameLogger implements IGameLogger {
         System.out.println("玩家4：第" + (ranking[3]) + "名 " + gameCore.getPlayerPoints()[3]);
 
         System.out.println("*** *** ***");
-        System.out.println("");
-        System.out.println("");
+        System.out.println();
+        System.out.println();
     }
 
     @Override

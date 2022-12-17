@@ -220,8 +220,6 @@ public class Yama implements IYama {
 
     /**
      * 获取所有的宝牌
-     * 
-     * @param isReach 是否立直，立直时会返回里宝牌
      */
     @Override
     public List<IHai> getDoras() {

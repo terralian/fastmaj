@@ -86,11 +86,7 @@ public class QueueReplayPlayer implements IPlayer {
      * @param action 动作
      */
     public void addRiverAction(int round, int actionCount, RiverActionCall action) {
-        Map<Integer, RiverActionCall> roundActionMap = riverActionCalls.get(round);
-        if (roundActionMap == null) {
-            roundActionMap = new HashMap<>();
-            riverActionCalls.put(round, roundActionMap);
-        }
+        Map<Integer, RiverActionCall> roundActionMap = riverActionCalls.computeIfAbsent(round, k -> new HashMap<>());
         roundActionMap.put(actionCount, action);
     }
 

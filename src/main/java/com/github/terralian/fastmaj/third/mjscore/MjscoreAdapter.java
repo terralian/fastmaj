@@ -98,13 +98,12 @@ public class MjscoreAdapter implements ITehaiAgariDivider {
         ITehaiLock tehaiLock = tehai.getLock();
 
         Set<IHai> annkotsu = new HashSet<>(agariDivide.getHandKotsuFirst());
-        Set<IHai> minkotsu = new HashSet<>();
         Set<IHai> allKanKotsu = new HashSet<>(tehaiLock.getNotChiFirst());
         
         // 所有的刻子/杠子
         allKanKotsu.addAll(agariDivide.getHandKotsuFirst());
         // 明刻包含杠
-        minkotsu.addAll(tehaiLock.getPonFirst());
+        Set<IHai> minkotsu = new HashSet<>(tehaiLock.getPonFirst());
 
         // 移除红宝牌信息
         IHai clearRed = agariHai.isRedDora() //

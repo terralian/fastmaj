@@ -22,7 +22,7 @@ public class Syousuusii implements IYakuman {
         // 3刻一雀头
         int[] value34 = Encode34.toEncode34(tehai.getAll());
         for (int i = Encode34.TON; i <= Encode34.PEI; i++) {
-            if (toitu == false && value34[i] == 2)
+            if (!toitu && value34[i] == 2)
                 toitu = true;
             else if (value34[i] >= 3)
                 kootu++;

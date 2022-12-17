@@ -81,7 +81,6 @@ public abstract class DoraHelper {
      * 
      * @param tehai 手牌
      * @param doraHais 宝牌
-     * @param withKita 是否包含拔北
      */
     public static int countDoraSize(ITehai tehai, List<IHai> doraHais) {
         int doraSize = 0;
@@ -101,7 +100,6 @@ public abstract class DoraHelper {
      * 统计红宝牌的数量
      * 
      * @param tehai 手牌
-     * @param doraHais 宝牌
      */
     public static int countRedDoraSize(ITehai tehai) {
         int doraSize = 0;

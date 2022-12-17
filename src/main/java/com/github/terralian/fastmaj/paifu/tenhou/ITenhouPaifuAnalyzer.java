@@ -132,7 +132,6 @@ public interface ITenhouPaifuAnalyzer {
      * 拔北的时候调用
      * 
      * @param position 拔北的玩家
-     * @param kitaHai 拔北的牌
      */
     default void kita(int position) {}
 

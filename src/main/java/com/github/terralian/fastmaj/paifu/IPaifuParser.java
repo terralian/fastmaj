@@ -14,7 +14,6 @@ public interface IPaifuParser {
      * 解析牌谱文件
      * 
      * @param file 文件
-     * @return 对应实体
      * @throws Exception IO异常或者解析异常
      */
     void parseFile(File file) throws Exception;
@@ -23,7 +22,6 @@ public interface IPaifuParser {
      * 解析流
      * 
      * @param in 字节流
-     * @return 对应实体
      * @throws Exception IO异常或者解析异常
      */
     void parseStream(InputStream in) throws Exception;

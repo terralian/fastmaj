@@ -21,10 +21,10 @@ public class RonAction extends AgariAction implements IRiverAction {
 
     /**
      * 执行荣和操作
-     * 
+     *
+     * @param value 参数
      * @param gameConfig 游戏规则
      * @param gameCore 游戏核心
-     * @param players 玩家
      */
     public void doAction(RiverActionValue value, GameConfig gameConfig, IGameCore gameCore) {
         // 坐席

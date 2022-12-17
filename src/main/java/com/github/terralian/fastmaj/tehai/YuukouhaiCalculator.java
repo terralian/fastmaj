@@ -76,8 +76,7 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
         int[] value34 = Encode34.toEncode34(tehai.getAll());
         int currentSyanten = syantenCalculator.calcTiitoitu(value34);
         List<IHai> values = tehai.getAll();
-        for (int i = 0; i < values.size(); i++) {
-            IHai hai = values.get(i);
+        for (IHai hai : values) {
             value34[hai.getValue()]++;
             if (syantenCalculator.calcTiitoitu(value34) < currentSyanten) {
                 yuukouhais.add(hai);
@@ -144,8 +143,8 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
 
     /**
      * 计算手牌的非孤立牌（指某张牌和手牌中的一枚牌可以形成搭子）
-     * 
-     * @param tehai34 手牌
+     *
+     * @param hais 手牌
      */
     private int[] calcNotKoritu(List<IHai> hais) {
         boolean[] work = new boolean[Encode34.length()];

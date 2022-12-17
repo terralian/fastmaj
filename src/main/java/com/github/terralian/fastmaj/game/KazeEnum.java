@@ -28,17 +28,18 @@ public enum KazeEnum {
     /**
      * 风名
      */
-    private String kazeName;
+    private final String kazeName;
 
     /**
      * 顺序，[0, 3]
      */
-    private Integer order;
+    private final Integer order;
 
     /**
      * 创建枚举
-     * 
-     * @param name 风名
+     *
+     * @param kazeName 风名
+     * @param order 序号
      */
     private KazeEnum(String kazeName, Integer order) {
         this.kazeName = kazeName;

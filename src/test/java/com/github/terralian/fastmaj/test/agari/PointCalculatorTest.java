@@ -163,6 +163,7 @@ public class PointCalculatorTest {
 
         // 有复合
         gameConfig.setMutiYakuman(true);
+        gameConfig.setDoubleYakuman(true);
         basePoint = pointCalculator.calcBasePoint(yakus, -1, -1, gameConfig);
         assertEquals(8000 * 2, basePoint);
 

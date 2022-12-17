@@ -149,15 +149,6 @@ public class PlayerGameContext {
     // -------------------------------------------
 
     /**
-     * 获取玩家
-     * 
-     * @param position 玩家索引
-     */
-    public IPlayer getPlayer(int position) {
-        return getPlayer(position);
-    }
-
-    /**
      * 返回玩家是否鸣牌
      */
     public boolean isNaki() {

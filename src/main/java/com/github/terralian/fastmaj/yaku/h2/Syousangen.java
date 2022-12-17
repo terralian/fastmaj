@@ -20,12 +20,12 @@ public class Syousangen implements IYaku {
         boolean toitu = false;
         int koutu = 0;
         for (int i = Encode34.HAKU; i <= Encode34.TYUN; i++) {
-            if (value34[i] == 2 && toitu == false)
+            if (value34[i] == 2 && !toitu)
                 toitu = true;
             if (value34[i] >= 3)
                 koutu++;
         }
-        return (koutu == 2 && toitu == true);
+        return (koutu == 2 && toitu);
     }
 
     @Override

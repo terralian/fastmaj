@@ -8,8 +8,8 @@ import lombok.Data;
 
 /**
  * 和了信息
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 @Data
 public class AgariInfo {

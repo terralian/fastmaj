@@ -93,7 +93,7 @@ class MjsAgari {
      */
     public static int[] agari(int[] value34, int[] pos) {
         int key = calc_key(value34, pos);
-        return tbl.get(Integer.valueOf(key));
+        return tbl.get(key);
     }
 
     /**

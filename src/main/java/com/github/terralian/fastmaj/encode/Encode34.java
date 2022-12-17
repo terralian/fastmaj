@@ -277,8 +277,8 @@ public abstract class Encode34 {
      */
     public static ITehai toTehai(int[] haiValues) {
         List<IHai> hais = new ArrayList<>();
-        for (int i = 0; i < haiValues.length; i++) {
-            hais.add(HaiPool.getByValue(haiValues[i]));
+        for (int haiValue : haiValues) {
+            hais.add(HaiPool.getByValue(haiValue));
         }
         return new Tehai(hais);
     }
@@ -319,8 +319,8 @@ public abstract class Encode34 {
 
     /**
      * 将手牌集合转换为34编码数组
-     * 
-     * @param tehai 手牌
+     *
+     * @param hais 手牌
      */
     public static int[] toEncode34(Collection<IHai> hais) {
         int[] value = new int[TYUN + 1];
@@ -483,9 +483,9 @@ public abstract class Encode34 {
      */
     public static int tehaiSize(int[] array) {
         int tehaiSize = 0;
-        for (int i = 0; i < array.length; i++)
-            if (array[i] > 0)
-                tehaiSize += array[i];
+        for (int i : array)
+            if (i > 0)
+                tehaiSize += i;
         return tehaiSize;
     }
 

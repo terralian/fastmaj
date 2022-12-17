@@ -40,7 +40,7 @@ public abstract class ZipUtil {
      * @throws FileNotFoundException 文件未找到异常
      */
     public static String ungzip(File file) throws FileNotFoundException, IOException {
-        try (FileInputStream fin = new FileInputStream(file);) {
+        try (FileInputStream fin = new FileInputStream(file)) {
             return ungzip(fin);
         }
     }
@@ -49,15 +49,15 @@ public abstract class ZipUtil {
      * 解压GZIP，返回加压的字符串
      * <p>
      * 天凤牌谱使用GZIP进行二次压缩，通过解压可以获得其XML文档
-     * 
-     * @param file 文件
-     * @throws IOException IO异常
+     *
+     * @param stream 流
+     * @throws IOException           IO异常
      * @throws FileNotFoundException 文件未找到异常
      */
     public static String ungzip(InputStream stream) throws FileNotFoundException, IOException {
         try (GZIPInputStream gzin = new GZIPInputStream(stream);
                 InputStreamReader ir = new InputStreamReader(gzin);
-                BufferedReader br = new BufferedReader(ir);) {
+                BufferedReader br = new BufferedReader(ir)) {
             return br.lines().collect(Collectors.joining(System.lineSeparator()));
         }
     }

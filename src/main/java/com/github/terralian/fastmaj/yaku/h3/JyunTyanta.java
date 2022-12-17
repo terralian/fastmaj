@@ -30,8 +30,8 @@ public class JyunTyanta implements IYaku {
             return false;
 
         int shuntsuSize = divide.getAllShuntsuFirst().size();
-        if (shuntsuSize > 0 && divide.getAllKanKotsuFirst().stream().noneMatch(k -> !k.isYaotyuHai()) // 刻子没有不是幺九牌的
-                && divide.getAllShuntsuFirst().stream().noneMatch(k -> !isTyantaShuntsuFirst(k))) // 顺子需要 1或7开头
+        if (shuntsuSize > 0 && divide.getAllKanKotsuFirst().stream().allMatch(k -> k.isYaotyuHai()) // 刻子没有不是幺九牌的
+                && divide.getAllShuntsuFirst().stream().allMatch(k -> isTyantaShuntsuFirst(k))) // 顺子需要 1或7开头
             return true;
 
         return false;

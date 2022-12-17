@@ -59,11 +59,11 @@ public class MersenneTwister {
     private static final long UMASK = 0x80000000L; /* most significant w-r bits */
     private static final long LMASK = 0x7fffffffL; /* least significant r bits */
 
-    private static final long mixBits(long u, long v) {
+    private static long mixBits(long u, long v) {
         return (u & MersenneTwister.UMASK) | (v & MersenneTwister.LMASK);
     }
 
-    private static final long twist(long u, long v) {
+    private static long twist(long u, long v) {
         return (mixBits(u, v) >> 1) ^ ((v & 1) == 1 ? MersenneTwister.MATRIX_A : 0);
     }
 

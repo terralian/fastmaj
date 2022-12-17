@@ -26,7 +26,7 @@ import com.github.terralian.fastmaj.yama.Yama;
 /**
  * 默认的游戏核心实现
  * 
- * @author terra.lian 
+ * @author terra.lian
  */
 public class GameCore implements IGameCore {
     /**
@@ -148,8 +148,7 @@ public class GameCore implements IGameCore {
      * @param gameLogger 日志处理器
      */
     public GameCore(int playerSize, List<IPlayer> players, GameConfig gameConfig, IYamaWorker yamaWorker,
-            ISyantenCalculator syantenCalculator,
-            IGameLogger gameLogger) {
+            ISyantenCalculator syantenCalculator, IGameLogger gameLogger) {
         this.playerSize = playerSize;
         this.players = players;
         this.gameConfig = gameConfig;
@@ -226,7 +225,8 @@ public class GameCore implements IGameCore {
         // 对局数增加
         round += 1;
         // 第一局时，不进行庄家切换操作
-        if (round < 0) {}
+        if (round < 0) {
+        }
         // 连庄或者下一玩家坐庄
         else if (!renchan) {
             oya++;
@@ -1025,11 +1025,17 @@ public class GameCore implements IGameCore {
      * @param actionPosition 动作玩家，暗杠时弃牌和暗杠玩家相同
      */
     private void setSameFirstJun(int fromPosition, int actionPosition) {
-        if (!haiRivers[actionPosition].isEmpty() || !haiRivers[actionPosition].isSameFirstJun()) {
+        // 若是暗杠等操作，应当是本身玩家起始，若是鸣牌等操作，应当是来源玩家的下一名玩家
+        // 通过自风换算，
+        KazeEnum fromKaze = KazeEnum.jiKaze(fromPosition, oya);
+        KazeEnum startKaze = fromPosition == actionPosition ? fromKaze : KazeEnum.next(fromKaze);
+        int startPlayer = KazeEnum.getKazePlayer(startKaze.getOrder(), oya);
+        if (!haiRivers[startPlayer].isEmpty() || !haiRivers[startPlayer].isSameFirstJun()) {
             return;
         }
-        for (int i = fromPosition + 1; i < playerSize; i++) {
-            haiRivers[i].setSameFirstJun(false);
+        for (int i = startKaze.getOrder(); i < playerSize; i++) {
+            int p = KazeEnum.getKazePlayer(i, oya);
+            haiRivers[p].setSameFirstJun(false);
         }
     }
 

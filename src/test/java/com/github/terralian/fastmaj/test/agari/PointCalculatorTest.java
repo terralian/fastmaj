@@ -168,6 +168,7 @@ public class PointCalculatorTest {
         assertEquals(8000 * 2, basePoint);
 
         // 两倍役满
+        gameConfig.setDoubleYakuman(true);
         yakus = Arrays.asList(new Kokusi13());
         basePoint = pointCalculator.calcBasePoint(yakus, -1, -1, gameConfig);
         assertEquals(8000 * 2, basePoint);

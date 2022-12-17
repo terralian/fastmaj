@@ -94,15 +94,10 @@ public class GameConfig {
     // ------------------------------------------------
 
     /**
-     * 默认的游戏规则
-     */
-    private static final GameConfig DEFAULT_RULE = new GameConfig();
-
-    /**
      * 使用默认的规则
      */
     public static GameConfig defaultRule() {
-        return DEFAULT_RULE;
+        return new GameConfig();
     }
 
     /**

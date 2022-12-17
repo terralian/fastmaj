@@ -17,8 +17,7 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
  * 游戏核心
  * <p>
  * 该接口用于管理游戏状态，而不关心游戏的规则，通过一定顺序调用相关接口，即可实现游戏的进行。
- * 
- * 
+ *
  * @author terra.lian 
  */
 public interface IGameCore {

@@ -186,7 +186,7 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
 
             String[] splitedDanCsv = danCsv.split(",");
             for (int j = 0; j < 4; j++) {
-                playerDans[j] = TenhouPaifuStringPool.DANS[Integer.valueOf(splitedDanCsv[j])];
+                playerDans[j] = TenhouPaifuStringPool.DANS[Integer.parseInt(splitedDanCsv[j])];
             }
         } else {
             // 重连时
@@ -213,17 +213,17 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
         String pointCsv = attributes.getValue("ten");
         String[] splitedPointCsv = pointCsv.split(",");
         for (int j = 0; j < 4; j++) {
-            playerPoints[j] = Integer.valueOf(splitedPointCsv[j]) * 100;
+            playerPoints[j] = Integer.parseInt(splitedPointCsv[j]) * 100;
         }
         int oya = Integer.parseInt(attributes.getValue("oya"));
         String seedCsv = attributes.getValue("seed");
         String[] splitedSeedCsv = seedCsv.split(",");
-        int seedElementFirst = Integer.valueOf(splitedSeedCsv[0]);
+        int seedElementFirst = Integer.parseInt(splitedSeedCsv[0]);
         int bakaze = seedElementFirst / 4;
         int kyoku = seedElementFirst % 4 + 1;
-        int honba = Integer.valueOf(splitedSeedCsv[1]);
-        int kyotaku = Integer.valueOf(splitedSeedCsv[2]);
-        int firstDoraDisplay = Integer.valueOf(splitedSeedCsv[5]);
+        int honba = Integer.parseInt(splitedSeedCsv[1]);
+        int kyotaku = Integer.parseInt(splitedSeedCsv[2]);
+        int firstDoraDisplay = Integer.parseInt(splitedSeedCsv[5]);
 
         List<List<Integer>> playerHaipais = new ArrayList<>();
         for (int i = 0; i < 4; i++) {

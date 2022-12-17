@@ -8,8 +8,8 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
- * 手牌动作请求参数，如模切暗杠等，该类用于存储玩家所选动作的请求参数返回给游戏。创建时应当使用{@link Factory}进行创建。
- * 
+ * 手牌动作请求参数，如模切暗杠等，该类用于存储玩家所选动作的请求参数返回给游戏。
+ *
  * @author terra.lian
  */
 @Getter
@@ -55,8 +55,8 @@ public class TehaiActionCall {
 
     /**
      * 构建一个暗杠动作参数
-     * 
-     * @param selfHais 自己的搭子
+     *
+     * @param annkanHai 暗杠的牌
      */
     public static TehaiActionCall newAnnkan(IHai annkanHai) {
         return new TehaiActionCall() //
@@ -66,8 +66,8 @@ public class TehaiActionCall {
 
     /**
      * 构建一个加杠动作参数
-     * 
-     * @param selfHais 自己的搭子
+     *
+     * @param kakanHai 加杠的牌
      */
     public static TehaiActionCall newKakan(IHai kakanHai) {
         return new TehaiActionCall() //
@@ -77,8 +77,8 @@ public class TehaiActionCall {
 
     /**
      * 构建一个拔北动作参数
-     * 
-     * @param selfHais 自己的搭子
+     *
+     * @param kitaHai 拔北的牌
      */
     public static TehaiActionCall newKita(IHai kitaHai) {
         return new TehaiActionCall() //

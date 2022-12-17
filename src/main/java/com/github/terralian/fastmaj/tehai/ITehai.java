@@ -1,6 +1,7 @@
 package com.github.terralian.fastmaj.tehai;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.github.terralian.fastmaj.encode.Encode34;
@@ -100,8 +101,8 @@ public interface ITehai {
      * 摸牌动作，将牌加入到手中的操作。
      * <p>
      * 摸牌会发生在从牌山/王牌区摸进一枚手牌或者鸣牌的情况。对于从牌山进行的摸牌，需要手动调用该方法将牌加入手牌。
-     * 而对于{@link #chi}等鸣牌方法，会由对应方法自行处理加入手牌行为，此时无需使用该方法加入手牌。
-     * 
+     * 而对于{@link #chii}等鸣牌方法，会由对应方法自行处理加入手牌行为，此时无需使用该方法加入手牌。
+     *
      * @param hai 摸的牌
      */
     void draw(IHai hai);
@@ -309,6 +310,6 @@ public interface ITehai {
      * @param hais 所有枚牌
      */
     static void sort(List<IHai> hais) {
-        Collections.sort(hais, (a, b) -> a.getId() - b.getId());
+        hais.sort(Comparator.comparingInt(IHai::getId));
     }
 }

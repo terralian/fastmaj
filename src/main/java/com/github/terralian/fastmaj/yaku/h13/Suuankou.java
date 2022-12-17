@@ -38,12 +38,11 @@ public class Suuankou implements IYakuman {
 
         for (int i = 0; i < 34; i++) {
             if (value34[i] == 0) {
-                continue;
             } else if (value34[i] == 1) {
                 return false;
             } else if (value34[i] >= 3) {
                 kootu++;
-            } else if (toitu == false && value34[i] == 2) {
+            } else if (!toitu && value34[i] == 2) {
                 toitu = true;
             }
         }

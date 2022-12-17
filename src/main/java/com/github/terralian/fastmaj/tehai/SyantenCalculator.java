@@ -103,8 +103,7 @@ public class SyantenCalculator implements ISyantenCalculator {
 
         // 幺九牌
         int[] yaotyuHais = Encode34.YAOTYU_HAIS;
-        for (int i = 0; i < yaotyuHais.length; i++) {
-            int yaochuuIndex = yaotyuHais[i];
+        for (int yaochuuIndex : yaotyuHais) {
             if (value34[yaochuuIndex] > 0) syanten--;
             if (value34[yaochuuIndex] > 1) toitu = 1;
         }
@@ -147,7 +146,7 @@ public class SyantenCalculator implements ISyantenCalculator {
         // 这部分手牌，在面子+搭子 >=4 时，不能作为雀头候补
         Set<Integer> invalidToituKouho = new HashSet<>();
         for (int i = 0; i < value34.length; i++) {
-            if (value34[i] == 4 && value34[i] > 0)
+            if (value34[i] == 4)
                 invalidToituKouho.add(i);
         }
         keeper.setInvalidToituKouho(invalidToituKouho);

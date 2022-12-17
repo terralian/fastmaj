@@ -76,7 +76,7 @@ public class TenhouPackageTest {
             String resourcePath = projectPath + "/src/test/resources/tehou";
             String fullName = resourcePath + "/" + currentName;
             file = new File(fullName);
-            try (FileOutputStream fo = new FileOutputStream(file);) {
+            try (FileOutputStream fo = new FileOutputStream(file)) {
                 fo.write(data);
                 fo.flush();
                 System.out.println("保存异常牌谱完成：" + currentName);

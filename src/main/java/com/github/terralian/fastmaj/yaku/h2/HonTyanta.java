@@ -12,7 +12,7 @@ import com.github.terralian.fastmaj.yaku.YakuNamePool;
  * <p>
  * 混全带和混老头并不会复合，因为混全带需要带有顺子
  * 
- * @author terra.lian 
+ * @author terra.lian
  */
 public class HonTyanta implements IYaku {
 
@@ -32,10 +32,12 @@ public class HonTyanta implements IYaku {
         }
 
         int shuntsuSize = divide.getAllShuntsuFirst().size();
-        if (shuntsuSize > 0 // 有顺子
-                && divide != null //
-                && divide.getAllKanKotsuFirst().stream().noneMatch(k -> !k.isYaotyuHai()) // 刻子需要全是幺九
-                && divide.getAllShuntsuFirst().stream().noneMatch(k -> !isTyantaShuntsuFirst(k)) // 顺子需要 1或7开头
+        // 有顺子
+        //
+        // 刻子需要全是幺九
+        if (shuntsuSize > 0 //
+                && divide.getAllKanKotsuFirst().stream().allMatch(k -> k.isYaotyuHai())
+                && divide.getAllShuntsuFirst().stream().allMatch(k -> isTyantaShuntsuFirst(k)) // 顺子需要 1或7开头
         ) {
             return true;
         }

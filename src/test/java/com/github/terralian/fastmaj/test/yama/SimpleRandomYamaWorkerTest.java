@@ -15,8 +15,8 @@ public class SimpleRandomYamaWorkerTest {
         IYamaWorker yamaWorker = new SimpleRandomYamaWorker();
         for (int i = 0; i < 100; i++) {
             int[] yama = yamaWorker.getNextYama(1);
-            for (int j = 0; j < yama.length; j++) {
-                System.out.print(format(yama[j]));
+            for (int k : yama) {
+                System.out.print(format(k));
             }
             System.out.println();
         }
@@ -27,8 +27,8 @@ public class SimpleRandomYamaWorkerTest {
         for (int i = 0; i < 100; i++) {
             IYamaWorker yamaWorker = new SimpleRandomYamaWorker(1L);
             int[] yama = yamaWorker.getNextYama(1);
-            for (int j = 0; j < yama.length; j++) {
-                System.out.print(format(yama[j]));
+            for (int k : yama) {
+                System.out.print(format(k));
             }
             System.out.println();
         }

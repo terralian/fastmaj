@@ -70,7 +70,7 @@ public interface IHai {
      * <p>
      * 对于字牌不再进行细分，若需要判断是四风牌还是三元牌，可以使用该接口的其他方法
      * 
-     * @see {@link HaiTypeEnum}
+     * @see HaiTypeEnum
      */
     HaiTypeEnum geHaiType();
 

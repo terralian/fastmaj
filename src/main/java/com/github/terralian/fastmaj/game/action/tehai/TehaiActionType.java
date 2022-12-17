@@ -40,5 +40,5 @@ public enum TehaiActionType {
     /**
      * 流局
      */
-    RYUUKYOKU;
+    RYUUKYOKU
 }

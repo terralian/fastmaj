@@ -126,8 +126,8 @@ public class StepMajongGame {
     /**
      * 校验游戏是否结束，若判定游戏继续，则开始下一局，否则结束游戏。
      * <p>
-     * 对于无法在开始下一局判定游戏结束的场景，可以直接调用{@link IGameCore#endGame()}结束游戏
-     * 
+     * 对于无法在开始下一局判定游戏结束的场景，可以直接调用{@link IGameCore#endGame(int[])}}结束游戏
+     *
      * @return 游戏状态
      */
     public GameRunningState nextKyoku() {
@@ -348,8 +348,7 @@ public class StepMajongGame {
         // 若需要判定三家和了，只能在这里进行判定
         // 处理所有玩家最高优先级的动作，荣和的情况下返回荣和
         RiverActionValue firstAction = actions.get(0);
-        for (int i = 0; i < actions.size(); i++) {
-            RiverActionValue action = actions.get(i);
+        for (RiverActionValue action : actions) {
             if (firstAction.getActionType() != action.getActionType()) {
                 break;
             }

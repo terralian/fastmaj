@@ -1,11 +1,9 @@
 package com.github.terralian.fastmaj.hai;
 
 /**
- * 牌种类
- * <p>
- * 表示万筒索字，牌的基本类型
- * 
- * @author terra.lian 
+ * 牌的花色种类字符编码，使用记号法常用的标识来编码花色信息，形成一个枚举。
+ *
+ * @author terra.lian
  */
 public enum HaiTypeEnum {
     /** 万 */

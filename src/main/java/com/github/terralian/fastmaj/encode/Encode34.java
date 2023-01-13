@@ -376,11 +376,11 @@ public abstract class Encode34 {
 
     /**
      * 判断两张牌是否相邻
-     * 
+     *
      * @param a 牌A
      * @param b 牌B
      */
-    public static boolean isAdjion(IHai a, IHai b) {
+    public static boolean isAdjoin(IHai a, IHai b) {
         return a.geHaiType() == b.geHaiType() && Math.abs(a.getValue() - b.getValue()) == 1;
     }
 

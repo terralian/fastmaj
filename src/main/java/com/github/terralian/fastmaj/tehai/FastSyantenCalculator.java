@@ -2,7 +2,6 @@ package com.github.terralian.fastmaj.tehai;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -80,8 +79,8 @@ public class FastSyantenCalculator extends SyantenCalculator {
 
     @Override
     public int calcNormal(Collection<IHai> hands) {
-        int menzuSize = hands.size() / 3;
-        return calcNormal(Encode34.toEncode34(hands), menzuSize);
+        int mentuSize = hands.size() / 3;
+        return calcNormal(Encode34.toEncode34(hands), mentuSize);
     }
 
     @Override
@@ -93,16 +92,16 @@ public class FastSyantenCalculator extends SyantenCalculator {
 
     /**
      * 计算通常向听
-     * 
+     *
      * @param value34 34编码手牌值
-     * @param menzuSize 面子数
+     * @param mentuSize 面子数
      */
-    private int calcNormal(int[] value34, int menzuSize) {
+    private int calcNormal(int[] value34, int mentuSize) {
         int[] ret = mp1[accum(value34, 1, 9, value34[0])].clone();
-        ret = add1(ret, mp1[accum(value34, 10, 18, value34[9])], menzuSize).clone();
-        ret = add1(ret, mp1[accum(value34, 19, 27, value34[18])], menzuSize).clone();
-        ret = add2(ret, mp2[accum(value34, 28, 34, value34[27])], menzuSize).clone();
-        return ret[5 + menzuSize] - 1;
+        ret = add1(ret, mp1[accum(value34, 10, 18, value34[9])], mentuSize).clone();
+        ret = add1(ret, mp1[accum(value34, 19, 27, value34[18])], mentuSize).clone();
+        ret = add2(ret, mp2[accum(value34, 28, 34, value34[27])], mentuSize).clone();
+        return ret[5 + mentuSize] - 1;
     }
 
     /**
@@ -124,13 +123,13 @@ public class FastSyantenCalculator extends SyantenCalculator {
 
     /**
      * 数牌
-     * 
+     *
      * @param lhs
      * @param rhs
-     * @param menzuSize 面子数
+     * @param mentuSize 面子数
      */
-    private int[] add1(int[] lhs, int[] rhs, int menzuSize) {
-        for (int j = menzuSize + 5; j >= 5; --j) {
+    private int[] add1(int[] lhs, int[] rhs, int mentuSize) {
+        for (int j = mentuSize + 5; j >= 5; --j) {
             int sht = Math.min(lhs[j] + rhs[0], lhs[0] + rhs[j]);
 
             for (int k = 5; k < j; ++k) {
@@ -138,7 +137,7 @@ public class FastSyantenCalculator extends SyantenCalculator {
             }
             lhs[j] = sht;
         }
-        for (int j = menzuSize; j >= 0; --j) {
+        for (int j = mentuSize; j >= 0; --j) {
             int sht = lhs[j] + rhs[0];
 
             for (int k = 0; k < j; ++k) {
@@ -187,7 +186,7 @@ public class FastSyantenCalculator extends SyantenCalculator {
     /**
      * 读取索引文件
      */
-    private static void loadSyantenIndexFile() throws FileNotFoundException, IOException {
+    private static void loadSyantenIndexFile() throws IOException {
         String fileName = FastSyantenCalculator.class.getClassLoader().getResource("syanten.zip").getPath();
         File file = new File(fileName);
         try (ZipFile zipFile = new ZipFile(file)) {

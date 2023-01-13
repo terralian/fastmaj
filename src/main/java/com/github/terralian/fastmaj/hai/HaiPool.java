@@ -50,7 +50,7 @@ public abstract class HaiPool {
     /**
      * 随机生成器
      */
-    private static ThreadLocalRandom r = ThreadLocalRandom.current();
+    private static final ThreadLocalRandom r = ThreadLocalRandom.current();
 
     static {
         generate();

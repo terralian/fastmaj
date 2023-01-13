@@ -6,7 +6,6 @@ import java.util.Set;
 
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.hai.IHai;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -226,7 +225,7 @@ public class SyantenCalculator implements ISyantenCalculator {
         // 计算向听数，取最小值
         if (i == 34) {
             int tmp = 8 - keeper.getMentu() * 2 - keeper.getKouho() - keeper.getToitu();
-            tmp = checkToiziKouhoValid(tmp, tehai, keeper);
+            tmp = checkToituKouhoValid(tmp, tehai, keeper);
             int syanten = Math.min(keeper.getSyanten(), tmp);
 
             keeper.setSyanten(syanten);
@@ -277,7 +276,7 @@ public class SyantenCalculator implements ISyantenCalculator {
      * @param tehai 当前扣减完剩余的手牌
      * @param keeper 值缓存
      */
-    private int checkToiziKouhoValid(int currentSyanten, int[] tehai, ValueKeeper keeper) {
+    private int checkToituKouhoValid(int currentSyanten, int[] tehai, ValueKeeper keeper) {
         // 雀头为0，手上有4枚的情况，需要判断雀头候补是否有效
         if (currentSyanten <= 1 && keeper.getToitu() == 0 && keeper.getInvalidToituKouho().size() > 0) {
             for (int i = 0; i < 34; i++) {

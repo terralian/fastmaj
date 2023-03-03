@@ -32,9 +32,12 @@ import org.junit.Test;
  */
 public class IndexSerializeMakerTest {
 
+    private final String projectPath = System.getProperty("user.dir").replaceAll("\\\\", "/");
+    private final String resourcePath = projectPath + "/src/test/resources/index";
+
     @Test
     public void serialize() throws IOException, ClassNotFoundException {
-        String fileName = FastSyantenCalculator.class.getClassLoader().getResource("syanten.zip").getPath();
+        String fileName = resourcePath + "/old.zip";
         File file = new File(fileName);
         int[][] mp1;
         int[][] mp2;
@@ -49,13 +52,11 @@ public class IndexSerializeMakerTest {
             mp2 = parseIndexZipEntry(zipFile.getInputStream(map.get("index_h.csv")));
         }
 
-        IndexSerializable indexSerializable = new IndexSerializable();
+        FastSyantenCalculator.IndexSerializable indexSerializable = new FastSyantenCalculator.IndexSerializable();
         indexSerializable.setMp1(mp1);
         indexSerializable.setMp2(mp2);
 
-        String projectPath = System.getProperty("user.dir").replaceAll("\\\\", "/");
-        String resourcePath = projectPath + "/src/test/resources/index";
-        String fullName = resourcePath + "/" + "index.data";
+        String fullName = resourcePath + "/index.data";
         file = new File(fullName);
         // 制作序列化文件
         try (FileOutputStream fo = new FileOutputStream(file); ObjectOutputStream out = new ObjectOutputStream(fo)) {
@@ -65,7 +66,7 @@ public class IndexSerializeMakerTest {
         System.out.println("序列化对象成功");
 
         try (FileInputStream fi = new FileInputStream(file); ObjectInputStream oi = new ObjectInputStream(fi)) {
-            IndexSerializable o = (IndexSerializable) oi.readObject();
+            FastSyantenCalculator.IndexSerializable o = (FastSyantenCalculator.IndexSerializable) oi.readObject();
             System.out.println(Arrays.toString(o.getMp1()[0]));
             System.out.println(Arrays.toString(o.getMp2()[0]));
         }
@@ -75,14 +76,12 @@ public class IndexSerializeMakerTest {
     public void deserialized() throws Exception {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        String projectPath = System.getProperty("user.dir").replaceAll("\\\\", "/");
-        String resourcePath = projectPath + "/src/test/resources/index";
         String fullName = resourcePath + "/" + "index.data";
 
         File file = new File(fullName);
         try (FileInputStream fi = new FileInputStream(file); BufferedInputStream ba = new BufferedInputStream(fi);
              ObjectInputStream oi = new ObjectInputStream(ba)) {
-            IndexSerializable o = (IndexSerializable) oi.readObject();
+            FastSyantenCalculator.IndexSerializable o = (FastSyantenCalculator.IndexSerializable) oi.readObject();
             System.out.println(Arrays.toString(o.getMp1()[0]));
             System.out.println(Arrays.toString(o.getMp2()[0]));
         }
@@ -94,8 +93,6 @@ public class IndexSerializeMakerTest {
     public void deserializedZip() throws Exception {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
-        String projectPath = System.getProperty("user.dir").replaceAll("\\\\", "/");
-        String resourcePath = projectPath + "/src/test/resources/index";
         String fullName = resourcePath + "/" + "index.zip";
         System.out.println("读取文件：" + fullName);
 
@@ -108,7 +105,7 @@ public class IndexSerializeMakerTest {
             ZipEntry entry = enums.nextElement();
             InputStream is = zipFile.getInputStream(entry);
             try (BufferedInputStream br = new BufferedInputStream(is); ObjectInputStream oi = new ObjectInputStream(br)) {
-                IndexSerializable o = (IndexSerializable) oi.readObject();
+                FastSyantenCalculator.IndexSerializable o = (FastSyantenCalculator.IndexSerializable) oi.readObject();
                 System.out.println(Arrays.toString(o.getMp1()[0]));
                 System.out.println(Arrays.toString(o.getMp2()[0]));
             }

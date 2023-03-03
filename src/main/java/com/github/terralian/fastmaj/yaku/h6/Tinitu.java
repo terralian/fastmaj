@@ -20,6 +20,7 @@ public class Tinitu implements IYaku {
 
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
+        // 没有字牌，且花色一致
         List<IHai> value = tehai.getAll();
         HaiTypeEnum haiType = value.get(0).geHaiType();
         if (haiType == HaiTypeEnum.Z) {

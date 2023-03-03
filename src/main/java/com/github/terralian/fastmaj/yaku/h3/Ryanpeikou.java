@@ -15,13 +15,8 @@ public class Ryanpeikou implements IYaku {
 
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
-        if (tehai.isNaki()) {
-            return false;
-        }
-        if (divide != null && divide.isRyanpeikou()) {
-            return true;
-        }
-        return false;
+        // 门清且有两个三色同顺（通过分割器实现）
+        return !tehai.isNaki() && divide != null && divide.isRyanpeikou();
     }
 
     @Override

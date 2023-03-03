@@ -23,7 +23,7 @@ public class HonTyanta implements IYaku {
             return false;
         }
         // 存在字牌，存在顺子，且所有顺子或刻子为幺九
-        if (tehai.getAll().stream().noneMatch(k -> k.isJiHai())) {
+        if (tehai.getAll().stream().noneMatch(IHai::isJiHai)) {
             return false;
         }
         // 雀头要是幺九牌
@@ -32,16 +32,11 @@ public class HonTyanta implements IYaku {
         }
 
         int shuntsuSize = divide.getAllShuntsuFirst().size();
-        // 有顺子
-        //
-        // 刻子需要全是幺九
-        if (shuntsuSize > 0 //
-                && divide.getAllKanKotsuFirst().stream().allMatch(k -> k.isYaotyuHai())
-                && divide.getAllShuntsuFirst().stream().allMatch(k -> isTyantaShuntsuFirst(k)) // 顺子需要 1或7开头
-        ) {
-            return true;
-        }
-        return false;
+        // 有顺子，且顺子需要1开头或者7开头
+        // 刻子需要全幺九
+        return shuntsuSize > 0 //
+                && divide.getAllShuntsuFirst().stream().allMatch(this::isTyantaShuntsuFirst) //
+                && divide.getAllKanKotsuFirst().stream().allMatch(IHai::isYaotyuHai);
     }
 
     @Override

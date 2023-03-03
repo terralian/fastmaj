@@ -21,6 +21,8 @@ public class SansyokuDoupon implements IYaku {
 
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
+        // 手牌存在3种花色不同点数相同的刻子或杠子
+        // 则通过乘法计算求模计算即可（每个点数 * 在手牌内的所有花色定义）
         Map<Integer, Integer> map = new HashMap<>(4);
         if (divide != null && !divide.getAllKanKotsuFirst().isEmpty()) {
             for (IHai hai : divide.getAllKanKotsuFirst()) {

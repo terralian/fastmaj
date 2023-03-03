@@ -19,10 +19,12 @@ public class Ittuu implements IYaku {
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
         if (divide == null)
             return false;
+        // 收集所有的顺子第一枚
         int[] value34 = new int[Encode34.length()];
         for (IHai hai : divide.getAllShuntsuFirst()) {
             value34[hai.getValue()]++;
         }
+        // 若顺子的第一枚包含某一个花色的1,4,7则是一气
         if (value34[Encode34.MAN_1] > 0 && value34[Encode34.MAN_4] > 0 && value34[Encode34.MAN_7] > 0) {
             return true;
         }

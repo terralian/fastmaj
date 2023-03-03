@@ -17,6 +17,7 @@ public class Honitu implements IYaku {
 
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
+        // 所有数牌花色相同，且有字牌
         boolean jihai = false;
         HaiTypeEnum haiType = null;
         for (IHai hai : tehai.getAll()) {

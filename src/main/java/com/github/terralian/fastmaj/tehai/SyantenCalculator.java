@@ -29,7 +29,6 @@ import lombok.experimental.Accessors;
  */
 public class SyantenCalculator implements ISyantenCalculator {
 
-
     @Override
     public int calcMin(Collection<IHai> hands) {
         int syanten = 13;
@@ -102,9 +101,9 @@ public class SyantenCalculator implements ISyantenCalculator {
 
         // 幺九牌
         int[] yaotyuHais = Encode34.YAOTYU_HAIS;
-        for (int yaochuuIndex : yaotyuHais) {
-            if (value34[yaochuuIndex] > 0) syanten--;
-            if (value34[yaochuuIndex] > 1) toitu = 1;
+        for (int yaotyuIndex : yaotyuHais) {
+            if (value34[yaotyuIndex] > 0) syanten--;
+            if (value34[yaotyuIndex] > 1) toitu = 1;
         }
         // 国士有一个对子，当手牌存在一个幺九对子，向听减一
         syanten -= toitu;

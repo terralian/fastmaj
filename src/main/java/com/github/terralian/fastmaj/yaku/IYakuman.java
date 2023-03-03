@@ -2,7 +2,7 @@ package com.github.terralian.fastmaj.yaku;
 
 /**
  * 役种中的役满
- * <p>
+ * <p/>
  * 一般规则有规定部分役满是双倍役满，役满的番数固定为13番
  * 
  * @author terra.lian 

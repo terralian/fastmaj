@@ -65,7 +65,7 @@ public abstract class DoraHelper {
 
     /**
      * 根据宝牌指示牌统计手牌的宝牌数量
-     * <p>
+     * <p/>
      * 若为三麻，则拔北数量也会增加宝牌数量
      * 
      * @param tehai 手牌

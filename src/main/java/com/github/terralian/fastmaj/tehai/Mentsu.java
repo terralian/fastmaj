@@ -5,9 +5,9 @@ import com.github.terralian.fastmaj.player.RivalEnum;
 
 /**
  * 表示一副面子
- * <p>
+ * <p/>
  * 面子为3枚或者4枚牌组成，其中顺子为3枚相近的牌，刻子（明刻暗刻）为3枚相同的牌，杠子为4枚相同的牌。
- * <p>
+ * <p/>
  * 该类设计为不可修改类
  * 
  * @author terra.lian 
@@ -72,7 +72,7 @@ public final class Mentsu {
 
     /**
      * 从动作吃构建一副面子
-     * <p>
+     * <p/>
      * 其形状会固定为鸣最小的那枚牌，若需要固定形状，可以使用{@link #fromChi(IHai, int)}
      * 
      * @param firstHai 第一枚牌
@@ -93,7 +93,7 @@ public final class Mentsu {
 
     /**
      * 从碰动作构建一副面子
-     * <p>
+     * <p/>
      * 该牌的形状固定为从上家碰，若需要固定，可以使用{@link #fromPon(IHai, RivalEnum)}
      * 
      * @param firstHai 第一枚牌
@@ -114,7 +114,7 @@ public final class Mentsu {
 
     /**
      * 从明杠动作构建一副面子
-     * <p>
+     * <p/>
      * 该牌的形状固定为从上家杠，若需要固定，可以使用{@link #fromMinkan(IHai, RivalEnum)}
      * 
      * @param firstHai 第一枚牌
@@ -148,7 +148,7 @@ public final class Mentsu {
 
     /**
      * 将一副刻子加杠为杠子，返回该面子实例
-     * <p>
+     * <p/>
      * 面子本身设计为固定不可修改，则需要重新生成
      */
     public Mentsu kakan() {

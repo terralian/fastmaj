@@ -10,7 +10,7 @@ import com.github.terralian.fastmaj.yaku.YakuNamePool;
 
 /**
  * 四暗刻
- * <p>
+ * <p/>
  * 需要知道荣和信息，一般规则荣和并不是四暗刻
  * 
  * @author terra.lian 

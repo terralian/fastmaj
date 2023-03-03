@@ -18,7 +18,7 @@ import com.github.terralian.fastmaj.yama.Yama;
 
 /**
  * {@link Yama}的测试
- * <p>
+ * <p/>
  * 牌山的构建基于{@link TenhouYamaWorker}
  * 
  * @author terra.lian 

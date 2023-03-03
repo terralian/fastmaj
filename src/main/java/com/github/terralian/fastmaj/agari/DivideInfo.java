@@ -13,7 +13,7 @@ import lombok.experimental.Accessors;
 
 /**
  * 和牌分割，当和牌时分割手牌的面刻雀头及部分役
- * <p>
+ * <p/>
  * 用于判断某些役种，及加速判断，如平和等。一个手牌的和牌分割不一定只有一个，需要根据最终打点选择。
  * 
  * @author terra.lian 

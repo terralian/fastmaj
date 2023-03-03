@@ -12,7 +12,7 @@ import com.github.terralian.fastmaj.util.SingletonFactory;
 
 /**
  * 快速麻将
- * <p>
+ * <p/>
  * 该类用于快速使用当前项目下的热点功能，相当于首页的快捷访问
  * 
  * @author terra.lian

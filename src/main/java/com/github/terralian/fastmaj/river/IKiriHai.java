@@ -5,7 +5,7 @@ import com.github.terralian.fastmaj.tehai.NakiEnum;
 
 /**
  * 表示一张牌河的的牌
- * <p>
+ * <p/>
  * 该类用于标记丢弃牌的属性，包含弃牌的位置，弃牌的状态（是否被吃碰杠），是否立直表示牌等
  * 
  * @author terra.lian 
@@ -70,7 +70,7 @@ public interface IKiriHai {
 
     /**
      * 是否立直标识牌
-     * <p>
+     * <p/>
      * 立直牌会被横向放置表示
      */
     boolean isReachDisplay();

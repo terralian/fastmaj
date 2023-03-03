@@ -20,11 +20,11 @@ import com.github.terralian.fastmaj.hai.IHai;
 
 /**
  * 快速向听计算器
- * <p>
+ * <p/>
  * 修改了回溯法设计的{@link SyantenCalculator#calcNormal(java.util.Collection)}方法，改为基于索引查和了型的数（向听数+1） 从而加快速度。
  * 该实现对于大量计算向听数场景十分有效，其性能是十分优异的。其缺点是初始化耗时较久，体感在3-4秒左右，单次计算使用时需要不停初始化索引。
  * 另外索引文件压缩后仅500KB左右，解压缩后会达到40MB，所以本身存在一定的内存占用。
- * <p>
+ * <p/>
  * 该实现来自于<b>tomohxx</b>，为c++实现，根据<b>comssa56</b>改写的JS版本改写为java版本，其原理及详情可以参考注释中的链接。
  *
  * @author terra.lian

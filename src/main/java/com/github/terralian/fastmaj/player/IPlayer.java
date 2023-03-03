@@ -10,7 +10,7 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 /**
  * 玩家和游戏关键的交互接口，一个麻将游戏中除可视画面外，所需玩家决策的只有2种情况，即摸牌后的手牌动作处理{@link TehaiActionCall},
  * 及其他玩家手牌动作后，进行牌河动作处理{@link RiverActionCall}（鸣牌，荣和）两种。
- * <p>
+ * <p/>
  * 目前版本中，由于玩家部分都是面向AI设计，而AI只需要在需要决策时，通过游戏上下文即可还原出先前其他人的所有动作。则这里不提供其他事件接口。
  * 
  * @author terra.lian

@@ -6,7 +6,7 @@ import com.github.terralian.fastmaj.player.RivalEnum;
 
 /**
  * 鸣牌形状
- * <p>
+ * <p/>
  * 鸣牌形状通过bitmap进行位存储，一般场景并不需要关注鸣牌的形状，则通过bitmap可节省存储空间
  * <ul>
  * <li>鸣牌依照对象有三种，[上家，下家，对家]
@@ -20,9 +20,9 @@ public abstract class NakiShape {
 
     /**
      * 玩家的坐席映射
-     * <p>
+     * <p/>
      * 该数组的索引为 被鸣牌玩家编码，其值为 自身玩家的坐席 到目标坐席的差
-     * <p>
+     * <p/>
      * 即 [ 自身，下家，上家，对家 ]，除自身外的下标，与bitmap的玩家编码一一对应
      */
     private final static Integer[] PLAYER_IDNEX_MAP = new Integer[] {0, -1, 1, 2};
@@ -55,7 +55,7 @@ public abstract class NakiShape {
     
     /**
      * 计算鸣牌大小（仅吃操作的情况下成立）
-     * <p>
+     * <p/>
      * 当被鸣的牌是最小的牌，返回{@link #NAKI_MIN}; 为中间的牌，返回{@link #NAKI_MIDDLE};
      * 否则返回{@link #NAKI_MAX}
      * 
@@ -121,7 +121,7 @@ public abstract class NakiShape {
 
     /**
      * 获取被鸣牌方玩家的坐席
-     * <p>
+     * <p/>
      * 通过自身的坐席来换算被鸣牌玩家的坐席
      * 
      * @param nakiShape 鸣牌的形状编码
@@ -156,7 +156,7 @@ public abstract class NakiShape {
 
     /**
      * 返回鸣牌形状编码中，鸣牌的那枚的索引
-     * <p>
+     * <p/>
      * 该方法返回的值，可以与副露第一枚集合组合，查找被鸣的那枚牌
      * 
      * @param nakiShape 鸣牌的形状编码

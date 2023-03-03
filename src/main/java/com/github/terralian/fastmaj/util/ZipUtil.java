@@ -19,7 +19,7 @@ public abstract class ZipUtil {
 
     /**
      * 解压GZIP，返回加压的字符串
-     * <p>
+     * <p/>
      * 天凤牌谱使用GZIP进行二次压缩，通过解压可以获得其XML文档
      * 
      * @param fileName 文件名
@@ -32,7 +32,7 @@ public abstract class ZipUtil {
 
     /**
      * 解压GZIP，返回加压的字符串
-     * <p>
+     * <p/>
      * 天凤牌谱使用GZIP进行二次压缩，通过解压可以获得其XML文档
      * 
      * @param file 文件
@@ -47,7 +47,7 @@ public abstract class ZipUtil {
 
     /**
      * 解压GZIP，返回加压的字符串
-     * <p>
+     * <p/>
      * 天凤牌谱使用GZIP进行二次压缩，通过解压可以获得其XML文档
      *
      * @param stream 流

@@ -24,7 +24,7 @@ public interface IChainHaiRiver {
 
     /**
      * 立直宣言时丢弃的牌
-     * <p>
+     * <p/>
      * 牌会以横向表示
      * 
      * @param hai 牌
@@ -33,7 +33,7 @@ public interface IChainHaiRiver {
 
     /**
      * 立直宣言时丢弃的牌
-     * <p>
+     * <p/>
      * 牌会以横向表示
      * 
      * @param hai 牌
@@ -43,7 +43,7 @@ public interface IChainHaiRiver {
 
     /**
      * 鸣牌河最末尾的那张牌
-     * <p>
+     * <p/>
      * 内部会对该牌进行鸣牌标识，但是不会将牌从牌河中移除。展示时可以通过{@link IKiriHai}的属性进行判断
      * 
      * @param player 鸣牌玩家的坐席

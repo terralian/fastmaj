@@ -57,7 +57,7 @@ import com.github.terralian.fastmaj.yaku.h6.Tinitu;
 
 /**
  * {@link IYakuMatcher}的默认实现
- * <p>
+ * <p/>
  * 该匹配器下的役种
  * <ul>
  * <li>计 通用一般役种，如三暗刻，一气等现代经常使用的役。
@@ -74,7 +74,7 @@ public class YakuMatcher implements IYakuMatcher {
     private List<IYaku> nonJihaiYakus;
     /**
      * 含字牌的役，字牌大于1枚以上判定
-     * <p>
+     * <p/>
      * 如混老头，混一色等
      */
     private List<IYaku> hasJihaiYakus;
@@ -250,7 +250,7 @@ public class YakuMatcher implements IYakuMatcher {
 
     /**
      * 设置无字牌的役种
-     * <p>
+     * <p/>
      * 该部分役种用无字牌判断会提升剪枝效率
      */
     private void setNonJihaiYakus() {
@@ -266,7 +266,7 @@ public class YakuMatcher implements IYakuMatcher {
 
     /**
      * 设置含字牌的一种
-     * <p>
+     * <p/>
      * 该部分役种用含字牌判断会提升剪枝效率
      */
     private void setHasJihaiYakus() {
@@ -282,7 +282,7 @@ public class YakuMatcher implements IYakuMatcher {
 
     /**
      * 设置字牌的役种，字牌需要大于等于3枚
-     * <p>
+     * <p/>
      * 该部分役种用字牌判断会提升剪枝效率
      */
     private void setjihaiYakus() {
@@ -306,7 +306,7 @@ public class YakuMatcher implements IYakuMatcher {
 
     /**
      * 设置对子役，对子需要大于等于3个
-     * <p>
+     * <p/>
      * 该部分役种用对子判断会提升剪枝效率
      */
     private void setKotsuYakus() {
@@ -336,7 +336,7 @@ public class YakuMatcher implements IYakuMatcher {
 
     /**
      * 设置顺子役，顺子需要大于3个
-     * <p>
+     * <p/>
      * 该部分役种用顺子判断会提升剪枝效率
      */
     private void setShuntsuYakus() {
@@ -356,7 +356,7 @@ public class YakuMatcher implements IYakuMatcher {
 
     /**
      * 设置剩余的门清役
-     * <p>
+     * <p/>
      * 该部分役种仅有门清可以进行提升剪枝效率
      */
     private void setMenchanYakus() {
@@ -384,7 +384,7 @@ public class YakuMatcher implements IYakuMatcher {
 
     /**
      * 设置荣和役
-     * <p>
+     * <p/>
      * 该部分役种仅在荣和生效
      */
     private void setRonYakus() {
@@ -398,7 +398,7 @@ public class YakuMatcher implements IYakuMatcher {
 
     /**
      * 设置通常役
-     * <p>
+     * <p/>
      * 这部分的役种没有剪枝条件
      */
     private void setCommonYakus() {

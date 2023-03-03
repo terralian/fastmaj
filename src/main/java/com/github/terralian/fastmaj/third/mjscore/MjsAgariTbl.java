@@ -4,7 +4,7 @@ import java.util.TreeMap;
 
 /**
  * 和了牌分割及役判定索引
- * <p>
+ * <p/>
  * 数据大小约为65KB
  * 
  * @see <a href="http://hp.vector.co.jp/authors/VA046927/mjscore/">mjscore</a>

@@ -7,10 +7,10 @@ import com.github.terralian.fastmaj.player.RivalEnum;
 
 /**
  * 表示固定部分手牌的接口
- * <p>
+ * <p/>
  * 鸣牌和暗杠都会固定手牌，将手牌将鸣牌方和搭子作为条件按特定形状放入自己的右桌角。这里的区域没有找到特定的称呼，
  * 我将其称之为<code>Tehai Lock</code>，即手牌锁。当鸣牌时，手牌会调用{@link ITehaiLock}将鸣牌信息存入管理。
- * <p>
+ * <p/>
  * 该接口提供对鸣牌及暗杠的操作查询管理，可以便利的获取或设置一副手牌的鸣牌信息，并减少{@link ITehai}的方法数量。
  * 这部分信息对于所有玩家是公开的，则在设置玩家游戏上下文时，其他家的{@link ITehaiLock}可以直接给与其他玩家查看。
  * 
@@ -24,7 +24,7 @@ public interface ITehaiLock {
 
     /**
      * 获取某一个面子
-     * <p>
+     * <p/>
      * 面子的存储顺序为加入顺序
      * 
      * @param index 面子的索引
@@ -33,7 +33,7 @@ public interface ITehaiLock {
 
     /**
      * 获取固定手牌的所有面子
-     * <p>
+     * <p/>
      * 面子的存储顺序为加入顺序
      */
     List<Mentsu> getAll();
@@ -45,7 +45,7 @@ public interface ITehaiLock {
 
     /**
      * 获取手牌中除吃外的第一枚牌
-     * <p>
+     * <p/>
      * 包含碰，明杠，暗杠部分
      */
     List<IHai> getNotChiFirst();
@@ -143,7 +143,7 @@ public interface ITehaiLock {
 
     /**
      * 返回固定的手牌面子数
-     * <p>
+     * <p/>
      * 鸣牌或暗杠通过面子进行，一个面子可能有3枚或4枚（暗杠/明杠）手牌，这里将面子作为{@link ITehaiLock}的数量单位。
      * 
      * @return 返回对应固定的面子数
@@ -152,7 +152,7 @@ public interface ITehaiLock {
 
     /**
      * 返回固定手牌中明杠和暗杠的面子总数
-     * <p>
+     * <p/>
      * 当明杠和暗杠都为0时，返回0，其中一个不为0则返回对应值
      */
     int kantsuSize();

@@ -19,7 +19,7 @@ public class KiriHai implements IKiriHai {
     private int kiriIndex;
     /**
      * 使用bitmap存储的弃牌信息
-     * <p>
+     * <p/>
      * <ul>
      * <li>1 ：立直标识
      * <li>2-3 : 吃碰明杠
@@ -43,7 +43,7 @@ public class KiriHai implements IKiriHai {
 
     /**
      * 通过牌构建一个弃牌实例
-     * <p>
+     * <p/>
      * 该方法为工厂方法
      * 
      * @param value 实际牌
@@ -141,7 +141,7 @@ public class KiriHai implements IKiriHai {
 
     /**
      * 是否立直标识牌
-     * <p>
+     * <p/>
      * 立直牌会被横向放置表示
      */
     @Override

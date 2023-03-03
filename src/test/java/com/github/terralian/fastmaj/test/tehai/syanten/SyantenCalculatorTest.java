@@ -21,7 +21,7 @@ import com.github.terralian.fastmaj.tehai.SyantenCalculator;
 
 /**
  * 向听数计算类测试{@link SyantenCalculator}
- * <p>
+ * <p/>
  * 该包下的向听数问题集数据来源于ara
  * 
  * @author terra.lian 

@@ -11,7 +11,7 @@ import com.github.terralian.fastmaj.yama.TenhouYamaWorker;
 
 /**
  * {@link TenhouLogYamaWorker} 测试集
- * <p>
+ * <p/>
  * 由于手头没有旧版本的牌谱，所以这部分没测
  * 
  * @author terra.lian 

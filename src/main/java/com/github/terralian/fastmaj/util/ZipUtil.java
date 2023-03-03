@@ -55,8 +55,8 @@ public abstract class ZipUtil {
      * @throws FileNotFoundException 文件未找到异常
      */
     public static String ungzip(InputStream stream) throws FileNotFoundException, IOException {
-        try (GZIPInputStream gzin = new GZIPInputStream(stream);
-                InputStreamReader ir = new InputStreamReader(gzin);
+        try (GZIPInputStream gin = new GZIPInputStream(stream);
+                InputStreamReader ir = new InputStreamReader(gin);
                 BufferedReader br = new BufferedReader(ir)) {
             return br.lines().collect(Collectors.joining(System.lineSeparator()));
         }

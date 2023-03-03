@@ -130,8 +130,7 @@ public class StopWatch {
 
     /**
      * Return the name of the currently running task, if any.
-     * 
-     * 
+     *
      * @see #isRunning()
      */
     public String currentTaskName() {

@@ -1,30 +1,26 @@
 package com.github.terralian.fastmaj.tehai;
 
-import java.io.BufferedReader;
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.hai.IHai;
+import com.github.terralian.fastmaj.util.Assert;
 
 /**
  * 快速向听计算器
  * <p/>
  * 修改了回溯法设计的{@link SyantenCalculator#calcNormal(java.util.Collection)}方法，改为基于索引查和了型的数（向听数+1） 从而加快速度。
- * 该实现对于大量计算向听数场景十分有效，其性能是十分优异的。其缺点是初始化耗时较久，体感在3-4秒左右，单次计算使用时需要不停初始化索引。
- * 另外索引文件压缩后仅500KB左右，解压缩后会达到40MB，所以本身存在一定的内存占用。
+ * 该实现对于大量计算向听数场景十分有效，其性能是十分优异的，使用序列化存储与读取索引文件，使其的初始化性能也达到可以接受的地步（约500ms)。
+ * <p/>
+ * 序列化文件压缩后有900KB，解压后会达到96MB大小，所以占用一定内存。
  * <p/>
  * 该实现来自于<b>tomohxx</b>，为c++实现，根据<b>comssa56</b>改写的JS版本改写为java版本，其原理及详情可以参考注释中的链接。
  *
@@ -187,43 +183,19 @@ public class FastSyantenCalculator extends SyantenCalculator {
     /**
      * 读取索引文件
      */
-    private static void loadSyantenIndexFile() throws IOException {
+    private static void loadSyantenIndexFile() throws IOException, ClassNotFoundException {
         String fileName = FastSyantenCalculator.class.getClassLoader().getResource("syanten.zip").getPath();
         File file = new File(fileName);
         try (ZipFile zipFile = new ZipFile(file)) {
-            Enumeration<? extends ZipEntry> enums = zipFile.entries();
-            Map<String, ZipEntry> map = new HashMap<>();
-            while (enums.hasMoreElements()) {
-                ZipEntry entry = enums.nextElement();
-                map.put(entry.getName(), entry);
-            }
-            mp1 = parseIndexZipEntry(zipFile.getInputStream(map.get("index_s.csv")));
-            mp2 = parseIndexZipEntry(zipFile.getInputStream(map.get("index_h.csv")));
-        }
-    }
-
-    /**
-     * 将索引的压缩文件解析为mp数组
-     * 
-     * @param is 输入流
-     */
-    private static int[][] parseIndexZipEntry(InputStream is) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(is, Charset.forName("GBK")));
-        List<String> lines = new ArrayList<>();
-        String line = null;
-        while ((line = br.readLine()) != null) {
-            lines.add(line);
-        }
-
-        int[][] mp = new int[lines.size()][10];
-        for (int i = 0; i < lines.size(); i++) {
-            line = lines.get(i);
-            String[] array = line.split(",");
-            for (int j = 0; j < array.length; j++) {
-                mp[i][j] = Integer.parseInt(array[j]);
+            Enumeration<? extends ZipEntry> entries = zipFile.entries();
+            Assert.isTrue(entries.hasMoreElements(), "向听数索引文件异常");
+            ZipEntry zipEntry = entries.nextElement();
+            try (ObjectInputStream oi = new ObjectInputStream(new BufferedInputStream(zipFile.getInputStream(zipEntry)))) {
+                IndexSerializable serializable = (IndexSerializable) oi.readObject();
+                FastSyantenCalculator.mp1 = serializable.getMp1();
+                FastSyantenCalculator.mp2 = serializable.getMp2();
             }
         }
-        return mp;
     }
 
     /**

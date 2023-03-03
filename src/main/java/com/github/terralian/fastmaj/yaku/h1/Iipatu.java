@@ -30,10 +30,7 @@ public class Iipatu implements IYaku {
         if (haiRiver == null) {
             return false;
         }
-        if (haiRiver.isReach() && haiRiver.isSameJun() && haiRiver.getLast().isReachDisplay()) {
-            return true;
-        }
-        return false;
+        return haiRiver.isReach() && haiRiver.isSameJun() && haiRiver.getLast().isReachDisplay();
     }
 
     @Override

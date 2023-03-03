@@ -17,10 +17,7 @@ public class Haku implements IYaku {
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
         int[] value34 = Encode34.toEncode34(tehai.getAll());
-        if (value34[Encode34.HAKU] >= 3) {
-            return true;
-        }
-        return false;
+        return value34[Encode34.HAKU] >= 3;
     }
 
     @Override

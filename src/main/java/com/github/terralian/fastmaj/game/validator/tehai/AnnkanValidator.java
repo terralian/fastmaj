@@ -2,6 +2,7 @@ package com.github.terralian.fastmaj.game.validator.tehai;
 
 import java.util.Set;
 
+import com.github.terralian.fastmaj.FastMajong;
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
@@ -26,7 +27,7 @@ public class AnnkanValidator implements ITehaiActionValidator {
      * 初始化构建暗杠判定器
      */
     public AnnkanValidator() {
-        yuukouhaiCalculator = new YuukouhaiCalculator();
+        yuukouhaiCalculator = new YuukouhaiCalculator(FastMajong.doGetSyantenCalculator());
     }
 
     @Override

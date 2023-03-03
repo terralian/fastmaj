@@ -431,7 +431,7 @@ public class GameCore implements IGameCore {
 
         ITehai tehai = tehais.get(position);
         IHaiRiver fromRiver = haiRivers[fromPosition];
-        IHai nakiHai = fromRiver.naki(position, NakiEnum.CHI);
+        IHai nakiHai = fromRiver.naki(position, NakiEnum.CHII);
         tehai.chii(nakiHai, selfHai1, selfHai2);
         // 移除同巡标识
         setSameJun(false);

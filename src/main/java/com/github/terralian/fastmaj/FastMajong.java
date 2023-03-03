@@ -44,6 +44,6 @@ public abstract class FastMajong {
      * 单例获取有效牌计算器实例
      */
     public static IYuukouhaiCalculator doGetYuukouhaiCalculator() {
-        return SingletonFactory.doGetBean(IYuukouhaiCalculator.class, YuukouhaiCalculator.class);
+        return new YuukouhaiCalculator(doGetSyantenCalculator());
     }
 }

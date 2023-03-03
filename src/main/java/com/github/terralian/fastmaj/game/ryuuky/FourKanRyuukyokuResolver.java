@@ -19,7 +19,7 @@ public class FourKanRyuukyokuResolver implements IRyuukyokuResolver, IHalfwayRyu
         int kantsuPlayer = 0;
         List<ITehai> tehais = gameCore.getTehais();
         for (ITehai tehai : tehais) {
-            int kantsuSize = tehai.getLock().getKantsuSize();
+            int kantsuSize = tehai.getLock().getKanzuSize();
             if (kantsuSize > 0) {
                 total += kantsuSize;
                 kantsuPlayer += 1;

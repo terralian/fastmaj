@@ -92,7 +92,7 @@ public class TehaiLock implements ITehaiLock {
      * {@inheritDoc}
      */
     @Override
-    public List<IHai> getKantsuFirst() {
+    public List<IHai> getKanzuFirst() {
         return getSomeFirst(Mentsu::isKantsu);
     }
 
@@ -128,8 +128,8 @@ public class TehaiLock implements ITehaiLock {
      * {@inheritDoc}
      */
     @Override
-    public int getKantsuSize() {
-        return getKantsuFirst().size();
+    public int getKanzuSize() {
+        return getKanzuFirst().size();
     }
 
     // ------------------------------------------------
@@ -140,7 +140,7 @@ public class TehaiLock implements ITehaiLock {
      * {@inheritDoc}
      */
     @Override
-    public Mentsu chi(IHai chiHai, IHai tehai1, IHai tehai2) {
+    public Mentsu chii(IHai chiHai, IHai tehai1, IHai tehai2) {
         IHai minHai = Encode34.min(chiHai, tehai1, tehai2);
         Mentsu chiMentsu = Mentsu.fromChi(minHai, NakiShape.calcNakiSize(chiHai, tehai1, tehai2));
         value.add(chiMentsu);
@@ -241,8 +241,8 @@ public class TehaiLock implements ITehaiLock {
      * {@inheritDoc}
      */
     @Override
-    public int kantsuSize() {
-        return getKantsuFirst().size();
+    public int kanzuSize() {
+        return getKanzuFirst().size();
     }
 
     // ------------------------------------------------

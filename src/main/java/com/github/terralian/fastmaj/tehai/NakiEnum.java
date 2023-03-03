@@ -9,7 +9,7 @@ public enum NakiEnum {
     /**
      * 吃
      */
-    CHI(0, "吃"),
+    CHII(0, "吃"),
 
     /**
      * 碰
@@ -24,7 +24,7 @@ public enum NakiEnum {
     /**
      * 通过数组存储索引信息
      */
-    private static final NakiEnum[] VALUE_ARRAY = new NakiEnum[]{CHI, PON, KAN};
+    private static final NakiEnum[] VALUE_ARRAY = new NakiEnum[]{CHII, PON, KAN};
 
     /**
      * 索引，用于在手牌中获取鸣牌的集合

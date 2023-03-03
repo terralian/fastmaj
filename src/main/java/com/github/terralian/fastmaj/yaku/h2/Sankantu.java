@@ -15,7 +15,7 @@ public class Sankantu implements IYaku {
 
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
-        return tehai.getLock().kantsuSize() == 3;
+        return tehai.getLock().kanzuSize() == 3;
     }
 
     @Override

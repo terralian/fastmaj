@@ -16,14 +16,7 @@ public class Iipeikou implements IYaku {
 
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
-        // 门清役
-        if (tehai.isNaki()) {
-            return false;
-        }
-        if (divide != null && divide.isIipeikou()) {
-            return true;
-        }
-        return false;
+        return divide != null && !tehai.isNaki() && divide.isIipeikou();
     }
 
     @Override

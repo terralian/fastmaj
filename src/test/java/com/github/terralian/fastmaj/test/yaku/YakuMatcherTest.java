@@ -62,6 +62,7 @@ import com.github.terralian.fastmaj.yaku.h3.Honitu;
 import com.github.terralian.fastmaj.yaku.h3.JyunTyanta;
 import com.github.terralian.fastmaj.yaku.h3.Ryanpeikou;
 import com.github.terralian.fastmaj.yaku.h6.Tinitu;
+import com.github.terralian.fastmaj.yama.DrawFrom;
 
 /**
  * {@link YakuMatcher}测试
@@ -74,7 +75,7 @@ import com.github.terralian.fastmaj.yaku.h6.Tinitu;
  * <li>测试役满场景
  * </ul>
  * 
- * @author terra.lian 
+ * @author terra.lian
  */
 public class YakuMatcherTest {
 
@@ -215,6 +216,7 @@ public class YakuMatcherTest {
         // 海底
         gameContext.setYamaCountdown(0);
         gameContext.setRon(false);
+        gameContext.setLastDrawFrom(DrawFrom.YAMA);
         tehai = EncodeMark.toTehai("123456m56799p11z");
         tehai.pon(HaiPool.p(9), RivalEnum.BOTTOM);
         yakus = yakuMatcher.match(tehai, CollectionUtil.newArrayList(), gameContext);
@@ -224,6 +226,7 @@ public class YakuMatcherTest {
         // 河底
         gameContext.setYamaCountdown(0);
         gameContext.setRon(true);
+        gameContext.setLastTehaiActionType(TehaiActionType.KIRI);
         tehai = EncodeMark.toTehai("123456m56799p11z");
         tehai.pon(HaiPool.p(9), RivalEnum.BOTTOM);
         yakus = yakuMatcher.match(tehai, CollectionUtil.newArrayList(), gameContext);

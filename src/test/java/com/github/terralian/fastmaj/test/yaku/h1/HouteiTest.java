@@ -10,11 +10,12 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h1.Houtei;
+import com.github.terralian.fastmaj.yama.DrawFrom;
 
 /**
  * {@link Houtei}测试
  * 
- * @author terra.lian 
+ * @author terra.lian
  */
 public class HouteiTest {
 
@@ -29,6 +30,8 @@ public class HouteiTest {
         ITehai tehai = null;
         // 结果
         boolean result = false;
+        // 需要从牌山摸牌，而非岭上
+        gameContext.setLastDrawFrom(DrawFrom.YAMA);
 
         // 最后一枚，非荣和
         gameContext.setRon(false);

@@ -15,6 +15,7 @@ public class Tiitoitu implements IYaku {
 
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
+        // 全是对子，通过分割器实现
         return divide != null && divide.isTiitoitu();
     }
 

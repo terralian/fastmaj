@@ -16,6 +16,7 @@ public class Syousangen implements IYaku {
 
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
+        // 白发中需要全部大于3枚，并且有一个=2枚（全部3枚以上的就是大三元了）
         int[] value34 = Encode34.toEncode34(tehai.getAll());
         boolean toitu = false;
         int koutu = 0;

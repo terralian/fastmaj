@@ -22,7 +22,7 @@ public class JyunTyanta implements IYaku {
         }
         // 不含字牌，且非清老头（有顺子，且是全带顺子）
         for (IHai hai : tehai.getAll())
-            if (HaiTypeEnum.Z == hai.geHaiType()) 
+            if (HaiTypeEnum.Z == hai.geHaiType())
                 return false;
 
         // 雀头需要是幺九牌（非字牌）
@@ -30,11 +30,11 @@ public class JyunTyanta implements IYaku {
             return false;
 
         int shuntsuSize = divide.getAllShuntsuFirst().size();
-        if (shuntsuSize > 0 && divide.getAllKanKotsuFirst().stream().allMatch(k -> k.isYaotyuHai()) // 刻子没有不是幺九牌的
-                && divide.getAllShuntsuFirst().stream().allMatch(k -> isTyantaShuntsuFirst(k))) // 顺子需要 1或7开头
-            return true;
-
-        return false;
+        return shuntsuSize > 0
+                // 顺子需要 1或7开头
+                && divide.getAllKanKotsuFirst().stream().allMatch(IHai::isYaotyuHai)
+                // 刻子没有不是幺九牌的
+                && divide.getAllShuntsuFirst().stream().allMatch(this::isTyantaShuntsuFirst);
     }
 
     @Override

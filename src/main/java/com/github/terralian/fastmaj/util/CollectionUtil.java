@@ -1,6 +1,7 @@
 package com.github.terralian.fastmaj.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,6 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
@@ -66,8 +68,7 @@ public abstract class CollectionUtil {
     @SafeVarargs
     public static <E> List<E> newArrayList(E... elements) {
         List<E> list = newArrayList(elements.length);
-        for (E element : elements)
-            list.add(element);
+        list.addAll(Arrays.asList(elements));
         return list;
     }
 
@@ -121,8 +122,7 @@ public abstract class CollectionUtil {
     @SafeVarargs
     public static <E> Set<E> newHashSet(E... elements) {
         Set<E> set = newHashSet(elements.length);
-        for (E element : elements)
-            set.add(element);
+        set.addAll(Arrays.asList(elements));
         return set;
     }
 
@@ -520,7 +520,7 @@ public abstract class CollectionUtil {
     @SafeVarargs
     public static <E> boolean in(E target, E... collect) {
         if (EmptyUtil.isNotEmpty(collect)) {
-            final Predicate<E> predicate = target == null ? e -> e == null : e -> target.equals(e);
+            final Predicate<E> predicate = target == null ? Objects::isNull : target::equals;
             for (E e : collect)
                 if (predicate.test(e))
                     return true;
@@ -626,7 +626,7 @@ public abstract class CollectionUtil {
         List<E> first = new ArrayList<>();
         List<E> second = new ArrayList<>();
         if (EmptyUtil.isNotEmpty(collection)) {
-            collection.stream().forEach(k -> {
+            collection.forEach(k -> {
                 if (predicate.test(k)) {
                     first.add(k);
                 } else {
@@ -651,7 +651,7 @@ public abstract class CollectionUtil {
         List<E> first = new ArrayList<>();
         List<E> second = new ArrayList<>();
         if (EmptyUtil.isNotEmpty(collection)) {
-            collection.stream().forEach(k -> {
+            collection.forEach(k -> {
                 if (firstPredicate.test(k)) {
                     first.add(k);
                 }
@@ -665,12 +665,12 @@ public abstract class CollectionUtil {
 
     /**
      * 用于存储分类出的两个集合，一般符合条件/符合第一个条件的分为first集合，不符合条件/符合第二个条件的分为second集合
-     * 
+     *
      * @param <E> 集合元素类型
      */
     public static class Partition<E> {
-        private List<E> first;
-        private List<E> second;
+        private final List<E> first;
+        private final List<E> second;
 
         public Partition(List<E> first, List<E> second) {
             this.first = first;

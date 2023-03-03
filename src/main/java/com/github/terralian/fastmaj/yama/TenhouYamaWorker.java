@@ -7,9 +7,9 @@ import com.github.terralian.fastmaj.third.mt19937ar.MersenneTwister;
 
 /**
  * 天凤牌谱的根据种子生成牌山算法
- * <p>
+ * <p/>
  * <b>该算法从C -> C# -> JAVA移植</b> 移植前的源码参考下面<code>@seeAlso</code>的链接
- * <p>
+ * <p/>
  * 该方法生成的牌山数组和实际的天凤牌谱对应关系为：
  * <ul>
  * <li>数组顺序为实际牌山摸牌顺序的倒序
@@ -27,7 +27,7 @@ public class TenhouYamaWorker implements IYamaWorker {
 
     /**
      * 梅森旋转法随机数生成器
-     * <p>
+     * <p/>
      * 需要根据种子进行初始化，非线程安全
      */
     private MersenneTwister r;
@@ -44,7 +44,7 @@ public class TenhouYamaWorker implements IYamaWorker {
 
     /**
      * 构建一个空的牌山生成器
-     * <p>
+     * <p/>
      * 由于此时种子为空，生成器是不可使用的状态
      */
     public TenhouYamaWorker() {
@@ -53,7 +53,7 @@ public class TenhouYamaWorker implements IYamaWorker {
 
     /**
      * 根据种子构建一个牌山生成器
-     * <p>
+     * <p/>
      * 该构造器会同时根据种子进行初始化{@link #initialize(String)}
      * 
      * @param seed 种子

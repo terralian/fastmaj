@@ -11,7 +11,7 @@ import com.github.terralian.fastmaj.tehai.Tehai;
 
 /**
  * 牌山的默认实现
- * <p>
+ * <p/>
  * 其逻辑为根据天凤的牌山处理逻辑:
  * <ul>
  * <li>顺序为倒序，即数组最后是摸牌的第一枚，而数组的第一枚则是王牌区
@@ -85,7 +85,7 @@ public class Yama implements IYama {
 
     /**
      * 初始配牌，按玩家数分发
-     * <p>
+     * <p/>
      * 模拟牌山搭好后，玩家从牌山拿牌的场景
      */
     @Override

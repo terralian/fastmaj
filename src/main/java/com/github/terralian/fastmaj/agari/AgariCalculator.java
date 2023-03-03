@@ -25,7 +25,7 @@ public class AgariCalculator implements IAgariCalculator {
 
     /**
      * 役匹配器，有值时使用指定的役匹配器。若为指定，则使用默认的
-     * <p>
+     * <p/>
      * 通过更改役匹配器，可以决定规则使用什么役种，比如是否启用人和，古役。
      */
     private IYakuMatcher yakuMatcher;

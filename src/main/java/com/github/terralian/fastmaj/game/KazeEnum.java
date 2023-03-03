@@ -2,7 +2,7 @@ package com.github.terralian.fastmaj.game;
 
 /**
  * 风（场风/自风）枚举
- * <p>
+ * <p/>
  * 该类对风从东到北编码[0, 3]，同编码可以直接转换
  * 
  * @author terra.lian
@@ -86,7 +86,7 @@ public enum KazeEnum {
 
     /**
      * 获取自己的自风
-     * <p>
+     * <p/>
      * 根据自身坐席和当前庄家的坐席计算场风，该方法默认牌局开始时的起始东风坐席为0
      * 
      * @param position 自身的坐席

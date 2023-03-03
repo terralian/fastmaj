@@ -11,7 +11,7 @@ import com.github.terralian.fastmaj.encode.EncodeMark;
 
 /**
  * 牌池
- * <p>
+ * <p/>
  * 基于使用便利静态类设计，内部缓存所有日式麻将使用的136枚牌的实例
  * 
  * @author terra.lian 
@@ -34,7 +34,7 @@ public abstract class HaiPool {
     private static final IHai[] HAIS = new IHai[HAI_LENGTH];
     /**
      * 3种数牌的红5宝牌
-     * <p>
+     * <p/>
      * 这里存储了红宝牌在同类型牌的所有下标情况，如在4枚5中的第一枚，或者第4枚
      */
     private static final IHai[][] RED_HAIS = new IHai[3][4];
@@ -66,9 +66,9 @@ public abstract class HaiPool {
 
     /**
      * 根据牌的唯一值获取牌的实例
-     * <p>
+     * <p/>
      * 基于该方法获取的牌都是唯一的一枚，并且都是通常牌，不含红宝牌
-     * <p>
+     * <p/>
      * <b>136编码格式</b>
      * 
      * @param id 136编码的牌唯一值，[0,135]
@@ -83,9 +83,9 @@ public abstract class HaiPool {
 
     /**
      * 根据牌的唯一值获取牌的实例
-     * <p>
+     * <p/>
      * 基于该方法获取的牌都是唯一的一枚，根据是否含红宝牌来获取对应的牌，其红宝牌位置为{@link #DEFAULT_RED_INDEX}
-     * <p>
+     * <p/>
      * <b>136编码格式</b>
      * 
      * @param id 主键
@@ -97,9 +97,9 @@ public abstract class HaiPool {
 
     /**
      * 根据牌的唯一值获取牌的实例
-     * <p>
+     * <p/>
      * 基于该方法获取的牌都是唯一的一枚，根据是否含红宝牌来获取对应的牌
-     * <p>
+     * <p/>
      * <b>136编码格式</b>
      * 
      * @param id 主键
@@ -120,9 +120,9 @@ public abstract class HaiPool {
 
     /**
      * 根据牌的值获取牌的实例
-     * <p>
+     * <p/>
      * 基于该方法获取到的牌默认都是同一枚
-     * <p>
+     * <p/>
      * <b>34编码格式</b>
      * 
      * @param value 34编码的牌值，[0, 33]
@@ -138,9 +138,9 @@ public abstract class HaiPool {
 
     /**
      * 根据记号法获取牌的实例
-     * <p>
+     * <p/>
      * 基于该方法获取到的牌默认都是同一枚
-     * <p>
+     * <p/>
      * <b>记号法格式</b>
      * 
      * @param literal 记号法的值（字面量） [0, 9] | [1, 7]
@@ -198,7 +198,7 @@ public abstract class HaiPool {
     
     /**
      * 获取第一枚牌（1m）
-     * <p>
+     * <p/>
      * 常用于填充某个测试用例
      */
     public static IHai firstHai() {
@@ -207,7 +207,7 @@ public abstract class HaiPool {
 
     /**
      * 将136枚牌转为数组，对其修改不会影响该牌池内部
-     * <p>
+     * <p/>
      * 该方法获取到的为无红宝牌的牌数组
      */
     public static IHai[] toArray() {
@@ -216,7 +216,7 @@ public abstract class HaiPool {
 
     /**
      * 将136枚牌转为数组，对其修改不会影响该牌池内部
-     * <p>
+     * <p/>
      * 该方法根据参数获取是否含红宝牌的牌数组，若含红宝牌，则红宝牌在同类型牌的第{@link #DEFAULT_RED_INDEX}枚
      * 
      * @param hasRed 是否含红宝牌
@@ -227,7 +227,7 @@ public abstract class HaiPool {
 
     /**
      * 将136枚牌转为数组，对其修改不会影响该牌池内部
-     * <p>
+     * <p/>
      * 该方法根据参数获取是否含红宝牌的牌数组，若含红宝牌，根据指定的红宝牌下标替换普通牌
      * 
      * @param hasRed 是否含红宝牌
@@ -246,7 +246,7 @@ public abstract class HaiPool {
 
     /**
      * 获取种类意义上的下一枚牌
-     * <p>
+     * <p/>
      * <li>除字牌外，表示当前种类的下一枚牌，会循环（如 5 -> 6, 9 -> 1）
      * <li>对于字牌，需要区分四喜牌和三元牌作为种类，内部循环
      * 
@@ -271,7 +271,7 @@ public abstract class HaiPool {
 
     /**
      * 初始化生成牌实例
-     * <p>
+     * <p/>
      * 其牌种类共{@link Encode34#max()}（34）种，所有牌都是通常牌（非红宝牌）.
      * 每一枚牌的id为按{@link Encode34}顺序编码
      */

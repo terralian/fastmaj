@@ -18,7 +18,7 @@ import com.github.terralian.fastmaj.util.CollectionUtil;
 
 /**
  * 和了分割对MSCORE的适配
- * <p>
+ * <p/>
  * 支持副露，暗杠等固定手牌的变化
  * 
  * @author terra.lian 
@@ -128,7 +128,7 @@ public class MjscoreAdapter implements ITehaiAgariDivider {
     /**
      * 使用手牌部分，而非包含固定区的所有牌部分进行计算会存在一杯口的不判定问题。
      * 当手牌进行过暗杠操作，手牌的面子数小于4，mjscore会当做非门清状态，而不判断一杯口。
-     * <p>
+     * <p/>
      * 使用该方法对一杯口的问题进行补全。
      * 
      * @param tehai 手牌

@@ -112,7 +112,7 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
 
     /**
      * 计算通常的有效待牌
-     * <p>
+     * <p/>
      * 即除了国士，七对外的通常手型
      * 
      * @param tehai 手牌

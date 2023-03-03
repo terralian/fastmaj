@@ -15,7 +15,7 @@ import com.github.terralian.fastmaj.yaku.YakuNamePool;
 
 /**
  * 平和
- * <p>
+ * <p/>
  * 平和需要知道自风场风，也可可脱离场况，当无场况上下文时不验证场风自风
  * 
  * @author 作者: terra.lian

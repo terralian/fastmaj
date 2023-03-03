@@ -9,7 +9,7 @@ import com.github.terralian.fastmaj.yaku.YakuNamePool;
 
 /**
  * 混全带
- * <p>
+ * <p/>
  * 混全带和混老头并不会复合，因为混全带需要带有顺子
  * 
  * @author terra.lian

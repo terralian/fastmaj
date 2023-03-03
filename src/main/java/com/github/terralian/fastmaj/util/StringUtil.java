@@ -317,7 +317,7 @@ public abstract class StringUtil {
     /**
      * 类Logger的字符串格式化，使用形如{0}{1}{2}的占位符，例如输入format("姓名:{0}", "爱因斯坦")，会输出："姓名:爱因斯坦"
      * 
-     * <p>
+     * <p/>
      * 该实现copy至MybatisPlus的StringUtil#sqlArgsFill方法
      * </p>
      * 
@@ -347,7 +347,7 @@ public abstract class StringUtil {
 
     /**
      * 当字符串是否以某些字符串开头
-     * <p>
+     * <p/>
      * 该方法根据参数多次调用{@link String#startsWith}方法
      * 
      * @param target 目标字符串

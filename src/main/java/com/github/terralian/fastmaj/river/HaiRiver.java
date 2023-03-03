@@ -11,7 +11,7 @@ import com.github.terralian.fastmaj.tehai.NakiEnum;
 
 /**
  * 牌河的默认实现
- * <p>
+ * <p/>
  * 一个牌河的最小单位是{@link IKiriHai} 表示一枚弃牌，但是其上有更多的信息：
  * <ul>
  * <li>吃碰杠，及对应的玩家
@@ -120,7 +120,7 @@ public class HaiRiver implements IHaiRiver {
 
     /**
      * 立直宣言时丢弃的牌
-     * <p>
+     * <p/>
      * 牌会以横向表示
      * 
      * @param hai 牌
@@ -137,7 +137,7 @@ public class HaiRiver implements IHaiRiver {
 
     /**
      * 鸣牌河最末尾的那张牌
-     * <p>
+     * <p/>
      * 内部会对该牌进行鸣牌标识，但是不会将牌从牌河中移除。展示时可以通过{@link IKiriHai}的属性进行判断
      * 
      * @param player 鸣牌玩家的坐席

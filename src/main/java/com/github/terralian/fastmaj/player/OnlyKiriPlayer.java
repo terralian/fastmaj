@@ -9,7 +9,7 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 
 /**
  * 一个只会模切的玩家
- * <p>
+ * <p/>
  * 该类实现的玩家只会将摸到的牌打出去，常用于调试
  * 
  * @author terra.lian 

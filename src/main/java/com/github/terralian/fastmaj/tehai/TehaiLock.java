@@ -11,7 +11,7 @@ import com.github.terralian.fastmaj.player.RivalEnum;
 
 /**
  * {@link ITehaiLock} 的固定实现
- * <p>
+ * <p/>
  * 该实现通过一个集合存储所有的面子，在获取对应集合时手动查询，由于集合大小最大为4，这样的实现性能不会小太多。
  * 
  * @author terra.lian 

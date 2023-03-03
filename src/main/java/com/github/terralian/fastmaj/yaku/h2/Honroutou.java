@@ -9,9 +9,9 @@ import com.github.terralian.fastmaj.yaku.YakuNamePool;
 
 /**
  * 混老头
- * <p>
+ * <p/>
  * 需要所有牌都是幺九牌，可以看做国士下位，但是和国士不复合。可以和七对子复合。
- * <p>
+ * <p/>
  * 混老头和混全带的区别是，混全带需要含幺九顺子（123,789），所以两者不复合
  * 
  * @author terra.lian 

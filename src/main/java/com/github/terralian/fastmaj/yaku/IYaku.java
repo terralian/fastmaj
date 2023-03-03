@@ -8,9 +8,9 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 
 /**
  * 役接口
- * <p>
+ * <p/>
  * 该接口为役的顶层类，其实现类包含所有麻将相关的役种
- * <p>
+ * <p/>
  * 役种实现类的匹配方式各不相同，部分役判断仅需要手牌即可，而部分役的判断则与手牌无关，需要根据场况才能确定（如抢杠）。
  * 
  * @author terra.lian 
@@ -28,9 +28,9 @@ public interface IYaku {
 
     /**
      * 获取役的名称（如：门前清自摸）
-     * <p>
+     * <p/>
      * 该名称在一场游戏中是唯一的，可以作为唯一主键使用，该接口的实现类的{@link #equals(String)}方法一般需要根据该名称来判断
-     * <p>
+     * <p/>
      * 实现类的役种名称一般通过{@link YakuNamePool}获取
      *
      * @see YakuNamePool
@@ -39,7 +39,7 @@ public interface IYaku {
 
     /**
      * 役代表的番数，该番数在役的构建时固定
-     * <p>
+     * <p/>
      * 役的番数根据不同规则可能有所不同
      * 
      * @param isNaki 是否鸣牌

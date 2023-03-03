@@ -2,7 +2,7 @@ package com.github.terralian.fastmaj.player;
 
 /**
  * 对手玩家枚举
- * <p>
+ * <p/>
  * 该枚举类基于自身视角，依照坐席，来定义其他玩家的叫法
  * 
  * @author terra.lian 

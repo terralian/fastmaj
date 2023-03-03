@@ -5,9 +5,9 @@ import com.github.terralian.fastmaj.tehai.NakiEnum;
 
 /**
  * 表示一个玩家的牌河
- * <p>
+ * <p/>
  * 该类定义为一个存储与管理玩家弃的牌的容器，提供对其他玩家鸣牌及查询弃牌的方法。
- * <p>
+ * <p/>
  * 同巡标识设置在牌河是由于是否同巡为玩家可知状态，当玩家不能看其他玩家手牌时，则只能通过牌河进行确认。
  * 
  * @author terra.lian
@@ -16,7 +16,7 @@ public interface IHaiRiver {
 
     /**
      * 鸣牌河最末尾的那张牌
-     * <p>
+     * <p/>
      * 内部会对该牌进行鸣牌标识，但是不会将牌从牌河中移除。展示时可以通过{@link IKiriHai}的属性进行判断
      * 
      * @param player 鸣牌玩家的坐席
@@ -26,7 +26,7 @@ public interface IHaiRiver {
 
     /**
      * 立直宣言时丢弃的牌
-     * <p>
+     * <p/>
      * 牌会以横向表示，非双立直
      * 
      * @param hai 牌
@@ -37,7 +37,7 @@ public interface IHaiRiver {
 
     /**
      * 立直宣言时丢弃的牌
-     * <p>
+     * <p/>
      * 牌会以横向表示
      * 
      * @param hai 牌

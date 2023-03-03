@@ -11,7 +11,7 @@ import com.github.terralian.fastmaj.player.RivalEnum;
 
 /**
  * {@link ITehai}的默认实现
- * <p>
+ * <p/>
  * 该牌的手牌顺序是按摸牌顺序排序的
  * 
  * @author terra.lian 
@@ -159,7 +159,7 @@ public class Tehai implements ITehai {
 
     /**
      * 副露[吃]操作
-     * <p>
+     * <p/>
      * 通过指定打搭子牌，完成吃牌的操作，该操作会首先调用{@link #draw(IHai)}将牌加入手中
      * 
      * @param chiHai 吃的牌
@@ -178,7 +178,7 @@ public class Tehai implements ITehai {
 
     /**
      * 副露[碰]操作
-     * <p>
+     * <p/>
      * 该操作会首先调用{@link #draw(IHai)}将牌加入手中
      * 
      * @param ponHai 碰的牌
@@ -198,7 +198,7 @@ public class Tehai implements ITehai {
 
     /**
      * 明杠
-     * <p>
+     * <p/>
      * 该操作会首先调用{@link #draw(IHai)}将牌加入手中
      * 
      * @param hai 鸣的牌
@@ -232,7 +232,7 @@ public class Tehai implements ITehai {
 
     /**
      * [非进张操作] 暗杠
-     * <p>
+     * <p/>
      * 当手上由4枚牌时，通过该操作进行暗杠，暗杠的牌会固定，不可进行后续操作
      * 
      * @param hai 暗杠的牌
@@ -248,7 +248,7 @@ public class Tehai implements ITehai {
 
     /**
      * [非进张操作] 拔北（限三麻）
-     * <p>
+     * <p/>
      * 从手中拔北，将北从手牌里去除，仅作为宝牌记录
      * 
      * @param hai 北
@@ -279,9 +279,9 @@ public class Tehai implements ITehai {
 
     /**
      * 校验某张牌是否可以吃
-     * <p>
+     * <p/>
      * 校验手牌中是否存在可以吃目标牌的搭子，这个搭子应该是可操作的，该方法也会校验字牌（false）.
-     * <p>
+     * <p/>
      * 该方法不会校验玩家的坐席，上下家的判断应当由该方法的使用者自行判断.
      * 
      * @param hai 牌
@@ -312,7 +312,7 @@ public class Tehai implements ITehai {
 
     /**
      * 校验某张牌是否可以碰
-     * <p>
+     * <p/>
      * 校验手牌中是否存在可用碰的搭子，在一般规则内碰的优先级要大于吃，调用时需要注意。
      * 
      * @param hai 牌
@@ -324,7 +324,7 @@ public class Tehai implements ITehai {
 
     /**
      * 校验某张牌是否可以明杠
-     * <p>
+     * <p/>
      * 校验手牌中是否存在可用杠的搭子，在一般规则内杠的优先级要大于吃，调用时需要注意。
      * 
      * @param hai 牌
@@ -336,7 +336,7 @@ public class Tehai implements ITehai {
 
     /**
      * 手牌是否能够加杠
-     * <p>
+     * <p/>
      * 对手牌进行判断，是否存在可操作加杠的牌
      * 
      * @return 若存在则返回true，若不存在则返回false
@@ -368,7 +368,7 @@ public class Tehai implements ITehai {
 
     /**
      * 手牌是否能够开暗杠
-     * <p>
+     * <p/>
      * 对手牌进行判断，是否存在可以开暗杠的牌，即手牌中可操作的牌大于4枚的情况。
      */
     @Override
@@ -391,7 +391,7 @@ public class Tehai implements ITehai {
 
     /**
      * 手牌是否能够拔北（限三麻）
-     * <p>
+     * <p/>
      * 三麻中，校验手牌中是否存在可操作的北，但是本方法不会校验是否在三麻。
      */
     @Override
@@ -448,7 +448,7 @@ public class Tehai implements ITehai {
 
     /**
      * 增加牌
-     * <p>
+     * <p/>
      * 该方法用于原子增加一张牌，该方法会处理内部的值List及34编码数组，该方法也会同步给可操作List
      * 
      * @param hai 牌
@@ -464,7 +464,7 @@ public class Tehai implements ITehai {
 
     /**
      * 减少可操作牌
-     * <p>
+     * <p/>
      * 该方法会根据参数移除可操作性List中的牌
      */
     private void reduceOperables(IHai... hais) {
@@ -496,7 +496,7 @@ public class Tehai implements ITehai {
 
     /**
      * 获取鸣牌的自身搭子
-     * <p>
+     * <p/>
      * 默认返回所有的牌，若优先使用红宝牌，则红宝牌在第一枚
      * 
      * @param value 牌的值

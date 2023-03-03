@@ -4,7 +4,7 @@ import java.util.TreeMap;
 
 /**
  * mjscore分割计算类
- * <p>
+ * <p/>
  * 该包中包含mjscore的和牌牌分割及部分役的计算，采用
  * 
  * @see <a href="http://hp.vector.co.jp/authors/VA046927/mjscore/">mjscore</a>

@@ -7,7 +7,7 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 
 /**
  * 表示一个牌山，包含牌山内的所有牌
- * <p>
+ * <p/>
  * 
  * @author terra.lian 
  */
@@ -19,7 +19,7 @@ public interface IYama {
 
     /**
      * 初始配牌，按玩家数分发
-     * <p>
+     * <p/>
      * 模拟牌山搭好后，玩家从牌山拿牌的场景
      * 
      * @param oya 庄家位置（由庄家起手先拿）

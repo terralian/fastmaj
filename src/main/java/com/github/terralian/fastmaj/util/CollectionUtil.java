@@ -189,7 +189,7 @@ public abstract class CollectionUtil {
 
     /**
      * 取集合中符合条件的一条。使用多个条件对集合进行判断，先用第一个条件遍历集合，再切换下一个，直到存在一个元素满足某个条件
-     * <p>
+     * <p/>
      * 如若优先顺序为 负数 > 2 > 大于3的数，则使用该方法如下：<br>
      * firstElement([1, 2, 3], k -> k < 0, k -> k ==2 , k -> k > 3) 取到的是2<br>
      * firstElement([-1, 5, 7], k -> k < 0, k -> k ==2 , k -> k > 3) 取到的是-1<br>
@@ -506,7 +506,7 @@ public abstract class CollectionUtil {
     /**
      * 判断目标是否在集合之内，若为null使用==进行判断，若不为null使用equal进行判断。<br>
      * 如
-     * <p>
+     * <p/>
      * IN(10) = false <br>
      * IN(10, 20,30,40) = false <br>
      * IN(10, 20,10,30) = true <br>
@@ -543,9 +543,9 @@ public abstract class CollectionUtil {
 
     /**
      * 根据条件去重，若存在重复，则以下标从小到大取其第一条数据作为返回值，使用如下：
-     * <p>
+     * <p/>
      * persons = CollectionUtil.distinct(persons, k -> k.getName())
-     * <p>
+     * <p/>
      * 
      * @param list 集合
      * @param keyMapper 条件获取器

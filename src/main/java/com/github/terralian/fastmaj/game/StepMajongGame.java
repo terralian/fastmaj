@@ -36,7 +36,7 @@ import lombok.Setter;
 /**
  * 按步骤执行游戏，该类为游戏的操作步骤基类，内部对各个动作进行了分类归纳，但还是需要按照一定步骤才可以正确的执行游戏。
  * 一个正确的自动执行的游戏可以参考{@link StreamMajongGame}，一个牌谱回放器可以参考{@link TenhouMajongReplay}.
- * <p>
+ * <p/>
  * 游戏的流程应当按照以下顺序调用：
  * 
  * <pre>
@@ -125,7 +125,7 @@ public class StepMajongGame {
 
     /**
      * 校验游戏是否结束，若判定游戏继续，则开始下一局，否则结束游戏。
-     * <p>
+     * <p/>
      * 对于无法在开始下一局判定游戏结束的场景，可以直接调用{@link IGameCore#endGame(int[])}}结束游戏
      *
      * @return 游戏状态

@@ -21,7 +21,7 @@ import com.github.terralian.fastmaj.yama.TenhouYamaWorker;
  * <li>处理完成后，由{@link ITenhouPaifuAnalyzer}返回所需的实体
  * </ul>
  * 由于使用SAX2进行XML解析，一次调用就是遍历整个XML。
- * <p>
+ * <p/>
  * 该方法代码来源为<code>tenhouvisualizer</code>，代码进行了一部分改造和补全
  * 
  * @author terra.lian
@@ -152,13 +152,13 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
 
     /**
      * 对局者信息，在重新连接时也会有一个记录，重连时只有当前玩家的名称，非重连时包含4人名称，段位，R值，性别信息
-     * <p>
+     * <p/>
      * 玩家： n0,n1,n2,n3. n0="%2D%72%6F%6E%2D"，3麻时n3=""
-     * <p>
+     * <p/>
      * 段位：dan="16,19,16,18"
-     * <p>
+     * <p/>
      * R值：rate="2135.55,2260.11,2018.07,2198.52"
-     * <p>
+     * <p/>
      * 性别：sx="M,M,M,M"
      * 
      * @param attributes
@@ -422,9 +422,9 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
 
     /**
      * 立直时调用，立直步骤分3步，这里处理13
-     * <p>
+     * <p/>
      * 步骤为: 1. 立直宣言， 2. 打出一张牌， 3.放置立直棒
-     * <p>
+     * <p/>
      * 按天凤规则，在立直打出一枚牌时才会翻新宝牌
      */
     private void visitREACH(Attributes attributes) {
@@ -461,9 +461,9 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
 
     /**
      * 和牌时调用，包含和牌信息和对局结束时的各家分数等
-     * <p>
+     * <p/>
      * 一次和牌的人可能有多个（荣和的情况）
-     * <p>
+     * <p/>
      * 若标签上存在游戏结束的owari，则处理游戏结束
      */
     private void visitAGARI(Attributes attributes) {

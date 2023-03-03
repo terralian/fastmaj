@@ -7,7 +7,7 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 
 /**
  * 手牌和了时分割器
- * <p>
+ * <p/>
  * 提取和了时的部分通用信息{@link DivideInfo}
  * 
  * @author terra.lian 

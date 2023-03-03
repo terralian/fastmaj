@@ -15,7 +15,7 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
 
 /**
  * 游戏核心
- * <p>
+ * <p/>
  * 该接口用于管理游戏状态，而不关心游戏的规则，通过一定顺序调用相关接口，即可实现游戏的进行。
  *
  * @author terra.lian 
@@ -24,16 +24,16 @@ public interface IGameCore {
 
     /**
      * 游戏开始
-     * <p>
+     * <p/>
      * 该方法将会初始化内部状态。
      */
     void startGame();
 
     /**
      * 游戏结束
-     * <p>
+     * <p/>
      * 调用该方法后，将会标记游戏为结束状态，其他游戏运行时方法将会变成非法操作
-     * <p>
+     * <p/>
      * 结束对局后将完成日志的构建
      * 
      * @param increaseAndDecrease 最终得分
@@ -42,7 +42,7 @@ public interface IGameCore {
 
     /**
      * 下一个对局
-     * <p>
+     * <p/>
      * 该方法会自动计算是否切换场风
      * <ul>
      * <li>若连庄，则不改变当前的庄家，增加本场数
@@ -55,7 +55,7 @@ public interface IGameCore {
 
     /**
      * 结束对局
-     * <p>
+     * <p/>
      * 调用该方法后，会将对局设置为结束状态，需要调用{@link #nextKyoku()}开始下一局
      */
     void endKyoku();
@@ -74,9 +74,9 @@ public interface IGameCore {
 
     /**
      * 当前玩家摸一枚手牌
-     * <p>
+     * <p/>
      * 可以从牌山或者王牌区摸一张牌，若从王牌区摸牌，<b>并不会自动增加新的宝牌</b>，这是由于不同规则新宝牌的时机并不一致。
-     * <p>
+     * <p/>
      * 当需要增加新宝牌时，可以调用{@link #nextDoraDisplay()}
      * 
      * @param drawFrom 摸牌来源
@@ -94,7 +94,7 @@ public interface IGameCore {
 
     /**
      * 立直（步骤2）玩家在{@link #kiri}动作后，放上一根立直棒
-     * <p>
+     * <p/>
      * 此时已经过荣和校验，立直成立，分数更新
      * 
      * @param increaseAndDecrease
@@ -141,9 +141,9 @@ public interface IGameCore {
 
     /**
      * 当前玩家操作暗杠
-     * <p>
+     * <p/>
      * 该行为<b>并不会自动增加新的宝牌</b>，这是由于不同规则新宝牌的时机并不一致。
-     * <p>
+     * <p/>
      * 当需要增加新宝牌时，可以调用{@link #nextDoraDisplay()}
      * 
      * @param hai 暗杠的牌
@@ -159,7 +159,7 @@ public interface IGameCore {
 
     /**
      * 和了，包含自摸和荣和
-     * <p>
+     * <p/>
      * 一个对局可能有多个人同时和了，该操作会清空累积的立直棒（本场数仅在切换玩家时会重置）
      * 
      * @param agariPosition 和牌的玩家

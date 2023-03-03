@@ -9,7 +9,7 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
 
 /**
  * 海底摸月
- * <p>
+ * <p/>
  * 海底摸月为牌山的最后一枚牌自摸
  * 
  * @author 作者: terra.lian

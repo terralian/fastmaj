@@ -39,7 +39,7 @@ public class GameCore implements IGameCore {
     private GameConfig gameConfig;
     /**
      * 牌山生成器，有值时使用指定的牌山生成器。若未指定，则使用{@link SimpleRandomYamaWorker}
-     * <p>
+     * <p/>
      * 若需要重复曾经的牌谱牌山，则自定义牌山生成器是关键之一
      */
     protected IYamaWorker yamaWorker;
@@ -159,7 +159,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 游戏开始
-     * <p>
+     * <p/>
      * 该方法将会初始化内部状态。
      */
     @Override
@@ -203,9 +203,9 @@ public class GameCore implements IGameCore {
 
     /**
      * 游戏结束
-     * <p>
+     * <p/>
      * 调用该方法后，将会标记游戏为结束状态，其他游戏运行时方法将会变成非法操作
-     * <p>
+     * <p/>
      * 结束对局后将完成日志的构建
      */
     @Override
@@ -318,9 +318,9 @@ public class GameCore implements IGameCore {
 
     /**
      * 当前玩家摸一枚手牌
-     * <p>
+     * <p/>
      * 可以从牌山或者王牌区摸一张牌，若从王牌区摸牌，<b>并不会自动增加新的宝牌</b>，这是由于不同规则新宝牌的时机并不一致。
-     * <p>
+     * <p/>
      * 当需要增加新宝牌时，可以调用{@link #nextDoraDisplay()}
      * 
      * @param fromYama true从牌山，false从王牌区
@@ -529,9 +529,9 @@ public class GameCore implements IGameCore {
 
     /**
      * 当前玩家操作暗杠
-     * <p>
+     * <p/>
      * 该行为<b>并不会自动增加新的宝牌</b>，这是由于不同规则新宝牌的时机并不一致。
-     * <p>
+     * <p/>
      * 当需要增加新宝牌时，可以调用{@link #nextDoraDisplay()}
      * 
      * @param hai 暗杠的牌
@@ -581,7 +581,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 和了
-     * <p>
+     * <p/>
      * 一个对局可能有多个人同时和了
      * 
      * @param agariPosition 和牌的玩家

@@ -14,14 +14,15 @@ import com.github.terralian.fastmaj.tehai.Tehai;
 
 /**
  * 34编码相关方法和编码值
- * <p>
+ * <p/>
  * 该类可用于便捷获取各个牌在34编码中所表示的值，也提供了一组用于判断和转换为其他格式的方法
- * <p>
- * 关于34编码，该编码法将[0,33]映射为34种牌，以实现编码，这种编码法很适合仅需要考虑种类（如5s，8p），不关心像136编码一样关心每一张牌的场合。 依照该编码法可以通过整形值快速判断一个牌的类型，及进行各种操作，如获取宝牌指示牌对应的宝牌。
- * <p>
+ * <p/>
+ * 关于34编码，该编码法将[0,33]映射为34种牌，以实现编码，这种编码法很适合仅需要考虑种类（如5s，8p），不关心像136编码一样关心每一张牌的场合。
+ * 依照该编码法可以通过整形值快速判断一个牌的类型，及进行各种操作，如获取宝牌指示牌对应的宝牌。
+ * <p/>
  * 34编码法的缺陷是会丢失牌是否为红宝牌信息，所以不适合作为持久化方案。
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public abstract class Encode34 {
 
@@ -183,7 +184,7 @@ public abstract class Encode34 {
 
     /**
      * 所有幺九牌的编码
-     * <p>
+     * <p/>
      * 包含数牌的1和9及字牌（东南西北白发中）
      */
     public final static int[] YAOTYU_HAIS = new int[] {
@@ -193,7 +194,7 @@ public abstract class Encode34 {
     
     /**
      * 所有牌的幺九属性
-     * <p>
+     * <p/>
      * 为True表示幺九牌，为False表示非幺九
      */
     private static final boolean[] IS_YAOTYU_ARRAY = new boolean[] {
@@ -225,7 +226,7 @@ public abstract class Encode34 {
 
     /**
      * 将34编码法的值转换为记号法的值
-     * <p>
+     * <p/>
      * 当为红宝牌时，无论是否为红5，都会返回是红宝牌（0），这样做是为了兼容特殊规则下红1，红2的场景
      * 
      * @param value34 34编码法的值
@@ -256,7 +257,7 @@ public abstract class Encode34 {
 
     /**
      * 将34编码法的值转换为记号法
-     * <p>
+     * <p/>
      * 例子： <code>8 -> 9m</code>
      * 
      * @param value34 34编码法的值
@@ -270,9 +271,9 @@ public abstract class Encode34 {
 
     /**
      * 将34编码数组转为手牌
-     * <p>
-     * 该方法并不是长度为34的数组，而是14枚手牌，按34编码存储为每个元素的数组
-     * 
+     * <p/>
+     * <b>该方法的参数并不是长度为34的数组，而是14枚手牌，按34编码存储为每个元素的数组</b>
+     *
      * @param haiValues 手牌值集合
      */
     public static ITehai toTehai(int[] haiValues) {
@@ -285,8 +286,8 @@ public abstract class Encode34 {
 
     /**
      * 将34编码集合转为手牌
-     * <p>
-     * 该方法并不是长度为34的数组，而是14枚手牌，按34编码存储为每个元素的数组
+     * <p/>
+     * 该方法的参数并不是长度为34的数组，而是14枚手牌，按34编码存储为每个元素的数组
      * 
      * @param encode34Tehai 34编码的手牌集合
      */
@@ -332,7 +333,7 @@ public abstract class Encode34 {
 
     /**
      * 同类型的下一枚牌
-     * <p>
+     * <p/>
      * 该方法可以用做查询宝牌指示牌的下一枚牌
      * 
      * @param encode34 34编码格式的牌
@@ -354,7 +355,7 @@ public abstract class Encode34 {
     
     /**
      * 判断是否是34编码中的幺九牌
-     * <p>
+     * <p/>
      * 幺九牌包含数牌中的19和所有字牌
      * 
      * @param value34 34编码法的值
@@ -365,7 +366,7 @@ public abstract class Encode34 {
 
     /**
      * 判断是否是34编码中的中张牌
-     * <p>
+     * <p/>
      * 中张牌为数牌中的2到8，也可以认为是非幺九牌
      * 
      * @param value34 34编码法的值
@@ -457,7 +458,7 @@ public abstract class Encode34 {
 
     /**
      * 判断牌a是否大于牌b
-     * <p>
+     * <p/>
      * 仅根据编码值进行比较，跨花色的情况下也成立，如：1p > 1m。
      * 
      * @param a 牌a
@@ -476,7 +477,7 @@ public abstract class Encode34 {
 
     /**
      * 获取一个数组中的手牌数
-     * <p>
+     * <p/>
      * 如[1, 2, 0, 0 ... ] 共3枚手牌
      * 
      * @param array 34编码数组

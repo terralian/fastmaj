@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -223,5 +224,29 @@ public class FastSyantenCalculator extends SyantenCalculator {
             }
         }
         return mp;
+    }
+
+    /**
+     * 序列化文件
+     */
+    public static class IndexSerializable implements Serializable {
+        private int[][] mp1;
+        private int[][] mp2;
+
+        public int[][] getMp1() {
+            return mp1;
+        }
+
+        public void setMp1(int[][] mp1) {
+            this.mp1 = mp1;
+        }
+
+        public int[][] getMp2() {
+            return mp2;
+        }
+
+        public void setMp2(int[][] mp2) {
+            this.mp2 = mp2;
+        }
     }
 }

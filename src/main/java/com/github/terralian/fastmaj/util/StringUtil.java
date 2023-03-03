@@ -264,14 +264,14 @@ public abstract class StringUtil {
         char[] charArray = string.toCharArray();
         StringBuilder builder = new StringBuilder(string.length());
         boolean underlineBefore = false;
-        for (int i = 0, l = charArray.length; i < l; i++) {
-            if (charArray[i] == '_') {
+        for (char c : charArray) {
+            if (c == '_') {
                 underlineBefore = true;
             } else if (underlineBefore) {
-                builder.append(Character.toUpperCase(charArray[i]));
+                builder.append(Character.toUpperCase(c));
                 underlineBefore = false;
             } else {
-                builder.append(charArray[i]);
+                builder.append(c);
             }
         }
         return builder.toString();
@@ -288,11 +288,11 @@ public abstract class StringUtil {
         }
         char[] charArray = string.toCharArray();
         StringBuilder builder = new StringBuilder(string.length());
-        for (int i = 0; i < charArray.length; i++) {
-            if (Character.isUpperCase(charArray[i])) {
-                builder.append('_').append(Character.toLowerCase(charArray[i]));
+        for (char c : charArray) {
+            if (Character.isUpperCase(c)) {
+                builder.append('_').append(Character.toLowerCase(c));
             } else {
-                builder.append(charArray[i]);
+                builder.append(c);
             }
         }
         return builder.toString();

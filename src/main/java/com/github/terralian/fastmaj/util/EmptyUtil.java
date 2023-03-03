@@ -55,8 +55,8 @@ public abstract class EmptyUtil {
     public static boolean isAllEmpty(String[] array) {
         if (array == null)
             return true;
-        for (int i = 0; i < array.length; i++) {
-            if (!isEmpty(array[i]))
+        for (String s : array) {
+            if (!isEmpty(s))
                 return false;
         }
         return true;
@@ -70,8 +70,8 @@ public abstract class EmptyUtil {
     public static boolean isAnyEmpty(String[] array) {
         if (array == null)
             return true;
-        for (int i = 0; i < array.length; i++) {
-            if (isEmpty(array[i]))
+        for (String s : array) {
+            if (isEmpty(s))
                 return true;
         }
         return false;

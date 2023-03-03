@@ -69,7 +69,7 @@ public class TehaiLock implements ITehaiLock {
      */
     @Override
     public List<IHai> getChiFirst() {
-        return getSomeFirst(k -> k.isShuntsu());
+        return getSomeFirst(Mentsu::isShuntsu);
     }
 
     /**
@@ -85,7 +85,7 @@ public class TehaiLock implements ITehaiLock {
      */
     @Override
     public List<IHai> getPonFirst() {
-        return getSomeFirst(k -> k.isKotsu());
+        return getSomeFirst(Mentsu::isKotsu);
     }
 
     /**
@@ -93,7 +93,7 @@ public class TehaiLock implements ITehaiLock {
      */
     @Override
     public List<IHai> getKantsuFirst() {
-        return getSomeFirst(k -> k.isKantsu());
+        return getSomeFirst(Mentsu::isKantsu);
     }
 
     /**
@@ -101,7 +101,7 @@ public class TehaiLock implements ITehaiLock {
      */
     @Override
     public List<IHai> getMinkanFirst() {
-        return getSomeFirst(k -> k.isMinkan());
+        return getSomeFirst(Mentsu::isMinkan);
     }
 
     /**
@@ -109,7 +109,7 @@ public class TehaiLock implements ITehaiLock {
      */
     @Override
     public List<IHai> getAnnkanFirst() {
-        return getSomeFirst(k -> k.isAnnkan());
+        return getSomeFirst(Mentsu::isAnnkan);
     }
 
     /**
@@ -120,7 +120,7 @@ public class TehaiLock implements ITehaiLock {
     private List<IHai> getSomeFirst(Predicate<Mentsu> predicate) {
         return value.stream() //
                 .filter(predicate) //
-                .map(k -> k.getMentuFirst()) //
+                .map(Mentsu::getMentuFirst) //
                 .collect(Collectors.toList());
     }
 
@@ -256,7 +256,7 @@ public class TehaiLock implements ITehaiLock {
     public Mentsu remove(int index) {
         Mentsu mentsu = value.remove(index);
         this.isNaki = value.stream().anyMatch(k -> !k.isAnnkan());
-        this.isAnnkan = value.stream().anyMatch(k -> k.isAnnkan());
+        this.isAnnkan = value.stream().anyMatch(Mentsu::isAnnkan);
         return mentsu;
     }
 

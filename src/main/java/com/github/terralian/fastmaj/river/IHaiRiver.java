@@ -125,11 +125,16 @@ public interface IHaiRiver {
 
     /**
      * 当前是否同巡
+     * <p/>
+     * 在立直时，会将同巡标记为True.
+     * 当玩家存在部分发声行为（鸣牌，拔北，杠牌），会将同巡标记为False.
      */
     boolean isSameJun();
 
     /**
      * 第一巡是否同巡
+     * <p />
+     * 当且仅当第一巡立直，且没有人在此之前有部分发声行为（鸣牌，拔北，杠牌）时，会将第一巡标记为同巡.
      */
     boolean isSameFirstJun();
 

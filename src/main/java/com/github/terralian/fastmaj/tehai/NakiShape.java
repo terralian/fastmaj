@@ -25,7 +25,7 @@ public abstract class NakiShape {
      * <p/>
      * 即 [ 自身，下家，上家，对家 ]，除自身外的下标，与bitmap的玩家编码一一对应
      */
-    private final static Integer[] PLAYER_IDNEX_MAP = new Integer[] {0, -1, 1, 2};
+    private final static Integer[] PLAYER_INDEX_MAP = new Integer[] {0, -1, 1, 2};
 
     /**
      * 上家
@@ -129,7 +129,7 @@ public abstract class NakiShape {
      * @return 被鸣牌玩家的坐席 [0, 3]
      */
     public static Integer getPlayerIndex(int nakiShape, Integer selfIndex) {
-        int index = selfIndex + PLAYER_IDNEX_MAP[nakiShape & 0b11];
+        int index = selfIndex + PLAYER_INDEX_MAP[nakiShape & 0b11];
         if (index < 0)
             index += 3;
         else if (index > 3)

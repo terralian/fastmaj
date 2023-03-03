@@ -22,7 +22,6 @@ import java.util.zip.ZipFile;
 
 import com.github.terralian.fastmaj.tehai.FastSyantenCalculator;
 import com.github.terralian.fastmaj.util.StopWatch;
-import org.junit.Test;
 
 /**
  * 向听序列化制作
@@ -35,7 +34,7 @@ public class IndexSerializeMakerTest {
     private final String projectPath = System.getProperty("user.dir").replaceAll("\\\\", "/");
     private final String resourcePath = projectPath + "/src/test/resources/index";
 
-    @Test
+    // @Test
     public void serialize() throws IOException, ClassNotFoundException {
         String fileName = resourcePath + "/old.zip";
         File file = new File(fileName);
@@ -72,15 +71,16 @@ public class IndexSerializeMakerTest {
         }
     }
 
-    @Test
+    // @Test
     public void deserialized() throws Exception {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();
         String fullName = resourcePath + "/" + "index.data";
 
         File file = new File(fullName);
-        try (FileInputStream fi = new FileInputStream(file); BufferedInputStream ba = new BufferedInputStream(fi);
-             ObjectInputStream oi = new ObjectInputStream(ba)) {
+        try (FileInputStream fi = new FileInputStream(file);
+                BufferedInputStream ba = new BufferedInputStream(fi);
+                ObjectInputStream oi = new ObjectInputStream(ba)) {
             FastSyantenCalculator.IndexSerializable o = (FastSyantenCalculator.IndexSerializable) oi.readObject();
             System.out.println(Arrays.toString(o.getMp1()[0]));
             System.out.println(Arrays.toString(o.getMp2()[0]));
@@ -89,7 +89,7 @@ public class IndexSerializeMakerTest {
         System.out.println(stopWatch.prettyPrint());
     }
 
-    @Test
+    // @Test
     public void deserializedZip() throws Exception {
         StopWatch stopWatch = new StopWatch();
         stopWatch.start();

@@ -18,7 +18,7 @@ public class Suukantu implements IYakuman {
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
         ITehaiLock tehaiLock = tehai.getLock();
-        return tehaiLock.kantsuSize() == 4;
+        return tehaiLock.kanzuSize() == 4;
     }
 
     @Override

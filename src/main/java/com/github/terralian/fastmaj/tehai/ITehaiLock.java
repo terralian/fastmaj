@@ -58,7 +58,7 @@ public interface ITehaiLock {
     /**
      * 获取手牌中固定的明杠+暗杠的第一枚牌
      */
-    List<IHai> getKantsuFirst();
+    List<IHai> getKanzuFirst();
 
     /**
      * 获取手牌中杠固定的部分第一枚牌
@@ -73,7 +73,7 @@ public interface ITehaiLock {
     /**
      * 获取杠子的数量
      */
-    int getKantsuSize();
+    int getKanzuSize();
 
     // ------------------------------------------------
     // 行为动作
@@ -86,7 +86,7 @@ public interface ITehaiLock {
      * @param tehai1 搭子牌1
      * @param tehai2 搭子牌2
      */
-    Mentsu chi(IHai chiHai, IHai tehai1, IHai tehai2);
+    Mentsu chii(IHai chiHai, IHai tehai1, IHai tehai2);
 
     /**
      * 副露[碰]操作
@@ -155,7 +155,7 @@ public interface ITehaiLock {
      * <p/>
      * 当明杠和暗杠都为0时，返回0，其中一个不为0则返回对应值
      */
-    int kantsuSize();
+    int kanzuSize();
 
     // ------------------------------------------------
     // 元素操作

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Set;
 
+import com.github.terralian.fastmaj.FastMajong;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,7 +28,7 @@ public class YuukouhaiCalculatorTest {
 
     @Before
     public void before() {
-        yuukouhaiCalculator = new YuukouhaiCalculator();
+        yuukouhaiCalculator = new YuukouhaiCalculator(FastMajong.doGetSyantenCalculator());
     }
 
     @Test

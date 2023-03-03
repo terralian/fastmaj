@@ -5,7 +5,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.github.terralian.fastmaj.FastMajong;
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.hai.HaiPool;
@@ -14,9 +13,8 @@ import com.github.terralian.fastmaj.hai.IHai;
 /**
  * 有效牌计算器的默认实现
  * 
- * @author terra.lian 
- * @see <a href=
- *      "https://web.archive.org/web/20190402234201/http://cmj3.web.fc2.com/index.htm#yuukou">麻雀C言語プログラム集</a>
+ * @author terra.lian
+ * @see <a href= "https://web.archive.org/web/20190402234201/http://cmj3.web.fc2.com/index.htm#yuukou">麻雀C言語プログラム集</a>
  */
 public class YuukouhaiCalculator implements IYuukouhaiCalculator {
 
@@ -28,8 +26,8 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
     /**
      * 构建有效牌实例
      */
-    public YuukouhaiCalculator() {
-        this.syantenCalculator = FastMajong.doGetSyantenCalculator();
+    public YuukouhaiCalculator(ISyantenCalculator syantenCalculator) {
+        this.syantenCalculator = syantenCalculator;
     }
 
     /**

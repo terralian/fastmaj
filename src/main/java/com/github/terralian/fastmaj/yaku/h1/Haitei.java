@@ -10,7 +10,7 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
 /**
  * 海底摸月
  * <p/>
- * 海底摸月为牌山的最后一枚牌自摸
+ * 海底摸月为山牌的最后一枚牌自摸（非岭上牌）
  * 
  * @author 作者: terra.lian
  * 
@@ -22,12 +22,9 @@ public class Haitei implements IYaku {
         if (holder == null) {
             return false;
         }
-        // 岭上和海底不能复合
+        // 岭上，海底，河底
         DrawFrom lastDrawFrom = holder.getLastDrawFrom();
-        if (lastDrawFrom == DrawFrom.RINSYIN) {
-            return false;
-        }
-        return holder.getYamaCountdown() == 0 && !holder.isRon();
+        return lastDrawFrom == DrawFrom.YAMA && holder.getYamaCountdown() == 0 && !holder.isRon();
     }
 
     @Override

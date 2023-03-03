@@ -171,7 +171,7 @@ public class Tehai implements ITehai {
         // 增加手牌
         addHai(chiHai, false);
         // 鸣牌
-        lock.chi(chiHai, tehai1, tehai2);
+        lock.chii(chiHai, tehai1, tehai2);
         // 副露后可操作牌减少
         reduceOperables(tehai1, tehai2);
     }

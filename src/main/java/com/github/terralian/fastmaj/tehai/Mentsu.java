@@ -25,7 +25,7 @@ public final class Mentsu {
     /** 8 明刻 */
     public static final int TYPE_MINKO = 0b01000;
     /** 16 杠子，包含明杠暗杠 */
-    public static final int TYPE_KANTSU = 0b10000;
+    public static final int TYPE_KANZU = 0b10000;
     /** 16 明杠 */
     public static final int TYPE_MINKAN = 0b10000;
     /** 17 暗杠 */
@@ -187,7 +187,7 @@ public final class Mentsu {
      * 是否是杠子，包含明杠和暗杠
      */
     public boolean isKantsu() {
-        return (this.type & TYPE_KANTSU) == TYPE_KANTSU;
+        return (this.type & TYPE_KANZU) == TYPE_KANZU;
     }
 
     /**

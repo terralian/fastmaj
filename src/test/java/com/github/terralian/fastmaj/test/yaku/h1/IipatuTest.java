@@ -73,7 +73,7 @@ public class IipatuTest {
         gameContext.getHaiRivers().forEach(k -> k.clear());
         gameContext.getHaiRiver(0).chain()//
                 .reach(HaiPool.random()) //
-                .naki(1, NakiEnum.CHI) //
+                .naki(1, NakiEnum.CHII) //
                 .setSameJun(false);
         gameContext.getHaiRiver(1).kiri(HaiPool.random());
         gameContext.getHaiRiver(2).reach(HaiPool.random());

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
+import java.net.URL;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
@@ -184,7 +185,9 @@ public class FastSyantenCalculator extends SyantenCalculator {
      * 读取索引文件
      */
     private static void loadSyantenIndexFile() throws IOException, ClassNotFoundException {
-        String fileName = FastSyantenCalculator.class.getClassLoader().getResource("syanten.zip").getPath();
+        URL indexUrl = FastSyantenCalculator.class.getClassLoader().getResource("syanten.zip");
+        Assert.notNull(indexUrl, "向听数索引压缩文件丢失");
+        String fileName = indexUrl.getPath();
         File file = new File(fileName);
         try (ZipFile zipFile = new ZipFile(file)) {
             Enumeration<? extends ZipEntry> entries = zipFile.entries();

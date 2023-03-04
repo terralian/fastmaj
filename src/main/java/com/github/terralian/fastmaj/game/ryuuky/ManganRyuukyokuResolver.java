@@ -74,7 +74,7 @@ public class ManganRyuukyokuResolver implements IRyuukyokuResolver {
         }
         gameCore.ryuukyoku(this, playerPoints);
         // 庄家听牌则连庄
-        boolean isOyaRenchan = gameCore.getPlayerHide(gameCore.getOya()).getSyanten() == 0;
+        boolean isOyaRenchan = gameCore.getPlayerHide(gameCore.getOya()).getSyaten() == 0;
         gameCore.setRenchan(isOyaRenchan, false);
     }
 

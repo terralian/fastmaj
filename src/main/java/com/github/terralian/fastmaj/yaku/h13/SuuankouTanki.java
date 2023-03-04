@@ -29,7 +29,7 @@ public class SuuankouTanki implements IYakuman {
             return false;
         }
 
-        return divide.getAnnKotsuFirst().size() == 4;
+        return divide.getAnnkoFirst().size() == 4;
     }
 
     @Override

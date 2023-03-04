@@ -91,7 +91,7 @@ public interface IHai {
     /**
      * 是否为索子牌
      */
-    boolean isSozu();
+    boolean isSouzu();
 
     /**
      * 是否是字牌

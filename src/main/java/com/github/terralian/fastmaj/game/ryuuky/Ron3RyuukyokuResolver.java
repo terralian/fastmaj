@@ -51,7 +51,7 @@ public class Ron3RyuukyokuResolver implements IRyuukyoku {
         // 执行流局操作
         gameCore.ryuukyoku(this, gameCore.getPlayerPoints());
         // 庄家听牌则连庄
-        boolean isOyaRenchan = gameCore.getPlayerHide(gameCore.getOya()).getSyanten() == 0;
+        boolean isOyaRenchan = gameCore.getPlayerHide(gameCore.getOya()).getSyaten() == 0;
         gameCore.setRenchan(isOyaRenchan, false);
     }
 

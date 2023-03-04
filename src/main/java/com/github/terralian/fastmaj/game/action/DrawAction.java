@@ -31,10 +31,10 @@ public class DrawAction implements IGameAction {
         TehaiActionValue lastTehaiAction = gameCore.getLastTehaiAction();
         DrawFrom drawFrom = DrawFrom.YAMA;
         if(lastRiverAction != null && lastRiverAction.getActionType() == RiverActionType.MINKAN) {
-            drawFrom = DrawFrom.RINSYIN;
+            drawFrom = DrawFrom.RINSYAN;
         } else if (lastTehaiAction != null && (lastTehaiAction.getActionType() == TehaiActionType.ANNKAN
                 || lastTehaiAction.getActionType() == TehaiActionType.KAKAN)) {
-            drawFrom = DrawFrom.RINSYIN;
+            drawFrom = DrawFrom.RINSYAN;
         }
         gameCore.draw(drawFrom);
     }

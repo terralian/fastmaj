@@ -22,7 +22,7 @@ import com.github.terralian.fastmaj.yaku.h1.Pinfu;
 import com.github.terralian.fastmaj.yaku.h1.Reach;
 import com.github.terralian.fastmaj.yaku.h1.Rinsyan;
 import com.github.terralian.fastmaj.yaku.h1.Tanyaotyu;
-import com.github.terralian.fastmaj.yaku.h1.Tuumo;
+import com.github.terralian.fastmaj.yaku.h1.Tsumo;
 import com.github.terralian.fastmaj.yaku.h1.TyanKan;
 import com.github.terralian.fastmaj.yaku.h1.Tyun;
 import com.github.terralian.fastmaj.yaku.h13.Daisangen;
@@ -44,7 +44,7 @@ import com.github.terralian.fastmaj.yaku.h2.HonTyanta;
 import com.github.terralian.fastmaj.yaku.h2.Honroutou;
 import com.github.terralian.fastmaj.yaku.h2.Ittuu;
 import com.github.terralian.fastmaj.yaku.h2.Sanankou;
-import com.github.terralian.fastmaj.yaku.h2.Sankantu;
+import com.github.terralian.fastmaj.yaku.h2.Sankanzu;
 import com.github.terralian.fastmaj.yaku.h2.SansyokuDoujyun;
 import com.github.terralian.fastmaj.yaku.h2.SansyokuDoupon;
 import com.github.terralian.fastmaj.yaku.h2.Syousangen;
@@ -53,7 +53,7 @@ import com.github.terralian.fastmaj.yaku.h2.Toitoi;
 import com.github.terralian.fastmaj.yaku.h3.Honitu;
 import com.github.terralian.fastmaj.yaku.h3.JyunTyanta;
 import com.github.terralian.fastmaj.yaku.h3.Ryanpeikou;
-import com.github.terralian.fastmaj.yaku.h6.Tinitu;
+import com.github.terralian.fastmaj.yaku.h6.Tinizu;
 
 /**
  * {@link IYakuMatcher}的默认实现
@@ -87,11 +87,11 @@ public class YakuMatcher implements IYakuMatcher {
     /**
      * 刻子役，含3个对子以上的
      */
-    private List<IYaku> kotsuYakus;
+    private List<IYaku> kozuYakus;
     /**
      * 顺子役，含3个顺子以上的
      */
-    private List<IYaku> shuntsuYakus;
+    private List<IYaku> shunzuYakus;
 
     /**
      * 门清役种
@@ -175,12 +175,12 @@ public class YakuMatcher implements IYakuMatcher {
         }
         if (divideInfo != null) {
             // 对子役
-            if (divideInfo.getAllKanKotsuFirst().size() >= 3) {
-                yakus.addAll(CollectionUtil.filterToList(kotsuYakus, yakuPredicate));
+            if (divideInfo.getAllKanKozuFirst().size() >= 3) {
+                yakus.addAll(CollectionUtil.filterToList(kozuYakus, yakuPredicate));
             }
             // 顺子役
-            if (divideInfo.getAllShuntsuFirst().size() >= 3) {
-                yakus.addAll(CollectionUtil.filterToList(shuntsuYakus, yakuPredicate));
+            if (divideInfo.getAllShunzuFirst().size() >= 3) {
+                yakus.addAll(CollectionUtil.filterToList(shunzuYakus, yakuPredicate));
             }
         }
         // 门清役
@@ -235,11 +235,11 @@ public class YakuMatcher implements IYakuMatcher {
         // 含字牌役
         this.setHasJihaiYakus();
         // 字牌役
-        this.setjihaiYakus();
+        this.setJihaiYakus();
         // 对子役
-        this.setKotsuYakus();
+        this.setKozuYakus();
         // 顺子役
-        this.setShuntsuYakus();
+        this.setShunzuYakus();
         // 门清役
         this.setMenchanYakus();
         // 荣和役
@@ -261,7 +261,7 @@ public class YakuMatcher implements IYakuMatcher {
         // 纯全带
         nonJihaiYakus.add(new JyunTyanta());
         // 清一色
-        nonJihaiYakus.add(new Tinitu());
+        nonJihaiYakus.add(new Tinizu());
     }
 
     /**
@@ -285,7 +285,7 @@ public class YakuMatcher implements IYakuMatcher {
      * <p/>
      * 该部分役种用字牌判断会提升剪枝效率
      */
-    private void setjihaiYakus() {
+    private void setJihaiYakus() {
         jihaiYakus = new ArrayList<>();
 
         // 场风
@@ -309,29 +309,29 @@ public class YakuMatcher implements IYakuMatcher {
      * <p/>
      * 该部分役种用对子判断会提升剪枝效率
      */
-    private void setKotsuYakus() {
-        kotsuYakus = new ArrayList<>();
+    private void setKozuYakus() {
+        kozuYakus = new ArrayList<>();
 
         // 三暗刻
-        kotsuYakus.add(new Sanankou());
+        kozuYakus.add(new Sanankou());
         // 三杠子
-        kotsuYakus.add(new Sankantu());
+        kozuYakus.add(new Sankanzu());
         // 三色同刻
-        kotsuYakus.add(new SansyokuDoupon());
+        kozuYakus.add(new SansyokuDoupon());
         // 对对和
-        kotsuYakus.add(new Toitoi());
+        kozuYakus.add(new Toitoi());
         // 四暗刻
-        kotsuYakus.add(new Suuankou());
+        kozuYakus.add(new Suuankou());
         // 四暗刻单骑
-        kotsuYakus.add(new SuuankouTanki());
+        kozuYakus.add(new SuuankouTanki());
         // 四杠子
-        kotsuYakus.add(new Syousuusii());
+        kozuYakus.add(new Syousuusii());
         // 大三元
-        kotsuYakus.add(new Daisangen());
+        kozuYakus.add(new Daisangen());
         // 大四喜
-        kotsuYakus.add(new Daisuusii());
+        kozuYakus.add(new Daisuusii());
         // 清老头
-        kotsuYakus.add(new Tinroutou());
+        kozuYakus.add(new Tinroutou());
     }
 
     /**
@@ -339,19 +339,19 @@ public class YakuMatcher implements IYakuMatcher {
      * <p/>
      * 该部分役种用顺子判断会提升剪枝效率
      */
-    private void setShuntsuYakus() {
-        shuntsuYakus = new ArrayList<>();
+    private void setShunzuYakus() {
+        shunzuYakus = new ArrayList<>();
 
         // 平和
-        shuntsuYakus.add(new Pinfu());
+        shunzuYakus.add(new Pinfu());
         // 一气
-        shuntsuYakus.add(new Ittuu());
+        shunzuYakus.add(new Ittuu());
         // 三色同顺
-        shuntsuYakus.add(new SansyokuDoujyun());
+        shunzuYakus.add(new SansyokuDoujyun());
         // 九莲
-        shuntsuYakus.add(new Tyuuren());
+        shunzuYakus.add(new Tyuuren());
         // 纯九莲
-        shuntsuYakus.add(new Tyuuren9());
+        shunzuYakus.add(new Tyuuren9());
     }
 
     /**
@@ -369,7 +369,7 @@ public class YakuMatcher implements IYakuMatcher {
         // 一发
         menchanYakus.add(new Iipatu());
         // 自摸
-        menchanYakus.add(new Tuumo());
+        menchanYakus.add(new Tsumo());
         // 一杯口
         menchanYakus.add(new Iipeikou());
         // 七对子

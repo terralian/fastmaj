@@ -25,7 +25,7 @@ public class DoubleReach implements IYaku {
 
     @Override
     public String getName() {
-        return YakuNamePool.DoubleRiichi;
+        return YakuNamePool.DoubleReach;
     }
 
     @Override

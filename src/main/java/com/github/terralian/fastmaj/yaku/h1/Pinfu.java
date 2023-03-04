@@ -35,8 +35,8 @@ public class Pinfu implements IYaku {
         }
 
         // 手上没有刻子，顺子为4（除却七对子）
-        List<IHai> shuntsuFirst = divide.getAllShuntsuFirst();
-        if (!divide.getAllKanKotsuFirst().isEmpty() || shuntsuFirst.size() != 4) {
+        List<IHai> shunzuFirst = divide.getAllShunzuFirst();
+        if (!divide.getAllKanKozuFirst().isEmpty() || shunzuFirst.size() != 4) {
             return false;
         }
 
@@ -65,7 +65,7 @@ public class Pinfu implements IYaku {
         IHai maxHai = agariLiteral >= 7 //
                 ? HaiPool.getByMark(agariLiteral - 2, agariHai.geHaiType())
                 : agariHai;
-        return Encode34.contains(shuntsuFirst, minHai) || Encode34.contains(shuntsuFirst, maxHai);
+        return Encode34.contains(shunzuFirst, minHai) || Encode34.contains(shunzuFirst, maxHai);
     }
 
     @Override

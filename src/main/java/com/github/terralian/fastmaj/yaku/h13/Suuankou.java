@@ -32,7 +32,7 @@ public class Suuankou implements IYakuman {
         }
 
         // 刻子
-        int kootu = 0;
+        int kozu = 0;
         // 是否有对子
         boolean toitu = false;
 
@@ -41,12 +41,12 @@ public class Suuankou implements IYakuman {
             } else if (value34[i] == 1) {
                 return false;
             } else if (value34[i] >= 3) {
-                kootu++;
+                kozu++;
             } else if (!toitu && value34[i] == 2) {
                 toitu = true;
             }
         }
-        return kootu == 4 && toitu;
+        return kozu == 4 && toitu;
     }
 
     @Override

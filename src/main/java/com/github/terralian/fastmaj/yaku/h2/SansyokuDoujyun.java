@@ -20,10 +20,10 @@ public class SansyokuDoujyun implements IYaku {
 
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
-        if (divide == null || divide.getAllShuntsuFirst().size() < 3) {
+        if (divide == null || divide.getAllShunzuFirst().size() < 3) {
             return false;
         }
-        List<IHai> allFirst = divide.getAllShuntsuFirst();
+        List<IHai> allFirst = divide.getAllShunzuFirst();
         // 若第二个不是那就不是了
         for (int i = 0; i < 2; i++) {
             // 取第一枚牌，作为值和类型的基准（第一候选）

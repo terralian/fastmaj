@@ -16,5 +16,5 @@ public enum DrawFrom {
     /**
      * 从岭上摸牌
      */
-    RINSYIN,
+    RINSYAN,
 }

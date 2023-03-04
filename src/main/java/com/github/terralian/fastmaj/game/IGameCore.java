@@ -148,7 +148,7 @@ public interface IGameCore {
      * 
      * @param hai 暗杠的牌
      */
-    void ankan(IHai hai);
+    void annkan(IHai hai);
 
     /**
      * 拔北

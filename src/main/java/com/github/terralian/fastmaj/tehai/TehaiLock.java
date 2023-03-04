@@ -16,14 +16,14 @@ import com.github.terralian.fastmaj.player.RivalEnum;
  * 
  * @author terra.lian 
  * @see ITehaiLock
- * @see Mentsu
+ * @see Menzu
  */
 public class TehaiLock implements ITehaiLock {
 
     /**
      * 所有固定的面子
      */
-    private List<Mentsu> value;
+    private List<Menzu> value;
 
     /**
      * 是否鸣牌
@@ -52,7 +52,7 @@ public class TehaiLock implements ITehaiLock {
      * {@inheritDoc}
      */
     @Override
-    public Mentsu get(int index) {
+    public Menzu get(int index) {
         return value.get(index);
     }
 
@@ -60,7 +60,7 @@ public class TehaiLock implements ITehaiLock {
      * {@inheritDoc}
      */
     @Override
-    public List<Mentsu> getAll() {
+    public List<Menzu> getAll() {
         return new ArrayList<>(value);
     }
 
@@ -69,7 +69,7 @@ public class TehaiLock implements ITehaiLock {
      */
     @Override
     public List<IHai> getChiFirst() {
-        return getSomeFirst(Mentsu::isShuntsu);
+        return getSomeFirst(Menzu::isShunzu);
     }
 
     /**
@@ -77,7 +77,7 @@ public class TehaiLock implements ITehaiLock {
      */
     @Override
     public List<IHai> getNotChiFirst() {
-        return getSomeFirst(k -> !k.isShuntsu());
+        return getSomeFirst(k -> !k.isShunzu());
     }
 
     /**
@@ -85,7 +85,7 @@ public class TehaiLock implements ITehaiLock {
      */
     @Override
     public List<IHai> getPonFirst() {
-        return getSomeFirst(Mentsu::isKotsu);
+        return getSomeFirst(Menzu::isKozu);
     }
 
     /**
@@ -93,7 +93,7 @@ public class TehaiLock implements ITehaiLock {
      */
     @Override
     public List<IHai> getKanzuFirst() {
-        return getSomeFirst(Mentsu::isKantsu);
+        return getSomeFirst(Menzu::isKanzu);
     }
 
     /**
@@ -101,7 +101,7 @@ public class TehaiLock implements ITehaiLock {
      */
     @Override
     public List<IHai> getMinkanFirst() {
-        return getSomeFirst(Mentsu::isMinkan);
+        return getSomeFirst(Menzu::isMinkan);
     }
 
     /**
@@ -109,7 +109,7 @@ public class TehaiLock implements ITehaiLock {
      */
     @Override
     public List<IHai> getAnnkanFirst() {
-        return getSomeFirst(Mentsu::isAnnkan);
+        return getSomeFirst(Menzu::isAnnkan);
     }
 
     /**
@@ -117,10 +117,10 @@ public class TehaiLock implements ITehaiLock {
      * 
      * @param predicate 匹配器
      */
-    private List<IHai> getSomeFirst(Predicate<Mentsu> predicate) {
+    private List<IHai> getSomeFirst(Predicate<Menzu> predicate) {
         return value.stream() //
                 .filter(predicate) //
-                .map(Mentsu::getMentuFirst) //
+                .map(Menzu::getMenzuFirst) //
                 .collect(Collectors.toList());
     }
 
@@ -140,47 +140,47 @@ public class TehaiLock implements ITehaiLock {
      * {@inheritDoc}
      */
     @Override
-    public Mentsu chii(IHai chiHai, IHai tehai1, IHai tehai2) {
+    public Menzu chii(IHai chiHai, IHai tehai1, IHai tehai2) {
         IHai minHai = Encode34.min(chiHai, tehai1, tehai2);
-        Mentsu chiMentsu = Mentsu.fromChi(minHai, NakiShape.calcNakiSize(chiHai, tehai1, tehai2));
-        value.add(chiMentsu);
+        Menzu chiMenzu = Menzu.fromChi(minHai, NakiShape.calcNakiSize(chiHai, tehai1, tehai2));
+        value.add(chiMenzu);
         isNaki = true;
-        return chiMentsu;
+        return chiMenzu;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Mentsu pon(IHai ponHai, RivalEnum fromPlayer) {
-        Mentsu mentsu = Mentsu.fromPon(ponHai, fromPlayer);
-        value.add(mentsu);
+    public Menzu pon(IHai ponHai, RivalEnum fromPlayer) {
+        Menzu menzu = Menzu.fromPon(ponHai, fromPlayer);
+        value.add(menzu);
         isNaki = true;
-        return mentsu;
+        return menzu;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Mentsu minkan(IHai kanHai, RivalEnum fromPlayer) {
-        Mentsu mentsu = Mentsu.fromMinkan(kanHai, fromPlayer);
-        value.add(mentsu);
+    public Menzu minkan(IHai kanHai, RivalEnum fromPlayer) {
+        Menzu menzu = Menzu.fromMinkan(kanHai, fromPlayer);
+        value.add(menzu);
         isNaki = true;
-        return mentsu;
+        return menzu;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public Mentsu kakan(IHai hai) {
+    public Menzu kakan(IHai hai) {
         for ( int i = 0; i < value.size(); i++) {
-            Mentsu mentsu = value.get(i);
-            if (mentsu.isKotsu() && mentsu.getMentuFirst().valueEquals(hai)) {
-                Mentsu kakanMentsu = mentsu.kakan();
-                value.set(i, kakanMentsu);
-                return kakanMentsu;
+            Menzu menzu = value.get(i);
+            if (menzu.isKozu() && menzu.getMenzuFirst().valueEquals(hai)) {
+                Menzu kakanMenzu = menzu.kakan();
+                value.set(i, kakanMenzu);
+                return kakanMenzu;
             }
         }
         throw new IllegalStateException("无可加杠固定面子");
@@ -190,11 +190,11 @@ public class TehaiLock implements ITehaiLock {
      * {@inheritDoc}
      */
     @Override
-    public Mentsu annkan(IHai hai) {
-        Mentsu mentsu = Mentsu.fromAnnkan(hai);
-        value.add(mentsu);
+    public Menzu annkan(IHai hai) {
+        Menzu menzu = Menzu.fromAnnkan(hai);
+        value.add(menzu);
         isAnnkan = true;
-        return mentsu;
+        return menzu;
     }
 
     // ------------------------------------------------
@@ -253,11 +253,11 @@ public class TehaiLock implements ITehaiLock {
      * {@inheritDoc}
      */
     @Override
-    public Mentsu remove(int index) {
-        Mentsu mentsu = value.remove(index);
+    public Menzu remove(int index) {
+        Menzu menzu = value.remove(index);
         this.isNaki = value.stream().anyMatch(k -> !k.isAnnkan());
-        this.isAnnkan = value.stream().anyMatch(Mentsu::isAnnkan);
-        return mentsu;
+        this.isAnnkan = value.stream().anyMatch(Menzu::isAnnkan);
+        return menzu;
     }
 
     /**

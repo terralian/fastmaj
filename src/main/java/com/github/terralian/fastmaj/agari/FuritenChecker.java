@@ -5,7 +5,7 @@ import java.util.Set;
 import com.github.terralian.fastmaj.FastMajong;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.river.IHaiRiver;
-import com.github.terralian.fastmaj.tehai.ISyantenCalculator;
+import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.IYuukouhaiCalculator;
 
@@ -19,14 +19,14 @@ public class FuritenChecker implements IFuritenChecker {
     /**
      * 向听计算器
      */
-    private ISyantenCalculator syantenCalculator;
+    private ISyatenCalculator syatenCalculator;
     /**
      * 有效牌计算器
      */
     private IYuukouhaiCalculator yuukouhaiCalculator;
 
     public FuritenChecker() {
-        syantenCalculator = FastMajong.doGetSyantenCalculator();
+        syatenCalculator = FastMajong.doGetSyatenCalculator();
         yuukouhaiCalculator = FastMajong.doGetYuukouhaiCalculator();
     }
 
@@ -38,7 +38,7 @@ public class FuritenChecker implements IFuritenChecker {
      */
     @Override
     public boolean test(ITehai tehai, IHaiRiver haiRiver) {
-        if (syantenCalculator.calcMin(tehai.getHand()) > 0) {
+        if (syatenCalculator.calcMin(tehai.getHand()) > 0) {
             return false;
         }
         Set<IHai> yuukous = yuukouhaiCalculator.calcMin(tehai);

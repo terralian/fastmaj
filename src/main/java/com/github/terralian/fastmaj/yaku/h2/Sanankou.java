@@ -16,7 +16,7 @@ public class Sanankou implements IYaku {
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
         // 手牌的暗刻数 + 暗杠数 = 3
-        return divide.getAnnKotsuFirst().size() + tehai.getLock().getAnnkanFirst().size() == 3;
+        return divide.getAnnkoFirst().size() + tehai.getLock().getAnnkanFirst().size() == 3;
     }
 
     @Override

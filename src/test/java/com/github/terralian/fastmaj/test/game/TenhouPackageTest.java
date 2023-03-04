@@ -58,7 +58,7 @@ public class TenhouPackageTest {
                 }
 
                 // 读取到内存，若出错则保存
-                String zipString = ZipUtil.ungzip(zipFile.getInputStream(entry));
+                String zipString = ZipUtil.unGzip(zipFile.getInputStream(entry));
                 currentName = entry.getName().split("/")[1];
                 // 转回GZIP
                 ByteArrayOutputStream bi = new ByteArrayOutputStream();

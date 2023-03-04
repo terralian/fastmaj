@@ -21,7 +21,7 @@ public class Ittuu implements IYaku {
             return false;
         // 收集所有的顺子第一枚
         int[] value34 = new int[Encode34.length()];
-        for (IHai hai : divide.getAllShuntsuFirst()) {
+        for (IHai hai : divide.getAllShunzuFirst()) {
             value34[hai.getValue()]++;
         }
         // 若顺子的第一枚包含某一个花色的1,4,7则是一气

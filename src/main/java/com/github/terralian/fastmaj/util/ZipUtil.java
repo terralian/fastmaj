@@ -26,8 +26,8 @@ public abstract class ZipUtil {
      * @throws IOException IO异常
      * @throws FileNotFoundException 文件未找到异常
      */
-    public static String ungzip(String fileName) throws FileNotFoundException, IOException {
-        return ungzip(new File(fileName));
+    public static String unGzip(String fileName) throws FileNotFoundException, IOException {
+        return unGzip(new File(fileName));
     }
 
     /**
@@ -39,9 +39,9 @@ public abstract class ZipUtil {
      * @throws IOException IO异常
      * @throws FileNotFoundException 文件未找到异常
      */
-    public static String ungzip(File file) throws FileNotFoundException, IOException {
+    public static String unGzip(File file) throws FileNotFoundException, IOException {
         try (FileInputStream fin = new FileInputStream(file)) {
-            return ungzip(fin);
+            return unGzip(fin);
         }
     }
 
@@ -54,7 +54,7 @@ public abstract class ZipUtil {
      * @throws IOException           IO异常
      * @throws FileNotFoundException 文件未找到异常
      */
-    public static String ungzip(InputStream stream) throws FileNotFoundException, IOException {
+    public static String unGzip(InputStream stream) throws FileNotFoundException, IOException {
         try (GZIPInputStream gin = new GZIPInputStream(stream);
                 InputStreamReader ir = new InputStreamReader(gin);
                 BufferedReader br = new BufferedReader(ir)) {

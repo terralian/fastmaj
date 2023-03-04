@@ -118,7 +118,7 @@ public class TenhouMajongReplay extends StepMajongGame implements ITenhouPaifuAn
                 new ArrayList<>(), //
                 config, //
                 yamaWorker, //
-                FastMajong.doGetSyantenCalculator(), //
+                FastMajong.doGetSyatenCalculator(), //
                 gameLogger);
         setConfig(config);
         setPlayerActionManager(PlayerActionManager.defaultManager());
@@ -212,7 +212,7 @@ public class TenhouMajongReplay extends StepMajongGame implements ITenhouPaifuAn
      * {@inheritDoc}
      */
     @Override
-    public void ankan(int position, int[] selfHai) {
+    public void annkan(int position, int[] selfHai) {
         TehaiActionCall actionCall = TehaiActionCall.newAnnkan(HaiPool.getById(selfHai[0], useRed));
         super.nextTehaiAction(actionCall);
     }

@@ -105,7 +105,7 @@ public interface ITenhouPaifuAnalyzer {
      * @param position 玩家
      * @param selfHai 暗杠的牌
      */
-    default void ankan(int position, int[] selfHai) {}
+    default void annkan(int position, int[] selfHai) {}
 
     /**
      * 明杠的时候调用

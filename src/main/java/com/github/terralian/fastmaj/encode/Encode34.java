@@ -388,17 +388,17 @@ public abstract class Encode34 {
     /**
      * 是否是顺子组成，即在顺子三枚里
      * 
-     * @param shuntsuFirst 顺子的第一枚牌
+     * @param shunzuFirst 顺子的第一枚牌
      * @param target 目标牌
      */
-    public static boolean isInShuntsu(IHai shuntsuFirst, IHai target) {
-        if (shuntsuFirst.getLiteral() >= 8) {
-            throw new IllegalArgumentException("参数错误，该牌不可能为顺子的第一枚：" + shuntsuFirst);
+    public static boolean isInShunzu(IHai shunzuFirst, IHai target) {
+        if (shunzuFirst.getLiteral() >= 8) {
+            throw new IllegalArgumentException("参数错误，该牌不可能为顺子的第一枚：" + shunzuFirst);
         }
-        if (shuntsuFirst.geHaiType() != target.geHaiType()) {
+        if (shunzuFirst.geHaiType() != target.geHaiType()) {
             return false;
         }
-        int a = shuntsuFirst.getValue();
+        int a = shunzuFirst.getValue();
         int b = target.getValue();
         return a == b || (a + 1) == b || (a + 2) == b;
     }

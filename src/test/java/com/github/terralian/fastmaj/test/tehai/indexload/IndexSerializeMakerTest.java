@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import com.github.terralian.fastmaj.tehai.FastSyantenCalculator;
+import com.github.terralian.fastmaj.tehai.FastSyatenCalculator;
 import com.github.terralian.fastmaj.util.StopWatch;
 
 /**
@@ -34,7 +34,7 @@ public class IndexSerializeMakerTest {
     private final String projectPath = System.getProperty("user.dir").replaceAll("\\\\", "/");
     private final String resourcePath = projectPath + "/src/test/resources/index";
 
-    // @Test
+    //@Test
     public void serialize() throws IOException, ClassNotFoundException {
         String fileName = resourcePath + "/old.zip";
         File file = new File(fileName);
@@ -51,7 +51,7 @@ public class IndexSerializeMakerTest {
             mp2 = parseIndexZipEntry(zipFile.getInputStream(map.get("index_h.csv")));
         }
 
-        FastSyantenCalculator.IndexSerializable indexSerializable = new FastSyantenCalculator.IndexSerializable();
+        FastSyatenCalculator.IndexSerializable indexSerializable = new FastSyatenCalculator.IndexSerializable();
         indexSerializable.setMp1(mp1);
         indexSerializable.setMp2(mp2);
 
@@ -65,7 +65,7 @@ public class IndexSerializeMakerTest {
         System.out.println("序列化对象成功");
 
         try (FileInputStream fi = new FileInputStream(file); ObjectInputStream oi = new ObjectInputStream(fi)) {
-            FastSyantenCalculator.IndexSerializable o = (FastSyantenCalculator.IndexSerializable) oi.readObject();
+            FastSyatenCalculator.IndexSerializable o = (FastSyatenCalculator.IndexSerializable) oi.readObject();
             System.out.println(Arrays.toString(o.getMp1()[0]));
             System.out.println(Arrays.toString(o.getMp2()[0]));
         }
@@ -79,9 +79,9 @@ public class IndexSerializeMakerTest {
 
         File file = new File(fullName);
         try (FileInputStream fi = new FileInputStream(file);
-                BufferedInputStream ba = new BufferedInputStream(fi);
-                ObjectInputStream oi = new ObjectInputStream(ba)) {
-            FastSyantenCalculator.IndexSerializable o = (FastSyantenCalculator.IndexSerializable) oi.readObject();
+             BufferedInputStream ba = new BufferedInputStream(fi);
+             ObjectInputStream oi = new ObjectInputStream(ba)) {
+            FastSyatenCalculator.IndexSerializable o = (FastSyatenCalculator.IndexSerializable) oi.readObject();
             System.out.println(Arrays.toString(o.getMp1()[0]));
             System.out.println(Arrays.toString(o.getMp2()[0]));
         }
@@ -105,7 +105,7 @@ public class IndexSerializeMakerTest {
             ZipEntry entry = enums.nextElement();
             InputStream is = zipFile.getInputStream(entry);
             try (BufferedInputStream br = new BufferedInputStream(is); ObjectInputStream oi = new ObjectInputStream(br)) {
-                FastSyantenCalculator.IndexSerializable o = (FastSyantenCalculator.IndexSerializable) oi.readObject();
+                FastSyatenCalculator.IndexSerializable o = (FastSyatenCalculator.IndexSerializable) oi.readObject();
                 System.out.println(Arrays.toString(o.getMp1()[0]));
                 System.out.println(Arrays.toString(o.getMp2()[0]));
             }

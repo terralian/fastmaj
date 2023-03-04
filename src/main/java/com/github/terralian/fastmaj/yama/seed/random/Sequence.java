@@ -9,7 +9,7 @@ import com.github.terralian.fastmaj.util.Assert;
 
 /**
  * 分布式高效有序 ID 生产黑科技(sequence)
- *
+ * <p>
  * <p/>优化开源项目：https://gitee.com/yu120/sequence</p>
  *
  * @author hubin
@@ -170,7 +170,6 @@ public class Sequence {
     }
 
     protected long timeGen() {
-        // MODIFIY
         // 感觉这里不是很需要使用单独线程不停去取时间
         return System.currentTimeMillis();
     }

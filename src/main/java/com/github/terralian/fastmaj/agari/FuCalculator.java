@@ -67,11 +67,11 @@ public class FuCalculator implements IFuCalculator {
             fu += hai.isYaotyuHai() ? 16 : 8;
         }
         // 暗刻明杠（中张4，幺九8）
-        for (IHai hai : divideInfo.getAnnKotsuFirst()) {
+        for (IHai hai : divideInfo.getAnnkoFirst()) {
             fu += hai.isYaotyuHai() ? 8 : 4;
         }
         // 明刻 （中张2，幺九4）
-        for (IHai hai : divideInfo.getMinKotsuFirst()) {
+        for (IHai hai : divideInfo.getMinkoFirst()) {
             fu += hai.isYaotyuHai() ? 4 : 2;
         }
         // 顺子 0符
@@ -84,7 +84,7 @@ public class FuCalculator implements IFuCalculator {
         if (jantou.valueEquals(agariHai)) {
             fu += 2;
         } else {
-            for (IHai hai : divideInfo.getHandShuntsuFirst()) {
+            for (IHai hai : divideInfo.getHandShunzuFirst()) {
                 if (hai.geHaiType() != agariHai.geHaiType()) {
                     continue;
                 }

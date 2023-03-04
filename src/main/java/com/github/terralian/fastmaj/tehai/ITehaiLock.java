@@ -29,14 +29,14 @@ public interface ITehaiLock {
      * 
      * @param index 面子的索引
      */
-    Mentsu get(int index);
+    Menzu get(int index);
 
     /**
      * 获取固定手牌的所有面子
      * <p/>
      * 面子的存储顺序为加入顺序
      */
-    List<Mentsu> getAll();
+    List<Menzu> getAll();
 
     /**
      * 获取手牌中吃固定的部分第一枚牌
@@ -86,7 +86,7 @@ public interface ITehaiLock {
      * @param tehai1 搭子牌1
      * @param tehai2 搭子牌2
      */
-    Mentsu chii(IHai chiHai, IHai tehai1, IHai tehai2);
+    Menzu chii(IHai chiHai, IHai tehai1, IHai tehai2);
 
     /**
      * 副露[碰]操作
@@ -94,7 +94,7 @@ public interface ITehaiLock {
      * @param ponHai 碰的牌
      * @param fromPlayer 来源玩家
      */
-    Mentsu pon(IHai ponHai, RivalEnum fromPlayer);
+    Menzu pon(IHai ponHai, RivalEnum fromPlayer);
 
     /**
      * 副露[明杠]操作
@@ -102,21 +102,21 @@ public interface ITehaiLock {
      * @param kanHai 杠的牌
      * @param fromPlayer 来源玩家
      */
-    Mentsu minkan(IHai kanHai, RivalEnum fromPlayer);
+    Menzu minkan(IHai kanHai, RivalEnum fromPlayer);
 
     /**
      * 加杠操作
      * 
      * @param hai 加杠的牌
      */
-    Mentsu kakan(IHai hai);
+    Menzu kakan(IHai hai);
 
     /**
      * 暗杠操作
      * 
      * @param hai 暗杠的牌
      */
-    Mentsu annkan(IHai hai);
+    Menzu annkan(IHai hai);
 
     // ------------------------------------------------
     // 状态判断
@@ -166,7 +166,7 @@ public interface ITehaiLock {
      * 
      * @param index 索引
      */
-    Mentsu remove(int index);
+    Menzu remove(int index);
 
     /**
      * 清空固定区

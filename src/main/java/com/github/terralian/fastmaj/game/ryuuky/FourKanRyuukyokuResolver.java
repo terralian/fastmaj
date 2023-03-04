@@ -16,16 +16,16 @@ public class FourKanRyuukyokuResolver implements IRyuukyokuResolver, IHalfwayRyu
     @Override
     public boolean validate(GameConfig gameConfig, IGameCore gameCore) {
         int total = 0;
-        int kantsuPlayer = 0;
+        int kanzuPlayer = 0;
         List<ITehai> tehais = gameCore.getTehais();
         for (ITehai tehai : tehais) {
-            int kantsuSize = tehai.getLock().getKanzuSize();
-            if (kantsuSize > 0) {
-                total += kantsuSize;
-                kantsuPlayer += 1;
+            int kanzuSize = tehai.getLock().getKanzuSize();
+            if (kanzuSize > 0) {
+                total += kanzuSize;
+                kanzuPlayer += 1;
             }
         }
-        return total >= 4 && kantsuPlayer > 1;
+        return total >= 4 && kanzuPlayer > 1;
     }
 
     @Override

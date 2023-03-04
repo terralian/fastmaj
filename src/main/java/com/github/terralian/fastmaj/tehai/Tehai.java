@@ -140,7 +140,7 @@ public class Tehai implements ITehai {
         // 移除值List
         all.remove(hai);
         // 减少可操作牌
-        reduceOperables(hai);
+        reduceOperable(hai);
 
         return handKiri;
     }
@@ -173,7 +173,7 @@ public class Tehai implements ITehai {
         // 鸣牌
         lock.chii(chiHai, tehai1, tehai2);
         // 副露后可操作牌减少
-        reduceOperables(tehai1, tehai2);
+        reduceOperable(tehai1, tehai2);
     }
 
     /**
@@ -193,7 +193,7 @@ public class Tehai implements ITehai {
         // 鸣牌
         lock.pon(ponHai, fromPlayer);
         // 副露后可操作牌减少
-        reduceOperables(selfHais[0], selfHais[1]);
+        reduceOperable(selfHais[0], selfHais[1]);
     }
 
     /**
@@ -213,7 +213,7 @@ public class Tehai implements ITehai {
         // 鸣牌
         lock.minkan(hai, fromPlayer);
         // 副露后可操作牌减少
-        reduceOperables(tehais);
+        reduceOperable(tehais);
     }
 
     /**
@@ -227,7 +227,7 @@ public class Tehai implements ITehai {
         // 鸣牌
         lock.kakan(hai);
         // 副露后可操作牌减少
-        reduceOperables(hai);
+        reduceOperable(hai);
     }
 
     /**
@@ -243,7 +243,7 @@ public class Tehai implements ITehai {
         // 鸣牌
         lock.annkan(hai);
         // 减少可操作牌
-        reduceOperables(hais);
+        reduceOperable(hais);
     }
 
     /**
@@ -262,7 +262,7 @@ public class Tehai implements ITehai {
         // 拔北的牌计数增加
         kitaCount++;
         // 减少可操作性的牌
-        reduceOperables(hai);
+        reduceOperable(hai);
     }
 
     // --------------------------------
@@ -372,7 +372,7 @@ public class Tehai implements ITehai {
      * 对手牌进行判断，是否存在可以开暗杠的牌，即手牌中可操作的牌大于4枚的情况。
      */
     @Override
-    public boolean canAnkan() {
+    public boolean canAnnkan() {
         for (IHai hai : hand)
             if (hand34[hai.getValue()] > 3)
                 return true;
@@ -385,7 +385,7 @@ public class Tehai implements ITehai {
      * @param hai 牌
      */
     @Override
-    public boolean canAnkan(IHai hai) {
+    public boolean canAnnkan(IHai hai) {
         return hand34[hai.getValue()] > 3;
     }
 
@@ -467,7 +467,7 @@ public class Tehai implements ITehai {
      * <p/>
      * 该方法会根据参数移除可操作性List中的牌
      */
-    private void reduceOperables(IHai... hais) {
+    private void reduceOperable(IHai... hais) {
         for (IHai hai : hais) {
             if (!hand.remove(hai)) {
                 throw new IllegalStateException("从手牌移除牌失败：" + hai);

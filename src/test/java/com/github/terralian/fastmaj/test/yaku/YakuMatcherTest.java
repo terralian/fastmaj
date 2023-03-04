@@ -36,7 +36,7 @@ import com.github.terralian.fastmaj.yaku.h1.Pinfu;
 import com.github.terralian.fastmaj.yaku.h1.Reach;
 import com.github.terralian.fastmaj.yaku.h1.Rinsyan;
 import com.github.terralian.fastmaj.yaku.h1.Tanyaotyu;
-import com.github.terralian.fastmaj.yaku.h1.Tuumo;
+import com.github.terralian.fastmaj.yaku.h1.Tsumo;
 import com.github.terralian.fastmaj.yaku.h1.TyanKan;
 import com.github.terralian.fastmaj.yaku.h1.Tyun;
 import com.github.terralian.fastmaj.yaku.h13.Daisangen;
@@ -54,14 +54,14 @@ import com.github.terralian.fastmaj.yaku.h2.DoubleReach;
 import com.github.terralian.fastmaj.yaku.h2.HonTyanta;
 import com.github.terralian.fastmaj.yaku.h2.Ittuu;
 import com.github.terralian.fastmaj.yaku.h2.Sanankou;
-import com.github.terralian.fastmaj.yaku.h2.Sankantu;
+import com.github.terralian.fastmaj.yaku.h2.Sankanzu;
 import com.github.terralian.fastmaj.yaku.h2.SansyokuDoujyun;
 import com.github.terralian.fastmaj.yaku.h2.Tiitoitu;
 import com.github.terralian.fastmaj.yaku.h2.Toitoi;
 import com.github.terralian.fastmaj.yaku.h3.Honitu;
 import com.github.terralian.fastmaj.yaku.h3.JyunTyanta;
 import com.github.terralian.fastmaj.yaku.h3.Ryanpeikou;
-import com.github.terralian.fastmaj.yaku.h6.Tinitu;
+import com.github.terralian.fastmaj.yaku.h6.Tinizu;
 import com.github.terralian.fastmaj.yama.DrawFrom;
 
 /**
@@ -154,7 +154,7 @@ public class YakuMatcherTest {
         singleYakuTest("112233556677m11p", Ryanpeikou.class);
 
         // 清老头
-        singleYakuTest("12334455688999m", Tinitu.class);
+        singleYakuTest("12334455688999m", Tinizu.class);
 
         // 无役
         zeroYakuTest("123m456p789s33344z");
@@ -278,7 +278,7 @@ public class YakuMatcherTest {
         tehai = EncodeMark.toTehai("123456m567999p11z");
         yakus = yakuMatcher.match(tehai, CollectionUtil.newArrayList(), gameContext);
         assertEquals(1, yakus.size());
-        assertTrue(yakus.get(0).getClass() == Tuumo.class);
+        assertTrue(yakus.get(0).getClass() == Tsumo.class);
 
         // 抢杠
         gameContext.setYamaCountdown(50);
@@ -328,7 +328,7 @@ public class YakuMatcherTest {
         List<DivideInfo> divideInfos = tehaiAgariDivider.divide(tehai);
         List<IYaku> yakus = yakuMatcher.match(tehai, divideInfos, gameContext);
         assertEquals(7, yakus.size());
-        assertYakus(yakus, Reach.class, Iipatu.class, Tuumo.class, Tinitu.class, Iipeikou.class, Ittuu.class);
+        assertYakus(yakus, Reach.class, Iipatu.class, Tsumo.class, Tinizu.class, Iipeikou.class, Ittuu.class);
 
         // 宫永咲名场面
         // 清一色，对对和，三暗刻，三杠子，岭上开花
@@ -358,7 +358,7 @@ public class YakuMatcherTest {
         divideInfos = tehaiAgariDivider.divide(tehai);
         yakus = yakuMatcher.match(tehai, divideInfos, gameContext);
         assertEquals(5, yakus.size());
-        assertYakus(yakus, Tinitu.class, Toitoi.class, Sanankou.class, Sankantu.class, Rinsyan.class);
+        assertYakus(yakus, Tinizu.class, Toitoi.class, Sanankou.class, Sankanzu.class, Rinsyan.class);
 
         // 岭上 白，发，自风，三杠子，对对和，混一色
         gameContext.getHaiRivers().forEach(k -> {
@@ -385,7 +385,7 @@ public class YakuMatcherTest {
         divideInfos = tehaiAgariDivider.divide(tehai);
         yakus = yakuMatcher.match(tehai, divideInfos, gameContext);
         assertEquals(7, yakus.size());
-        assertYakus(yakus, Rinsyan.class, Haku.class, Hatu.class, Jikaze.class, Sankantu.class, Toitoi.class, Honitu.class);
+        assertYakus(yakus, Rinsyan.class, Haku.class, Hatu.class, Jikaze.class, Sankanzu.class, Toitoi.class, Honitu.class);
     }
 
     /**

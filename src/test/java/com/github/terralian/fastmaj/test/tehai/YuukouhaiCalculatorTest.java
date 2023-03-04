@@ -28,7 +28,7 @@ public class YuukouhaiCalculatorTest {
 
     @Before
     public void before() {
-        yuukouhaiCalculator = new YuukouhaiCalculator(FastMajong.doGetSyantenCalculator());
+        yuukouhaiCalculator = new YuukouhaiCalculator(FastMajong.doGetSyatenCalculator());
     }
 
     @Test

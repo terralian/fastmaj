@@ -18,7 +18,7 @@ public class Toitoi implements IYaku {
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
         // 必须4个刻子（杠也行）
-        if (divide.getAllKanKotsuFirst().size() < 4) {
+        if (divide.getAllKanKozuFirst().size() < 4) {
             return false;
         }
         // 鸣牌后的对对

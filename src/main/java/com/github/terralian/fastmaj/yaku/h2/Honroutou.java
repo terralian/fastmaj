@@ -21,16 +21,16 @@ public class Honroutou implements IYaku {
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
         int[] value34 = Encode34.toEncode34(tehai.getAll());
-        boolean nonjiHai = true;
+        boolean nonJihai = true;
         for (int i = Encode34.DONG; i <= Encode34.ZHONG; i++) {
             // 过滤国士
             if (value34[i] == 1)
                 return false;
-            if (nonjiHai && value34[i] > 1)
-                nonjiHai = false;
+            if (nonJihai && value34[i] > 1)
+                nonJihai = false;
         }
         // 过滤清老头
-        if (nonjiHai) {
+        if (nonJihai) {
             return false;
         }
         // 非幺九校验

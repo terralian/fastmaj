@@ -27,7 +27,7 @@ public class Reach implements IYaku {
 
     @Override
     public String getName() {
-        return YakuNamePool.Riichi;
+        return YakuNamePool.Reach;
     }
 
     @Override

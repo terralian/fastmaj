@@ -1,7 +1,5 @@
 package com.github.terralian.fastmaj.test.tehai.Syaten;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -9,24 +7,25 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.SyatenCalculator;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * 向听数计算类测试{@link com.github.terralian.fastmaj.tehai.SyatenCalculator}
  * <p/>
  * 该包下的向听数问题集数据来源于ara
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  * @see <a href="https://mahjong.ara.black/etc/shanten/shanten9.htm">问题集来源
- *      :ara</a>
+ * :ara</a>
  */
 public class SyatenCalculatorTest {
 
@@ -112,7 +111,7 @@ public class SyatenCalculatorTest {
 
     /**
      * 使用问题集进行测试
-     * 
+     *
      * @see <a href="https://mahjong.ara.black/etc/shanten/shanten9.htm">问题集来源 :https://mahjong.ara.black/etc/shanten/shanten9.htm</a>
      */
     @Test
@@ -162,11 +161,11 @@ public class SyatenCalculatorTest {
 
     /**
      * 读取文件List中
-     * 
+     *
      * @param fileName 文件名
      */
     private List<String> readFileToList(String fileName) {
-        fileName = this.getClass().getResource("").getPath() + fileName;
+        fileName = this.getClass().getResource("/").getPath() + "/syaten/" + fileName;
         try (BufferedReader reader = new BufferedReader(new FileReader(new File(fileName)))) {
             return reader.lines().collect(Collectors.toList());
         } catch (IOException e) {

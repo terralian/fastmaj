@@ -1,4 +1,4 @@
-package com.github.terralian.fastmaj.test.tehai.Syaten;
+package com.github.terralian.fastmaj.test.tehai.syaten;
 
 import com.github.terralian.fastmaj.tehai.FastSyatenCalculator;
 import org.junit.Before;
@@ -8,8 +8,8 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * {@link com.github.terralian.fastmaj.tehai.FastSyatenCalculator} 测试
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class FastSyatenCalculatorTest extends com.github.terralian.fastmaj.test.tehai.Syaten.SyatenCalculatorTest {
 

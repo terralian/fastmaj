@@ -6,6 +6,7 @@ import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.river.HaiRiver;
+import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.TehaiLock;
 import com.github.terralian.fastmaj.util.CollectionUtil;
 
@@ -41,7 +42,7 @@ public class PlayerGameContextFactory {
                 .setYamaCountdown(gameCore.getYamaCountdown()) //
                 .setDoraDisplays(gameCore.getDoraDisplays()) //
                 .setHaiRivers(gameCore.getHaiRivers()) //
-                .setTehaiLocks(CollectionUtil.mapToList(gameCore.getTehais(), k -> k.getLock()))
+                .setTehaiLocks(CollectionUtil.mapToList(gameCore.getTehais(), ITehai::getLock))
                 .setPosition(position) //
                 .setJikaze(KazeEnum.jiKaze(position, gameCore.getOya())) //
                 .setFuriten(gameCore.getPlayerHide().isFuriten()) //

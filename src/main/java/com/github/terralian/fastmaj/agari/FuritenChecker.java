@@ -42,7 +42,7 @@ public class FuritenChecker implements IFuritenChecker {
             return false;
         }
         Set<IHai> yuukous = yuukouhaiCalculator.calcMin(tehai);
-        return yuukous.stream().anyMatch(k -> haiRiver.hasKiri(k));
+        return yuukous.stream().anyMatch(haiRiver::hasKiri);
     }
 
 }

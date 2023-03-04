@@ -78,7 +78,7 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
     }
 
     @Override
-    public void startElement(String uri, String localName, String tagName, Attributes attributes) throws SAXException {
+    public void startElement(String uri, String localName, String tagName, Attributes attributes) {
         if ("SHUFFLE".equals(tagName)) {
             visitSHUFFLE(attributes);
         } else if ("GO".equals(tagName)) {

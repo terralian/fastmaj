@@ -25,7 +25,7 @@ import com.github.terralian.fastmaj.yama.Yama;
 
 /**
  * 默认的游戏核心实现
- * 
+ *
  * @author terra.lian
  */
 public class GameCore implements IGameCore {
@@ -141,7 +141,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 初始化构建游戏内核
-     * 
+     *
      * @param playerSize 玩家人数
      * @param gameConfig 游戏规则
      * @param yamaWorker 牌山生成器
@@ -304,7 +304,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 切换当前操作玩家
-     * 
+     *
      * @param position 玩家坐席
      */
     @Override
@@ -322,8 +322,8 @@ public class GameCore implements IGameCore {
      * 可以从牌山或者王牌区摸一张牌，若从王牌区摸牌，<b>并不会自动增加新的宝牌</b>，这是由于不同规则新宝牌的时机并不一致。
      * <p/>
      * 当需要增加新宝牌时，可以调用{@link #nextDoraDisplay()}
-     * 
-     * @param fromYama true从牌山，false从王牌区
+     *
+     * @param drawFrom true从牌山，false从王牌区
      */
     @Override
     public IHai draw(DrawFrom drawFrom) {
@@ -356,7 +356,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 当前玩家切一张手牌
-     * 
+     *
      * @param hai 要切的牌，通过id比较
      * @return 是否手切（true手切，false模切）
      */
@@ -404,7 +404,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 增加新的宝牌指示牌
-     * 
+     *
      * @return 新的宝牌指示牌
      */
     @Override
@@ -419,7 +419,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 从玩家的牌河吃一张牌
-     * 
+     *
      * @param fromPosition 被吃牌的玩家
      * @param selfHai1 自家的搭子1
      * @param selfHai2 自家的搭子2
@@ -449,7 +449,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 从玩家的牌河碰一张牌
-     * 
+     *
      * @param fromPosition 被碰牌的玩家
      * @param redFirst 红宝牌做搭子优先
      */
@@ -479,7 +479,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 从玩家的牌河明杠一张牌
-     * 
+     *
      * @param fromPosition 被杠的玩家
      */
     @Override
@@ -507,7 +507,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 当前玩家加杠
-     * 
+     *
      * @param hai 操作的牌
      */
     @Override
@@ -533,7 +533,7 @@ public class GameCore implements IGameCore {
      * 该行为<b>并不会自动增加新的宝牌</b>，这是由于不同规则新宝牌的时机并不一致。
      * <p/>
      * 当需要增加新宝牌时，可以调用{@link #nextDoraDisplay()}
-     * 
+     *
      * @param hai 暗杠的牌
      */
     @Override
@@ -557,7 +557,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 拔北
-     * 
+     *
      * @param hai 拔北的牌
      */
     @Override
@@ -583,10 +583,10 @@ public class GameCore implements IGameCore {
      * 和了
      * <p/>
      * 一个对局可能有多个人同时和了
-     * 
+     *
      * @param agariPosition 和牌的玩家
      * @param fromPosition 从玩家
-     * @param yaku 和了的役
+     * @param yakus 和了的役
      * @param ban 番数
      * @param fu 符数
      * @param score 和了点数
@@ -613,7 +613,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 流局
-     * 
+     *
      * @param increaseAndDecrease 玩家的分数更新
      */
     @Override
@@ -668,7 +668,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 设置当前场风
-     * 
+     *
      * @param bakaze 场风
      */
     public void setBakaze(KazeEnum bakaze) {
@@ -685,7 +685,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 设置当前庄家
-     * 
+     *
      * @param oya 当前庄家
      */
     public void setOya(int oya) {
@@ -702,7 +702,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 设置当前玩家分数
-     * 
+     *
      * @param playerPoints 玩家分数
      */
     public void setPlayerPoints(int[] playerPoints) {
@@ -719,7 +719,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 获取某个玩家的手牌
-     * 
+     *
      * @param position 玩家的坐席
      */
     @Override
@@ -745,7 +745,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 获取某个玩家的牌河
-     * 
+     *
      * @param position 玩家的坐席
      */
     @Override
@@ -881,7 +881,7 @@ public class GameCore implements IGameCore {
     @Override
     public List<Boolean> getReachs() {
         return Arrays.stream(haiRivers) //
-                .map(k -> Boolean.valueOf(k.isReach())) //
+                .map(IHaiRiver::isReach) //
                 .collect(Collectors.toList());
     }
 
@@ -891,7 +891,7 @@ public class GameCore implements IGameCore {
     @Override
     public List<Boolean> getSameRounds() {
         return Arrays.stream(haiRivers) //
-                .map(k -> Boolean.valueOf(k.isSameJun())) //
+                .map(IHaiRiver::isSameJun) //
                 .collect(Collectors.toList());
     }
 
@@ -1009,7 +1009,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 设置玩家的同巡状态
-     * 
+     *
      * @param sameRound 同巡状态
      */
     private void setSameJun(boolean sameRound) {
@@ -1020,7 +1020,7 @@ public class GameCore implements IGameCore {
 
     /**
      * 设置第一巡是否同巡
-     * 
+     *
      * @param fromPosition 弃牌玩家
      * @param actionPosition 动作玩家，暗杠时弃牌和暗杠玩家相同
      */
@@ -1048,8 +1048,8 @@ public class GameCore implements IGameCore {
 
     /**
      * 计算向听数
-     * 
-     * @param position 玩家坐席
+     *
+     * @param p 玩家坐席
      */
     private void calcPlayerSyaten(int p) {
         playerHides[p].setSyaten(syatenCalculator.calcMin(getTehai(p).getHand()));

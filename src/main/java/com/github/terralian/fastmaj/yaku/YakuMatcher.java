@@ -195,7 +195,7 @@ public class YakuMatcher implements IYakuMatcher {
         // 含有役满，则去除其他非役满役
         for (IYaku yaku : yakus) {
             if (yaku instanceof IYakuman) {
-                yakus = CollectionUtil.filterToList(yakus, k -> k.isYakuman());
+                yakus = CollectionUtil.filterToList(yakus, IYaku::isYakuman);
                 break;
             }
         }

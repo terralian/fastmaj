@@ -250,7 +250,7 @@ public class PrintGameLogger implements IGameLogger {
                 StringUtil.join(",", increaseAndDecrease), //
                 gameCore.getActionCount());
         System.out.println(message);
-        List<String> yakuNames = CollectionUtil.mapToList(yakus, k -> k.getName());
+        List<String> yakuNames = CollectionUtil.mapToList(yakus, IYaku::getName);
         System.out.println(StringUtil.join(" ", yakuNames));
         System.out.println("--------------------------------------------");
     }
@@ -272,7 +272,7 @@ public class PrintGameLogger implements IGameLogger {
                 gameCore.getActionCount()
         ));
         System.out.println("手牌：" + EncodeMark.encode(gameCore.getTehai(position)));
-        List<String> yakuNames = CollectionUtil.mapToList(yakus, k -> k.getName());
+        List<String> yakuNames = CollectionUtil.mapToList(yakus, IYaku::getName);
         System.out.println(StringUtil.join(" ", yakuNames));
         System.out.println("--------------------------------------------");
     }

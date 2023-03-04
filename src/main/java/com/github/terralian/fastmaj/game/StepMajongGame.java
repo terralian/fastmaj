@@ -398,10 +398,10 @@ public class StepMajongGame {
      */
     public void optionBeforeTehaiAction() {
         TehaiActionType tehaiActionType = Optional.ofNullable(gameCore.getLastTehaiAction()) //
-                .map(k -> k.getActionType()) //
+                .map(TehaiActionValue::getActionType) //
                 .orElse(null);
         RiverActionType riverActionType = Optional.ofNullable(gameCore.getLastRiverAction()) //
-                .map(k -> k.getActionType()) //
+                .map(RiverActionValue::getActionType) //
                 .orElse(null);
         if (config.newDoraAction(DoraAddRule.BEFORE_KIRI, tehaiActionType, riverActionType)) {
             nextDoraDisplayOnActionKan();
@@ -415,10 +415,10 @@ public class StepMajongGame {
         // 不同规则下的动作可选执行点
         // 玩家打出一枚牌后才会增加宝牌的规则
         TehaiActionType tehaiActionType = Optional.ofNullable(gameCore.getLastTehaiAction()) //
-                .map(k -> k.getActionType()) //
+                .map(TehaiActionValue::getActionType) //
                 .orElse(null);
         RiverActionType riverActionType = Optional.ofNullable(gameCore.getLastRiverAction()) //
-                .map(k -> k.getActionType()) //
+                .map(RiverActionValue::getActionType) //
                 .orElse(null);
         if (config.newDoraAction(DoraAddRule.AFTER_KIRI, tehaiActionType, riverActionType)) {
             nextDoraDisplayOnActionKan();

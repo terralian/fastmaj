@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
+import com.github.terralian.fastmaj.hai.IHai;
 
 /**
  * 【动作】碰， 从对手牌河碰一枚牌
@@ -16,7 +17,7 @@ public class PonAction implements IRiverAction {
         if (!gameCore.getTehai().canPon(value.getActionHai())) {
             throw new IllegalArgumentException("手牌不可基于参数牌操作碰：" + value.getActionHai());
         }
-        gameCore.pon(value.getFromPlayer(), Arrays.stream(value.getSelfHais()).anyMatch(k -> k.isRedDora()));
+        gameCore.pon(value.getFromPlayer(), Arrays.stream(value.getSelfHais()).anyMatch(IHai::isRedDora));
     }
 
     @Override

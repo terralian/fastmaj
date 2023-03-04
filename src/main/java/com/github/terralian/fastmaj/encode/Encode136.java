@@ -16,7 +16,7 @@ public abstract class Encode136 {
 
     /**
      * 将值为136编码的手牌数组转为{@link IHai}
-     * 
+     *
      * @param hais 每个元素为136编码的数组
      * @param useRed 是否使用红宝牌
      */

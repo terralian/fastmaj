@@ -37,7 +37,6 @@ public class Ron3RyuukyokuResolver implements IRyuukyoku {
         if (riverActionType != RiverActionType.RON) {
             return false;
         }
-
         return true;
     }
 

@@ -112,7 +112,7 @@ public class Sequence {
                 }
             }
         } catch (Exception e) {
-
+            // ignore
         }
         return id;
     }

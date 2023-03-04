@@ -50,7 +50,7 @@ public class GameEndValidator implements IGameValidator {
 
         // 东风战未到东4，东南战未到南4局，对局继续
         if (bakaze.getOrder() < endBakaze.getOrder()
-                || (bakaze.getOrder() == endBakaze.getOrder() && oya < gameConfig.getPlayerSize() - 1)) {
+                || (bakaze.getOrder().equals(endBakaze.getOrder()) && oya < gameConfig.getPlayerSize() - 1)) {
             return false;
         }
         // 西入后的最后一局，若庄家未连庄则直接结束

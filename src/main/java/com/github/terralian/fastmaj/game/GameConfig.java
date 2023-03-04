@@ -69,7 +69,7 @@ public class GameConfig {
     /**
      * 复合役满规则
      */
-    private Boolean mutiYakuman = true;
+    private Boolean multipleYakuman = true;
     /**
      * 玩家的开始分数
      */

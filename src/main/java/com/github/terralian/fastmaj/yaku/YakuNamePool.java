@@ -25,13 +25,13 @@ public final class YakuNamePool {
     /** 平和 */
     public static final String Pinfu = "平和";
     /** 立直 */
-    public static final String Riichi = "立直";
+    public static final String Reach = "立直";
     /** 岭上开花 */
     public static final String Rinsyan = "岭上开花";
     /** 断幺九 */
     public static final String Tanyaotyu = "断幺九";
     /** 门前清自摸 */
-    public static final String Tuumo = "门前清自摸";
+    public static final String Tsumo = "门前清自摸";
     /** 枪杠 */
     public static final String TyanKan = "枪杠";
     /** 役牌中 */
@@ -41,7 +41,7 @@ public final class YakuNamePool {
 
     // 2番
     /** 两立直 */
-    public static final String DoubleRiichi = "两立直";
+    public static final String DoubleReach = "两立直";
     /** 混老头 */
     public static final String Honroutou = "混老头";
     /** 一气通贯 */
@@ -49,7 +49,7 @@ public final class YakuNamePool {
     /** 三暗刻 */
     public static final String Sanankou = "三暗刻";
     /** 三杠子 */
-    public static final String Sankantu = "三杠子";
+    public static final String Sankanzu = "三杠子";
     /** 三色同顺 */
     public static final String SansyokuDoujyun = "三色同顺";
     /** 三色同刻 */
@@ -73,7 +73,7 @@ public final class YakuNamePool {
 
     // 6番
     /** 清一色 */
-    public static final String Tinitu = "清一色";
+    public static final String Tinizu = "清一色";
 
     // 役满
     /** 大三元 */
@@ -91,7 +91,7 @@ public final class YakuNamePool {
     /** 四暗刻单骑 */
     public static final String SuuankouTanki = "四暗刻单骑";
     /** 四杠子 */
-    public static final String Suukantu = "四杠子";
+    public static final String Suukanzu = "四杠子";
     /** 小四喜 */
     public static final String Syousuusii = "小四喜";
     /** 天和 */

@@ -29,12 +29,12 @@ public class JyunTyanta implements IYaku {
         if (!divide.getJantou().isYaotyuHai())
             return false;
 
-        int shuntsuSize = divide.getAllShuntsuFirst().size();
-        return shuntsuSize > 0
+        int shunzuSize = divide.getAllShunzuFirst().size();
+        return shunzuSize > 0
                 // 顺子需要 1或7开头
-                && divide.getAllKanKotsuFirst().stream().allMatch(IHai::isYaotyuHai)
+                && divide.getAllKanKozuFirst().stream().allMatch(IHai::isYaotyuHai)
                 // 刻子没有不是幺九牌的
-                && divide.getAllShuntsuFirst().stream().allMatch(this::isTyantaShuntsuFirst);
+                && divide.getAllShunzuFirst().stream().allMatch(this::isTyantaShunzuFirst);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class JyunTyanta implements IYaku {
      * 
      * @param hai 牌
      */
-    private boolean isTyantaShuntsuFirst(IHai hai) {
+    private boolean isTyantaShunzuFirst(IHai hai) {
         int literal = hai.getLiteral();
         return literal == 1 || literal == 7;
     }

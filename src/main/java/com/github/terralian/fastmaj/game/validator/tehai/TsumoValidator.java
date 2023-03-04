@@ -17,7 +17,7 @@ public class TsumoValidator implements ITehaiActionValidator {
         // 只需要手牌已经完成和了动作
         // 若存在番缚，这个还需要增加校验（或者写个新类），后面再考虑
         PlayerHideStatus playerHide = gameCore.getPlayerHide(position);
-        return playerHide.getSyanten() < 0;
+        return playerHide.getSyaten() < 0;
     }
 
     @Override

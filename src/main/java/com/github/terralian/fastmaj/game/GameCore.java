@@ -13,7 +13,7 @@ import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.player.RivalEnum;
 import com.github.terralian.fastmaj.river.HaiRiver;
 import com.github.terralian.fastmaj.river.IHaiRiver;
-import com.github.terralian.fastmaj.tehai.ISyantenCalculator;
+import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.NakiEnum;
 import com.github.terralian.fastmaj.yaku.IYaku;
@@ -46,7 +46,7 @@ public class GameCore implements IGameCore {
     /**
      * 向听计算器
      */
-    protected ISyantenCalculator syantenCalculator;
+    protected ISyatenCalculator syatenCalculator;
 
     // -------------------------------------
     // 内部状态
@@ -148,12 +148,12 @@ public class GameCore implements IGameCore {
      * @param gameLogger 日志处理器
      */
     public GameCore(int playerSize, List<IPlayer> players, GameConfig gameConfig, IYamaWorker yamaWorker,
-            ISyantenCalculator syantenCalculator, IGameLogger gameLogger) {
+                    ISyatenCalculator syatenCalculator, IGameLogger gameLogger) {
         this.playerSize = playerSize;
         this.players = players;
         this.gameConfig = gameConfig;
         this.yamaWorker = yamaWorker;
-        this.syantenCalculator = syantenCalculator;
+        this.syatenCalculator = syatenCalculator;
         this.gameLogger = gameLogger;
     }
 
@@ -164,7 +164,7 @@ public class GameCore implements IGameCore {
      */
     @Override
     public void startGame() {
-        gameState.requireGameUnstart();
+        gameState.requireGameUnStart();
         gameState = GameState.GAME_NEW;
 
         // 牌山
@@ -219,8 +219,8 @@ public class GameCore implements IGameCore {
 
     @Override
     public int nextKyoku() {
-        gameState.requireKyokuUnstart();
-        gameState = GameState.KOYKU_NEW;
+        gameState.requireKyokuUnStart();
+        gameState = GameState.KYOKU_NEW;
 
         // 对局数增加
         round += 1;
@@ -250,7 +250,7 @@ public class GameCore implements IGameCore {
         tehais = yama.deals(oya);
         // 重算向听
         for (int i = 0; i < playerSize; i++) {
-            calcPlayerSyanten(i);
+            calcPlayerSyaten(i);
         }
         // 日志处理
         gameLogger.kyokuStart(round, bakaze, oya, honba[1], tehais);
@@ -261,7 +261,7 @@ public class GameCore implements IGameCore {
 
     @Override
     public void endKyoku() {
-        gameState = GameState.KOYKU_END;
+        gameState = GameState.KYOKU_END;
         // 对局结束
         gameLogger.kyokuEnd(round, getPlayerPoints());
     }
@@ -336,7 +336,7 @@ public class GameCore implements IGameCore {
             case YAMA:
                 hai = yama.nextHai();
                 break;
-            case RINSYIN:
+            case RINSYAN:
                 hai = yama.nextTrumpHai();
                 break;
         }
@@ -537,7 +537,7 @@ public class GameCore implements IGameCore {
      * @param hai 暗杠的牌
      */
     @Override
-    public void ankan(IHai hai) {
+    public void annkan(IHai hai) {
         gameState.requireWaitTehaiAction();
         gameState = GameState.WAIT_RIVER_ACTION;
 
@@ -619,7 +619,7 @@ public class GameCore implements IGameCore {
     @Override
     public void ryuukyoku(IRyuukyoku ryuukyoku, int[] increaseAndDecrease) {
         gameState.requireKyokuStarted();
-        gameState = GameState.KOYKU_END;
+        gameState = GameState.KYOKU_END;
         // 更新分数
         this.playerPoints = increaseAndDecrease;
         // 是否是中途流局
@@ -1043,7 +1043,7 @@ public class GameCore implements IGameCore {
      * 重新计算当前玩家的向听数
      */
     private void calcCurrentPlayerSyaten() {
-        calcPlayerSyanten(position);
+        calcPlayerSyaten(position);
     }
 
     /**
@@ -1051,7 +1051,7 @@ public class GameCore implements IGameCore {
      * 
      * @param position 玩家坐席
      */
-    private void calcPlayerSyanten(int p) {
-        playerHides[p].setSyanten(syantenCalculator.calcMin(getTehai(p).getHand()));
+    private void calcPlayerSyaten(int p) {
+        playerHides[p].setSyaten(syatenCalculator.calcMin(getTehai(p).getHand()));
     }
 }

@@ -179,14 +179,14 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
                 }
             }
             String rateCsv = attributes.getValue("rate");
-            String[] splitedRateCsv = rateCsv.split(",");
+            String[] splitRateCsv = rateCsv.split(",");
             for (int j = 0; j < 4; j++) {
-                playerRates[j] = Float.valueOf(splitedRateCsv[j]).intValue();
+                playerRates[j] = Float.valueOf(splitRateCsv[j]).intValue();
             }
 
-            String[] splitedDanCsv = danCsv.split(",");
+            String[] splitDanCsv = danCsv.split(",");
             for (int j = 0; j < 4; j++) {
-                playerDans[j] = TenhouPaifuStringPool.DANS[Integer.parseInt(splitedDanCsv[j])];
+                playerDans[j] = TenhouPaifuStringPool.DANS[Integer.parseInt(splitDanCsv[j])];
             }
         } else {
             // 重连时
@@ -211,19 +211,19 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
     private void visitINIT(Attributes attributes) {
         int[] playerPoints = new int[4];
         String pointCsv = attributes.getValue("ten");
-        String[] splitedPointCsv = pointCsv.split(",");
+        String[] splitPointCsv = pointCsv.split(",");
         for (int j = 0; j < 4; j++) {
-            playerPoints[j] = Integer.parseInt(splitedPointCsv[j]) * 100;
+            playerPoints[j] = Integer.parseInt(splitPointCsv[j]) * 100;
         }
         int oya = Integer.parseInt(attributes.getValue("oya"));
         String seedCsv = attributes.getValue("seed");
-        String[] splitedSeedCsv = seedCsv.split(",");
-        int seedElementFirst = Integer.parseInt(splitedSeedCsv[0]);
+        String[] splitSeedCsv = seedCsv.split(",");
+        int seedElementFirst = Integer.parseInt(splitSeedCsv[0]);
         int bakaze = seedElementFirst / 4;
         int kyoku = seedElementFirst % 4 + 1;
-        int honba = Integer.parseInt(splitedSeedCsv[1]);
-        int kyotaku = Integer.parseInt(splitedSeedCsv[2]);
-        int firstDoraDisplay = Integer.parseInt(splitedSeedCsv[5]);
+        int honba = Integer.parseInt(splitSeedCsv[1]);
+        int kyotaku = Integer.parseInt(splitSeedCsv[2]);
+        int firstDoraDisplay = Integer.parseInt(splitSeedCsv[5]);
 
         List<List<Integer>> playerHaipais = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
@@ -233,9 +233,9 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
             if ("".equals(haiCsv))
                 continue;
 
-            String[] splitedHaiCsv = haiCsv.split(",");
+            String[] splitHaiCsv = haiCsv.split(",");
             for (int j = 0; j < 13; j++) {
-                int hai = Integer.parseInt(splitedHaiCsv[j]);
+                int hai = Integer.parseInt(splitHaiCsv[j]);
                 playerHaipais.get(i).add(hai);
             }
         }
@@ -282,7 +282,7 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
             parseKita(position);
         } else if ((m & 3) == 0) {
             // 暗杠
-            parseAnkan(position, m);
+            parseAnnkan(position, m);
         } else {
             // 明杠
             parseMinkan(position, m);
@@ -389,14 +389,14 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
     /**
      * 暗杠
      */
-    private void parseAnkan(int position, int m) {
+    private void parseAnnkan(int position, int m) {
         int tmp = (m >> 8) & 255;
 
         tmp = tmp / 4 * 4;
 
         int[] selfHai = {tmp + 1, tmp, tmp + 2, tmp + 3};
 
-        analyzer.ankan(position, selfHai);
+        analyzer.annkan(position, selfHai);
     }
 
     /**
@@ -435,9 +435,9 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
         } else {
             String tenCsv = attributes.getValue("ten");
             int[] playerPoints = new int[4];
-            String[] splitedPointCsv = tenCsv.split(",");
+            String[] splitPointCsv = tenCsv.split(",");
             for (int i = 0; i < 4; i++) {
-                playerPoints[i] = Integer.parseInt(splitedPointCsv[i]) * 100;
+                playerPoints[i] = Integer.parseInt(splitPointCsv[i]) * 100;
             }
             analyzer.reach2(position, playerPoints);
         }
@@ -470,39 +470,39 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
         int position = Integer.parseInt(attributes.getValue("who"));
         int from = Integer.parseInt(attributes.getValue("fromWho"));
         String scoreCsv = attributes.getValue("ten");
-        String[] splitedScoreCsv = scoreCsv.split(",");
-        int hu = Integer.parseInt(splitedScoreCsv[0]);
-        int score = Integer.parseInt(splitedScoreCsv[1]);
+        String[] splitScoreCsv = scoreCsv.split(",");
+        int hu = Integer.parseInt(splitScoreCsv[0]);
+        int score = Integer.parseInt(splitScoreCsv[1]);
         int han = 0;
         ArrayList<String> yaku = new ArrayList<>();
         String yakuCsv = attributes.getValue("yaku");
         if (yakuCsv != null) {
-            String[] splitedYakuCsv = yakuCsv.split(",");
-            for (int i = 0; i < splitedYakuCsv.length; i += 2) {
-                int yakuId = Integer.parseInt(splitedYakuCsv[i]);
-                int n = Integer.parseInt(splitedYakuCsv[i + 1]);
+            String[] splitYakuCsv = yakuCsv.split(",");
+            for (int i = 0; i < splitYakuCsv.length; i += 2) {
+                int yakuId = Integer.parseInt(splitYakuCsv[i]);
+                int n = Integer.parseInt(splitYakuCsv[i + 1]);
                 if (yakuId < 52) {
-                    yaku.add(TenhouPaifuStringPool.YANKUS[yakuId]);
+                    yaku.add(TenhouPaifuStringPool.YAKUS[yakuId]);
                 } else {
-                    yaku.add(TenhouPaifuStringPool.YANKUS[yakuId] + (n >= 2 ? n : ""));
+                    yaku.add(TenhouPaifuStringPool.YAKUS[yakuId] + (n >= 2 ? n : ""));
                 }
                 han += n;
             }
         }
         String yakumanCsv = attributes.getValue("yakuman");
         if (yakumanCsv != null) {
-            String[] splitedYakumanCsv = yakumanCsv.split(",");
-            for (String aSplitedYakumanCsv : splitedYakumanCsv) {
-                yaku.add(TenhouPaifuStringPool.YANKUS[Integer.parseInt(aSplitedYakumanCsv)]);
+            String[] splitYakumanCsv = yakumanCsv.split(",");
+            for (String split : splitYakumanCsv) {
+                yaku.add(TenhouPaifuStringPool.YAKUS[Integer.parseInt(split)]);
             }
-            han = splitedYakumanCsv.length * 13;
+            han = splitYakumanCsv.length * 13;
         }
         int[] increaseAndDecrease = new int[4];
         String scCsv = attributes.getValue("sc");
-        String[] splitedScCsv = scCsv.split(",");
+        String[] splitScCsv = scCsv.split(",");
         for (int i = 0; i < 4; i++) {
-            int transferPoint = Integer.parseInt(splitedScCsv[2 * i + 1]) * 100;
-            increaseAndDecrease[i] = Integer.parseInt(splitedScCsv[2 * i]) * 100 + transferPoint;
+            int transferPoint = Integer.parseInt(splitScCsv[2 * i + 1]) * 100;
+            increaseAndDecrease[i] = Integer.parseInt(splitScCsv[2 * i]) * 100 + transferPoint;
         }
         analyzer.agari(position, from, yaku, han, hu, score, increaseAndDecrease);
         // 由于可能有多人荣和，此时不能直接调用结束对局
@@ -525,10 +525,10 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
         int[] increaseAndDecrease = new int[4];
         String scCsv = attributes.getValue("sc");
         String type = attributes.getValue("type");
-        String[] splitedScCsv = scCsv.split(",");
+        String[] splitScCsv = scCsv.split(",");
         for (int i = 0; i < 4; i++) {
-            int transferPoint = Integer.parseInt(splitedScCsv[2 * i + 1]) * 100;
-            increaseAndDecrease[i] = Integer.parseInt(splitedScCsv[2 * i]) * 100 + transferPoint;
+            int transferPoint = Integer.parseInt(splitScCsv[2 * i + 1]) * 100;
+            increaseAndDecrease[i] = Integer.parseInt(splitScCsv[2 * i]) * 100 + transferPoint;
         }
         analyzer.ryuukyoku(increaseAndDecrease, type);
         // 流局时可直接结束对局
@@ -557,12 +557,12 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
         if (owariCsv != null) {
             int playerSize = isSanma ? 3 : 4;
             // 数组为 a的点数，a的分数，b的点数，b的分数...d的分数
-            String[] splitedOwariCsv = owariCsv.split(",");
+            String[] splitOwariCsv = owariCsv.split(",");
             int[] playerPoints = new int[playerSize];
             int[] playerScores = new int[playerSize];
-            for (int i = 0, j = 0; i < splitedOwariCsv.length; i += 2, j++) {
-                playerPoints[j] = (int) Float.parseFloat(splitedOwariCsv[i]) * 100;
-                playerScores[j] = (int) Float.parseFloat(splitedOwariCsv[i + 1]);
+            for (int i = 0, j = 0; i < splitOwariCsv.length; i += 2, j++) {
+                playerPoints[j] = (int) Float.parseFloat(splitOwariCsv[i]) * 100;
+                playerScores[j] = (int) Float.parseFloat(splitOwariCsv[i + 1]);
             }
             analyzer.endGame(playerPoints, playerScores);
         }

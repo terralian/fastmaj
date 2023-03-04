@@ -11,7 +11,7 @@ public class PlayerHideStatus {
     /**
      * 玩家的向听数
      */
-    private int syanten;
+    private int syaten;
 
     // 振听
     /**
@@ -38,7 +38,7 @@ public class PlayerHideStatus {
      * 初始化
      */
     public void reset() {
-        syanten = 13;
+        syaten = 13;
         tempFuriten = false;
         reachFuriten = false;
         kiriFuriten = false;
@@ -49,17 +49,17 @@ public class PlayerHideStatus {
     /**
      * 获取向听数
      */
-    public int getSyanten() {
-        return syanten;
+    public int getSyaten() {
+        return syaten;
     }
 
     /**
      * 设置向听数
      * 
-     * @param syanten 向听数
+     * @param syaten 向听数
      */
-    public void setSyanten(int syanten) {
-        this.syanten = syanten;
+    public void setSyaten(int syaten) {
+        this.syaten = syaten;
     }
 
     /**

@@ -1,6 +1,5 @@
 package com.github.terralian.fastmaj.tehai;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -258,14 +257,14 @@ public interface ITehai {
      * <p/>
      * 对手牌进行判断，是否存在可以开暗杠的牌，即手牌中可操作的牌大于4枚的情况。
      */
-    boolean canAnkan();
+    boolean canAnnkan();
 
     /**
      * 手牌中的某一枚牌是否能够暗杠
      * 
      * @param hai 牌
      */
-    boolean canAnkan(IHai hai);
+    boolean canAnnkan(IHai hai);
 
     /**
      * 手牌是否能够拔北（限三麻）

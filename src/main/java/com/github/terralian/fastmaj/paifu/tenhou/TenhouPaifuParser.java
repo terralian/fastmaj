@@ -43,7 +43,7 @@ public class TenhouPaifuParser implements IPaifuParser {
     public void parseFile(File file) throws Exception {
         Assert.isTrue(file != null, "牌谱文件不存在，请检查路径");
         Assert.isTrue(!file.isDirectory(), "参数是一个文件夹，请检查路径");
-        String data = ZipUtil.ungzip(file);
+        String data = ZipUtil.unGzip(file);
         parseContent(data);
     }
 
@@ -53,7 +53,7 @@ public class TenhouPaifuParser implements IPaifuParser {
      */
     @Override
     public void parseStream(InputStream in) throws Exception {
-        String data = ZipUtil.ungzip(in);
+        String data = ZipUtil.unGzip(in);
         parseContent(data);
     }
 

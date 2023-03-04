@@ -21,13 +21,13 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
     /**
      * 向听数计算
      */
-    private ISyantenCalculator syantenCalculator;
+    private ISyatenCalculator syatenCalculator;
 
     /**
      * 构建有效牌实例
      */
-    public YuukouhaiCalculator(ISyantenCalculator syantenCalculator) {
-        this.syantenCalculator = syantenCalculator;
+    public YuukouhaiCalculator(ISyatenCalculator syatenCalculator) {
+        this.syatenCalculator = syatenCalculator;
     }
 
     /**
@@ -42,19 +42,19 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
         }
 
         List<IHai> hand = tehai.getHand();
-        int kokusiSyanten = syantenCalculator.calcKokusi(hand);
-        int tiitoituSyanten = syantenCalculator.calcTiitoitu(hand);
-        int normalSyanten = syantenCalculator.calcNormal(hand);
+        int kokusiSyaten = syatenCalculator.calcKokusi(hand);
+        int tiitoituSyaten = syatenCalculator.calcTiitoitu(hand);
+        int normalSyaten = syatenCalculator.calcNormal(hand);
 
-        int minSyanten = Math.min(kokusiSyanten, Math.min(tiitoituSyanten, normalSyanten));
+        int minSyaten = Math.min(kokusiSyaten, Math.min(tiitoituSyaten, normalSyaten));
         Set<IHai> minYuukouhais = new HashSet<>();
-        if (kokusiSyanten == minSyanten) {
+        if (kokusiSyaten == minSyaten) {
             minYuukouhais.addAll(calcKokusi(tehai));
         }
-        if (tiitoituSyanten == minSyanten) {
+        if (tiitoituSyaten == minSyaten) {
             minYuukouhais.addAll(calcTiitoitu(tehai));
         }
-        if (normalSyanten == minSyanten) {
+        if (normalSyaten == minSyaten) {
             minYuukouhais.addAll(calcNormal(tehai));
         }
         return minYuukouhais;
@@ -72,11 +72,11 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
             return yuukouhais;
         }
         int[] value34 = Encode34.toEncode34(tehai.getAll());
-        int currentSyanten = syantenCalculator.calcTiitoitu(value34);
+        int currentSyaten = syatenCalculator.calcTiitoitu(value34);
         List<IHai> values = tehai.getAll();
         for (IHai hai : values) {
             value34[hai.getValue()]++;
-            if (syantenCalculator.calcTiitoitu(value34) < currentSyanten) {
+            if (syatenCalculator.calcTiitoitu(value34) < currentSyaten) {
                 yuukouhais.add(hai);
             }
             value34[hai.getValue()]--;
@@ -96,11 +96,11 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
             return yuukouhais;
         }
         int[] value34 = Encode34.toEncode34(tehai.getAll());
-        int currentSyanten = syantenCalculator.calcKokusi(value34);
+        int currentSyaten = syatenCalculator.calcKokusi(value34);
         for (int i = 0; i < Encode34.YAOTYU_HAIS.length; i++) {
             int yaotyuIndex = Encode34.YAOTYU_HAIS[i];
             value34[yaotyuIndex]++;
-            if (syantenCalculator.calcKokusi(value34) < currentSyanten) {
+            if (syatenCalculator.calcKokusi(value34) < currentSyaten) {
                 yuukouhais.add(HaiPool.getByValue(yaotyuIndex));
             }
             value34[yaotyuIndex]--;
@@ -118,21 +118,21 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
     @Override
     public Set<IHai> calcNormal(ITehai tehai) {
         int[] value34 = Encode34.toEncode34(tehai.getHand());
-        int[] notkoritu = calcNotKoritu(tehai.getHand());
-        int syanten = syantenCalculator.calcNormal(value34);
+        int[] notKoritu = calcNotKoritu(tehai.getHand());
+        int syaten = syatenCalculator.calcNormal(value34);
         int index = 0;
 
         Set<IHai> yuukouHais = new HashSet<>();
-        while (notkoritu[index] >= 0) {
+        while (notKoritu[index] >= 0) {
             // 非孤立牌计算出的结果，不包含手牌已到4枚的信息
             // 若手牌数量已到达4枚，则不会存在第五枚，需要跳过这种情况
-            int nindex = notkoritu[index];
-            if (value34[nindex] < 4) {
-                value34[nindex]++;
-                if (syantenCalculator.calcNormal(value34) < syanten) {
-                    yuukouHais.add(HaiPool.getByValue(notkoritu[index]));
+            int nIndex = notKoritu[index];
+            if (value34[nIndex] < 4) {
+                value34[nIndex]++;
+                if (syatenCalculator.calcNormal(value34) < syaten) {
+                    yuukouHais.add(HaiPool.getByValue(notKoritu[index]));
                 }
-                value34[nindex]--;
+                value34[nIndex]--;
             }
             index++;
         }
@@ -167,15 +167,15 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
             }
         }
 
-        int[] notkoritu = new int[Encode34.length()];
-        Arrays.fill(notkoritu, -1);
+        int[] notKoritu = new int[Encode34.length()];
+        Arrays.fill(notKoritu, -1);
         int j = 0;
         for (int i = 0; i < work.length; i++) {
             if (!work[i])
                 continue;
-            notkoritu[j] = i;
+            notKoritu[j] = i;
             j++;
         }
-        return notkoritu;
+        return notKoritu;
     }
 }

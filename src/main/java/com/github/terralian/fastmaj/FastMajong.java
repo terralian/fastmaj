@@ -4,8 +4,8 @@ import com.github.terralian.fastmaj.agari.AgariCalculator;
 import com.github.terralian.fastmaj.agari.FuritenChecker;
 import com.github.terralian.fastmaj.agari.IAgariCalculator;
 import com.github.terralian.fastmaj.agari.IFuritenChecker;
-import com.github.terralian.fastmaj.tehai.FastSyantenCalculator;
-import com.github.terralian.fastmaj.tehai.ISyantenCalculator;
+import com.github.terralian.fastmaj.tehai.FastSyatenCalculator;
+import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.IYuukouhaiCalculator;
 import com.github.terralian.fastmaj.tehai.YuukouhaiCalculator;
 import com.github.terralian.fastmaj.util.SingletonFactory;
@@ -22,8 +22,8 @@ public abstract class FastMajong {
     /**
      * 单例获取默认的向听计算器实例
      */
-    public static ISyantenCalculator doGetSyantenCalculator() {
-        return SingletonFactory.doGetBean(ISyantenCalculator.class, FastSyantenCalculator.class);
+    public static ISyatenCalculator doGetSyatenCalculator() {
+        return SingletonFactory.doGetBean(ISyatenCalculator.class, FastSyatenCalculator.class);
     }
 
     /**
@@ -44,6 +44,6 @@ public abstract class FastMajong {
      * 单例获取有效牌计算器实例
      */
     public static IYuukouhaiCalculator doGetYuukouhaiCalculator() {
-        return new YuukouhaiCalculator(doGetSyantenCalculator());
+        return new YuukouhaiCalculator(doGetSyatenCalculator());
     }
 }

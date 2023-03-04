@@ -16,7 +16,7 @@ import com.github.terralian.fastmaj.game.ryuuky.IRyuukyokuResolverManager;
 import com.github.terralian.fastmaj.game.ryuuky.RyuukyokuResolverManager;
 import com.github.terralian.fastmaj.game.validator.GameEndValidator;
 import com.github.terralian.fastmaj.player.IPlayer;
-import com.github.terralian.fastmaj.tehai.ISyantenCalculator;
+import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.util.EmptyUtil;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
 import com.github.terralian.fastmaj.yama.SimpleRandomYamaWorker;
@@ -66,7 +66,7 @@ public class DefaultGameBuilder {
     /**
      * 向听计算器
      */
-    private ISyantenCalculator syantenCalculator = FastMajong.doGetSyantenCalculator();
+    private ISyatenCalculator syatenCalculator = FastMajong.doGetSyatenCalculator();
     /**
      * 链式构建器
      */
@@ -87,7 +87,7 @@ public class DefaultGameBuilder {
                     (List<IPlayer>) players,
                     config, //
                     yamaWorker, //
-                    syantenCalculator, //
+                    syatenCalculator, //
                     chainGameLoggerBuilder.build() //
             );
         }

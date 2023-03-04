@@ -45,7 +45,7 @@ public class PlayerGameContextFactory {
                 .setPosition(position) //
                 .setJikaze(KazeEnum.jiKaze(position, gameCore.getOya())) //
                 .setFuriten(gameCore.getPlayerHide().isFuriten()) //
-                .setSyanten(gameCore.getPlayerHide().getSyanten()) //
+                .setSyaten(gameCore.getPlayerHide().getSyaten()) //
                 .setTehai(gameCore.getTehai(position)) //
                 .setLastTehaiActionType(lastActionType) //
                 .setLastRiverAction(gameCore.getLastRiverAction()) //
@@ -78,7 +78,7 @@ public class PlayerGameContextFactory {
                 .setPosition(position) //
                 .setJikaze(KazeEnum.jiKaze(position, 0)) //
                 .setFuriten(false) //
-                .setSyanten(13) //
+                .setSyaten(13) //
                 .setTehai(null) //
                 .setLastTehaiActionType(null) //
         ;

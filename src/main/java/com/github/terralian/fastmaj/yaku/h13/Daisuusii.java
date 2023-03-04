@@ -9,13 +9,14 @@ import com.github.terralian.fastmaj.yaku.YakuNamePool;
 
 /**
  * 大四喜
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class Daisuusii implements IYakuman {
 
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
+        // 四喜牌每个都要>=3
         int[] value34 = Encode34.toEncode34(tehai.getAll());
         for (int i = Encode34.TON; i <= Encode34.PEI; i++) {
             if (value34[i] < 3)

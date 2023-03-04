@@ -15,7 +15,7 @@ public class ReachValidator implements ITehaiActionValidator {
     @Override
     public boolean resolveAction(int position, GameConfig gameConfig, IGameCore gameCore) {
         PlayerHideStatus playerHide = gameCore.getPlayerHide(position);
-        return !gameCore.getReachs().get(position) && playerHide.getSyanten() <= 0;
+        return !gameCore.getReachs().get(position) && playerHide.getSyaten() <= 0;
     }
 
     @Override

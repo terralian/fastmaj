@@ -15,7 +15,7 @@ import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.log.ChainGameLoggerBuilder;
 import com.github.terralian.fastmaj.game.log.IGameLogger;
 import com.github.terralian.fastmaj.game.log.PrintGameLogger;
-import com.github.terralian.fastmaj.tehai.ISyantenCalculator;
+import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
 import com.github.terralian.fastmaj.yama.SimpleRandomYamaWorker;
 
@@ -27,12 +27,12 @@ import com.github.terralian.fastmaj.yama.SimpleRandomYamaWorker;
 public class GameCoreTest {
 
     private IYamaWorker yamaWorker;
-    private ISyantenCalculator syantenCalculator;
+    private ISyatenCalculator syatenCalculator;
 
     @Before
     public void before() {
         yamaWorker = new SimpleRandomYamaWorker();
-        syantenCalculator = FastMajong.doGetSyantenCalculator();
+        syatenCalculator = FastMajong.doGetSyatenCalculator();
     }
 
     @Test
@@ -41,7 +41,7 @@ public class GameCoreTest {
         IGameLogger gameLogger = ChainGameLoggerBuilder.newBuilder() //
                 .addLogger(new PrintGameLogger()) //
                 .build();
-        IGameCore gameCore = new GameCore(4, new ArrayList<>(), config, yamaWorker, syantenCalculator, gameLogger);
+        IGameCore gameCore = new GameCore(4, new ArrayList<>(), config, yamaWorker, syatenCalculator, gameLogger);
         gameCore.startGame();
         assertEquals(KazeEnum.DON, gameCore.getBakaze());
         assertEquals(0, gameCore.getHonba());
@@ -60,7 +60,7 @@ public class GameCoreTest {
         IGameLogger gameLogger = ChainGameLoggerBuilder.newBuilder() //
                 .addLogger(new PrintGameLogger()) //
                 .build();
-        IGameCore gameCore = new GameCore(4, new ArrayList<>(), config, yamaWorker, syantenCalculator, gameLogger);
+        IGameCore gameCore = new GameCore(4, new ArrayList<>(), config, yamaWorker, syatenCalculator, gameLogger);
         gameCore.startGame();
         assertEquals(0, gameCore.nextKyoku());
     }
@@ -71,7 +71,7 @@ public class GameCoreTest {
         IGameLogger gameLogger = ChainGameLoggerBuilder.newBuilder() //
                 .addLogger(new PrintGameLogger()) //
                 .build();
-        IGameCore gameCore = new GameCore(4, new ArrayList<>(), config, yamaWorker, syantenCalculator, gameLogger);
+        IGameCore gameCore = new GameCore(4, new ArrayList<>(), config, yamaWorker, syatenCalculator, gameLogger);
         gameCore.nextKyoku();
     }
 }

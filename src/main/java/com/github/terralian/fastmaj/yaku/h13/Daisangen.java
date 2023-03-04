@@ -9,17 +9,16 @@ import com.github.terralian.fastmaj.yaku.YakuNamePool;
 
 /**
  * 大三元
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class Daisangen implements IYakuman {
 
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
+        // 中发白每个都大于3
         int[] value34 = Encode34.toEncode34(tehai.getAll());
-        if (value34[Encode34.HAKU] >= 3 && value34[Encode34.HATU] >= 3 && value34[Encode34.TYUN] >= 3)
-            return true;
-        return false;
+        return value34[Encode34.HAKU] >= 3 && value34[Encode34.HATU] >= 3 && value34[Encode34.TYUN] >= 3;
     }
 
     @Override

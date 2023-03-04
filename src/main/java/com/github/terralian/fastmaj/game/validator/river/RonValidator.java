@@ -15,7 +15,7 @@ import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionValue;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
-import com.github.terralian.fastmaj.tehai.ISyantenCalculator;
+import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.IYuukouhaiCalculator;
 import com.github.terralian.fastmaj.yaku.IYaku;
@@ -34,7 +34,7 @@ public class RonValidator implements IRiverActionValidator {
     /**
      * 向听计算器
      */
-    private ISyantenCalculator syantenCalculator;
+    private ISyatenCalculator syatenCalculator;
     /**
      * 荣和役计算器
      */
@@ -42,7 +42,7 @@ public class RonValidator implements IRiverActionValidator {
 
     public RonValidator() {
         this.yuukouhaiCalculator = FastMajong.doGetYuukouhaiCalculator();
-        this.syantenCalculator = FastMajong.doGetSyantenCalculator();
+        this.syatenCalculator = FastMajong.doGetSyatenCalculator();
         this.ronYakuMatcher = new RonYakuMatcher();
     }
 
@@ -51,7 +51,7 @@ public class RonValidator implements IRiverActionValidator {
             PlayerGameContext context) {
         // 未听牌或者振听
         PlayerHideStatus hideStatus = gameCore.getPlayerHide(position);
-        if (hideStatus.getSyanten() > 0 || hideStatus.isFuriten()) {
+        if (hideStatus.getSyaten() > 0 || hideStatus.isFuriten()) {
             return false;
         }
         // 听的牌是这几枚
@@ -63,8 +63,8 @@ public class RonValidator implements IRiverActionValidator {
         // 抢暗杠
         // 对手动作是暗杠，且自己未固定牌，且国士听牌
         if (rivalTehaiAction.getActionType() == TehaiActionType.ANNKAN && tehai.getLock().isEmpty()) {
-            int syanten = syantenCalculator.calcKokusi(tehai.getHand());
-            return syanten == 0;
+            int syaten = syatenCalculator.calcKokusi(tehai.getHand());
+            return syaten == 0;
         }
         // 抢加杠
         // 只要听这张，且非振听

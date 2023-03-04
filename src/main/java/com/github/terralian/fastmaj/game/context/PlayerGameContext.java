@@ -7,7 +7,6 @@ import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.action.river.RiverActionValue;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.hai.IHai;
-import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.river.IHaiRiver;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.ITehaiLock;
@@ -113,7 +112,7 @@ public class PlayerGameContext {
     /**
      * 当前向听数
      */
-    private int syanten;
+    private int syaten;
     /**
      * 玩家的手牌
      */

@@ -10,7 +10,7 @@ public final class TenhouPaifuStringPool {
     /**
      * 天凤的役种（顺序特定为牌谱的定义值）
      */
-    public static final String[] YANKUS = {
+    public static final String[] YAKUS = {
             // 一番
             "门前清自摸和", "立直", "一发", "抢杠", "岭上开花",
             "海底摸月", "河底捞鱼", "平和", "断幺九", "一杯口",

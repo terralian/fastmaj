@@ -351,13 +351,13 @@ public abstract class StringUtil {
      * 该方法根据参数多次调用{@link String#startsWith}方法
      * 
      * @param target 目标字符串
-     * @param prefixs 前缀集合
+     * @param prefixes 前缀集合
      * @return 字符串为null或者未匹配返回false，若参数一个匹配，返回true
      */
-    public static boolean startWith(String target, String... prefixs) {
+    public static boolean startWith(String target, String... prefixes) {
         if (target == null)
             return false;
-        for (String prefix : prefixs) {
+        for (String prefix : prefixes) {
             if (target.startsWith(prefix))
                 return true;
         }

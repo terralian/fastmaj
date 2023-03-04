@@ -70,7 +70,7 @@ public class HaiteiTest {
         // 结果
         boolean result = false;
         // 从牌山自摸
-        gameContext.setLastDrawFrom(DrawFrom.RINSYIN);
+        gameContext.setLastDrawFrom(DrawFrom.RINSYAN);
 
         // 最后一枚，非荣和
         gameContext.setRon(false);

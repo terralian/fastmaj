@@ -17,11 +17,11 @@ import com.github.terralian.fastmaj.tehai.ITehaiLock;
 import com.github.terralian.fastmaj.util.CollectionUtil;
 
 /**
- * 和了分割对MSCORE的适配
+ * 和了分割对mjscore的适配
  * <p/>
  * 支持副露，暗杠等固定手牌的变化
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class MjscoreAdapter implements ITehaiAgariDivider {
 
@@ -50,36 +50,36 @@ public class MjscoreAdapter implements ITehaiAgariDivider {
             int jantou = pos[(r >> 6) & 0xF];
 
             // 刻子
-            int numKotsu = r & 0x7;
-            Set<IHai> handKotsuFirst = new LinkedHashSet<>();
-            for (int i = 0; i < numKotsu; i++) {
+            int numKozu = r & 0x7;
+            Set<IHai> handKozuFirst = new LinkedHashSet<>();
+            for (int i = 0; i < numKozu; i++) {
                 IHai hai = HaiPool.getByValue(pos[(r >> (10 + i * 4)) & 0xF]);
-                handKotsuFirst.add(hai);
+                handKozuFirst.add(hai);
             }
-            
+
             // 顺子
-            int numShuntsu = (r >> 3) & 0x7;
-            List<IHai> handShuntsuFirst = new ArrayList<>();
-            for (int i = 0; i < numShuntsu; i++) {
-                IHai hai = HaiPool.getByValue(pos[(r >> (10 + numKotsu * 4 + i * 4)) & 0xF]);
-                handShuntsuFirst.add(hai);
+            int numShunzu = (r >> 3) & 0x7;
+            List<IHai> handShunzuFirst = new ArrayList<>();
+            for (int i = 0; i < numShunzu; i++) {
+                IHai hai = HaiPool.getByValue(pos[(r >> (10 + numKozu * 4 + i * 4)) & 0xF]);
+                handShunzuFirst.add(hai);
             }
-            List<IHai> allShuntsuFirst = new ArrayList<>(handShuntsuFirst);
-            allShuntsuFirst.addAll(tehai.getLock().getChiFirst());
+            List<IHai> allShunzuFirst = new ArrayList<>(handShunzuFirst);
+            allShunzuFirst.addAll(tehai.getLock().getChiFirst());
 
 
             DivideInfo divide = new DivideInfo();
             divide.setJantou(HaiPool.getByValue(jantou)) //
-                    .setHandKotsuFirst(handKotsuFirst)//
-                    .setAllShuntsuFirst(allShuntsuFirst) //
-                    .setHandShuntsuFirst(handShuntsuFirst) //
+                    .setHandKozuFirst(handKozuFirst)//
+                    .setAllShunzuFirst(allShunzuFirst) //
+                    .setHandShunzuFirst(handShunzuFirst) //
                     .setTiitoitu((r & (1 << 26)) != 0) //
                     .setTyuuren((r & (1 << 27)) != 0) //
                     .setRyanpeikou((r & (1 << 29)) != 0) //
                     .setIipeikou((r & (1 << 30)) != 0);
 
             fixIipeikou(tehai, divide);
-            partitionkotsu(tehai, divide, isRon, agariHai);
+            partitionKozu(tehai, divide, isRon, agariHai);
             divides.add(divide);
         }
 
@@ -88,41 +88,41 @@ public class MjscoreAdapter implements ITehaiAgariDivider {
 
     /**
      * 根据分割出的刻子，拆分为暗刻，明刻
-     * 
+     *
      * @param tehai 手牌
      * @param agariDivide 分割
      * @param isRon 是否荣和
      * @param agariHai 和了的牌
      */
-    private void partitionkotsu(ITehai tehai, DivideInfo agariDivide, boolean isRon, IHai agariHai) {
+    private void partitionKozu(ITehai tehai, DivideInfo agariDivide, boolean isRon, IHai agariHai) {
         ITehaiLock tehaiLock = tehai.getLock();
 
-        Set<IHai> annkotsu = new HashSet<>(agariDivide.getHandKotsuFirst());
-        Set<IHai> allKanKotsu = new HashSet<>(tehaiLock.getNotChiFirst());
-        
+        Set<IHai> annko = new HashSet<>(agariDivide.getHandKozuFirst());
+        Set<IHai> allKanzu = new HashSet<>(tehaiLock.getNotChiFirst());
+
         // 所有的刻子/杠子
-        allKanKotsu.addAll(agariDivide.getHandKotsuFirst());
+        allKanzu.addAll(agariDivide.getHandKozuFirst());
         // 明刻包含杠
-        Set<IHai> minkotsu = new HashSet<>(tehaiLock.getPonFirst());
+        Set<IHai> minKozu = new HashSet<>(tehaiLock.getPonFirst());
 
         // 移除红宝牌信息
         IHai clearRed = agariHai.isRedDora() //
                 ? HaiPool.getByValue(agariHai.getValue()) //
                 : agariHai;
         // 荣和情况下要二次判定和了的牌是否是暗刻
-        if (isRon && annkotsu.contains(clearRed)) {
+        if (isRon && annko.contains(clearRed)) {
             // 若和了的牌是顺子组成的一个，则无需处理
-            List<IHai> hais = agariDivide.getHandShuntsuFirst();
-            boolean inShuntsu = hais.stream().anyMatch(k -> Encode34.isInShuntsu(k, clearRed));
-            if (!inShuntsu) {
-                annkotsu.remove(clearRed);
-                minkotsu.add(clearRed);
+            List<IHai> hais = agariDivide.getHandShunzuFirst();
+            boolean inShunzu = hais.stream().anyMatch(k -> Encode34.isInShunzu(k, clearRed));
+            if (!inShunzu) {
+                annko.remove(clearRed);
+                minKozu.add(clearRed);
             }
         }
 
-        agariDivide.setAllKanKotsuFirst(allKanKotsu);
-        agariDivide.setAnnKotsuFirst(annkotsu);
-        agariDivide.setMinKotsuFirst(minkotsu);
+        agariDivide.setAllKanKozuFirst(allKanzu);
+        agariDivide.setAnnkoFirst(annko);
+        agariDivide.setMinkoFirst(minKozu);
     }
 
     /**
@@ -130,7 +130,7 @@ public class MjscoreAdapter implements ITehaiAgariDivider {
      * 当手牌进行过暗杠操作，手牌的面子数小于4，mjscore会当做非门清状态，而不判断一杯口。
      * <p/>
      * 使用该方法对一杯口的问题进行补全。
-     * 
+     *
      * @param tehai 手牌
      * @param agariDivide 拆分的结果
      */
@@ -140,18 +140,18 @@ public class MjscoreAdapter implements ITehaiAgariDivider {
         if (tehai.isNaki() || !tehai.isAnnkan()) {
             return;
         }
-        List<IHai> handShuntsuFirst = agariDivide.getHandShuntsuFirst();
-        if (handShuntsuFirst.size() < 2) {
+        List<IHai> handShunzuFirst = agariDivide.getHandShunzuFirst();
+        if (handShunzuFirst.size() < 2) {
             return;
         }
-        if (CollectionUtil.containsDuplicate(handShuntsuFirst)) {
+        if (CollectionUtil.containsDuplicate(handShunzuFirst)) {
             agariDivide.setIipeikou(true);
         }
     }
 
     /**
      * 国士情况下的手牌分割（大部分值为空）
-     * 
+     *
      * @param divides
      * @param value34
      */
@@ -172,12 +172,12 @@ public class MjscoreAdapter implements ITehaiAgariDivider {
 
         DivideInfo divide = new DivideInfo();
         divide.setJantou(HaiPool.getByValue(jantou)) //
-                .setHandKotsuFirst(Collections.emptySet())//
-                .setAllKanKotsuFirst(Collections.emptySet()) //
-                .setAnnKotsuFirst(Collections.emptySet()) //
-                .setMinKotsuFirst(Collections.emptySet()) //
-                .setAllShuntsuFirst(Collections.emptyList()) //
-                .setHandShuntsuFirst(Collections.emptyList()) //
+                .setHandKozuFirst(Collections.emptySet())//
+                .setAllKanKozuFirst(Collections.emptySet()) //
+                .setAnnkoFirst(Collections.emptySet()) //
+                .setMinkoFirst(Collections.emptySet()) //
+                .setAllShunzuFirst(Collections.emptyList()) //
+                .setHandShunzuFirst(Collections.emptyList()) //
                 .setTiitoitu(false) //
                 .setTyuuren(false) //
                 .setRyanpeikou(false) //

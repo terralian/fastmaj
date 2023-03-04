@@ -17,7 +17,7 @@ public class Syousuusii implements IYakuman {
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
         boolean toitu = false;
-        int kootu = 0;
+        int kozu = 0;
 
         // 3刻一雀头
         int[] value34 = Encode34.toEncode34(tehai.getAll());
@@ -25,9 +25,9 @@ public class Syousuusii implements IYakuman {
             if (!toitu && value34[i] == 2)
                 toitu = true;
             else if (value34[i] >= 3)
-                kootu++;
+                kozu++;
         }
-        return kootu == 3 && toitu;
+        return kozu == 3 && toitu;
     }
 
     @Override

@@ -16,7 +16,7 @@ import com.github.terralian.fastmaj.yaku.h13.Daisuusii;
 import com.github.terralian.fastmaj.yaku.h13.Kokusi;
 import com.github.terralian.fastmaj.yaku.h13.Kokusi13;
 import com.github.terralian.fastmaj.yaku.h13.SuuankouTanki;
-import com.github.terralian.fastmaj.yaku.h13.Suukantu;
+import com.github.terralian.fastmaj.yaku.h13.Suukanzu;
 import com.github.terralian.fastmaj.yaku.h13.Tenho;
 import com.github.terralian.fastmaj.yaku.h13.Tuuiisou;
 
@@ -156,13 +156,13 @@ public class PointCalculatorTest {
     public void calcBasePoint_yakuman() {
         GameConfig gameConfig = GameConfig.defaultRule();
         // 无复合
-        gameConfig.setMutiYakuman(false);
+        gameConfig.setMultipleYakuman(false);
         List<IYaku> yakus = Arrays.asList(new Tenho(), new Kokusi());
         int basePoint = pointCalculator.calcBasePoint(1, -1, -1);
         assertEquals(8000, basePoint);
 
         // 有复合
-        gameConfig.setMutiYakuman(true);
+        gameConfig.setMultipleYakuman(true);
         gameConfig.setDoubleYakuman(true);
         basePoint = pointCalculator.calcBasePoint(yakus, -1, -1, gameConfig);
         assertEquals(8000 * 2, basePoint);
@@ -180,7 +180,7 @@ public class PointCalculatorTest {
 
         // 理论最大役满
         // 字一色，大四喜，四杠子，四暗刻单骑 6倍
-        yakus = Arrays.asList(new Tuuiisou(), new Daisuusii(), new Suukantu(), new SuuankouTanki());
+        yakus = Arrays.asList(new Tuuiisou(), new Daisuusii(), new Suukanzu(), new SuuankouTanki());
         basePoint = pointCalculator.calcBasePoint(yakus, -1, -1, gameConfig);
         assertEquals(8000 * 6, basePoint);
     }

@@ -152,7 +152,7 @@ public class Hai implements IHai {
      * 牌是否为索子牌
      */
     @Override
-    public boolean isSozu() {
+    public boolean isSouzu() {
         return type == HaiTypeEnum.S;
     }
 

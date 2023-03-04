@@ -139,11 +139,11 @@ public class TenhouQueueReplayPlayerBuilder extends TenhouMajongReplay {
     }
 
     @Override
-    public void ankan(int position, int[] selfHai) {
+    public void annkan(int position, int[] selfHai) {
         TehaiActionCall actionCall = TehaiActionCall.newAnnkan(HaiPool.getById(selfHai[0], useRed));
         value.get(position).addTehaiAction(gameCore.getRound(), actionCall);
 
-        super.ankan(position, selfHai);
+        super.annkan(position, selfHai);
     }
 
     @Override

@@ -27,7 +27,7 @@ public class AnnkanValidator implements ITehaiActionValidator {
      * 初始化构建暗杠判定器
      */
     public AnnkanValidator() {
-        yuukouhaiCalculator = new YuukouhaiCalculator(FastMajong.doGetSyantenCalculator());
+        yuukouhaiCalculator = new YuukouhaiCalculator(FastMajong.doGetSyatenCalculator());
     }
 
     @Override
@@ -40,10 +40,10 @@ public class AnnkanValidator implements ITehaiActionValidator {
         ITehai tehai = gameCore.getTehai(position);
         // 若未立直，则只需判定能否暗杠
         if (!gameCore.getHaiRiver(position).isReach()) {
-            return tehai.canAnkan();
+            return tehai.canAnnkan();
         }
         // 若已立直，则需要判定摸到的牌是否可以开暗杠，且开暗杠后，听的牌是否会变更
-        if (!tehai.canAnkan(tehai.getDrawHai())) {
+        if (!tehai.canAnnkan(tehai.getDrawHai())) {
             return false;
         }
         return isYuukouhaiNotChangeAfterAnnkan(tehai);

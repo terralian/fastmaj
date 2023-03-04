@@ -31,12 +31,12 @@ public class HonTyanta implements IYaku {
             return false;
         }
 
-        int shuntsuSize = divide.getAllShuntsuFirst().size();
+        int shunzuSize = divide.getAllShunzuFirst().size();
         // 有顺子，且顺子需要1开头或者7开头
         // 刻子需要全幺九
-        return shuntsuSize > 0 //
-                && divide.getAllShuntsuFirst().stream().allMatch(this::isTyantaShuntsuFirst) //
-                && divide.getAllKanKotsuFirst().stream().allMatch(IHai::isYaotyuHai);
+        return shunzuSize > 0 //
+                && divide.getAllShunzuFirst().stream().allMatch(this::isTyantaShunzuFirst) //
+                && divide.getAllKanKozuFirst().stream().allMatch(IHai::isYaotyuHai);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class HonTyanta implements IYaku {
      * 
      * @param hai 牌
      */
-    private boolean isTyantaShuntsuFirst(IHai hai) {
+    private boolean isTyantaShunzuFirst(IHai hai) {
         int literal = hai.getLiteral();
         return literal == 1 || literal == 7;
     }

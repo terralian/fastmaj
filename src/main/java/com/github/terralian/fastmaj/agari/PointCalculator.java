@@ -160,11 +160,11 @@ public class PointCalculator implements IPointCalculator {
         if (yakus.get(0).isYakuman()) {
             int multiple = 1;
             // 复合役满及多倍役满
-            if (gameConfig.getMutiYakuman() && gameConfig.getDoubleYakuman()) {
+            if (gameConfig.getMultipleYakuman() && gameConfig.getDoubleYakuman()) {
                 multiple = yakus.stream().mapToInt(k -> ((IYakuman) k).isDoubleYakuman() ? 2 : 1).sum();
             }
             // 只计复合役满
-            else if (gameConfig.getMutiYakuman()) {
+            else if (gameConfig.getMultipleYakuman()) {
                 multiple = yakus.size();
             }
             return multiple;

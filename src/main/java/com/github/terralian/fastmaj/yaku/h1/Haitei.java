@@ -5,16 +5,19 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.RonYaku;
+import com.github.terralian.fastmaj.yaku.meta.StateYaku;
 import com.github.terralian.fastmaj.yama.DrawFrom;
 
 /**
  * 海底摸月
  * <p/>
  * 海底摸月为山牌的最后一枚牌自摸（非岭上牌）
- * 
+ *
  * @author 作者: terra.lian
- * 
  */
+@StateYaku
+@RonYaku(false)
 public class Haitei implements IYaku {
 
     @Override

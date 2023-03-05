@@ -6,12 +6,14 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYakuman;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.JihaiYaku;
 
 /**
  * 字一色
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
+@JihaiYaku(minJihaiSize = 14)
 public class Tuuiisou implements IYakuman {
 
     @Override

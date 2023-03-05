@@ -7,12 +7,16 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYakuman;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
+import com.github.terralian.fastmaj.yaku.meta.MenchanYaku;
 
 /**
  * 四暗刻单骑
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
+@MenchanYaku
+@KozuYaku(minKozuSize = 4)
 public class SuuankouTanki implements IYakuman {
 
     @Override

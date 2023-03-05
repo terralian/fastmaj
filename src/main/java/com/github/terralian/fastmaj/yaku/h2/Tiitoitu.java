@@ -8,8 +8,8 @@ import com.github.terralian.fastmaj.yaku.YakuNamePool;
 
 /**
  * 七对子
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class Tiitoitu implements IYaku {
 

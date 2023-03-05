@@ -7,12 +7,14 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.JihaiYaku;
 
 /**
  * 混一色
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
+@JihaiYaku(minJihaiSize = 2)
 public class Honitu implements IYaku {
 
     @Override

@@ -7,13 +7,18 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYakuman;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.MenchanYaku;
+import com.github.terralian.fastmaj.yaku.meta.NonJihaiYaku;
+import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
 
 /**
  * 九蓮宝燈
- * 
+ *
  * @author 作者: terra.lian
- * 
  */
+@MenchanYaku
+@NonJihaiYaku
+@ShunzuYaku(minShunzuSize = 4)
 public class Tyuuren implements IYakuman {
 
     @Override
@@ -35,7 +40,7 @@ public class Tyuuren implements IYakuman {
 
     /**
      * 是否是纯九莲
-     * 
+     *
      * @param value34 34编码
      * @param agariHai 和的牌
      */

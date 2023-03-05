@@ -7,12 +7,14 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYakuman;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.MenchanYaku;
 
 /**
  * 国士无双13面
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
+@MenchanYaku
 public class Kokusi13 implements IYakuman {
 
     @Override

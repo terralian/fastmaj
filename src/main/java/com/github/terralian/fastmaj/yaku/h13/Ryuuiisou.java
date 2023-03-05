@@ -10,8 +10,8 @@ import com.github.terralian.fastmaj.yaku.YakuNamePool;
 
 /**
  * 绿一色
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class Ryuuiisou implements IYakuman {
 

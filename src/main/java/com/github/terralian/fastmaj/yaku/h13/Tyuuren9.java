@@ -6,12 +6,18 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.MenchanYaku;
+import com.github.terralian.fastmaj.yaku.meta.NonJihaiYaku;
+import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
 
 /**
  * 纯正九莲宝灯
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
+@MenchanYaku
+@NonJihaiYaku
+@ShunzuYaku(minShunzuSize = 4)
 public class Tyuuren9 extends Tyuuren {
 
     @Override

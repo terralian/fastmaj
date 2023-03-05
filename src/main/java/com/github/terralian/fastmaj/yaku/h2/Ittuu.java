@@ -7,12 +7,14 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
 
 /**
  * 一气通贯
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
+@ShunzuYaku(minShunzuSize = 3)
 public class Ittuu implements IYaku {
 
     @Override

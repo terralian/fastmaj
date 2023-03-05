@@ -6,12 +6,16 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.JihaiYaku;
+import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
 
 /**
  * 役牌发
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
+@JihaiYaku
+@KozuYaku
 public class Hatu implements IYaku {
 
     @Override

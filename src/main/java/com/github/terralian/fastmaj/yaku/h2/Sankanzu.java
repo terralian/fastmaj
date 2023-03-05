@@ -5,12 +5,14 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
 
 /**
  * 三杠子
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
+@KozuYaku(minKozuSize = 3)
 public class Sankanzu implements IYaku {
 
     @Override

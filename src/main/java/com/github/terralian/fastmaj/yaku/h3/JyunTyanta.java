@@ -7,12 +7,18 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
+import com.github.terralian.fastmaj.yaku.meta.NonJihaiYaku;
+import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
 
 /**
  * 纯全带幺九
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
+@NonJihaiYaku
+@ShunzuYaku
+@KozuYaku
 public class JyunTyanta implements IYaku {
 
     @Override
@@ -49,7 +55,7 @@ public class JyunTyanta implements IYaku {
 
     /**
      * 是否是包含幺九顺子的第一枚
-     * 
+     *
      * @param hai 牌
      */
     private boolean isTyantaShunzuFirst(IHai hai) {

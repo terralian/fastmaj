@@ -8,13 +8,14 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.StateYaku;
 
 /**
  * 岭上开花
- * 
+ *
  * @author 作者: terra.lian
- * 
  */
+@StateYaku
 public class Rinsyan implements IYaku {
 
     @Override
@@ -24,7 +25,7 @@ public class Rinsyan implements IYaku {
         }
         // 先判定是否明杠
         RiverActionValue riverAction = holder.getLastRiverAction();
-        if (riverAction!= null && riverAction.getActionPlayer() == holder.getPosition()) {
+        if (riverAction != null && riverAction.getActionPlayer() == holder.getPosition()) {
             if (riverAction.getActionType() == RiverActionType.MINKAN) {
                 return true;
             }

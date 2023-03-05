@@ -6,13 +6,14 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.ITehaiLock;
 import com.github.terralian.fastmaj.yaku.IYakuman;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
 
 /**
  * 四杠子
- * 
+ *
  * @author 作者: terra.lian
- * 
  */
+@KozuYaku(minKozuSize = 4)
 public class Suukanzu implements IYakuman {
 
     @Override

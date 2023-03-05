@@ -7,12 +7,16 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.JihaiYaku;
+import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
 
 /**
  * 场风，根据场况得出东南西北
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
+@JihaiYaku
+@KozuYaku
 public class Bakaze implements IYaku {
 
     @Override

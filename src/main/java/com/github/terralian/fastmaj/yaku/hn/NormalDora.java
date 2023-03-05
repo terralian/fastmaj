@@ -4,12 +4,14 @@ import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
+import com.github.terralian.fastmaj.yaku.meta.BountyYaku;
 
 /**
  * 宝牌
- * 
+ *
  * @author terra.lian
  */
+@BountyYaku
 public class NormalDora implements IYaku {
 
     private int han;

@@ -11,26 +11,29 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.MenchanYaku;
+import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
 
 
 /**
  * 平和
  * <p/>
  * 平和需要知道自风场风，也可可脱离场况，当无场况上下文时不验证场风自风
- * 
+ *
  * @author 作者: terra.lian
- * 
  */
+@MenchanYaku
+@ShunzuYaku(minShunzuSize = 4)
 public class Pinfu implements IYaku {
 
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
         IHai agariHai = tehai.getDrawHai();
         // 平和不能副露暗刻
-        if (tehai.isNaki() || tehai.isAnnkan() || divide == null || agariHai== null) {
+        if (tehai.isNaki() || tehai.isAnnkan() || divide == null || agariHai == null) {
             return false;
         }
         // 和了的牌不能是字牌
-        if(agariHai.isJiHai()) {
+        if (agariHai.isJiHai()) {
             return false;
         }
 

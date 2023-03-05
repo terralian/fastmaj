@@ -6,14 +6,18 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.JihaiYaku;
+import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
 
 /**
  * 混全带
  * <p/>
  * 混全带和混老头并不会复合，因为混全带需要带有顺子
- * 
+ *
  * @author terra.lian
  */
+@ShunzuYaku
+@JihaiYaku(minJihaiSize = 2)
 public class HonTyanta implements IYaku {
 
     @Override
@@ -51,7 +55,7 @@ public class HonTyanta implements IYaku {
 
     /**
      * 顺子第一枚是否为1或者7
-     * 
+     *
      * @param hai 牌
      */
     private boolean isTyantaShunzuFirst(IHai hai) {

@@ -6,6 +6,8 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.RonYaku;
+import com.github.terralian.fastmaj.yaku.meta.StateYaku;
 
 /**
  * 抢杠
@@ -13,10 +15,11 @@ import com.github.terralian.fastmaj.yaku.YakuNamePool;
  * 抢杠为当其他家进行加杠操作时，该枚牌为和了牌时的役种
  * <p/>
  * 该役的计算时点应该是，在对方操作抢杠时，对其他听牌且未为振听的一方，计算一次和了判定，若未和牌，修改一发巡标识为否。
- * 
+ *
  * @author 作者: terra.lian
- * 
  */
+@StateYaku
+@RonYaku
 public class TyanKan implements IYaku {
 
     @Override

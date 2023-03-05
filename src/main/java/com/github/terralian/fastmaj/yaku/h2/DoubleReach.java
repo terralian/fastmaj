@@ -6,12 +6,14 @@ import com.github.terralian.fastmaj.river.IHaiRiver;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.StateYaku;
 
 /**
  * 两立直
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
+@StateYaku
 public class DoubleReach implements IYaku {
 
     @Override

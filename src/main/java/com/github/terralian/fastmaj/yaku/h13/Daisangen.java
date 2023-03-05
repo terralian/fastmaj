@@ -6,12 +6,14 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYakuman;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.JihaiYaku;
 
 /**
  * 大三元
  *
  * @author terra.lian
  */
+@JihaiYaku(minJihaiSize = 9)
 public class Daisangen implements IYakuman {
 
     @Override

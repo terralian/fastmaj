@@ -7,12 +7,14 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
 
 /**
  * 对对和
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
+@KozuYaku(minKozuSize = 4)
 public class Toitoi implements IYaku {
 
     @Override

@@ -11,12 +11,14 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
 
 /**
  * 三色同刻
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
+@KozuYaku(minKozuSize = 3)
 public class SansyokuDoupon implements IYaku {
 
     @Override

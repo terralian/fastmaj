@@ -49,7 +49,7 @@ public class SyatenCalculator implements ISyatenCalculator {
 
         // 副露，或者暗杠时，即不可能再是七对子或国士的牌型
         int tehaiSize = Encode34.tehaiSize(value34);
-        if (tehaiSize >= 14) {
+        if (tehaiSize >= 13) {
             syaten = Math.min(syaten, calcKokusi(value34));
             syaten = Math.min(syaten, calcTiitoitu(value34));
         }

@@ -5,58 +5,78 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.terralian.fastmaj.yama.TenhouYamaWorker;
 import org.xml.sax.Attributes;
-import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import com.github.terralian.fastmaj.yama.TenhouYamaWorker;
-
 /**
- * 天凤牌谱XML解析器，该类用于将天凤牌谱文件中的编码信息进行解码，通过{@link ITenhouPaifuAnalyzer}返回可以看懂的解读信息。
+ * 天凤牌谱XML解码器，该类用于将天凤牌谱文件中的编码信息进行解码，通过{@link ITenhouPaifuParseHandler}返回可以看懂的解读信息。
  * 一个牌谱XML文件的解析流程为：
  * <ul>
  * <li>读取牌谱文件获取XML
  * <li>使用{@link TenhouPaifuDecodeHandler}将XML进行解密（实质是把压缩的信息提取出来）
- * <li>在执行到对应的步骤时，调用{@link ITenhouPaifuAnalyzer}的实例类处理可处理的解密信息
- * <li>处理完成后，由{@link ITenhouPaifuAnalyzer}返回所需的实体
+ * <li>在执行到对应的步骤时，调用{@link ITenhouPaifuParseHandler}的实例类处理可处理的解密信息
+ * <li>处理完成后，由{@link ITenhouPaifuParseHandler}返回所需的实体
  * </ul>
  * 由于使用SAX2进行XML解析，一次调用就是遍历整个XML。
  * <p/>
  * 该方法代码来源为<code>tenhouvisualizer</code>，代码进行了一部分改造和补全
- * 
+ *
  * @author terra.lian
  * @see <a href=
  *      "https://github.com/CrazyBBB/tenhou-visualizer/blob/master/src/main/java/tenhouvisualizer/domain/analyzer/ParseHandler.java">类原始来源</a>
  * @see <a href=
  *      "https://m77.hatenablog.com/entry/2017/05/21/214529">天凤牌谱解析教程</a>
- * @see ITenhouPaifuAnalyzer
+ * @see ITenhouPaifuParseHandler
  */
 public class TenhouPaifuDecodeHandler extends DefaultHandler {
 
-    /** 是否三麻 */
+    /**
+     * 是否三麻
+     */
     private boolean isSanma;
-    /** 天凤桌 */
+    /**
+     * 天凤桌
+     */
     private int taku;
-    /** 是否东南 */
+    /**
+     * 是否东南
+     */
     private boolean isTonnan;
-    /** 是否快速场 */
+    /**
+     * 是否快速场
+     */
     private boolean isSoku;
-    /** 是否含宝牌规则 */
+    /**
+     * 是否含宝牌规则
+     */
     private boolean isUseAka;
-    /** 是否食断规则 */
+    /**
+     * 是否食断规则
+     */
     private boolean isAriAri;
-    /** 天凤玩家昵称 */
+    /**
+     * 天凤玩家昵称
+     */
     private String[] playerNames = new String[4];
-    /** 玩家分数 */
+    /**
+     * 玩家分数
+     */
     private int[] playerRates = new int[4];
-    /** 玩家段位 */
+    /**
+     * 玩家段位
+     */
     private String[] playerDans = new String[4];
 
-    /** 牌谱实际分析的接口 */
-    private ITenhouPaifuAnalyzer analyzer;
-    /** 天凤牌山生成器 */
-    private TenhouYamaWorker tenhouLogYamaWorker;
-    
+    /**
+     * 牌谱实际分析的接口
+     */
+    private final ITenhouPaifuParseHandler analyzer;
+    /**
+     * 天凤牌山生成器
+     */
+    private final TenhouYamaWorker tenhouLogYamaWorker;
+
     /**
      * 是否和了
      */
@@ -71,7 +91,7 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
      * 
      * @param analyzer 天凤牌谱监听分析器
      */
-    public TenhouPaifuDecodeHandler(ITenhouPaifuAnalyzer analyzer) {
+    public TenhouPaifuDecodeHandler(ITenhouPaifuParseHandler analyzer) {
         this.analyzer = analyzer;
         this.tenhouLogYamaWorker = new TenhouYamaWorker();
         isAgari = false;
@@ -107,6 +127,14 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
         } else if ("BYE".equals(tagName)) {
             visitBYE(attributes);
         }
+    }
+
+    /**
+     * 返回牌谱
+     * @return
+     */
+    public ITenhouPaifuParseHandler getAnalyzer() {
+        return analyzer;
     }
 
     /**

@@ -17,7 +17,7 @@ import com.github.terralian.fastmaj.game.ryuuky.RyuukyokuResolverManager;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.paifu.IPaifuParser;
-import com.github.terralian.fastmaj.paifu.tenhou.ITenhouPaifuAnalyzer;
+import com.github.terralian.fastmaj.paifu.tenhou.ITenhouPaifuParseHandler;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuParser;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuStringPool;
 import com.github.terralian.fastmaj.player.RiverActionCall;
@@ -29,7 +29,7 @@ import com.github.terralian.fastmaj.yama.VirtualYamaWorker;
  * 
  * @author terra.lian
  */
-public class TenhouMajongReplay extends StepMajongGame implements ITenhouPaifuAnalyzer {
+public class TenhouMajongReplay extends StepMajongGame implements ITenhouPaifuParseHandler {
 
     /**
      * 牌谱解析器

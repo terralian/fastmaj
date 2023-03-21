@@ -1,17 +1,15 @@
 package com.github.terralian.fastmaj.paifu.tenhou;
 
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.InputStream;
 
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.InputSource;
-
 import com.github.terralian.fastmaj.paifu.IPaifuParser;
 import com.github.terralian.fastmaj.util.Assert;
 import com.github.terralian.fastmaj.util.ZipUtil;
+import org.xml.sax.InputSource;
 
 /**
  * 默认的天凤牌谱解析器，天凤牌谱下载下来时是通过GZIP进行压缩的压缩包（无后缀），该类
@@ -24,15 +22,15 @@ public class TenhouPaifuParser implements IPaifuParser {
     /**
      * 牌谱分析器，用于实际处理牌谱解析的信息，转换为所需的实体
      */
-    private ITenhouPaifuAnalyzer analyzer;
+    private final TenhouPaifuDecodeHandler decodeHandler;
 
     /**
-     * 根据牌谱分析器构建一个{@link TenhouPaifuParser}，{@link ITenhouPaifuAnalyzer}为所需解析实体的分析器
-     * 
-     * @param analyzer
+     * 根据牌谱分析器构建一个{@link TenhouPaifuParser}，{@link ITenhouPaifuParseHandler}为牌谱的解析处理器实际业务核心
+     *
+     * @param parseHandler
      */
-    public TenhouPaifuParser(ITenhouPaifuAnalyzer analyzer) {
-        this.analyzer = analyzer;
+    public TenhouPaifuParser(ITenhouPaifuParseHandler parseHandler) {
+        this.decodeHandler = new TenhouPaifuDecodeHandler(parseHandler);
     }
 
     /**
@@ -66,8 +64,7 @@ public class TenhouPaifuParser implements IPaifuParser {
     public void parseContent(String content) throws Exception {
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         SAXParser saxParser = saxParserFactory.newSAXParser();
-        TenhouPaifuDecodeHandler xmlHandler = new TenhouPaifuDecodeHandler(analyzer);
         InputSource inputSource = new InputSource(new ByteArrayInputStream(content.getBytes()));
-        saxParser.parse(inputSource, xmlHandler);
+        saxParser.parse(inputSource, decodeHandler);
     }
 }

@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @author terra.lian
  */
-public interface ITenhouPaifuParseHandler {
+public interface ITenhouPaifuParseHandler<T> {
 
     /**
      * 洗牌的的头信息，在牌谱开头记录着牌山的种子，通过种子即可还原牌山
@@ -228,5 +228,12 @@ public interface ITenhouPaifuParseHandler {
      * @param position 重连的玩家
      */
     default void reconnect(int position) {
+    }
+
+    /**
+     * 当解析结束后，用于获取解析的信息
+     */
+    default T getParseData() {
+        throw new UnsupportedOperationException("未支持获取被解析的内容");
     }
 }

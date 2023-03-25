@@ -29,7 +29,7 @@ import com.github.terralian.fastmaj.yama.VirtualYamaWorker;
  * 
  * @author terra.lian
  */
-public class TenhouMajongReplay extends StepMajongGame implements ITenhouPaifuParseHandler {
+public class TenhouMajongReplay extends StepMajongGame implements ITenhouPaifuParseHandler<Object> {
 
     /**
      * 牌谱解析器

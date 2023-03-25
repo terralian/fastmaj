@@ -66,10 +66,7 @@ public enum KazeEnum {
      * @param order 排序 [0, 3]
      */
     public static KazeEnum getByOrder(int order) {
-        for (KazeEnum kaze : KazeEnum.values())
-            if (kaze.getOrder() == order)
-                return kaze;
-        return null;
+        return KazeEnum.values()[order];
     }
 
     /**

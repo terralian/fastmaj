@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.InputStream;
 
 import com.github.terralian.fastmaj.paifu.IPaifuParser;
+import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
 import com.github.terralian.fastmaj.util.Assert;
 import com.github.terralian.fastmaj.util.ZipUtil;
 import org.xml.sax.InputSource;
@@ -38,11 +39,11 @@ public class TenhouPaifuParser implements IPaifuParser {
      * 这里能够处理的为压缩包里内的单个压缩文件
      */
     @Override
-    public void parseFile(File file) throws Exception {
+    public PaifuGame parseFile(File file) throws Exception {
         Assert.isTrue(file != null, "牌谱文件不存在，请检查路径");
         Assert.isTrue(!file.isDirectory(), "参数是一个文件夹，请检查路径");
         String data = ZipUtil.unGzip(file);
-        parseContent(data);
+        return parseContent(data);
     }
 
     /**
@@ -50,21 +51,22 @@ public class TenhouPaifuParser implements IPaifuParser {
      * 这里能够处理的为压缩包里内的单个压缩文件流
      */
     @Override
-    public void parseStream(InputStream in) throws Exception {
+    public PaifuGame parseStream(InputStream in) throws Exception {
         String data = ZipUtil.unGzip(in);
-        parseContent(data);
+        return parseContent(data);
     }
 
     /**
      * 根据牌谱内容解析牌谱，该内容是通过解压缩后的牌谱内容，是一个可读取的XML文件
-     * 
+     *
      * @param content XML内容
      */
     @Override
-    public void parseContent(String content) throws Exception {
+    public PaifuGame parseContent(String content) throws Exception {
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         SAXParser saxParser = saxParserFactory.newSAXParser();
         InputSource inputSource = new InputSource(new ByteArrayInputStream(content.getBytes()));
         saxParser.parse(inputSource, decodeHandler);
+        return null;
     }
 }

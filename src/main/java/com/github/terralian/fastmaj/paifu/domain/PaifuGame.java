@@ -5,13 +5,21 @@ import java.util.List;
 
 import com.github.terralian.fastmaj.game.KazeEnum;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
+ * 一个牌谱解析的结果，对人友好易懂易用。
+ * <p/>
+ * 通过该实体，可以获取到一个牌谱中每一个时刻的信息，这些详细的信息可以用于支撑后续的牌谱分析
+ * <p/>
+ * 比如南四局，目标玩家在分数相近时，在没有人立直时，该玩家选择立直的牌谱。那么，遍历解析该玩家的所有解析牌谱后，
+ * 获取到{@link PaifuGame}的集合，再通过内部信息进行过滤。一个示例代码：
  *
  * @author terra.lian
  * @since 2023-03-21
  */
 @Data
+@Accessors(chain = true)
 public class PaifuGame {
 
     // --------------------------------------------------
@@ -22,6 +30,11 @@ public class PaifuGame {
      * 原始的牌谱信息
      */
     private String origin;
+
+    /**
+     * 牌谱的种子，一般平台的麻将游戏都会使用种子技术生成牌山
+     */
+    private String seed;
 
     /**
      * 牌谱的文件名（包含后缀）
@@ -84,6 +97,11 @@ public class PaifuGame {
      * 该麻将游戏中的所有对局
      */
     private List<PaifuKyoku> kyokus;
+
+    /**
+     * 玩家的最终分数
+     */
+    private int[] endPoints;
 
     // --------------------------------------------------
     // 常用方法部分

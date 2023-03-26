@@ -40,8 +40,11 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
     }
 
     @Override
-    public void startGame(boolean isSanma, int taku, boolean isTonnan, boolean isSoku, boolean isUseAka, boolean isAriAri, String[] playerNames, int[] playerRates, String[] playerDans) {
-        paifuGame.setRoom(TenhouPaifuStringPool.TAKU[taku]).setPlatform(TenhouPaifuStringPool.PLATFORM).setPlayerSize(isSanma ? 3 : 4).setEndBakaze(isTonnan ? KazeEnum.NAN : KazeEnum.DON).setUseRed(isUseAka).setPlayerNames(playerNames).setKyokus(new ArrayList<>());
+    public void startGame(boolean isSanma, int taku, boolean isTonnan, boolean isSoku, boolean isUseAka, boolean isAriAri,
+            String[] playerNames, int[] playerRates, String[] playerDans) {
+        paifuGame.setRoom(TenhouPaifuStringPool.TAKU[taku]).setPlatform(TenhouPaifuStringPool.PLATFORM).setPlayerSize(isSanma ? 3 : 4)
+                .setEndBakaze(isTonnan ? KazeEnum.NAN : KazeEnum.DON).setUseRed(isUseAka).setPlayerNames(playerNames)
+                .setKyokus(new ArrayList<>());
     }
 
     @Override
@@ -50,9 +53,11 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
     }
 
     @Override
-    public void startKyoku(int[] playerPoints, List<List<Integer>> playerHaipais, int oya, int bakaze, int kyoku, int honba, int kyotaku, int firstDoraDisplay, int[] yama) {
+    public void startKyoku(int[] playerPoints, List<List<Integer>> playerHaipais, int oya, int bakaze, int kyoku, int honba, int kyotaku,
+            int firstDoraDisplay, int[] yama) {
         currentKyoku = new PaifuKyoku();
-        currentKyoku.setStartPoints(playerPoints).setOya(oya).setBakaze(KazeEnum.getByOrder(bakaze)).setHonba(honba).setKyotaku(kyotaku).setYamas(yama);
+        currentKyoku.setStartPoints(playerPoints).setOya(oya).setBakaze(KazeEnum.getByOrder(bakaze)).setHonba(honba).setKyotaku(kyotaku)
+                .setYamas(yama);
     }
 
     @Override
@@ -61,6 +66,7 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
         currentKyoku = null;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public PaifuGame getParseData() {
         return paifuGame;

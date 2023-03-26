@@ -1,4 +1,6 @@
-package com.github.terralian.fastmaj.test.tehai.Syaten;
+package com.github.terralian.fastmaj.test.tehai.syaten;
+
+import static org.junit.Assert.assertEquals;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,16 +9,15 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.junit.Before;
+import org.junit.Test;
+
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.SyatenCalculator;
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 /**
  * 向听数计算类测试{@link com.github.terralian.fastmaj.tehai.SyatenCalculator}
@@ -24,8 +25,7 @@ import static org.junit.Assert.assertEquals;
  * 该包下的向听数问题集数据来源于ara
  *
  * @author terra.lian
- * @see <a href="https://mahjong.ara.black/etc/shanten/shanten9.htm">问题集来源
- * :ara</a>
+ * @see <a href="https://mahjong.ara.black/etc/shanten/shanten9.htm">问题集来源 :ara</a>
  */
 public class SyatenCalculatorTest {
 

@@ -17,6 +17,7 @@ import com.github.terralian.fastmaj.game.ryuuky.RyuukyokuResolverManager;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.paifu.IPaifuParser;
+import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
 import com.github.terralian.fastmaj.paifu.tenhou.ITenhouPaifuParseHandler;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuParser;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuStringPool;
@@ -29,12 +30,12 @@ import com.github.terralian.fastmaj.yama.VirtualYamaWorker;
  * 
  * @author terra.lian
  */
-public class TenhouMajongReplay extends StepMajongGame implements ITenhouPaifuParseHandler<Object> {
+public class TenhouMajongReplay extends StepMajongGame implements ITenhouPaifuParseHandler {
 
     /**
      * 牌谱解析器
      */
-    protected IPaifuParser paifuParser;
+    protected IPaifuParser<PaifuGame> paifuParser;
     /**
      * 模拟牌山生成器
      */
@@ -81,7 +82,7 @@ public class TenhouMajongReplay extends StepMajongGame implements ITenhouPaifuPa
     /**
      * 获取牌谱解析器
      */
-    public IPaifuParser getPaifuParser() {
+    public IPaifuParser<PaifuGame> getPaifuParser() {
         return paifuParser;
     }
 
@@ -294,5 +295,11 @@ public class TenhouMajongReplay extends StepMajongGame implements ITenhouPaifuPa
      */
     public void setGameLogger(IGameLogger gameLogger) {
         this.gameLogger = gameLogger;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public PaifuGame getParseData() {
+        return new PaifuGame();
     }
 }

@@ -6,13 +6,14 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.NonJihaiYaku;
 
 /**
  * 断幺九
- * 
+ *
  * @author 作者: terra.lian
- * 
  */
+@NonJihaiYaku
 public class Tanyaotyu implements IYaku {
 
     @Override

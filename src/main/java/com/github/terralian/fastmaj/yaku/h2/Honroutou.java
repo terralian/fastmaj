@@ -6,6 +6,7 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.JihaiYaku;
 
 /**
  * 混老头
@@ -13,9 +14,10 @@ import com.github.terralian.fastmaj.yaku.YakuNamePool;
  * 需要所有牌都是幺九牌，可以看做国士下位，但是和国士不复合。可以和七对子复合。
  * <p/>
  * 混老头和混全带的区别是，混全带需要含幺九顺子（123,789），所以两者不复合
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
+@JihaiYaku(minJihaiSize = 2)
 public class Honroutou implements IYaku {
 
     @Override

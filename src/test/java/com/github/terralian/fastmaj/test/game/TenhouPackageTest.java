@@ -41,7 +41,7 @@ public class TenhouPackageTest {
     private void testBaseOnTenhouPackage0(String fileName) {
         File file = null;
         try {
-            file = new File(this.getClass().getClassLoader().getResource("tehou/" + fileName).getPath());
+            file = new File(this.getClass().getClassLoader().getResource("tenhou/" + fileName).getPath());
         } catch (Exception e) {
             System.out.println("未设置测试资源牌谱包，跳过测试：" + fileName);
             return;

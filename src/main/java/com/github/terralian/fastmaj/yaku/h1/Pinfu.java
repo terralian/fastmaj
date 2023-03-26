@@ -1,5 +1,6 @@
 package com.github.terralian.fastmaj.yaku.h1;
 
+import java.lang.annotation.Target;
 import java.util.List;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;

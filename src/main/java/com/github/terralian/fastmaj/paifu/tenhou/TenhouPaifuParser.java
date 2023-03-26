@@ -15,15 +15,17 @@ import org.xml.sax.InputSource;
 /**
  * 默认的天凤牌谱解析器，天凤牌谱下载下来时是通过GZIP进行压缩的压缩包（无后缀），该类
  * 的部分方法针对压缩进行了特别处理，使用时需要注意。
- * 
+ *
  * @author terra.lian
  */
-public class TenhouPaifuParser implements IPaifuParser {
+public class TenhouPaifuParser implements IPaifuParser<PaifuGame> {
 
     /**
      * 牌谱分析器，用于实际处理牌谱解析的信息，转换为所需的实体
      */
     private final TenhouPaifuDecodeHandler decodeHandler;
+
+    private final ITenhouPaifuParseHandler parseHandler;
 
     /**
      * 根据牌谱分析器构建一个{@link TenhouPaifuParser}，{@link ITenhouPaifuParseHandler}为牌谱的解析处理器实际业务核心
@@ -31,6 +33,7 @@ public class TenhouPaifuParser implements IPaifuParser {
      * @param parseHandler
      */
     public TenhouPaifuParser(ITenhouPaifuParseHandler parseHandler) {
+        this.parseHandler = parseHandler;
         this.decodeHandler = new TenhouPaifuDecodeHandler(parseHandler);
     }
 
@@ -67,6 +70,8 @@ public class TenhouPaifuParser implements IPaifuParser {
         SAXParser saxParser = saxParserFactory.newSAXParser();
         InputSource inputSource = new InputSource(new ByteArrayInputStream(content.getBytes()));
         saxParser.parse(inputSource, decodeHandler);
-        return null;
+        PaifuGame paifuGame = parseHandler.getParseData();
+        paifuGame.setOrigin(content);
+        return paifuGame;
     }
 }

@@ -4,12 +4,14 @@ import java.util.List;
 
 import com.github.terralian.fastmaj.game.KazeEnum;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * @author terra.lian
  * @since 2023-03-21
  */
 @Data
+@Accessors(chain = true)
 public class PaifuKyoku {
 
     /**

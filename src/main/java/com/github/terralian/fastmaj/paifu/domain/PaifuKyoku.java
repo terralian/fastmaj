@@ -28,9 +28,14 @@ public class PaifuKyoku {
     private int oya;
 
     /**
-     * 每个玩家的分数
+     * 每个玩家对局开始时的分数
      */
-    private int[] points;
+    private int[] startPoints;
+
+    /**
+     * 每个玩家的结束时的分数
+     */
+    private int[] endPoints;
 
     /**
      * 场供
@@ -50,4 +55,14 @@ public class PaifuKyoku {
      * 该对局的所有动作
      */
     private List<PaifuAction> actions;
+
+    /**
+     * 是否是（东/南）某局. 如东4局，那么isEqual(KazeEnum.Don, 4)
+     *
+     * @param bakaze 场风
+     * @param kyokuNumber 第几局
+     */
+    public boolean isKyoku(KazeEnum bakaze, int kyokuNumber) {
+        return this.bakaze == bakaze && (kyokuNumber - 1) == oya;
+    }
 }

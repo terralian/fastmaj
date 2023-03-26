@@ -2,11 +2,16 @@ package com.github.terralian.fastmaj.paifu.tenhou;
 
 /**
  * 天凤牌谱相关的常量池
- * 
+ *
  * @author terra.lian
  */
 public final class TenhouPaifuStringPool {
-    
+
+    /**
+     * 平台名
+     */
+    public static final String PLATFORM = "天凤";
+
     /**
      * 天凤的役种（顺序特定为牌谱的定义值）
      */

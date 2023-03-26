@@ -2,10 +2,14 @@ package com.github.terralian.fastmaj.paifu.tenhou;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.game.KazeEnum;
+import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
 import com.github.terralian.fastmaj.paifu.domain.PaifuKyoku;
+import com.github.terralian.fastmaj.tehai.ITehai;
 
 /**
  * 天凤牌谱解析器实例，用于将牌谱解析为{@link PaifuGame}
@@ -41,9 +45,13 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
 
     @Override
     public void startGame(boolean isSanma, int taku, boolean isTonnan, boolean isSoku, boolean isUseAka, boolean isAriAri,
-            String[] playerNames, int[] playerRates, String[] playerDans) {
-        paifuGame.setRoom(TenhouPaifuStringPool.TAKU[taku]).setPlatform(TenhouPaifuStringPool.PLATFORM).setPlayerSize(isSanma ? 3 : 4)
-                .setEndBakaze(isTonnan ? KazeEnum.NAN : KazeEnum.DON).setUseRed(isUseAka).setPlayerNames(playerNames)
+                          String[] playerNames, int[] playerRates, String[] playerDans) {
+        paifuGame.setRoom(TenhouPaifuStringPool.TAKU[taku]) //
+                .setPlatform(TenhouPaifuStringPool.PLATFORM) //
+                .setPlayerSize(isSanma ? 3 : 4) //
+                .setEndBakaze(isTonnan ? KazeEnum.NAN : KazeEnum.DON) //
+                .setUseRed(isUseAka) //
+                .setPlayerNames(playerNames) //
                 .setKyokus(new ArrayList<>());
     }
 
@@ -54,10 +62,20 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
 
     @Override
     public void startKyoku(int[] playerPoints, List<List<Integer>> playerHaipais, int oya, int bakaze, int kyoku, int honba, int kyotaku,
-            int firstDoraDisplay, int[] yama) {
+                           int firstDoraDisplay, int[] yama) {
+        List<ITehai> startTehais = playerHaipais.stream() //
+                .map(Encode34::toTehai) //
+                .collect(Collectors.toList());
+
         currentKyoku = new PaifuKyoku();
-        currentKyoku.setStartPoints(playerPoints).setOya(oya).setBakaze(KazeEnum.getByOrder(bakaze)).setHonba(honba).setKyotaku(kyotaku)
-                .setYamas(yama);
+        currentKyoku.setStartPoints(playerPoints)//
+                .setOya(oya)//
+                .setBakaze(KazeEnum.getByOrder(bakaze))//
+                .setHonba(honba)//
+                .setKyotaku(kyotaku) //
+                .setYamas(yama) //
+                .setStartTehais(startTehais) //
+                .setFirstDoraDisplay(HaiPool.getById(firstDoraDisplay));
     }
 
     @Override

@@ -3,6 +3,8 @@ package com.github.terralian.fastmaj.paifu.domain;
 import java.util.List;
 
 import com.github.terralian.fastmaj.game.KazeEnum;
+import com.github.terralian.fastmaj.hai.IHai;
+import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.game.event.ActionEvent;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -53,6 +55,16 @@ public class PaifuKyoku {
      * 东一局0本场 = [ 场风: 东，本场数: 0 ]
      */
     private int honba;
+
+    /**
+     * 初始手牌
+     */
+    private List<ITehai> startTehais;
+
+    /**
+     * 第一枚宝牌指示牌
+     */
+    private IHai firstDoraDisplay;
 
     /**
      * 该对局的所有动作

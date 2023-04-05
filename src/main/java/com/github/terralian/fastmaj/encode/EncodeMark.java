@@ -19,8 +19,8 @@ import com.github.terralian.fastmaj.tehai.Tehai;
  * 关于记号法，这种编码方法通过1位数字为值，1位字母为牌类型的方法来表示一张牌的信息 ，如8s => 八索。
  * 该编码的优点在于对人友好易懂，相较于{@link Encode34}编码法而言，不会丢失红宝牌信息，可以用做持久化存储的备选方案。
  * 缺点是相较于{@link Encode34}编码，其不能直接进行计算，而且转换效率相对较慢一些。
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public abstract class EncodeMark {
 
@@ -59,10 +59,10 @@ public abstract class EncodeMark {
      */
     public static final int ZHONG = 7, TYUN = 7;
 
-    
+
     /**
      * 是否红宝牌
-     * 
+     *
      * @param markValue 记号值
      */
     public static boolean isRedHai(int markValue) {
@@ -71,17 +71,17 @@ public abstract class EncodeMark {
 
     /**
      * 获取记号编码的最大值
-     * 
+     *
      * @param type 记号类型
      */
     public static int maxValue(HaiTypeEnum type) {
         return type == HaiTypeEnum.Z ? 7 : 9;
     }
 
-    
+
     /**
      * 将字面量和类型转为记号法表示
-     * 
+     *
      * @param literal 字面量
      * @param type 类型
      */
@@ -93,7 +93,7 @@ public abstract class EncodeMark {
      * 将一张牌进行编码为记号法输出
      * <p/>
      * 如红5索=0s，5索=5s
-     * 
+     *
      * @param hai 牌
      */
     public static String encode(IHai hai) {
@@ -109,7 +109,7 @@ public abstract class EncodeMark {
      * <li>存在最后一枚进牌，则区别对待这枚，其输出会如123z1z，其中1z为最后一枚进牌
      * <li><b>会丢失副露信息</b>
      * </ul>
-     * 
+     *
      * @param tehai 手牌
      */
     public static String encode(ITehai tehai) {
@@ -144,7 +144,7 @@ public abstract class EncodeMark {
 
     /**
      * 转为34类型编码
-     * 
+     *
      * @param value 记号值
      * @param type 记号类型
      */
@@ -155,19 +155,23 @@ public abstract class EncodeMark {
 
         switch (type) {
             // 0 - 8
-            case M: return value - 1;
+            case M:
+                return value - 1;
             // 9 - 17
-            case P: return value + 8;
+            case P:
+                return value + 8;
             // 18 - 26
-            case S: return  value + 17;
+            case S:
+                return value + 17;
             // 27 - 34
-            default: return value + 26;
+            default:
+                return value + 26;
         }
     }
 
     /**
      * 使用一个长度为{@link Encode34#length()}的数组，将字符串转为34编码
-     * 
+     *
      * @param marks 字符串，如123m78p45s123z
      * @return 34编码值数组，[0,0,1,2,0...]
      */
@@ -196,11 +200,10 @@ public abstract class EncodeMark {
 
     /**
      * 将形如123m78p45s123z形式的字符串转换为手牌
-     * 
+     *
      * @param nameMark 字符串
-     * @return 34编码的手牌
      */
-    public static ITehai toTehai(String nameMark) {
+    public static List<IHai> toHai(String nameMark) {
         char[] array = nameMark.toCharArray();
         HaiTypeEnum currentType = HaiTypeEnum.Z;
 
@@ -219,12 +222,22 @@ public abstract class EncodeMark {
         // 由于是从后往前扫描的字符串，获得牌的顺序是反过来的
         Collections.reverse(hais);
 
-        return new Tehai(hais);
+        return hais;
+    }
+
+    /**
+     * 将形如123m78p45s123z形式的字符串转换为手牌
+     *
+     * @param nameMark 字符串
+     * @return 手牌
+     */
+    public static ITehai toTehai(String nameMark) {
+        return new Tehai(toHai(nameMark));
     }
 
     /**
      * 将字符的记号类型转换为枚举
-     * 
+     *
      * @param typeChar 记号类型字符
      */
     public static HaiTypeEnum toTypeEnum(char typeChar) {
@@ -241,7 +254,7 @@ public abstract class EncodeMark {
 
     /**
      * 去除红宝牌信息，将字面量转为不含红宝牌的实际值
-     * 
+     *
      * @param literal [1, 9] | [1, 7]
      */
     public static int clearRed(int literal) {

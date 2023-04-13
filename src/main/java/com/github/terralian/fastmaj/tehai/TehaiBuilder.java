@@ -1,6 +1,7 @@
 package com.github.terralian.fastmaj.tehai;
 
 import java.util.List;
+import java.util.Objects;
 
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.hai.IHai;
@@ -71,6 +72,7 @@ public class TehaiBuilder {
      * @param tehai 手牌
      */
     public TehaiBuilder(ITehai tehai) {
+        Objects.requireNonNull(tehai);
         this.tehai = tehai;
     }
 

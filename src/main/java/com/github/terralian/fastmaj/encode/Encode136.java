@@ -1,7 +1,12 @@
 package com.github.terralian.fastmaj.encode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.hai.IHai;
+import com.github.terralian.fastmaj.tehai.ITehai;
+import com.github.terralian.fastmaj.tehai.Tehai;
 
 /**
  * 136编码法的相关方法
@@ -26,6 +31,22 @@ public abstract class Encode136 {
             result[i] = HaiPool.getById(hais[i], useRed);
         }
         return result;
+    }
+
+    /**
+     * 将136编码集合转为手牌
+     * <p/>
+     * 该方法的参数并不是长度为34的数组，而是14枚手牌，按34编码存储为每个元素的数组
+     *
+     * @param encode136 136编码的手牌数组
+     * @param useRed 是否使用红宝牌
+     */
+    public static ITehai toTehai(List<Integer> encode136, boolean useRed) {
+        List<IHai> hais = new ArrayList<>();
+        for (Integer haiValue : encode136) {
+            hais.add(HaiPool.getById(haiValue, useRed));
+        }
+        return new Tehai(hais);
     }
 
     /**

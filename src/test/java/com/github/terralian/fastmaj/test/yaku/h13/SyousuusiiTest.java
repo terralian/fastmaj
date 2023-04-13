@@ -1,23 +1,21 @@
 package com.github.terralian.fastmaj.test.yaku.h13;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
-import com.github.terralian.fastmaj.hai.HaiPool;
-import com.github.terralian.fastmaj.player.RivalEnum;
 import com.github.terralian.fastmaj.tehai.ITehai;
+import com.github.terralian.fastmaj.tehai.TehaiBuilder;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h13.Syousuusii;
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * {@link Syousuusii}小四喜
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class SyousuusiiTest {
 
@@ -44,10 +42,11 @@ public class SyousuusiiTest {
         assertFalse(result);
 
         // 鸣牌小四喜
-        tehai = EncodeMark.toTehai("111m11223344z");
-        tehai.pon(HaiPool.z(1), false, RivalEnum.BOTTOM);
-        tehai.pon(HaiPool.z(2), false, RivalEnum.BOTTOM);
-        tehai.pon(HaiPool.z(3), false, RivalEnum.BOTTOM);
+        tehai = TehaiBuilder.from("111m11223344z") //
+                .pon("1z") //
+                .pon("2z") //
+                .pon("3z") //
+                .get();
         result = yaku.match(tehai, divide, gameContext);
         assertTrue(result);
 

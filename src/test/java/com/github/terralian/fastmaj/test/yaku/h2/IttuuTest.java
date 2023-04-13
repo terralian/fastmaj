@@ -1,27 +1,26 @@
 package com.github.terralian.fastmaj.test.yaku.h2;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.agari.ITehaiAgariDivider;
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
-import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.tehai.ITehai;
+import com.github.terralian.fastmaj.tehai.TehaiBuilder;
 import com.github.terralian.fastmaj.third.mjscore.MjscoreAdapter;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h2.Ittuu;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * {@link Ittuu} 一气
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class IttuuTest {
 
@@ -53,8 +52,9 @@ public class IttuuTest {
         assertTrue(result);
 
         // 一气，且鸣牌了
-        tehai = EncodeMark.toTehai("12356789m123p11z");
-        tehai.chii(HaiPool.m(4), HaiPool.m(5), HaiPool.m(6));
+        tehai = TehaiBuilder.from("12356789m123p11z") //
+                .chi("4m", "56m") //
+                .get();
         divideInfos = tehaiAgariDivider.divide(tehai);
         result = yaku.match(tehai, divideInfos.get(0), gameContext);
         assertTrue(result);

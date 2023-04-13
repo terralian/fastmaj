@@ -199,6 +199,17 @@ public abstract class EncodeMark {
     }
 
     /**
+     * 将单个记号(如1s)转换为{@link IHai}
+     *
+     * @param nameMark 记号法的牌，如1s
+     */
+    public static IHai toHaiOne(String nameMark) {
+        if (nameMark.length() != 2)
+            throw new IllegalArgumentException("参数并不是单枚牌：" + nameMark);
+        return HaiPool.getByMark(nameMark.charAt(0) - '0', toTypeEnum(nameMark.charAt(1)));
+    }
+
+    /**
      * 将形如123m78p45s123z形式的字符串转换为手牌
      *
      * @param nameMark 字符串

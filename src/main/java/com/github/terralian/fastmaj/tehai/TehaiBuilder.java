@@ -11,11 +11,19 @@ import com.github.terralian.fastmaj.util.Assert;
  * 手牌建造者，用于便捷构建和操作{@link Tehai}
  * <p/>
  * {@link ITehai}设计上仅使用IHai作为传输对象，这么做令接口保持简洁，但也使对人类友好上较差。
- * 这也是该类出现的目的，为了提供更好的构建和操作{@link Tehai}的方法。
+ * 该类提供了更好的构建和操作{@link Tehai}的方法，用于快速构建和使用手牌。
  * <p/>
+ * 一副手牌的构建示例如下：
+ * <pre>
+ *    ITehai tehai = TehaiBuilder.from("11133355m") //
+ *                 .addChi("1s", "23s") //
+ *                 .addPon("2p") //
+ *                 .get();
+ * </pre>
  *
  * @see ITehai
  * @see Tehai
+ * @since 0.8
  */
 public class TehaiBuilder {
 

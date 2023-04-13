@@ -39,6 +39,26 @@ public class TehaiBuilder {
     }
 
     /**
+     * 根据多个记号法串初始化建造者（工厂方法）
+     *
+     * @param nameMarks 多组记号法串
+     */
+    public static TehaiBuilder from(String... nameMarks) {
+        TehaiBuilder builder = new TehaiBuilder();
+        builder.addAll(nameMarks);
+        return builder;
+    }
+
+    /**
+     * 根据一个已有的手牌初始化建造者（工厂方法）
+     *
+     * @param tehai 手牌
+     */
+    public static TehaiBuilder from(ITehai tehai) {
+        return new TehaiBuilder(tehai);
+    }
+
+    /**
      * 初始化构建一个建造者
      */
     public TehaiBuilder() {
@@ -76,6 +96,17 @@ public class TehaiBuilder {
     // -----------------------------------------------
 
     /**
+     * 增加单枚牌
+     *
+     * @param oneMark 单枚记号法，如1s
+     */
+    public TehaiBuilder addOne(String oneMark) {
+        IHai hai = EncodeMark.toHaiOne(oneMark);
+        tehai.draw(hai);
+        return this;
+    }
+
+    /**
      * 为手牌增加不限数量的N个牌
      *
      * @param nameMark 不限数量的记号法
@@ -84,6 +115,18 @@ public class TehaiBuilder {
         List<IHai> hais = EncodeMark.toHai(nameMark);
         for (IHai hai : hais) {
             tehai.draw(hai);
+        }
+        return this;
+    }
+
+    /**
+     * 为手牌增加不限数量的N个牌，且使用多组
+     *
+     * @param nameMarks 不限数量的记号法数组
+     */
+    public TehaiBuilder addAll(String... nameMarks) {
+        for (String nameMark : nameMarks) {
+            addAll(nameMark);
         }
         return this;
     }
@@ -118,8 +161,8 @@ public class TehaiBuilder {
     /**
      * 为手牌直接增加一副吃的附露，如addChi("1s", "23s")
      *
-     * @param chiHaiMark 吃的牌
-     * @param selfHaiMark 自己的牌
+     * @param chiHaiMark 吃的牌 如1s
+     * @param selfHaiMark 自己的牌 如23s
      */
     public TehaiBuilder addChi(String chiHaiMark, String selfHaiMark) {
         List<IHai> selfHais = EncodeMark.toHai(selfHaiMark);
@@ -129,6 +172,20 @@ public class TehaiBuilder {
         for (IHai hai : selfHais) {
             tehai.draw(hai);
         }
+        tehai.chii(chiHai, selfHais.get(0), selfHais.get(1));
+        return this;
+    }
+
+    /**
+     * 吃操作，增加吃的牌，并将吃的牌和自己的搭子附露
+     *
+     * @param chiHaiMark 吃的牌 如1s
+     * @param selfHaiMark 自己的牌 如23s
+     */
+    public TehaiBuilder chi(String chiHaiMark, String selfHaiMark) {
+        List<IHai> selfHais = EncodeMark.toHai(selfHaiMark);
+        Assert.isTrue(selfHais.size() == 2, "搭子需要仅为2枚牌组成：" + selfHaiMark);
+        IHai chiHai = EncodeMark.toHaiOne(chiHaiMark);
         tehai.chii(chiHai, selfHais.get(0), selfHais.get(1));
         return this;
     }
@@ -156,6 +213,27 @@ public class TehaiBuilder {
     }
 
     /**
+     * 碰操作，为手牌增加碰的牌，并与自己的搭子作为面子附露
+     *
+     * @param oneMark 单枚牌记号法，如1s
+     * @param ponFrom 从哪个对手碰的牌，影响形状
+     */
+    public TehaiBuilder pon(String oneMark, RivalEnum ponFrom) {
+        IHai hai = EncodeMark.toHaiOne(oneMark);
+        tehai.pon(hai, ponFrom);
+        return this;
+    }
+
+    /**
+     * 碰操作，为手牌增加碰的牌，并与自己的搭子作为面子附露，默认从对家碰牌
+     *
+     * @param oneMark 单枚牌记号法，如1s
+     */
+    public TehaiBuilder pon(String oneMark) {
+        return pon(oneMark, RivalEnum.OPPO);
+    }
+
+    /**
      * 为手牌增加一副明杠附露
      *
      * @param oneMark 单枚牌记号法，如1s
@@ -179,6 +257,27 @@ public class TehaiBuilder {
     }
 
     /**
+     * 杠操作，为手牌增加杠牌，并与搭子一起附露
+     *
+     * @param oneMark 单枚牌记号法，如1s
+     * @param kanFrom 从哪个对手杠的牌，影响形状
+     */
+    public TehaiBuilder minkan(String oneMark, RivalEnum kanFrom) {
+        IHai hai = EncodeMark.toHaiOne(oneMark);
+        tehai.minkan(hai, kanFrom);
+        return this;
+    }
+
+    /**
+     * 杠操作，为手牌增加杠牌，并与搭子一起附露，默认从对家杠牌
+     *
+     * @param oneMark 单枚牌记号法，如1s
+     */
+    public TehaiBuilder minkan(String oneMark) {
+        return minkan(oneMark, RivalEnum.OPPO);
+    }
+
+    /**
      * 为手牌增加一副暗杠的附露
      *
      * @param oneMark 单枚牌记号法，如1s
@@ -186,6 +285,17 @@ public class TehaiBuilder {
     public TehaiBuilder addAnnkan(String oneMark) {
         IHai hai = EncodeMark.toHaiOne(oneMark);
         addSame(hai, 4);
+        tehai.annkan(hai);
+        return this;
+    }
+
+    /**
+     * 暗杠操作
+     *
+     * @param oneMark 单枚牌记号法，如1s
+     */
+    public TehaiBuilder annkan(String oneMark) {
+        IHai hai = EncodeMark.toHaiOne(oneMark);
         tehai.annkan(hai);
         return this;
     }

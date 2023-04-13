@@ -1,28 +1,27 @@
 package com.github.terralian.fastmaj.test.yaku.h13;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.agari.ITehaiAgariDivider;
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
-import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.tehai.ITehai;
+import com.github.terralian.fastmaj.tehai.TehaiBuilder;
 import com.github.terralian.fastmaj.third.mjscore.MjscoreAdapter;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h13.Tyuuren9;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * {@link Tyuuren9}纯九莲
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class Tyuuren9Test {
 
@@ -62,9 +61,10 @@ public class Tyuuren9Test {
         assertTrue(result);
 
         // 纯九莲，但是鸣牌
-        tehai = EncodeMark.toTehai("111245678999m");
-        tehai.chii(HaiPool.m(3), HaiPool.m(2), HaiPool.m(4));
-        tehai.draw(HaiPool.m(8));
+        tehai = TehaiBuilder.from("111245678999m") //
+                .chi("3m", "24m") //
+                .addOne("8m") //
+                .get();
         divideInfos = tehaiAgariDivider.divide(tehai);
         assertEquals(1, divideInfos.size());
         result = yaku.match(tehai, divideInfos.get(0), gameContext);

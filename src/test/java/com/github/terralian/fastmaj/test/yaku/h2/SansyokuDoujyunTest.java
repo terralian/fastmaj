@@ -1,27 +1,26 @@
 package com.github.terralian.fastmaj.test.yaku.h2;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.agari.ITehaiAgariDivider;
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
-import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.tehai.ITehai;
+import com.github.terralian.fastmaj.tehai.TehaiBuilder;
 import com.github.terralian.fastmaj.third.mjscore.MjscoreAdapter;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h2.SansyokuDoujyun;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * {@link SansyokuDoujyun} 三色同顺
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class SansyokuDoujyunTest {
 
@@ -53,8 +52,9 @@ public class SansyokuDoujyunTest {
         assertTrue(result);
 
         // 三色，鸣牌
-        tehai = EncodeMark.toTehai("123m12p123456s11z");
-        tehai.chii(HaiPool.p(3), HaiPool.p(1), HaiPool.p(2));
+        tehai = TehaiBuilder.from("123m12p123456s11z") //
+                .chi("3p", "12p") //
+                .get();
         divideInfos = tehaiAgariDivider.divide(tehai);
         result = yaku.match(tehai, divideInfos.get(0), gameContext);
         assertTrue(result);

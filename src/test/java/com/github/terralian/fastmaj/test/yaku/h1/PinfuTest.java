@@ -1,13 +1,6 @@
 package com.github.terralian.fastmaj.test.yaku.h1;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.agari.ITehaiAgariDivider;
@@ -16,14 +9,21 @@ import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.tehai.ITehai;
+import com.github.terralian.fastmaj.tehai.TehaiBuilder;
 import com.github.terralian.fastmaj.third.mjscore.MjscoreAdapter;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h1.Pinfu;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * {@link Pinfu}平和测试
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class PinfuTest {
 
@@ -68,8 +68,9 @@ public class PinfuTest {
         assertFalse(result);
 
         // 鸣牌，无字牌，似平和
-        tehai = EncodeMark.toTehai("123456m789p8999s");
-        tehai.chii(HaiPool.s(7), HaiPool.s(8), HaiPool.s(9));
+        tehai = TehaiBuilder.from("123456m789p8999s") //
+                .chi("7s", "89s") //
+                .get();
         divideInfos = tehaiAgariDivider.divide(tehai);
         assertEquals(1, divideInfos.size());
         result = yaku.match(tehai, divideInfos.get(0), gameContext);

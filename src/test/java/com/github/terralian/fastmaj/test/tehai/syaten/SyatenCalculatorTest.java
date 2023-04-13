@@ -1,7 +1,5 @@
 package com.github.terralian.fastmaj.test.tehai.syaten;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -9,15 +7,16 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Before;
-import org.junit.Test;
-
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.encode.EncodeMark;
-import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.SyatenCalculator;
+import com.github.terralian.fastmaj.tehai.TehaiBuilder;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * 向听数计算类测试{@link com.github.terralian.fastmaj.tehai.SyatenCalculator}
@@ -87,22 +86,24 @@ public class SyatenCalculatorTest {
     @Test
     public void mitiSizeTest() {
         // 吃碰杠后仅1枚待牌
-        ITehai tehai = EncodeMark.toTehai("23232323m1p");
-        tehai.chii(HaiPool.m(1), HaiPool.m(2), HaiPool.m(3));
-        tehai.chii(HaiPool.m(1), HaiPool.m(2), HaiPool.m(3));
-        tehai.chii(HaiPool.m(1), HaiPool.m(2), HaiPool.m(3));
-        tehai.chii(HaiPool.m(1), HaiPool.m(2), HaiPool.m(3));
+        ITehai tehai = TehaiBuilder.from("23232323m1p") //
+                .chi("1m", "23m") //
+                .chi("1m", "23m") //
+                .chi("1m", "23m") //
+                .chi("1m", "23m") //
+                .get();
         int syaten = calculator.calcNormal(tehai.getHand());
         assertEquals(0, syaten);
         syaten = calculator.calcNormal(Encode34.toEncode34(tehai.getHand()));
         assertEquals(0, syaten);
 
         // 吃碰杠后仅2枚待牌
-        tehai = EncodeMark.toTehai("23232323m12p");
-        tehai.chii(HaiPool.m(1), HaiPool.m(2), HaiPool.m(3));
-        tehai.chii(HaiPool.m(1), HaiPool.m(2), HaiPool.m(3));
-        tehai.chii(HaiPool.m(1), HaiPool.m(2), HaiPool.m(3));
-        tehai.chii(HaiPool.m(1), HaiPool.m(2), HaiPool.m(3));
+        tehai = TehaiBuilder.from("23232323m12p") //
+                .chi("1m", "23m") //
+                .chi("1m", "23m") //
+                .chi("1m", "23m") //
+                .chi("1m", "23m") //
+                .get();
         syaten = calculator.calcNormal(tehai.getHand());
         assertEquals(0, syaten);
         syaten = calculator.calcNormal(Encode34.toEncode34(tehai.getHand()));

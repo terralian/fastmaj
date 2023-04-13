@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.github.terralian.fastmaj.encode.Encode34;
+import com.github.terralian.fastmaj.encode.Encode136;
 import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.event.DrawEvent;
 import com.github.terralian.fastmaj.game.event.river.ChiiEvent;
@@ -13,7 +13,6 @@ import com.github.terralian.fastmaj.game.event.tehai.AnnkanEvent;
 import com.github.terralian.fastmaj.game.event.tehai.KiriEvent;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.hai.IHai;
-import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
 import com.github.terralian.fastmaj.paifu.domain.PaifuKyoku;
 import com.github.terralian.fastmaj.tehai.ITehai;
@@ -71,7 +70,7 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
     public void startKyoku(int[] playerPoints, List<List<Integer>> playerHaipais, int oya, int bakaze, int kyoku, int honba, int kyotaku,
                            int firstDoraDisplay, int[] yama) {
         List<ITehai> startTehais = playerHaipais.stream() //
-                .map(Encode34::toTehai) //
+                .map(k -> Encode136.toTehai(k, paifuGame.isUseRed())) //
                 .collect(Collectors.toList());
 
         currentKyoku = new PaifuKyoku();

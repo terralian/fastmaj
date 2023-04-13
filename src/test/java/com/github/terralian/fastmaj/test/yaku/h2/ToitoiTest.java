@@ -1,28 +1,26 @@
 package com.github.terralian.fastmaj.test.yaku.h2;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.agari.ITehaiAgariDivider;
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
-import com.github.terralian.fastmaj.hai.HaiPool;
-import com.github.terralian.fastmaj.player.RivalEnum;
 import com.github.terralian.fastmaj.tehai.ITehai;
+import com.github.terralian.fastmaj.tehai.TehaiBuilder;
 import com.github.terralian.fastmaj.third.mjscore.MjscoreAdapter;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h2.Toitoi;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * {@link Toitoi} 对对和测试
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class ToitoiTest {
 
@@ -48,8 +46,9 @@ public class ToitoiTest {
         boolean result = false;
 
         // 鸣牌对对
-        tehai = EncodeMark.toTehai("11133355777m22p");
-        tehai.pon(HaiPool.m(5), RivalEnum.BOTTOM);
+        tehai = TehaiBuilder.from("11133355777m") //
+                .addPon("2p") //
+                .get();
         List<DivideInfo> divideInfos = tehaiAgariDivider.divide(tehai);
         result = yaku.match(tehai, divideInfos.get(0), gameContext);
         assertTrue(result);

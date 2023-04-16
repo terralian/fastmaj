@@ -7,9 +7,9 @@ import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.IYuukouhaiCalculator;
+import com.github.terralian.fastmaj.tehai.SyatenCalculator;
 import com.github.terralian.fastmaj.tehai.TehaiBuilder;
 import com.github.terralian.fastmaj.tehai.YuukouhaiCalculator;
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -21,15 +21,10 @@ import static org.junit.Assert.assertEquals;
  */
 public class YuukouhaiCalculatorTest {
 
-    private IYuukouhaiCalculator yuukouhaiCalculator;
-
-    @Before
-    public void before() {
-        yuukouhaiCalculator = new YuukouhaiCalculator(FastMajong.doGetSyatenCalculator());
-    }
-
     @Test
     public void test() {
+        IYuukouhaiCalculator yuukouhaiCalculator = new YuukouhaiCalculator(FastMajong.doGetSyatenCalculator());
+
         ITehai tehai = EncodeMark.toTehai("6m234678p136678s9s");
         yuukouhaiCalculator.calcMin(tehai);
 
@@ -45,6 +40,7 @@ public class YuukouhaiCalculatorTest {
         tehai = TehaiBuilder.from("234789m0p11155z") //
                 .pon("5z") //
                 .get();
+
         Set<IHai> yuukous = yuukouhaiCalculator.calcMin(tehai);
         assertEquals(1, yuukous.size());
 
@@ -55,5 +51,10 @@ public class YuukouhaiCalculatorTest {
                 .get();
         yuukous = yuukouhaiCalculator.calcMin(tehai);
         assertEquals(2, yuukous.size());
+    }
+
+    @Test(timeout = 20)
+    public void new_override_constructor_not_use_default() {
+        new YuukouhaiCalculator(new SyatenCalculator());
     }
 }

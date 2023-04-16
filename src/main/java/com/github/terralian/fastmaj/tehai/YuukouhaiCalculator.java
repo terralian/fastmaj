@@ -12,7 +12,7 @@ import com.github.terralian.fastmaj.hai.IHai;
 
 /**
  * 有效牌计算器的默认实现
- * 
+ *
  * @author terra.lian
  * @see <a href= "https://web.archive.org/web/20190402234201/http://cmj3.web.fc2.com/index.htm#yuukou">麻雀C言語プログラム集</a>
  */
@@ -21,10 +21,17 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
     /**
      * 向听数计算
      */
-    private ISyatenCalculator syatenCalculator;
+    private final ISyatenCalculator syatenCalculator;
 
     /**
-     * 构建有效牌实例
+     * 构建有效牌计算实例
+     */
+    public YuukouhaiCalculator() {
+        this.syatenCalculator = new FastSyatenCalculator();
+    }
+
+    /**
+     * 构建有效牌计算实例
      */
     public YuukouhaiCalculator(ISyatenCalculator syatenCalculator) {
         this.syatenCalculator = syatenCalculator;
@@ -32,7 +39,7 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
 
     /**
      * 计算最小向听数的有效待牌
-     * 
+     *
      * @param tehai 手牌
      */
     @Override
@@ -62,7 +69,7 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
 
     /**
      * 计算七对子的有效待牌
-     * 
+     *
      * @param tehai 手牌
      */
     @Override
@@ -86,7 +93,7 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
 
     /**
      * 计算国士的有效待牌
-     * 
+     *
      * @param tehai 手牌
      */
     @Override
@@ -112,7 +119,7 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
      * 计算通常的有效待牌
      * <p/>
      * 即除了国士，七对外的通常手型
-     * 
+     *
      * @param tehai 手牌
      */
     @Override

@@ -7,10 +7,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 场况役，该役种一般不根据手牌，而根据场况来判定是否达成
+ * 必须使用游戏上下文才能进行判定的役种
+ *
+ * @author terra.lian
+ * @since 2023-04-17
  */
 @Documented
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface StateYaku {
+public @interface RequestContextYaku {
 }

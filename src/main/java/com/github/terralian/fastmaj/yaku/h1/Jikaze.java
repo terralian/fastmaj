@@ -7,7 +7,7 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
 import com.github.terralian.fastmaj.yaku.meta.JihaiYaku;
-import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
+import com.github.terralian.fastmaj.yaku.meta.RequestContextYaku;
 
 /**
  * 自风，根据场况判断东南西北
@@ -15,7 +15,7 @@ import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
  * @author 作者: terra.lian
  */
 @JihaiYaku
-@KozuYaku
+@RequestContextYaku
 public class Jikaze implements IYaku {
 
     @Override

@@ -7,6 +7,7 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYakuman;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
 import com.github.terralian.fastmaj.yaku.meta.MenchanYaku;
 import com.github.terralian.fastmaj.yaku.meta.NonJihaiYaku;
 import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
@@ -18,7 +19,8 @@ import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
  */
 @MenchanYaku
 @NonJihaiYaku
-@ShunzuYaku(minShunzuSize = 4)
+@ShunzuYaku(minShunzuSize = 3)
+@KozuYaku(minKozuSize = 1)
 public class Tyuuren implements IYakuman {
 
     @Override

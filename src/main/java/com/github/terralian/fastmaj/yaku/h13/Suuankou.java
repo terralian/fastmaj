@@ -9,6 +9,7 @@ import com.github.terralian.fastmaj.yaku.IYakuman;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
 import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
 import com.github.terralian.fastmaj.yaku.meta.MenchanYaku;
+import com.github.terralian.fastmaj.yaku.meta.RequestContextYaku;
 import com.github.terralian.fastmaj.yaku.meta.RonYaku;
 
 /**
@@ -21,6 +22,7 @@ import com.github.terralian.fastmaj.yaku.meta.RonYaku;
 @MenchanYaku
 @RonYaku(false)
 @KozuYaku(minKozuSize = 4)
+@RequestContextYaku
 public class Suuankou implements IYakuman {
 
     @Override

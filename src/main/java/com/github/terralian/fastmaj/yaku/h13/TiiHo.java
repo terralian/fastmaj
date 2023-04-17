@@ -6,15 +6,15 @@ import com.github.terralian.fastmaj.river.IHaiRiver;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYakuman;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.RequestContextYaku;
 import com.github.terralian.fastmaj.yaku.meta.RonYaku;
-import com.github.terralian.fastmaj.yaku.meta.StateYaku;
 
 /**
  * 地和
  *
  * @author terra.lian
  */
-@StateYaku
+@RequestContextYaku
 @RonYaku(false)
 public class TiiHo implements IYakuman {
 

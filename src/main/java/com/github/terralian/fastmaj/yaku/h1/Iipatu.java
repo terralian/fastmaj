@@ -7,6 +7,7 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
 import com.github.terralian.fastmaj.yaku.meta.BountyYaku;
+import com.github.terralian.fastmaj.yaku.meta.RequestContextYaku;
 
 /**
  * 一发
@@ -20,6 +21,7 @@ import com.github.terralian.fastmaj.yaku.meta.BountyYaku;
  * @author 作者: terra.lian
  */
 @BountyYaku
+@RequestContextYaku
 public class Iipatu implements IYaku {
 
     @Override

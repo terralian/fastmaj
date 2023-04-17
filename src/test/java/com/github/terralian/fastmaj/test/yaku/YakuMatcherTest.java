@@ -1,12 +1,6 @@
 package com.github.terralian.fastmaj.test.yaku;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
-
-import org.junit.Before;
-import org.junit.Test;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.agari.ITehaiAgariDivider;
@@ -63,6 +57,11 @@ import com.github.terralian.fastmaj.yaku.h3.JyunTyanta;
 import com.github.terralian.fastmaj.yaku.h3.Ryanpeikou;
 import com.github.terralian.fastmaj.yaku.h6.Tinizu;
 import com.github.terralian.fastmaj.yama.DrawFrom;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * {@link YakuMatcher}测试
@@ -74,13 +73,13 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
  * <li>测试复合场景
  * <li>测试役满场景
  * </ul>
- * 
+ *
  * @author terra.lian
  */
 public class YakuMatcherTest {
 
-    private IYakuMatcher yakuMatcher;
-    private ITehaiAgariDivider tehaiAgariDivider;
+    protected IYakuMatcher yakuMatcher;
+    protected ITehaiAgariDivider tehaiAgariDivider;
 
     @Before
     public void before() {

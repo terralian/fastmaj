@@ -6,15 +6,15 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.ITehaiLock;
 import com.github.terralian.fastmaj.yaku.IYakuman;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.RequestContextYaku;
 import com.github.terralian.fastmaj.yaku.meta.RonYaku;
-import com.github.terralian.fastmaj.yaku.meta.StateYaku;
 
 /**
  * 天和
  *
  * @author 作者: terra.lian
  */
-@StateYaku
+@RequestContextYaku
 @RonYaku(false)
 public class Tenho implements IYakuman {
 

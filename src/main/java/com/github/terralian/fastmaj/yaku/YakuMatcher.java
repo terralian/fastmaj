@@ -9,7 +9,6 @@ import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.util.CollectionUtil;
-import com.github.terralian.fastmaj.util.EmptyUtil;
 import com.github.terralian.fastmaj.yaku.h1.Bakaze;
 import com.github.terralian.fastmaj.yaku.h1.Haitei;
 import com.github.terralian.fastmaj.yaku.h1.Haku;
@@ -111,39 +110,6 @@ public class YakuMatcher implements IYakuMatcher {
      */
     public YakuMatcher() {
         this.classifyCreateYaku();
-    }
-
-    @Override
-    public List<IYaku> match(ITehai tehai, List<DivideInfo> divideInfos, PlayerGameContext context) {
-        // 单个分割的情况直接进行匹配
-        if (EmptyUtil.isEmpty(divideInfos)) {
-            divideInfos.add(null);
-        } else if (divideInfos.size() == 1) {
-            return match(tehai, divideInfos.get(0), context);
-        }
-
-        // 多种分割结果需要取最好的一种
-        List<IYaku> lastYakus = new ArrayList<>();
-        int lastBans = 0;
-
-        for (DivideInfo divideInfo : divideInfos) {
-            List<IYaku> tmpYakus = match(tehai, divideInfo, context);
-
-            // 匹配到了役满，役满下基本没有多种分割结果
-            if (tmpYakus.size() > 0 && tmpYakus.get(0).isYakuman()) {
-                lastYakus = tmpYakus;
-                break;
-            }
-
-            // 按番数匹配最大
-            int tmpBans = tmpYakus.stream().mapToInt(k -> k.getHan(tehai.isNaki())).sum();
-            if (lastBans < tmpBans) {
-                lastYakus = tmpYakus;
-                lastBans = tmpBans;
-            }
-        }
-
-        return lastYakus;
     }
 
     /**

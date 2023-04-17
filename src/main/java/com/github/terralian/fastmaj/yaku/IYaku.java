@@ -57,7 +57,7 @@ public interface IYaku {
 
     /**
      * 根据役实例判断是否是该役
-     * 
+     *
      * @param yaku 役实例
      */
     default boolean equals(IYaku yaku) {
@@ -66,7 +66,7 @@ public interface IYaku {
 
     /**
      * 根据役名称判断是否与该役相等
-     * 
+     *
      * @param yakuName 役名称
      * @see YakuNamePool
      */

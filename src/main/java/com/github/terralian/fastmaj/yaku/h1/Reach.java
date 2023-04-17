@@ -6,14 +6,14 @@ import com.github.terralian.fastmaj.river.IHaiRiver;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
-import com.github.terralian.fastmaj.yaku.meta.StateYaku;
+import com.github.terralian.fastmaj.yaku.meta.RequestContextYaku;
 
 /**
  * 立直
  *
  * @author 作者: terra.lian
  */
-@StateYaku
+@RequestContextYaku
 public class Reach implements IYaku {
 
     @Override

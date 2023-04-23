@@ -142,7 +142,7 @@ public class GameCore implements IGameCore {
     /**
      * 初始化构建游戏内核
      *
-     * @param players 玩家集合
+     * @param players 玩家集合（可选）
      * @param gameConfig 游戏规则
      * @param yamaWorker 牌山生成器
      * @param gameLogger 日志处理器

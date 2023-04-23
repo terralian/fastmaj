@@ -21,7 +21,6 @@ import com.github.terralian.fastmaj.util.EmptyUtil;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
 import com.github.terralian.fastmaj.yama.SimpleRandomYamaWorker;
 import com.github.terralian.fastmaj.yama.seed.random.IdWorker;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -83,8 +82,7 @@ public class DefaultGameBuilder {
             throw new IllegalArgumentException("需要传入玩家实例来处理游戏事件");
         }
         if(gameCore == null) {
-            gameCore = new GameCore(config.getPlayerSize(), //
-                    (List<IPlayer>) players,
+            gameCore = new GameCore((List<IPlayer>) players,
                     config, //
                     yamaWorker, //
                     syatenCalculator, //

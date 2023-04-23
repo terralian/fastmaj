@@ -142,15 +142,14 @@ public class GameCore implements IGameCore {
     /**
      * 初始化构建游戏内核
      *
-     * @param playerSize 玩家人数
      * @param players 玩家集合
      * @param gameConfig 游戏规则
      * @param yamaWorker 牌山生成器
      * @param gameLogger 日志处理器
      */
-    public GameCore(int playerSize, List<IPlayer> players, GameConfig gameConfig, IYamaWorker yamaWorker,
+    public GameCore(List<IPlayer> players, GameConfig gameConfig, IYamaWorker yamaWorker,
                     ISyatenCalculator syatenCalculator, IGameLogger gameLogger) {
-        this.playerSize = playerSize;
+        this.playerSize = gameConfig.getPlayerSize();
         this.players = players;
         this.gameConfig = gameConfig;
         this.yamaWorker = yamaWorker;

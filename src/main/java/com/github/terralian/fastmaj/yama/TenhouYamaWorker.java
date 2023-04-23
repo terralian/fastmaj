@@ -54,8 +54,8 @@ public class TenhouYamaWorker implements IYamaWorker {
     /**
      * 根据种子构建一个牌山生成器
      * <p/>
-     * 该构造器会同时根据种子进行初始化{@link #initialize(String)}
-     * 
+     * 该构造器会同时根据种子进行初始化{@link #initialize()}
+     *
      * @param seed 种子
      */
     public TenhouYamaWorker(String seed) {
@@ -226,6 +226,7 @@ public class TenhouYamaWorker implements IYamaWorker {
      * 
      * @param seed 种子
      */
+    @Override
     public void setSeed(String seed) {
         this.seed = seed;
     }

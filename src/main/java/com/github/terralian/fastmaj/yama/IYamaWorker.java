@@ -15,7 +15,7 @@ public interface IYamaWorker {
 
     /**
      * 获取下一个136编码方式的牌山，根据参数循环多次获取，直到获取到对应次数的牌山
-     * 
+     *
      * @param nextSize 接下来获取的次数[1 ~ N]
      */
     int[] getNextYama(int nextSize);
@@ -24,4 +24,9 @@ public interface IYamaWorker {
      * 获取种子
      */
     String getSeed();
+
+    /**
+     * 设置种子
+     */
+    void setSeed(String seed);
 }

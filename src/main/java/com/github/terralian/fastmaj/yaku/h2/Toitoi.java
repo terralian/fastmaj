@@ -14,7 +14,7 @@ import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
  *
  * @author terra.lian
  */
-@KozuYaku(minKozuSize = 4)
+@KozuYaku
 public class Toitoi implements IYaku {
 
     @Override

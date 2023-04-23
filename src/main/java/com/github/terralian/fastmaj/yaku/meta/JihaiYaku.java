@@ -7,15 +7,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 字牌役
+ * 字牌役，包含一枚以上的字牌
+ * <p/>
+ * 该注解为役种匹配剪枝使用，役种上标记的meta注解集合，仅第一个会起效
  */
 @Documented
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface JihaiYaku {
-
-    /**
-     * 最小字牌数量，一般需要3枚及以上
-     */
-    int minJihaiSize() default 3;
 }

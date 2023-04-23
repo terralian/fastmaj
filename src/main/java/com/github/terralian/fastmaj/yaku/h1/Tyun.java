@@ -15,7 +15,6 @@ import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
  * @author 作者: terra.lian
  */
 @JihaiYaku
-@KozuYaku
 public class Tyun implements IYaku {
 
     @Override

@@ -13,6 +13,7 @@ import com.github.terralian.fastmaj.yaku.YakuNamePool;
  *
  * @author terra.lian
  */
+
 public class Ryuuiisou implements IYakuman {
 
     @Override

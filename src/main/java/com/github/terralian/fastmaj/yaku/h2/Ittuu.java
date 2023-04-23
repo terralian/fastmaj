@@ -14,7 +14,7 @@ import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
  *
  * @author terra.lian
  */
-@ShunzuYaku(minShunzuSize = 3)
+@ShunzuYaku
 public class Ittuu implements IYaku {
 
     @Override

@@ -7,7 +7,6 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
 import com.github.terralian.fastmaj.yaku.meta.JihaiYaku;
-import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
 
 /**
  * 混全带
@@ -16,8 +15,7 @@ import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
  *
  * @author terra.lian
  */
-@ShunzuYaku
-@JihaiYaku(minJihaiSize = 2)
+@JihaiYaku
 public class HonTyanta implements IYaku {
 
     @Override

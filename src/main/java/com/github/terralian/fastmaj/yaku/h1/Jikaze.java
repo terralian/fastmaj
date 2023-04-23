@@ -15,7 +15,6 @@ import com.github.terralian.fastmaj.yaku.meta.RequestContextYaku;
  * @author 作者: terra.lian
  */
 @JihaiYaku
-@RequestContextYaku
 public class Jikaze implements IYaku {
 
     @Override

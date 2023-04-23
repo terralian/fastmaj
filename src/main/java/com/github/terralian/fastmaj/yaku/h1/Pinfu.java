@@ -23,7 +23,6 @@ import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
  * @author 作者: terra.lian
  */
 @MenchanYaku
-@ShunzuYaku(minShunzuSize = 4)
 public class Pinfu implements IYaku {
 
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {

@@ -64,7 +64,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
- * {@link YakuMatcher}测试
+ * {@link com.github.terralian.fastmaj.yaku.YakuMatcher}测试
  * <p/>
  * 测试范围：
  * <ul>
@@ -417,5 +417,27 @@ public class YakuMatcherTest {
         List<IYaku> yakus = yakuMatcher.match(tehai, divideInfos, gameContext);
         assertEquals(1, yakus.size());
         assertEquals(Ryuuiisou.class, yakus.get(0).getClass());
+    }
+
+    /**
+     * 性能测试
+     */
+    @Test
+    public void performance_test() {
+        PlayerGameContext gameContext = PlayerGameContextFactory.buildByNormal(0);
+        // 立直一发自摸，清一色，一气，一杯口，平和
+        gameContext.getHaiRivers().forEach(k -> {
+            k.clear();
+            k.setSameFirstJun(false);
+            k.setSameJun(true);
+            k.reach(HaiPool.random(), false);
+        });
+        ITehai tehai = EncodeMark.toTehai("11223345678999m");
+        gameContext.setTehai(tehai);
+        List<DivideInfo> divideInfos = tehaiAgariDivider.divide(tehai);
+        for (int i = 0; i < 1_0_000_000; i++) {
+            List<IYaku> yakus = yakuMatcher.match(tehai, divideInfos, gameContext);
+            assertEquals(7, yakus.size());
+        }
     }
 }

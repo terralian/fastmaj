@@ -18,7 +18,6 @@ import com.github.terralian.fastmaj.yaku.meta.RonYaku;
  *
  * @author 作者: terra.lian
  */
-@RequestContextYaku
 @RonYaku
 public class TyanKan implements IYaku {
 

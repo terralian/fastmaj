@@ -7,15 +7,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 仅在荣和情况下成立或荣和下一定不成立的役种
+ * 仅在荣和情况下成立的役种
+ * <p/>
+ * 该注解为役种匹配剪枝使用，役种上标记的meta注解集合，仅第一个会起效
  */
 @Documented
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface RonYaku {
-
-    /**
-     * 若该值为false，则表示该役种在荣和时一定不成立
-     */
-    boolean value() default true;
 }

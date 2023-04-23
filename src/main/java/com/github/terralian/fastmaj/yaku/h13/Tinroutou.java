@@ -8,15 +8,13 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYakuman;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
 import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
-import com.github.terralian.fastmaj.yaku.meta.NonJihaiYaku;
 
 /**
  * 清老头
  *
  * @author terra.lian
  */
-@NonJihaiYaku
-@KozuYaku(minKozuSize = 4)
+@KozuYaku
 public class Tinroutou implements IYakuman {
 
     @Override

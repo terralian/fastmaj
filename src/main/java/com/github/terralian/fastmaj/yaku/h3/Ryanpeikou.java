@@ -6,7 +6,6 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
 import com.github.terralian.fastmaj.yaku.meta.MenchanYaku;
-import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
 
 /**
  * 二杯口
@@ -14,7 +13,6 @@ import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
  * @author terra.lian
  */
 @MenchanYaku
-@ShunzuYaku(minShunzuSize = 4)
 public class Ryanpeikou implements IYaku {
 
     @Override

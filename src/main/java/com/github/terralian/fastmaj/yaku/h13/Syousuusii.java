@@ -6,7 +6,6 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYakuman;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
-import com.github.terralian.fastmaj.yaku.meta.JihaiYaku;
 import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
 
 /**
@@ -14,8 +13,7 @@ import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
  *
  * @author terra.lian
  */
-@JihaiYaku(minJihaiSize = 11)
-@KozuYaku(minKozuSize = 3)
+@KozuYaku
 public class Syousuusii implements IYakuman {
 
     @Override

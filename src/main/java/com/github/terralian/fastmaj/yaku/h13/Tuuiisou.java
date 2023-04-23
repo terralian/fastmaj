@@ -13,7 +13,7 @@ import com.github.terralian.fastmaj.yaku.meta.JihaiYaku;
  *
  * @author terra.lian
  */
-@JihaiYaku(minJihaiSize = 14)
+@JihaiYaku
 public class Tuuiisou implements IYakuman {
 
     @Override

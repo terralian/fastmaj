@@ -12,11 +12,11 @@ public class KiriHai implements IKiriHai {
     /**
      * 牌的实际值
      */
-    private IHai value;
+    private final IHai value;
     /**
      * 该牌在牌河的枚数
      */
-    private int kiriIndex;
+    private final int kiriIndex;
     /**
      * 使用bitmap存储的弃牌信息
      * <p/>

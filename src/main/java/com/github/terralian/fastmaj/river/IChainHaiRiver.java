@@ -6,10 +6,6 @@ import com.github.terralian.fastmaj.tehai.NakiEnum;
 /**
  * 链式牌河，用于更遍历的操作设置方法。
  * 
- * <pre>
- * 
- * </pre>
- * 
  * @author terra.lian
  * @since 2022-11-03
  */

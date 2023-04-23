@@ -13,7 +13,7 @@ public class ChainHaiRiver implements IChainHaiRiver {
     /**
      * 牌河
      */
-    private IHaiRiver haiRiver;
+    private final IHaiRiver haiRiver;
 
     /**
      * 根据牌河构建一个链式牌河

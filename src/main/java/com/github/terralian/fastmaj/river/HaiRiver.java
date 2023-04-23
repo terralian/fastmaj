@@ -25,16 +25,16 @@ public class HaiRiver implements IHaiRiver {
     /**
      * 牌河的实际值
      */
-    private List<IKiriHai> value;
+    private final List<IKiriHai> value;
     /**
      * 34编码法
      */
-    private int[] value34;
+    private final int[] value34;
 
     /**
      * 哪个玩家的牌河
      */
-    private int playerIndex;
+    private final int playerIndex;
     /**
      * 是否被鸣牌过
      */

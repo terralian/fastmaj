@@ -52,4 +52,9 @@ public class SimpleRandomYamaWorker implements IYamaWorker {
     public String getSeed() {
         return Long.toString(seed);
     }
+
+    @Override
+    public void setSeed(String seed) {
+        this.seed = Long.parseLong(seed);
+    }
 }

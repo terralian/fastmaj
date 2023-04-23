@@ -196,10 +196,17 @@ public interface IGameCore {
 
     /**
      * 获取玩家
-     * 
+     *
      * @param position 玩家坐席
      */
     IPlayer getPlayer(int position);
+
+    /**
+     * 设置玩家，用于异步设置玩家信息
+     *
+     * @param players 玩家集合
+     */
+    void setPlayers(List<IPlayer> players);
 
     /**
      * 获取当前的场风

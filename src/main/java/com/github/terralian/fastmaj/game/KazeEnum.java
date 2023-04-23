@@ -41,7 +41,7 @@ public enum KazeEnum {
      * @param kazeName 风名
      * @param order 序号
      */
-    private KazeEnum(String kazeName, Integer order) {
+    KazeEnum(String kazeName, Integer order) {
         this.kazeName = kazeName;
         this.order = order;
     }

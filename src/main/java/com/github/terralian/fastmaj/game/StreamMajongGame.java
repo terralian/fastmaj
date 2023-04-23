@@ -1,5 +1,10 @@
 package com.github.terralian.fastmaj.game;
 
+import java.util.List;
+
+import com.github.terralian.fastmaj.game.log.EmptyGameLogger;
+import com.github.terralian.fastmaj.player.IPlayer;
+
 /**
  * 流式执行游戏，一旦开始游戏就会执行到结束
  *
@@ -7,6 +12,61 @@ package com.github.terralian.fastmaj.game;
  * @see StepMajongGame
  */
 public class StreamMajongGame extends StepMajongGame {
+
+    private GameComponent gameComponent;
+
+    public StreamMajongGame() {
+
+    }
+
+    /**
+     * 通过游戏配置和游戏组件构建一个流执行游戏，玩家暂时不设置
+     *
+     * @param gameConfig 游戏配置
+     * @param gameComponent 游戏组件
+     */
+    public StreamMajongGame(GameConfig gameConfig, GameComponent gameComponent) {
+        this(null, gameConfig, gameComponent);
+    }
+
+    /**
+     * 根据完整信息构建一个流执行游戏
+     *
+     * @param players 玩家集合
+     * @param gameConfig 游戏配置
+     * @param gameComponent 游戏组件
+     */
+    @SuppressWarnings("unchecked")
+    public StreamMajongGame(List<? extends IPlayer> players, GameConfig gameConfig, GameComponent gameComponent) {
+        this.config = gameConfig;
+        this.gameComponent = gameComponent;
+        this.gameEndValidator = gameComponent.getGameEndValidator();
+        this.ryuukyokuResolverManager = gameComponent.getRyuukyokuResolverManager();
+        this.playerActionManager = gameComponent.getPlayerActionManager();
+
+        this.gameCore = new GameCore((List<IPlayer>) players, gameConfig, gameComponent.getYamaWorker(),
+                gameComponent.getSyatenCalculator(), EmptyGameLogger.empty());
+    }
+
+    /**
+     * 设置牌山种子
+     *
+     * @param seed 牌山种子
+     */
+    public StreamMajongGame setYamaSeed(String seed) {
+        gameComponent.getYamaWorker().setSeed(seed);
+        return this;
+    }
+
+    /**
+     * 设置玩家集合
+     *
+     * @param players 玩家集合
+     */
+    public StreamMajongGame setPlayers(List<IPlayer> players) {
+        gameCore.setPlayers(players);
+        return this;
+    }
 
     /**
      * 开始游戏

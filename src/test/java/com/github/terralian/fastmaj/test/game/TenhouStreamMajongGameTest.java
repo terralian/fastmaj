@@ -1,11 +1,9 @@
 package com.github.terralian.fastmaj.test.game;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.List;
 
-import org.junit.Test;
-
+import com.github.terralian.fastmaj.game.GameComponent;
+import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.StreamMajongGame;
 import com.github.terralian.fastmaj.game.builder.MajongGameBuilder;
@@ -15,6 +13,9 @@ import com.github.terralian.fastmaj.player.QueueReplayPlayer;
 import com.github.terralian.fastmaj.replay.TenhouMajongReplay;
 import com.github.terralian.fastmaj.util.StringUtil;
 import com.github.terralian.fastmaj.yama.TenhouYamaWorker;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * {@link StreamMajongGame}单元测试
@@ -35,10 +36,10 @@ public class TenhouStreamMajongGameTest {
         builder.getPaifuParser().parseStream(this.getClass().getClassLoader().getResourceAsStream(fileName));
 
         List<QueueReplayPlayer> players = builder.getValue();
-        StreamMajongGame majongGame = MajongGameBuilder.withDefault() //
-                .setYamaWorker(new TenhouYamaWorker(builder.getSeed())) //
-                .addGameLogger(new PrintGameLogger().setShortKyokuSummary(true))//
-                .build(players);
+        StreamMajongGame majongGame = new StreamMajongGame(players,
+                GameConfig.defaultRule(),
+                GameComponent.useTenhou(builder.getSeed()).addLogger(new PrintGameLogger(true)));
+
         // 东风战
         majongGame.getConfig().setEndBakaze(KazeEnum.DON);
 

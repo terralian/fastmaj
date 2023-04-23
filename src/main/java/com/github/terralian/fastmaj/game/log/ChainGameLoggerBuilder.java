@@ -13,14 +13,13 @@ public class ChainGameLoggerBuilder {
     /**
      * 链式日志处理器
      */
-    private List<IGameLogger> gameLoggers;
+    private final List<IGameLogger> gameLoggers;
 
     /**
      * 初始化一个构建器
      */
     public static ChainGameLoggerBuilder newBuilder() {
-        ChainGameLoggerBuilder builder = new ChainGameLoggerBuilder();
-        return builder;
+        return new ChainGameLoggerBuilder();
     }
 
     /**

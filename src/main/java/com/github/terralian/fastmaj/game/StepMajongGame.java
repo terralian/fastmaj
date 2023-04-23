@@ -29,7 +29,6 @@ import com.github.terralian.fastmaj.player.TehaiActionCall;
 import com.github.terralian.fastmaj.replay.TenhouMajongReplay;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.util.Assert;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,13 +37,13 @@ import lombok.Setter;
  * 一个正确的自动执行的游戏可以参考{@link StreamMajongGame}，一个牌谱回放器可以参考{@link TenhouMajongReplay}.
  * <p/>
  * 游戏的流程应当按照以下顺序调用：
- * 
+ *
  * <pre>
  *  开始游戏 
  *  -  {@link #startGame()}
-    - （结束判定）下一局 
+    - （结束判定）下一局
         - {@link #nextKyoku()}
-        - 摸牌 
+        - 摸牌
             - {@link #nextDraw()}
             - 根据牌河动作判定是否摸牌
             - 根据牌河动作及手牌动作判定切换玩家
@@ -62,12 +61,12 @@ import lombok.Setter;
         - 流局判定
             - {@link #resolverRyuukyoku()}
  * </pre>
- * 
+ *
  * @author terra.lian
  */
 @Getter
 @Setter
-public class StepMajongGame {
+public abstract class StepMajongGame {
     /**
      * 游戏规则
      */
@@ -226,7 +225,7 @@ public class StepMajongGame {
         // 执行动作
         ITehaiAction tehaiAction = playerActionManager.getTehaiAction(actionParam.getActionType());
         if (tehaiAction == null) {
-            throw new IllegalStateException("该手牌处理动作无法执行，未从动作管理器中获取：" + actionParam.getActionType());
+            throw new IllegalStateException("该手牌处理动作无法执行，动作管理器获取该动作为空：" + actionParam.getActionType());
         }
         KyokuState kyokuState = tehaiAction.doAction(actionParam, gameCore, config);
         // 手牌动作后的规则可选时点，新宝牌处理
@@ -394,7 +393,7 @@ public class StepMajongGame {
     }
 
     /**
-     * 在手牌动作之前的一个执行时点，特别的规则设置会在这里执行。如宝牌增加规则设置为{@link DoraAddRule#BEFORE_KIRI}
+     * 在手牌动作之前的一个执行时点，特别的规则设置会在这里执行。如宝牌增加规则设置为{@link DoraAddRule#BEFORE_KIRI}时，会增加新的宝牌
      */
     public void optionBeforeTehaiAction() {
         TehaiActionType tehaiActionType = Optional.ofNullable(gameCore.getLastTehaiAction()) //

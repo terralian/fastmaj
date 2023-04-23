@@ -2,8 +2,9 @@ package com.github.terralian.fastmaj.game;
 
 /**
  * 流式执行游戏，一旦开始游戏就会执行到结束
- * 
+ *
  * @author terra.lian
+ * @see StepMajongGame
  */
 public class StreamMajongGame extends StepMajongGame {
 

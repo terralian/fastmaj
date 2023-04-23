@@ -137,7 +137,7 @@ public class GameCore implements IGameCore {
     /**
      * 玩家集合
      */
-    private final List<IPlayer> players;
+    private List<IPlayer> players;
 
     /**
      * 初始化构建游戏内核
@@ -656,6 +656,16 @@ public class GameCore implements IGameCore {
     @Override
     public IPlayer getPlayer(int position) {
         return players.get(position);
+    }
+
+    /**
+     * 设置玩家信息
+     *
+     * @param players 玩家集合
+     */
+    @Override
+    public void setPlayers(List<IPlayer> players) {
+        this.players = players;
     }
 
     /**

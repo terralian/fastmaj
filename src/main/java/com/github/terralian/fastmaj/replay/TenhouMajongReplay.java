@@ -115,8 +115,7 @@ public class TenhouMajongReplay extends StepMajongGame implements ITenhouPaifuPa
         int playerSize = isSanma ? 3 : 4;
         config.setPlayerSize(playerSize);
         config.setEndBakaze(isTonnan ? KazeEnum.NAN : KazeEnum.DON);
-        super.gameCore = new GameCore(playerSize, //
-                new ArrayList<>(), //
+        super.gameCore = new GameCore(new ArrayList<>(), //
                 config, //
                 yamaWorker, //
                 FastMajong.doGetSyatenCalculator(), //

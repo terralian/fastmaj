@@ -39,6 +39,15 @@ public class PrintGameLogger implements IGameLogger {
     public PrintGameLogger() {
     }
 
+    /**
+     * 仅打印简要的统计信息
+     *
+     * @param shortKyokuSummary 是否仅打印简要的统计信息（true为是）
+     */
+    public PrintGameLogger(boolean shortKyokuSummary) {
+        this.shortKyokuSummary = shortKyokuSummary;
+    }
+
     @Override
     public void gameStart(List<IPlayer> players, IGameCore gameCore) {
         this.gameCore = gameCore;

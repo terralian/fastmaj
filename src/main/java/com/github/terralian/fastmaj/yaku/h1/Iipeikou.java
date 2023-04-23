@@ -14,7 +14,6 @@ import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
  * @author 作者: terra.lian
  */
 @MenchanYaku
-@ShunzuYaku(minShunzuSize = 2)
 public class Iipeikou implements IYaku {
 
     @Override

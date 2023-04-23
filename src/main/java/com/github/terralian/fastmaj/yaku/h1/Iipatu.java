@@ -21,7 +21,6 @@ import com.github.terralian.fastmaj.yaku.meta.RequestContextYaku;
  * @author 作者: terra.lian
  */
 @BountyYaku
-@RequestContextYaku
 public class Iipatu implements IYaku {
 
     @Override

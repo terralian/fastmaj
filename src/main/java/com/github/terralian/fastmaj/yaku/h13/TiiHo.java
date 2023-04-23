@@ -7,7 +7,6 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYakuman;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
 import com.github.terralian.fastmaj.yaku.meta.RequestContextYaku;
-import com.github.terralian.fastmaj.yaku.meta.RonYaku;
 
 /**
  * 地和
@@ -15,7 +14,6 @@ import com.github.terralian.fastmaj.yaku.meta.RonYaku;
  * @author terra.lian
  */
 @RequestContextYaku
-@RonYaku(false)
 public class TiiHo implements IYakuman {
 
     @Override

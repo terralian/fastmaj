@@ -8,6 +8,8 @@ import java.lang.annotation.Target;
 
 /**
  * 不含字牌的役种，该类役完全不由字牌构成
+ * <p/>
+ * 该注解为役种匹配剪枝使用，役种上标记的meta注解集合，仅第一个会起效
  */
 @Documented
 @Target({ElementType.TYPE})

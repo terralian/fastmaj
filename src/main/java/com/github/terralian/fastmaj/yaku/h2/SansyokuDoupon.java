@@ -18,7 +18,7 @@ import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
  *
  * @author terra.lian
  */
-@KozuYaku(minKozuSize = 3)
+@KozuYaku
 public class SansyokuDoupon implements IYaku {
 
     @Override

@@ -16,10 +16,7 @@ import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
  *
  * @author terra.lian
  */
-@MenchanYaku
-@NonJihaiYaku
-@ShunzuYaku(minShunzuSize = 3)
-@KozuYaku(minKozuSize = 1)
+@ShunzuYaku
 public class Tyuuren9 extends Tyuuren {
 
     @Override

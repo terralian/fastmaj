@@ -5,7 +5,6 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
-import com.github.terralian.fastmaj.yaku.meta.RonYaku;
 import com.github.terralian.fastmaj.yaku.meta.RequestContextYaku;
 import com.github.terralian.fastmaj.yama.DrawFrom;
 
@@ -16,7 +15,6 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
  *
  * @author 作者: terra.lian
  */
-@RonYaku(false)
 @RequestContextYaku
 public class Haitei implements IYaku {
 

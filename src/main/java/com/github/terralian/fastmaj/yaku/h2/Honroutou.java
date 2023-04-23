@@ -17,7 +17,7 @@ import com.github.terralian.fastmaj.yaku.meta.JihaiYaku;
  *
  * @author terra.lian
  */
-@JihaiYaku(minJihaiSize = 2)
+@JihaiYaku
 public class Honroutou implements IYaku {
 
     @Override

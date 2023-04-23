@@ -1,14 +1,14 @@
 package com.github.terralian.fastmaj.yaku;
 
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
-import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
-import com.github.terralian.fastmaj.util.CollectionUtil;
 import com.github.terralian.fastmaj.yaku.h1.Bakaze;
 import com.github.terralian.fastmaj.yaku.h1.Haitei;
 import com.github.terralian.fastmaj.yaku.h1.Haku;
@@ -31,6 +31,7 @@ import com.github.terralian.fastmaj.yaku.h13.Kokusi13;
 import com.github.terralian.fastmaj.yaku.h13.Ryuuiisou;
 import com.github.terralian.fastmaj.yaku.h13.Suuankou;
 import com.github.terralian.fastmaj.yaku.h13.SuuankouTanki;
+import com.github.terralian.fastmaj.yaku.h13.Suukanzu;
 import com.github.terralian.fastmaj.yaku.h13.Syousuusii;
 import com.github.terralian.fastmaj.yaku.h13.Tenho;
 import com.github.terralian.fastmaj.yaku.h13.TiiHo;
@@ -53,18 +54,21 @@ import com.github.terralian.fastmaj.yaku.h3.Honitu;
 import com.github.terralian.fastmaj.yaku.h3.JyunTyanta;
 import com.github.terralian.fastmaj.yaku.h3.Ryanpeikou;
 import com.github.terralian.fastmaj.yaku.h6.Tinizu;
+import com.github.terralian.fastmaj.yaku.meta.JihaiYaku;
+import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
+import com.github.terralian.fastmaj.yaku.meta.MenchanYaku;
+import com.github.terralian.fastmaj.yaku.meta.NonJihaiYaku;
+import com.github.terralian.fastmaj.yaku.meta.RequestContextYaku;
+import com.github.terralian.fastmaj.yaku.meta.RonYaku;
+import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
 
 /**
- * {@link IYakuMatcher}的默认实现
+ * 简易和了役种匹配器，返回匹配到的所有役种。
  * <p/>
- * 该匹配器下的役种
- * <ul>
- * <li>计 通用一般役种，如三暗刻，一气等现代经常使用的役。
- * <li>计 累计役满，如MLG规则是无累计役满的规则。
- * <li>不计 人和
- * </ul>
- * 
- * @author terra.lian 
+ * 该匹配器支持自定义需匹配的役种，或者根据规则快速替换要匹配的役种集合。
+ *
+ * @author terra.lian
+ * @since 2023-04-17
  */
 public class YakuMatcher implements IYakuMatcher {
     /**
@@ -76,13 +80,7 @@ public class YakuMatcher implements IYakuMatcher {
      * <p/>
      * 如混老头，混一色等
      */
-    private List<IYaku> hasJihaiYakus;
-    /**
-     * 字牌相关役，字牌大于3枚以上判定
-     */
     private List<IYaku> jihaiYakus;
-
-    // 与字牌无关
     /**
      * 刻子役，含3个对子以上的
      */
@@ -91,7 +89,6 @@ public class YakuMatcher implements IYakuMatcher {
      * 顺子役，含3个顺子以上的
      */
     private List<IYaku> shunzuYakus;
-
     /**
      * 门清役种
      */
@@ -101,284 +98,173 @@ public class YakuMatcher implements IYakuMatcher {
      */
     private List<IYaku> ronYakus;
     /**
-     * 通用役种
+     * 需要上下文才能判定的役种
      */
-    private List<IYaku> commonYakus;
+    private List<IYaku> requestContextYakus;
+    /**
+     * 无剪枝的通常役，所有情况下都会进行匹配。
+     * <p/>
+     * 这里的役种越少性能越好
+     */
+    private List<IYaku> normalYakus;
 
     /**
-     * 构建{@link YakuMatcher} 实例
+     * 初始化役种解析器
      */
     public YakuMatcher() {
-        this.classifyCreateYaku();
+        mapYakuMeta(buildDefaultYakuList());
     }
 
-    /**
-     * 进行单个分割的役匹配
-     * 
-     * @param tehai 手牌
-     * @param divideInfo 分割结果
-     * @param context 用户信息
-     */
     @Override
     public List<IYaku> match(ITehai tehai, DivideInfo divideInfo, PlayerGameContext context) {
-        Predicate<IYaku> yakuPredicate = k -> k.match(tehai, divideInfo, context);
         List<IYaku> yakus = new ArrayList<>();
-
-        // 字牌数量
-        int jihaiSize = analyseJihaiSize(tehai);
-
-        // 无字牌
-        if (jihaiSize == 0) {
-            yakus.addAll(CollectionUtil.filterToList(nonJihaiYakus, yakuPredicate));
-        }
-        // 含字牌
-        else if (jihaiSize > 0) {
-            yakus.addAll(CollectionUtil.filterToList(hasJihaiYakus, yakuPredicate));
-            // 字牌
-            if (jihaiSize >= 3) {
-                yakus.addAll(CollectionUtil.filterToList(jihaiYakus, yakuPredicate));
-            }
+        if (tehai.getAll().stream().anyMatch(IHai::isJiHai)) {
+            matchCollectYaku(yakus, jihaiYakus, tehai, divideInfo, context);
+        } else {
+            matchCollectYaku(yakus, nonJihaiYakus, tehai, divideInfo, context);
         }
         if (divideInfo != null) {
-            // 对子役
             if (divideInfo.getAllKanKozuFirst().size() >= 3) {
-                yakus.addAll(CollectionUtil.filterToList(kozuYakus, yakuPredicate));
+                matchCollectYaku(yakus, kozuYakus, tehai, divideInfo, context);
             }
-            // 顺子役
             if (divideInfo.getAllShunzuFirst().size() >= 3) {
-                yakus.addAll(CollectionUtil.filterToList(shunzuYakus, yakuPredicate));
+                matchCollectYaku(yakus, shunzuYakus, tehai, divideInfo, context);
             }
         }
-        // 门清役
-        yakus.addAll(CollectionUtil.filterToList(menchanYakus, yakuPredicate));
-        // 荣和役
-        if (context != null && context.isRon()) {
-            yakus.addAll(CollectionUtil.filterToList(ronYakus, yakuPredicate));
+        if (!tehai.isNaki()) {
+            matchCollectYaku(yakus, menchanYakus, tehai, divideInfo, context);
         }
-        // 通常役
-        yakus.addAll(CollectionUtil.filterToList(commonYakus, yakuPredicate));
+        if (context != null) {
+            matchCollectYaku(yakus, requestContextYakus, tehai, divideInfo, context);
+            if (context.isRon()) {
+                matchCollectYaku(yakus, ronYakus, tehai, divideInfo, context);
+            }
+        }
+        matchCollectYaku(yakus, normalYakus, tehai, divideInfo, context);
 
-        // 含有役满，则去除其他非役满役
-        for (IYaku yaku : yakus) {
-            if (yaku instanceof IYakuman) {
-                yakus = CollectionUtil.filterToList(yakus, IYaku::isYakuman);
-                break;
-            }
+        // 若匹配结果中含役满，则过滤非役满部分
+        if (yakus.stream().anyMatch(IYaku::isYakuman)) {
+            yakus = yakus.stream() //
+                    .filter(IYaku::isYakuman) //
+                    .collect(Collectors.toList());
         }
         return yakus;
     }
 
     /**
-     * 判断字牌的数量
-     * 
-     * @param tehai 手牌
+     * 组装默认的役种集合，包含天凤规则下的所有通常役种
      */
-    private int analyseJihaiSize(ITehai tehai) {
-        int[] value34 = Encode34.toEncode34(tehai.getAll());
+    public List<IYaku> buildDefaultYakuList() {
+        List<IYaku> defaultYakus = new ArrayList<>();
+        // 1番
+        defaultYakus.add(new Bakaze());
+        defaultYakus.add(new Haitei());
+        defaultYakus.add(new Haku());
+        defaultYakus.add(new Hatu());
+        defaultYakus.add(new Houtei());
+        defaultYakus.add(new Iipatu());
+        defaultYakus.add(new Iipeikou());
+        defaultYakus.add(new Jikaze());
+        defaultYakus.add(new Pinfu());
+        defaultYakus.add(new Reach());
+        defaultYakus.add(new Rinsyan());
+        defaultYakus.add(new Tanyaotyu());
+        defaultYakus.add(new Tsumo());
+        defaultYakus.add(new TyanKan());
+        defaultYakus.add(new Tyun());
+        // 2番
+        defaultYakus.add(new DoubleReach());
+        defaultYakus.add(new Honroutou());
+        defaultYakus.add(new HonTyanta());
+        defaultYakus.add(new Ittuu());
+        defaultYakus.add(new Sanankou());
+        defaultYakus.add(new Sankanzu());
+        defaultYakus.add(new SansyokuDoujyun());
+        defaultYakus.add(new SansyokuDoupon());
+        defaultYakus.add(new Syousangen());
+        defaultYakus.add(new Tiitoitu());
+        defaultYakus.add(new Toitoi());
+        // 3番
+        defaultYakus.add(new Honitu());
+        defaultYakus.add(new JyunTyanta());
+        defaultYakus.add(new Ryanpeikou());
+        // 6番
+        defaultYakus.add(new Tinizu());
+        // 役满
+        defaultYakus.add(new Daisangen());
+        defaultYakus.add(new Daisuusii());
+        defaultYakus.add(new Kokusi());
+        defaultYakus.add(new Kokusi13());
+        defaultYakus.add(new Ryuuiisou());
+        defaultYakus.add(new Suuankou());
+        defaultYakus.add(new SuuankouTanki());
+        defaultYakus.add(new Suukanzu());
+        defaultYakus.add(new Syousuusii());
+        defaultYakus.add(new Tenho());
+        defaultYakus.add(new TiiHo());
+        defaultYakus.add(new Tinroutou());
+        defaultYakus.add(new Tuuiisou());
+        defaultYakus.add(new Tyuuren());
+        defaultYakus.add(new Tyuuren9());
 
-        int jihaiSize = 0;
-        // 东到中
-        for (int i = Encode34.DONG; i <= Encode34.ZHONG; i++) {
-            if (value34[i] == 4) {
-                jihaiSize += 3;
-            } else if (value34[i] > 0) {
-                jihaiSize += value34[i];
+        return defaultYakus;
+    }
+
+    /**
+     * 将役种信息解析并根据名称映射为Map，用于后续快速解析
+     *
+     * @param yakus 役种
+     */
+    private void mapYakuMeta(List<IYaku> yakus) {
+        nonJihaiYakus = new ArrayList<>();
+        jihaiYakus = new ArrayList<>();
+        kozuYakus = new ArrayList<>();
+        shunzuYakus = new ArrayList<>();
+        menchanYakus = new ArrayList<>();
+        ronYakus = new ArrayList<>();
+        requestContextYakus = new ArrayList<>();
+        normalYakus = new ArrayList<>();
+
+        for (IYaku yaku : yakus) {
+            Annotation[] annotations = yaku.getClass().getAnnotations();
+            Annotation yakuMeta = annotations.length == 0 ? null : annotations[0];
+            if (yakuMeta == null) {
+                normalYakus.add(yaku);
+            } else if (yakuMeta instanceof NonJihaiYaku) {
+                nonJihaiYakus.add(yaku);
+            } else if (yakuMeta instanceof JihaiYaku) {
+                jihaiYakus.add(yaku);
+            } else if (yakuMeta instanceof KozuYaku) {
+                kozuYakus.add(yaku);
+            } else if (yakuMeta instanceof ShunzuYaku) {
+                shunzuYakus.add(yaku);
+            } else if (yakuMeta instanceof MenchanYaku) {
+                menchanYakus.add(yaku);
+            } else if (yakuMeta instanceof RonYaku) {
+                ronYakus.add(yaku);
+            } else if (yakuMeta instanceof RequestContextYaku) {
+                requestContextYakus.add(yaku);
+            } else {
+                normalYakus.add(yaku);
             }
         }
-        return jihaiSize;
-    }
-
-    // -----------------------------------------
-    // 役种初始化分组索引构建
-    // -----------------------------------------
-
-    /**
-     * 分类创建役
-     */
-    private void classifyCreateYaku() {
-        // 无字牌役
-        this.setNonJihaiYakus();
-        // 含字牌役
-        this.setHasJihaiYakus();
-        // 字牌役
-        this.setJihaiYakus();
-        // 对子役
-        this.setKozuYakus();
-        // 顺子役
-        this.setShunzuYakus();
-        // 门清役
-        this.setMenchanYakus();
-        // 荣和役
-        this.setRonYakus();
-        // 无剪枝的役
-        this.setCommonYakus();
     }
 
     /**
-     * 设置无字牌的役种
-     * <p/>
-     * 该部分役种用无字牌判断会提升剪枝效率
+     * 进行匹配并收集所有匹配到的役种
+     *
+     * @param container 收集的容器
+     * @param currentYaku 当前待匹配的役种
+     * @param tehai 手牌
+     * @param divideInfo 牌谱分割
+     * @param context 游戏上下文
      */
-    private void setNonJihaiYakus() {
-        nonJihaiYakus = new ArrayList<>();
-
-        // 断幺九
-        nonJihaiYakus.add(new Tanyaotyu());
-        // 纯全带
-        nonJihaiYakus.add(new JyunTyanta());
-        // 清一色
-        nonJihaiYakus.add(new Tinizu());
-    }
-
-    /**
-     * 设置含字牌的一种
-     * <p/>
-     * 该部分役种用含字牌判断会提升剪枝效率
-     */
-    private void setHasJihaiYakus() {
-        hasJihaiYakus = new ArrayList<>();
-
-        // 混老头
-        hasJihaiYakus.add(new Honroutou());
-        // 混带
-        hasJihaiYakus.add(new HonTyanta());
-        // 混一色
-        hasJihaiYakus.add(new Honitu());
-    }
-
-    /**
-     * 设置字牌的役种，字牌需要大于等于3枚
-     * <p/>
-     * 该部分役种用字牌判断会提升剪枝效率
-     */
-    private void setJihaiYakus() {
-        jihaiYakus = new ArrayList<>();
-
-        // 场风
-        jihaiYakus.add(new Bakaze());
-        // 自风
-        jihaiYakus.add(new Jikaze());
-        // 白
-        jihaiYakus.add(new Haku());
-        // 发
-        jihaiYakus.add(new Hatu());
-        // 中
-        jihaiYakus.add(new Tyun());
-        // 小三元
-        jihaiYakus.add(new Syousangen());
-        // 字一色
-        jihaiYakus.add(new Tuuiisou());
-    }
-
-    /**
-     * 设置对子役，对子需要大于等于3个
-     * <p/>
-     * 该部分役种用对子判断会提升剪枝效率
-     */
-    private void setKozuYakus() {
-        kozuYakus = new ArrayList<>();
-
-        // 三暗刻
-        kozuYakus.add(new Sanankou());
-        // 三杠子
-        kozuYakus.add(new Sankanzu());
-        // 三色同刻
-        kozuYakus.add(new SansyokuDoupon());
-        // 对对和
-        kozuYakus.add(new Toitoi());
-        // 四暗刻
-        kozuYakus.add(new Suuankou());
-        // 四暗刻单骑
-        kozuYakus.add(new SuuankouTanki());
-        // 四杠子
-        kozuYakus.add(new Syousuusii());
-        // 大三元
-        kozuYakus.add(new Daisangen());
-        // 大四喜
-        kozuYakus.add(new Daisuusii());
-        // 清老头
-        kozuYakus.add(new Tinroutou());
-    }
-
-    /**
-     * 设置顺子役，顺子需要大于3个
-     * <p/>
-     * 该部分役种用顺子判断会提升剪枝效率
-     */
-    private void setShunzuYakus() {
-        shunzuYakus = new ArrayList<>();
-
-        // 平和
-        shunzuYakus.add(new Pinfu());
-        // 一气
-        shunzuYakus.add(new Ittuu());
-        // 三色同顺
-        shunzuYakus.add(new SansyokuDoujyun());
-        // 九莲
-        shunzuYakus.add(new Tyuuren());
-        // 纯九莲
-        shunzuYakus.add(new Tyuuren9());
-    }
-
-    /**
-     * 设置剩余的门清役
-     * <p/>
-     * 该部分役种仅有门清可以进行提升剪枝效率
-     */
-    private void setMenchanYakus() {
-        menchanYakus = new ArrayList<>();
-
-        // 立直
-        menchanYakus.add(new Reach());
-        // 两立直
-        menchanYakus.add(new DoubleReach());
-        // 一发
-        menchanYakus.add(new Iipatu());
-        // 自摸
-        menchanYakus.add(new Tsumo());
-        // 一杯口
-        menchanYakus.add(new Iipeikou());
-        // 七对子
-        menchanYakus.add(new Tiitoitu());
-        // 国士无双
-        menchanYakus.add(new Kokusi());
-        // 国士13面
-        menchanYakus.add(new Kokusi13());
-        // 二杯口
-        menchanYakus.add(new Ryanpeikou());
-    }
-
-    /**
-     * 设置荣和役
-     * <p/>
-     * 该部分役种仅在荣和生效
-     */
-    private void setRonYakus() {
-        ronYakus = new ArrayList<>();
-
-        // 河底
-        ronYakus.add(new Houtei());
-        // 抢杠
-        ronYakus.add(new TyanKan());
-    }
-
-    /**
-     * 设置通常役
-     * <p/>
-     * 这部分的役种没有剪枝条件
-     */
-    private void setCommonYakus() {
-        commonYakus = new ArrayList<>();
-
-        // 海底
-        commonYakus.add(new Haitei());
-        // 岭上
-        commonYakus.add(new Rinsyan());
-        // 绿一色
-        commonYakus.add(new Ryuuiisou());
-        // 天和
-        commonYakus.add(new Tenho());
-        // 地和
-        commonYakus.add(new TiiHo());
+    private void matchCollectYaku(List<IYaku> container, List<IYaku> currentYaku, ITehai tehai, DivideInfo divideInfo
+            , PlayerGameContext context) {
+        for (IYaku yaku : currentYaku) {
+            if (yaku.match(tehai, divideInfo, context)) {
+                container.add(yaku);
+            }
+        }
     }
 }

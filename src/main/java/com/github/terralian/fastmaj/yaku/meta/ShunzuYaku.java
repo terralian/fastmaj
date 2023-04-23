@@ -7,15 +7,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 顺子役，包含顺子组成的役种类，需要一定程度的顺子才能达成
+ * 顺子役，包含三个以上顺子组成的
+ * <p/>
+ * 该注解为役种匹配剪枝使用，役种上标记的meta注解集合，仅第一个会起效
  */
 @Documented
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ShunzuYaku {
-
-    /**
-     * 最小顺子数，一个顺子由相邻的3枚牌组成
-     */
-    int minShunzuSize() default 1;
 }

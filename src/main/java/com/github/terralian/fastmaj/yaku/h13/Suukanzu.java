@@ -13,7 +13,7 @@ import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
  *
  * @author 作者: terra.lian
  */
-@KozuYaku(minKozuSize = 4)
+@KozuYaku
 public class Suukanzu implements IYakuman {
 
     @Override

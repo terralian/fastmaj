@@ -5,6 +5,7 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
+import com.github.terralian.fastmaj.yaku.meta.MenchanYaku;
 import com.github.terralian.fastmaj.yaku.meta.RequestContextYaku;
 import com.github.terralian.fastmaj.yaku.meta.RonYaku;
 
@@ -13,8 +14,7 @@ import com.github.terralian.fastmaj.yaku.meta.RonYaku;
  *
  * @author 作者: terra.lian
  */
-@RequestContextYaku
-@RonYaku(false)
+@MenchanYaku
 public class Tsumo implements IYaku {
 
     @Override

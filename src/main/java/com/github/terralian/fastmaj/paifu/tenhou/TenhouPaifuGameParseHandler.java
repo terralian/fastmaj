@@ -87,6 +87,7 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
 
     @Override
     public void endKyoku(int[] playerPoints) {
+        currentKyoku.setRound(paifuGame.getKyokus().size());
         paifuGame.getKyokus().add(currentKyoku);
         currentKyoku = null;
     }

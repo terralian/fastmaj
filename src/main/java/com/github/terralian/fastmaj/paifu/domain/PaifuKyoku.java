@@ -3,6 +3,7 @@ package com.github.terralian.fastmaj.paifu.domain;
 import java.util.List;
 
 import com.github.terralian.fastmaj.game.KazeEnum;
+import com.github.terralian.fastmaj.game.event.ActionEvent;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import lombok.Data;
@@ -15,6 +16,11 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class PaifuKyoku {
+
+    /**
+     * 对局数
+     */
+    private int round;
 
     /**
      * 场风

@@ -470,7 +470,7 @@ public class Tehai implements ITehai {
     private void reduceOperable(IHai... hais) {
         for (IHai hai : hais) {
             if (!hand.remove(hai)) {
-                throw new IllegalStateException("从手牌移除牌失败：" + hai);
+                throw new IllegalStateException("从手牌移除牌失败：" + hai + " 当前手牌：" + this.hand);
             }
             hand34[hai.getValue()]--;
         }

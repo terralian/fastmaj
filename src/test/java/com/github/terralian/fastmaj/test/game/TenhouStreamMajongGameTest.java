@@ -9,24 +9,38 @@ import com.github.terralian.fastmaj.game.StreamMajongGame;
 import com.github.terralian.fastmaj.game.builder.MajongGameBuilder;
 import com.github.terralian.fastmaj.game.log.IGameLogger;
 import com.github.terralian.fastmaj.game.log.PrintGameLogger;
+import com.github.terralian.fastmaj.paifu.IPaifuParser;
+import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
+import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuGameParseHandler;
+import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuParser;
+import com.github.terralian.fastmaj.player.PaifuGameQueueReplayPlayerBuilder;
 import com.github.terralian.fastmaj.player.QueueReplayPlayer;
 import com.github.terralian.fastmaj.replay.TenhouMajongReplay;
 import com.github.terralian.fastmaj.util.StringUtil;
+import com.github.terralian.fastmaj.util.TestResourceUtil;
 import com.github.terralian.fastmaj.yama.TenhouYamaWorker;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 /**
  * {@link StreamMajongGame}单元测试
- * 
+ *
  * @author terra.lian
  */
 public class TenhouStreamMajongGameTest {
 
+    private IPaifuParser<PaifuGame> paifuParser;
+
+    @Before
+    public void before() {
+        paifuParser = new TenhouPaifuParser(new TenhouPaifuGameParseHandler());
+    }
+
     /**
      * 根据{@link QueueReplayPlayer}及{@link TenhouMajongReplay}使用牌谱进行测试
-     * 
+     *
      * @throws Exception
      */
     @Test
@@ -34,18 +48,44 @@ public class TenhouStreamMajongGameTest {
         TenhouTestPlayerBuilder builder = new TenhouTestPlayerBuilder();
         String fileName = "tenhou/2014050315gm-0041-0000-0f3f6de5&tw=3.mjlog";
         builder.getPaifuParser().parseStream(this.getClass().getClassLoader().getResourceAsStream(fileName));
-
         List<QueueReplayPlayer> players = builder.getValue();
-        StreamMajongGame majongGame = new StreamMajongGame(players,
-                GameConfig.defaultRule(),
-                GameComponent.useTenhou(builder.getSeed()).addLogger(new PrintGameLogger(true)));
 
+        GameComponent gameComponent = GameComponent.useTenhou(builder.getSeed()) //
+                .addLogger(new PrintGameLogger(true));
         // 东风战
-        majongGame.getConfig().setEndBakaze(KazeEnum.DON);
-
+        GameConfig gameConfig = GameConfig.defaultRule();
+        gameConfig.setEndBakaze(KazeEnum.DON);
+        // 创建游戏
+        StreamMajongGame majongGame = new StreamMajongGame(players, gameConfig, gameComponent);
         majongGame.startGame();
 
         int[] expected = builder.getPlayerPoints();
+        int[] actual = majongGame.getGameCore().getPlayerPoints();
+        for (int i = 0; i < players.size(); i++) {
+            assertEquals(expected[i], actual[i]);
+        }
+    }
+
+    @Test
+    public void special_sample_paifu_test() throws Exception {
+        simulate_run_game("2014050315gm-0041-0000-0f3f6de5&tw=3.mjlog");
+    }
+
+    private void simulate_run_game(String simplePaifuName) throws Exception {
+        PaifuGame paifuGame = paifuParser.parseFile(TestResourceUtil.readToFile("tenhou", simplePaifuName));
+        List<QueueReplayPlayer> players = PaifuGameQueueReplayPlayerBuilder.toPlayer(paifuGame);
+
+        // 游戏组件
+        GameComponent gameComponent = GameComponent.useTenhou(paifuGame.getSeed()) //
+                .addLogger(new PrintGameLogger(true));
+        // 配置
+        GameConfig gameConfig = GameConfig.defaultRule();
+        gameConfig.setEndBakaze(paifuGame.getEndBakaze());
+
+        StreamMajongGame majongGame = new StreamMajongGame(players, gameConfig, gameComponent);
+        majongGame.startGame();
+
+        int[] expected = paifuGame.getEndPoints();
         int[] actual = majongGame.getGameCore().getPlayerPoints();
         for (int i = 0; i < players.size(); i++) {
             assertEquals(expected[i], actual[i]);

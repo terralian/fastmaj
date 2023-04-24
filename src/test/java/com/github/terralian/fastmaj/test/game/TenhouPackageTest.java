@@ -1,7 +1,5 @@
 package com.github.terralian.fastmaj.test.game;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -14,14 +12,16 @@ import java.util.zip.GZIPOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-import org.junit.Test;
-
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.StreamMajongGame;
 import com.github.terralian.fastmaj.game.builder.MajongGameBuilder;
 import com.github.terralian.fastmaj.player.QueueReplayPlayer;
+import com.github.terralian.fastmaj.util.TestResourceUtil;
 import com.github.terralian.fastmaj.util.ZipUtil;
 import com.github.terralian.fastmaj.yama.TenhouYamaWorker;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class TenhouPackageTest {
 
@@ -39,9 +39,9 @@ public class TenhouPackageTest {
     }
 
     private void testBaseOnTenhouPackage0(String fileName) {
-        File file = null;
+        File file;
         try {
-            file = new File(this.getClass().getClassLoader().getResource("tenhou/" + fileName).getPath());
+            file = TestResourceUtil.readToFile("tenhou", fileName);
         } catch (Exception e) {
             System.out.println("未设置测试资源牌谱包，跳过测试：" + fileName);
             return;

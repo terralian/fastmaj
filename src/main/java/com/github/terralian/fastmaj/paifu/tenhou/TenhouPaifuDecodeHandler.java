@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.github.terralian.fastmaj.yama.TenhouYamaWorker;
 import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
@@ -88,12 +89,18 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
 
     /**
      * 实例化{@link TenhouPaifuDecodeHandler}
-     * 
+     *
      * @param analyzer 天凤牌谱监听分析器
      */
     public TenhouPaifuDecodeHandler(ITenhouPaifuParseHandler analyzer) {
         this.analyzer = analyzer;
         this.tenhouLogYamaWorker = new TenhouYamaWorker();
+    }
+
+    @Override
+    public void startDocument() throws SAXException {
+        super.startDocument();
+        // 初始化
         isAgari = false;
     }
 

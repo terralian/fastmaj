@@ -6,11 +6,16 @@ import java.util.stream.Collectors;
 
 import com.github.terralian.fastmaj.encode.Encode136;
 import com.github.terralian.fastmaj.game.KazeEnum;
+import com.github.terralian.fastmaj.game.event.ActionEvent;
 import com.github.terralian.fastmaj.game.event.DrawEvent;
 import com.github.terralian.fastmaj.game.event.river.ChiiEvent;
 import com.github.terralian.fastmaj.game.event.river.PonEvent;
+import com.github.terralian.fastmaj.game.event.river.RonEvent;
 import com.github.terralian.fastmaj.game.event.tehai.AnnkanEvent;
 import com.github.terralian.fastmaj.game.event.tehai.KiriEvent;
+import com.github.terralian.fastmaj.game.event.tehai.ReachEvent;
+import com.github.terralian.fastmaj.game.event.tehai.Ryuukyoku99Event;
+import com.github.terralian.fastmaj.game.event.tehai.TsumoEvent;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
@@ -35,6 +40,11 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
      * 当前对局
      */
     private PaifuKyoku currentKyoku;
+
+    /**
+     * 是否立直步骤1
+     */
+    protected boolean reachStep1 = false;
 
     /**
      * 构建{@link TenhouPaifuDecodeHandler}
@@ -97,16 +107,34 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
         DrawEvent drawEvent = new DrawEvent() //
                 .setDrawHai(getHaiById(tsumoHai)) //
                 .setPosition(position);
-        // TODO
         currentKyoku.getActions().add(drawEvent);
     }
 
     @Override
+    public void reach1(int position) {
+        reachStep1 = true;
+    }
+
+    @Override
     public void kiri(int position, int kiriHai) {
-        KiriEvent kiriEvent = new KiriEvent() //
-                .setKiriHai(getHaiById(kiriHai)) //
-                .setPosition(position); //
-        currentKyoku.getActions().add(kiriEvent);
+        // 天凤的牌谱立直分为3个步骤
+        // 1. 立直宣言，看reach1
+        // 2. 打出一枚牌
+        // 3. 放置立直棒，看reach2.
+        // 其中2、3位原子操作，所以在这里处理事件。
+        if (reachStep1) {
+            reachStep1 = false;
+            ReachEvent reachEvent = new ReachEvent()
+                    .setReachHai(getHaiById(kiriHai))
+                    .setPosition(position);
+            currentKyoku.getActions().add(reachEvent);
+        } else {
+            // 非立直
+            KiriEvent kiriEvent = new KiriEvent() //
+                    .setKiriHai(getHaiById(kiriHai)) //
+                    .setPosition(position); //
+            currentKyoku.getActions().add(kiriEvent);
+        }
     }
 
     @Override
@@ -137,6 +165,47 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
         currentKyoku.getActions().add(annkanEvent);
     }
 
+    @Override
+    public void agari(int position, int from, List<String> yaku, int han, int hu, int score,
+                      int[] increaseAndDecrease) {
+        if (position != from) {
+            RonEvent ronEvent = new RonEvent()
+                    .setFrom(from)
+                    .setPosition(position);
+            currentKyoku.getActions().add(ronEvent);
+        } else {
+            TsumoEvent tsumoEvent = new TsumoEvent()
+                    .setPosition(position);
+            currentKyoku.getActions().add(tsumoEvent);
+        }
+    }
+
+    @Override
+    public void ryuukyoku(int[] increaseAndDecrease, String type) {
+        List<ActionEvent> actionEvents = currentKyoku.getActions();
+        // 九种九牌
+        if (TenhouPaifuStringPool.RYUUKYOKU_TYPE_99.equals(type)) {
+            // 摸牌事件
+            ActionEvent lastEvent = actionEvents.get(actionEvents.size() - 1);
+            Ryuukyoku99Event event = new Ryuukyoku99Event();
+            event.setPosition(lastEvent.getPosition());
+            currentKyoku.getActions().add(event);
+        }
+        // 三家和了的场合，牌谱上仅记录了流局，并不会触发三个荣和事件
+        if (TenhouPaifuStringPool.RYUUKYOKU_TYPE_RON_3.equals(type)) {
+            ActionEvent lastPlayerEvent = actionEvents.get(actionEvents.size() - 2);
+            for (int i = 0; i < paifuGame.getPlayerSize(); i++) {
+                if (i == lastPlayerEvent.getPosition()) {
+                    continue;
+                }
+                RonEvent event = new RonEvent();
+                event.setFrom(lastPlayerEvent.getPosition());
+                event.setPosition(i);
+                currentKyoku.getActions().add(event);
+            }
+        }
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public PaifuGame getParseData() {
@@ -149,7 +218,7 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
      * @param hai 牌id
      */
     private IHai getHaiById(int hai) {
-        return HaiPool.getById(hai, paifuGame.isUseRed(), 1);
+        return HaiPool.getById(hai, paifuGame.isUseRed());
     }
 
     /**

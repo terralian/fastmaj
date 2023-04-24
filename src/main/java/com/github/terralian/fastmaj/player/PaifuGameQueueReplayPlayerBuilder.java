@@ -58,6 +58,8 @@ public abstract class PaifuGameQueueReplayPlayerBuilder {
                         break;
                     case RON:
                         addRon((RonEvent) abstractEvent, list, round, actionCount);
+                        // 存在多人和了的可能性，保持actionCount不变
+                        actionCount -= 1;
                         break;
                     case ANNKAN:
                         addAnnkan((AnnkanEvent) abstractEvent, list, round);

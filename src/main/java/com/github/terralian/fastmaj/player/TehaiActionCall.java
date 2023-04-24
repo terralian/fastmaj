@@ -2,7 +2,6 @@ package com.github.terralian.fastmaj.player;
 
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.hai.IHai;
-
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -104,6 +103,9 @@ public class TehaiActionCall {
 
     @Override
     public String toString() {
+        if (actionHai == null) {
+            return actionType.toString();
+        }
         return actionType.toString() + actionHai.toString();
     }
 }

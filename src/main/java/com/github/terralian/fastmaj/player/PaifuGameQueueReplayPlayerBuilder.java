@@ -43,8 +43,7 @@ public abstract class PaifuGameQueueReplayPlayerBuilder {
             int round = paifuKyoku.getRound();
             List<ActionEvent> events = paifuKyoku.getActions();
             int actionCount = -1;
-            for (int i = 0; i < events.size(); i++) {
-                ActionEvent abstractEvent = events.get(i);
+            for (ActionEvent abstractEvent : events) {
                 actionCount += 1;
                 switch (abstractEvent.getType()) {
                     case CHII:

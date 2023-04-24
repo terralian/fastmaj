@@ -11,4 +11,14 @@ package com.github.terralian.fastmaj.game.event;
  * @since 2023-03-29
  */
 public interface ActionEvent {
+
+    /**
+     * 事件类型
+     */
+    GameEventEnum getType();
+
+    /**
+     * 获取发生事件的玩家的坐席
+     */
+    int getPosition();
 }

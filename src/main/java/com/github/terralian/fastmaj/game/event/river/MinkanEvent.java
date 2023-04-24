@@ -1,6 +1,7 @@
 package com.github.terralian.fastmaj.game.event.river;
 
 import com.github.terralian.fastmaj.game.event.ActionEvent;
+import com.github.terralian.fastmaj.game.event.GameEventEnum;
 import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -34,4 +35,9 @@ public class MinkanEvent implements ActionEvent {
      * 鸣的牌
      */
     private IHai nakiHai;
+
+    @Override
+    public GameEventEnum getType() {
+        return GameEventEnum.MINKAN;
+    }
 }

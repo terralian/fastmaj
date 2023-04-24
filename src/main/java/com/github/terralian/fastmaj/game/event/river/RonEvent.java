@@ -1,6 +1,7 @@
 package com.github.terralian.fastmaj.game.event.river;
 
 import com.github.terralian.fastmaj.game.event.ActionEvent;
+import com.github.terralian.fastmaj.game.event.GameEventEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -21,4 +22,9 @@ public class RonEvent implements ActionEvent {
      * 和了的玩家
      */
     private int position;
+
+    @Override
+    public GameEventEnum getType() {
+        return GameEventEnum.RON;
+    }
 }

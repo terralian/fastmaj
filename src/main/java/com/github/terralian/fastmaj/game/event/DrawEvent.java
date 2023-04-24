@@ -28,4 +28,9 @@ public class DrawEvent implements ActionEvent {
      * 是否从牌山摸牌
      */
     private boolean fromYama;
+
+    @Override
+    public GameEventEnum getType() {
+        return GameEventEnum.DRAW;
+    }
 }

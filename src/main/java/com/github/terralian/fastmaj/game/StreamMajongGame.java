@@ -2,7 +2,7 @@ package com.github.terralian.fastmaj.game;
 
 import java.util.List;
 
-import com.github.terralian.fastmaj.game.log.EmptyGameLogger;
+import com.github.terralian.fastmaj.game.log.IGameLogger;
 import com.github.terralian.fastmaj.player.IPlayer;
 
 /**
@@ -44,8 +44,9 @@ public class StreamMajongGame extends StepMajongGame {
         this.ryuukyokuResolverManager = gameComponent.getRyuukyokuResolverManager();
         this.playerActionManager = gameComponent.getPlayerActionManager();
 
+        IGameLogger logger = gameComponent.getChainGameLoggerBuilder().build();
         this.gameCore = new GameCore((List<IPlayer>) players, gameConfig, gameComponent.getYamaWorker(),
-                gameComponent.getSyatenCalculator(), EmptyGameLogger.empty());
+                gameComponent.getSyatenCalculator(), logger);
     }
 
     /**

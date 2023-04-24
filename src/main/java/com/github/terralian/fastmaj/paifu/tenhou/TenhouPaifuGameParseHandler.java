@@ -9,10 +9,13 @@ import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.event.ActionEvent;
 import com.github.terralian.fastmaj.game.event.DrawEvent;
 import com.github.terralian.fastmaj.game.event.river.ChiiEvent;
+import com.github.terralian.fastmaj.game.event.river.MinkanEvent;
 import com.github.terralian.fastmaj.game.event.river.PonEvent;
 import com.github.terralian.fastmaj.game.event.river.RonEvent;
 import com.github.terralian.fastmaj.game.event.tehai.AnnkanEvent;
+import com.github.terralian.fastmaj.game.event.tehai.KakanEvent;
 import com.github.terralian.fastmaj.game.event.tehai.KiriEvent;
+import com.github.terralian.fastmaj.game.event.tehai.KitaEvent;
 import com.github.terralian.fastmaj.game.event.tehai.ReachEvent;
 import com.github.terralian.fastmaj.game.event.tehai.Ryuukyoku99Event;
 import com.github.terralian.fastmaj.game.event.tehai.TsumoEvent;
@@ -34,7 +37,7 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
     /**
      * 游戏
      */
-    private final PaifuGame paifuGame;
+    private PaifuGame paifuGame;
 
     /**
      * 当前对局
@@ -44,18 +47,19 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
     /**
      * 是否立直步骤1
      */
-    protected boolean reachStep1 = false;
+    protected boolean reachStep1;
 
     /**
      * 构建{@link TenhouPaifuDecodeHandler}
      */
     public TenhouPaifuGameParseHandler() {
-        paifuGame = new PaifuGame();
-        currentKyoku = null;
     }
 
     @Override
     public void shuffleMeta(String seed) {
+        paifuGame = new PaifuGame();
+        currentKyoku = null;
+        reachStep1 = false;
         paifuGame.setSeed(seed);
     }
 
@@ -97,7 +101,8 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
 
     @Override
     public void endKyoku(int[] playerPoints) {
-        currentKyoku.setRound(paifuGame.getKyokus().size());
+        currentKyoku.setRound(paifuGame.getKyokus().size()) //
+                .setEndPoints(playerPoints);
         paifuGame.getKyokus().add(currentKyoku);
         currentKyoku = null;
     }
@@ -163,6 +168,31 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
                 .setPosition(position) //
                 .setAnnkanHai(getHaiByIds(selfHai)); //
         currentKyoku.getActions().add(annkanEvent);
+    }
+
+    @Override
+    public void minkan(int position, int from, int[] selfHai, int nakiHai) {
+        MinkanEvent minkanEvent = new MinkanEvent()
+                .setFrom(from)
+                .setPosition(position)
+                .setSelfHais(getHaiByIds(selfHai))
+                .setNakiHai(getHaiById(nakiHai));
+        currentKyoku.getActions().add(minkanEvent);
+    }
+
+    @Override
+    public void kakan(int position, int from, int[] selfHai, int nakiHai, int addHai) {
+        KakanEvent kakanEvent = new KakanEvent()
+                .setPosition(position)
+                .setKakanHai(getHaiById(nakiHai));
+        currentKyoku.getActions().add(kakanEvent);
+    }
+
+    @Override
+    public void kita(int position) {
+        KitaEvent kitaEvent = new KitaEvent()
+                .setPosition(position);
+        currentKyoku.getActions().add(kitaEvent);
     }
 
     @Override

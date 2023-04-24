@@ -1,6 +1,7 @@
 package com.github.terralian.fastmaj.game.event.tehai;
 
 import com.github.terralian.fastmaj.game.event.ActionEvent;
+import com.github.terralian.fastmaj.game.event.GameEventEnum;
 import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -24,4 +25,9 @@ public class ReachEvent implements ActionEvent {
      * 立直打出的牌
      */
     private IHai reachHai;
+
+    @Override
+    public GameEventEnum getType() {
+        return GameEventEnum.REACH;
+    }
 }

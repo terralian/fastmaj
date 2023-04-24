@@ -1,5 +1,7 @@
 package com.github.terralian.fastmaj.game.event.tehai;
 
+import com.github.terralian.fastmaj.game.event.ActionEvent;
+import com.github.terralian.fastmaj.game.event.GameEventEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -11,10 +13,15 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class KitaEvent {
+public class KitaEvent implements ActionEvent {
 
     /**
      * 拔北事件
      */
     private int position;
+
+    @Override
+    public GameEventEnum getType() {
+        return GameEventEnum.KITA;
+    }
 }

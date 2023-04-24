@@ -1,6 +1,7 @@
 package com.github.terralian.fastmaj.game.event.tehai;
 
 import com.github.terralian.fastmaj.game.event.ActionEvent;
+import com.github.terralian.fastmaj.game.event.GameEventEnum;
 import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -18,4 +19,9 @@ public class KakanEvent implements ActionEvent {
     private int position;
 
     private IHai kakanHai;
+
+    @Override
+    public GameEventEnum getType() {
+        return GameEventEnum.KAKAN;
+    }
 }

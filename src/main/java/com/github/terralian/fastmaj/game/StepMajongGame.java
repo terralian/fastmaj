@@ -26,7 +26,6 @@ import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.player.RivalEnum;
 import com.github.terralian.fastmaj.player.RiverActionCall;
 import com.github.terralian.fastmaj.player.TehaiActionCall;
-import com.github.terralian.fastmaj.replay.TenhouMajongReplay;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.util.Assert;
 import lombok.Getter;
@@ -34,17 +33,17 @@ import lombok.Setter;
 
 /**
  * 按步骤执行游戏，该类为游戏的操作步骤基类，内部对各个动作进行了分类归纳，但还是需要按照一定步骤才可以正确的执行游戏。
- * 一个正确的自动执行的游戏可以参考{@link StreamMajongGame}，一个牌谱回放器可以参考{@link TenhouMajongReplay}.
+ * 一个正确的自动执行的游戏可以参考{@link StreamMajongGame}
  * <p/>
  * 游戏的流程应当按照以下顺序调用：
  *
  * <pre>
  *  开始游戏 
  *  -  {@link #startGame()}
-    - （结束判定）下一局
-        - {@link #nextKyoku()}
-        - 摸牌
-            - {@link #nextDraw()}
+ - （结束判定）下一局
+ - {@link #nextKyoku()}
+ - 摸牌
+ - {@link #nextDraw()}
             - 根据牌河动作判定是否摸牌
             - 根据牌河动作及手牌动作判定切换玩家
         - 手牌动作（弃牌，暗杠，自摸）

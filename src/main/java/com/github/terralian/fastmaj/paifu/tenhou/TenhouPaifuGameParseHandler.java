@@ -184,7 +184,7 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
     public void kakan(int position, int from, int[] selfHai, int nakiHai, int addHai) {
         KakanEvent kakanEvent = new KakanEvent()
                 .setPosition(position)
-                .setKakanHai(getHaiById(nakiHai));
+                .setKakanHai(getHaiById(addHai));
         currentKyoku.getActions().add(kakanEvent);
     }
 

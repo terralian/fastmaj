@@ -1,7 +1,5 @@
 package com.github.terralian.fastmaj.game.event;
 
-import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
-
 /**
  * 动作事件
  * <p/>
@@ -29,5 +27,5 @@ public interface ActionEvent {
      *
      * @param <T> 子类（chain形式）
      */
-    <T extends TehaiActionEvent> T setPosition(int position);
+    <T extends ActionEvent> T setPosition(int position);
 }

@@ -86,6 +86,48 @@ public class TenhouStreamMajongGameTest {
         simulate_run_game("2015070814gm-00a9-0000-37705455&tw=1.mjlog", true);
     }
 
+    /**
+     * 由于移除了replay体系，replay的牌谱校验部分暂存于这里
+     */
+    @Test
+    public void reply_history_test_collect() throws Exception {
+        simulate_run_game("2014050315gm-0041-0000-0f3f6de5&tw=3.mjlog", true);
+
+        simulate_run_game("2014050315gm-0041-0000-06a52f11&tw=2.mjlog", true);
+        simulate_run_game("2014050315gm-0041-0000-6babc3e5&tw=0.mjlog", true);
+        simulate_run_game("2014050315gm-0041-0000-7ddece8e&tw=0.mjlog", true);
+        simulate_run_game("2014050706gm-0041-0000-4e38a006&tw=1.mjlog", true);
+        simulate_run_game("2014050707gm-0041-0000-5cf9066d&tw=3.mjlog", true);
+
+        simulate_run_game("2014050821gm-0041-0000-a1298f1a&tw=2.mjlog", true);
+        simulate_run_game("2014050911gm-0041-0000-01181f16&tw=0.mjlog", true);
+        simulate_run_game("2014051313gm-0041-0000-c47daaf7&tw=2.mjlog", true);
+        simulate_run_game("2014051511gm-0041-0000-a29f5b7b&tw=1.mjlog", true);
+        simulate_run_game("2014052604gm-0041-0000-dc1795af&tw=3.mjlog", true);
+
+        simulate_run_game("2014052605gm-0041-0000-5db7afd1&tw=1.mjlog", true);
+        simulate_run_game("2014060513gm-00c1-0000-84fa529d&tw=1.mjlog", true);
+        simulate_run_game("2014072411gm-0089-0000-37d4cafc&tw=1.mjlog", true);
+        simulate_run_game("2014112412gm-00c1-0000-bfbe4417&tw=1.mjlog", true);
+        simulate_run_game("2014120309gm-0029-0000-ed40750a&tw=1.mjlog", true);
+
+        simulate_run_game("2014120822gm-0029-0000-808ea6c0&tw=0.mjlog", true);
+        simulate_run_game("2014051123gm-0041-0000-19ae6ef7&tw=0.mjlog", true);
+        simulate_run_game("2014120823gm-0029-0000-26f781c3&tw=0.mjlog", true);
+        simulate_run_game("2014123118gm-0029-0000-4700b218&tw=0.mjlog", true);
+        simulate_run_game("2015070411gm-00a9-0000-b8b13fcc&tw=0.mjlog", true);
+
+        simulate_run_game("2015080113gm-00a9-0000-0213ac0c&tw=3.mjlog", true);
+        simulate_run_game("2015082211gm-00a9-0000-b665ff0a&tw=1.mjlog", true);
+        simulate_run_game("2018061303gm-00a9-0000-5a8850e9&tw=2.mjlog", true);
+        simulate_run_game("2019050400gm-00a9-0000-8c08e32a&tw=3.mjlog", true);
+        simulate_run_game("2019110302gm-00a9-0000-473e5852&tw=3.mjlog", true);
+
+        simulate_run_game("2021041720gm-00a9-0000-f3b19e15&tw=3.mjlog", true);
+        simulate_run_game("2021010917gm-0089-0000-d9225d74&tw=1.mjlog", true);
+        simulate_run_game("2021100323gm-00a9-0000-d0ac1302&tw=1.mjlog", true);
+    }
+
     private void simulate_run_game(String simplePaifuName, boolean shortKyokuSummary) throws Exception {
         PaifuGame paifuGame = paifuParser.parseFile(TestResourceUtil.readToFile("tenhou", simplePaifuName));
         List<QueueReplayPlayer> players = PaifuGameQueueReplayPlayerBuilder.toPlayer(paifuGame);

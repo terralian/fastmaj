@@ -1,6 +1,8 @@
 package com.github.terralian.fastmaj.game.event.tehai;
 
+import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.event.ActionEvent;
+import com.github.terralian.fastmaj.hai.IHai;
 
 /**
  * 手牌事件
@@ -10,4 +12,13 @@ import com.github.terralian.fastmaj.game.event.ActionEvent;
  */
 public interface TehaiActionEvent extends ActionEvent {
 
+    /**
+     * 获取动作类型
+     */
+    TehaiActionType getActionType();
+
+    /**
+     * 返回操作的手牌（可能为空）
+     */
+    IHai getIfHai();
 }

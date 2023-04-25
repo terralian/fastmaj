@@ -1,5 +1,6 @@
 package com.github.terralian.fastmaj.game.event.tehai;
 
+import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.event.GameEventEnum;
 import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
@@ -22,5 +23,15 @@ public class AnnkanEvent implements TehaiActionEvent {
     @Override
     public GameEventEnum getType() {
         return GameEventEnum.ANNKAN;
+    }
+
+    @Override
+    public TehaiActionType getActionType() {
+        return TehaiActionType.ANNKAN;
+    }
+
+    @Override
+    public IHai getIfHai() {
+        return annkanHai[0];
     }
 }

@@ -1,11 +1,6 @@
 package com.github.terralian.fastmaj.test.yama;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import java.util.List;
-
-import org.junit.Test;
 
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.hai.HaiPool;
@@ -14,6 +9,10 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.util.CollectionUtil;
 import com.github.terralian.fastmaj.yama.DoraHelper;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * {@link DoraHelper}的测试
@@ -83,8 +82,8 @@ public class DoraHelperTest {
     @Test
     public void testGetDoraList() {
         List<IHai> doras = DoraHelper.getDora(CollectionUtil.newArrayList(HaiPool.m(5), HaiPool.m(0)));
-        assertTrue(doras.get(0).getLiteral() == 6);
-        assertTrue(doras.get(1).getLiteral() == 6);
+        assertEquals(6, doras.get(0).getLiteral());
+        assertEquals(6, doras.get(1).getLiteral());
     }
 
     /**

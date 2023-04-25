@@ -1,6 +1,5 @@
 package com.github.terralian.fastmaj.game.event.river;
 
-import com.github.terralian.fastmaj.game.event.ActionEvent;
 import com.github.terralian.fastmaj.game.event.GameEventEnum;
 import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
@@ -14,7 +13,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class MinkanEvent implements ActionEvent {
+public class MinkanEvent implements RiverActionEvent {
 
     /**
      * 从玩家鸣牌

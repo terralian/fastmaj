@@ -1,5 +1,7 @@
 package com.github.terralian.fastmaj.game.event;
 
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
+
 /**
  * 动作事件
  * <p/>
@@ -21,4 +23,11 @@ public interface ActionEvent {
      * 获取发生事件的玩家的坐席
      */
     int getPosition();
+
+    /**
+     * 设置手牌事件的玩家坐席
+     *
+     * @param <T> 子类（chain形式）
+     */
+    <T extends TehaiActionEvent> T setPosition(int position);
 }

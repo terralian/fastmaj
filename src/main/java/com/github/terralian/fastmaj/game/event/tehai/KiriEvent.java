@@ -1,6 +1,5 @@
 package com.github.terralian.fastmaj.game.event.tehai;
 
-import com.github.terralian.fastmaj.game.event.ActionEvent;
 import com.github.terralian.fastmaj.game.event.GameEventEnum;
 import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
@@ -14,7 +13,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class KiriEvent implements ActionEvent {
+public class KiriEvent implements TehaiActionEvent {
 
     /**
      * 弃牌的玩家

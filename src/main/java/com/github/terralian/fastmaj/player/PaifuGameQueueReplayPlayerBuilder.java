@@ -15,7 +15,6 @@ import com.github.terralian.fastmaj.game.event.tehai.KitaEvent;
 import com.github.terralian.fastmaj.game.event.tehai.ReachEvent;
 import com.github.terralian.fastmaj.game.event.tehai.Ryuukyoku99Event;
 import com.github.terralian.fastmaj.game.event.tehai.TsumoEvent;
-import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
 import com.github.terralian.fastmaj.paifu.domain.PaifuKyoku;
 
@@ -117,43 +116,36 @@ public abstract class PaifuGameQueueReplayPlayerBuilder {
 
     private static void addAnnkan(AnnkanEvent event, List<QueueReplayPlayer> list, int round) {
         QueueReplayPlayer targetPlayer = list.get(event.getPosition());
-        TehaiActionCall call = TehaiActionCall.newAnnkan(event.getAnnkanHai()[0]);
-        targetPlayer.addTehaiAction(round, call);
+        targetPlayer.addTehaiAction(round, event);
     }
 
     private static void addKakan(KakanEvent event, List<QueueReplayPlayer> list, int round) {
         QueueReplayPlayer targetPlayer = list.get(event.getPosition());
-        TehaiActionCall call = TehaiActionCall.newKakan(event.getKakanHai());
-        targetPlayer.addTehaiAction(round, call);
+        targetPlayer.addTehaiAction(round, event);
     }
 
     private static void addKiri(KiriEvent event, List<QueueReplayPlayer> list, int round) {
         QueueReplayPlayer targetPlayer = list.get(event.getPosition());
-        TehaiActionCall call = TehaiActionCall.newKiri(event.getKiriHai());
-        targetPlayer.addTehaiAction(round, call);
+        targetPlayer.addTehaiAction(round, event);
     }
 
     private static void addKita(KitaEvent event, List<QueueReplayPlayer> list, int round) {
         QueueReplayPlayer targetPlayer = list.get(event.getPosition());
-        TehaiActionCall call = TehaiActionCall.newKita(HaiPool.z(4));
-        targetPlayer.addTehaiAction(round, call);
+        targetPlayer.addTehaiAction(round, event);
     }
 
     private static void addReach(ReachEvent event, List<QueueReplayPlayer> list, int round) {
         QueueReplayPlayer targetPlayer = list.get(event.getPosition());
-        TehaiActionCall call = TehaiActionCall.newReach(event.getReachHai());
-        targetPlayer.addTehaiAction(round, call);
+        targetPlayer.addTehaiAction(round, event);
     }
 
     private static void addRyuukyoku99(Ryuukyoku99Event event, List<QueueReplayPlayer> list, int round) {
         QueueReplayPlayer targetPlayer = list.get(event.getPosition());
-        TehaiActionCall call = TehaiActionCall.newRyuukyoku();
-        targetPlayer.addTehaiAction(round, call);
+        targetPlayer.addTehaiAction(round, event);
     }
 
     private static void addTsumo(TsumoEvent event, List<QueueReplayPlayer> list, int round) {
         QueueReplayPlayer targetPlayer = list.get(event.getPosition());
-        TehaiActionCall call = TehaiActionCall.newTsumo();
-        targetPlayer.addTehaiAction(round, call);
+        targetPlayer.addTehaiAction(round, event);
     }
 }

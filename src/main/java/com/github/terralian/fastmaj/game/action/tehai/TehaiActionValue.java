@@ -1,8 +1,7 @@
 package com.github.terralian.fastmaj.game.action.tehai;
 
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.hai.IHai;
-import com.github.terralian.fastmaj.player.TehaiActionCall;
-
 import lombok.Getter;
 
 /**
@@ -28,14 +27,14 @@ public class TehaiActionValue {
     private TehaiActionType actionType;
 
     /**
-     * 根据玩家请求参数{@link TehaiActionCall}创建{@link TehaiActionValue}
-     * 
-     * @param actionCall 请求参数
+     * 根据玩家请求参数{@link TehaiActionEvent}创建{@link TehaiActionValue}
+     *
+     * @param tehaiEvent 请求参数
      * @param actionPlayer 动作对象
      */
-    public TehaiActionValue(TehaiActionCall actionCall, int actionPlayer) {
-        this.actionHai = actionCall.getActionHai();
-        this.actionType = actionCall.getActionType();
+    public TehaiActionValue(TehaiActionEvent tehaiEvent, int actionPlayer) {
+        this.actionHai = tehaiEvent.getIfHai();
+        this.actionType = tehaiEvent.getActionType();
         this.actionPlayer = actionPlayer;
     }
 

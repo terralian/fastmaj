@@ -15,6 +15,7 @@ import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionValue;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.game.option.DoraAddRule;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyokuResolver;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyokuResolverManager;
@@ -25,7 +26,6 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.player.RivalEnum;
 import com.github.terralian.fastmaj.player.RiverActionCall;
-import com.github.terralian.fastmaj.player.TehaiActionCall;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.util.Assert;
 import lombok.Getter;
@@ -47,7 +47,7 @@ import lombok.Setter;
             - 根据牌河动作判定是否摸牌
             - 根据牌河动作及手牌动作判定切换玩家
         - 手牌动作（弃牌，暗杠，自摸）
-            - {@link #nextTehaiAction()}或{@link #nextTehaiAction(TehaiActionCall)}
+            - {@link #nextTehaiAction()}或{@link #nextTehaiAction(TehaiActionEvent)}
             - 清空牌河动作
             - 缓存手牌动作
         - 手牌动作后时点（新宝牌）
@@ -191,19 +191,19 @@ public abstract class StepMajongGame {
         // 请求玩家动作
         IPlayer player = gameCore.getPlayer(position);
         PlayerGameContext playerGameContext = PlayerGameContextFactory.buildByGameCore(position, config, gameCore);
-        TehaiActionCall tehaiActionCall = player.drawHai(tehai, enableActions, playerGameContext);
+        TehaiActionEvent tehaiActionEvent = player.drawHai(tehai, enableActions, playerGameContext);
         // 校验并执行玩家动作
-        return nextTehaiAction(tehaiActionCall);
+        return nextTehaiAction(tehaiActionEvent);
     }
 
     /**
      * 传入一个手牌动作，校验动作并执行。若手牌动作为自摸，则返回对局结束。
-     * 
-     * @param tehaiActionCall 手牌动作
+     *
+     * @param tehaiActionEvent 手牌动作
      * @return 对局状态
      */
-    public KyokuState nextTehaiAction(TehaiActionCall tehaiActionCall) {
-        if (tehaiActionCall == null) {
+    public KyokuState nextTehaiAction(TehaiActionEvent tehaiActionEvent) {
+        if (tehaiActionEvent == null) {
             throw new IllegalStateException("玩家必须对手牌动作进行处理，至少是模切");
         }
 
@@ -214,13 +214,13 @@ public abstract class StepMajongGame {
         // 当前玩家
         int position = gameCore.getPosition();
         // 校验这个动作是否合法
-        ITehaiActionValidator validator = playerActionManager.getTehaiActionValidator(tehaiActionCall.getActionType());
+        ITehaiActionValidator validator = playerActionManager.getTehaiActionValidator(tehaiActionEvent.getActionType());
         if (!validator.resolveAction(position, config, gameCore)) {
-            throw new IllegalArgumentException("非法手牌动作：" + tehaiActionCall.getActionType());
+            throw new IllegalArgumentException("非法手牌动作：" + tehaiActionEvent.getActionType());
         }
 
         // 将玩家动作缓存到游戏核心，方便其他地方查询
-        TehaiActionValue actionParam = new TehaiActionValue(tehaiActionCall, gameCore.getPosition());
+        TehaiActionValue actionParam = new TehaiActionValue(tehaiActionEvent, gameCore.getPosition());
         // 执行动作
         ITehaiAction tehaiAction = playerActionManager.getTehaiAction(actionParam.getActionType());
         if (tehaiAction == null) {

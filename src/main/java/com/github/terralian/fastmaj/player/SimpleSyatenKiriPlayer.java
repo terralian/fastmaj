@@ -7,6 +7,10 @@ import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.event.tehai.KiriEvent;
+import com.github.terralian.fastmaj.game.event.tehai.ReachEvent;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
+import com.github.terralian.fastmaj.game.event.tehai.TsumoEvent;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
@@ -25,14 +29,14 @@ public class SimpleSyatenKiriPlayer implements IPlayer {
     }
 
     @Override
-    public TehaiActionCall drawHai(ITehai tehai, Set<TehaiActionType> enableActions, PlayerGameContext context) {
+    public TehaiActionEvent drawHai(ITehai tehai, Set<TehaiActionType> enableActions, PlayerGameContext context) {
         // 能和了则和了
         if (enableActions.contains(TehaiActionType.TSUMO)) {
-            return TehaiActionCall.newTsumo();
-        } 
+            return new TsumoEvent();
+        }
 
         // 按顺序，选一枚能使向听数减小的牌
-        IHai candidate =null;
+        IHai candidate = null;
         int syaten = context.getSyaten();
         int[] hands = Encode34.toEncode34(tehai.getHand());
         for (IHai hai : tehai.getHand()) {
@@ -46,14 +50,14 @@ public class SimpleSyatenKiriPlayer implements IPlayer {
         }
         // 没有能够减小向听数的牌，模切
         if (candidate == null) {
-            return TehaiActionCall.newKiri(tehai.getDrawHai());
+            return new KiriEvent().setKiriHai(tehai.getDrawHai());
         }
         // 能立直则立直
         if (enableActions.contains(TehaiActionType.REACH)) {
-            return TehaiActionCall.newReach(candidate);
+            return new ReachEvent().setReachHai(candidate);
         }
         // 手切向听数减小的牌
-        return TehaiActionCall.newKiri(candidate);
+        return new KiriEvent().setKiriHai(candidate);
     }
 
     @Override

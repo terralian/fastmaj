@@ -11,6 +11,7 @@ import java.util.Set;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.tehai.ITehai;
 
 /**
@@ -25,7 +26,7 @@ public class QueueReplayPlayer implements IPlayer {
     /**
      * 手牌动作队列
      */
-    private List<Queue<TehaiActionCall>> tehaiActionCalls;
+    private List<Queue<TehaiActionEvent>> tehaiActionCalls;
     /**
      * 牌河动作
      */
@@ -43,8 +44,8 @@ public class QueueReplayPlayer implements IPlayer {
      * {@inheritDoc}
      */
     @Override
-    public TehaiActionCall drawHai(ITehai tehai, Set<TehaiActionType> enableActions, PlayerGameContext context) {
-        Queue<TehaiActionCall> queue = tehaiActionCalls.get(context.getRound());
+    public TehaiActionEvent drawHai(ITehai tehai, Set<TehaiActionType> enableActions, PlayerGameContext context) {
+        Queue<TehaiActionEvent> queue = tehaiActionCalls.get(context.getRound());
         return queue.poll();
     }
 
@@ -63,14 +64,14 @@ public class QueueReplayPlayer implements IPlayer {
 
     /**
      * 将一个手牌动作增加到动作队列末尾，后续会按先进先出使用。
-     * 
+     *
      * @param action 动作
      */
-    public void addTehaiAction(int round, TehaiActionCall action) {
+    public void addTehaiAction(int round, TehaiActionEvent action) {
         while (tehaiActionCalls.size() <= round) {
             tehaiActionCalls.add(new ArrayDeque<>());
         }
-        Queue<TehaiActionCall> queue = tehaiActionCalls.get(round);
+        Queue<TehaiActionEvent> queue = tehaiActionCalls.get(round);
         queue.add(action);
     }
 

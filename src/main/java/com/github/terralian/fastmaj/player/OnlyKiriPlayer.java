@@ -5,6 +5,8 @@ import java.util.Set;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.event.tehai.KiriEvent;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.tehai.ITehai;
 
 /**
@@ -17,8 +19,8 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 public class OnlyKiriPlayer implements IPlayer {
 
     @Override
-    public TehaiActionCall drawHai(ITehai tehai, Set<TehaiActionType> enableActions, PlayerGameContext context) {
-        return TehaiActionCall.newKiri(tehai.getDrawHai());
+    public TehaiActionEvent drawHai(ITehai tehai, Set<TehaiActionType> enableActions, PlayerGameContext context) {
+        return new KiriEvent().setKiriHai(tehai.getDrawHai());
     }
 
     @Override

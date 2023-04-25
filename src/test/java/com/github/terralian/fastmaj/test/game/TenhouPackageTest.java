@@ -15,15 +15,28 @@ import java.util.zip.ZipFile;
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.StreamMajongGame;
 import com.github.terralian.fastmaj.game.builder.MajongGameBuilder;
+import com.github.terralian.fastmaj.paifu.IPaifuParser;
+import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
+import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuGameParseHandler;
+import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuParser;
+import com.github.terralian.fastmaj.player.PaifuGameQueueReplayPlayerBuilder;
 import com.github.terralian.fastmaj.player.QueueReplayPlayer;
 import com.github.terralian.fastmaj.util.TestResourceUtil;
 import com.github.terralian.fastmaj.util.ZipUtil;
 import com.github.terralian.fastmaj.yama.TenhouYamaWorker;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class TenhouPackageTest {
+
+    private IPaifuParser<PaifuGame> paifuParser;
+
+    @Before
+    public void before() {
+        paifuParser = new TenhouPaifuParser(new TenhouPaifuGameParseHandler());
+    }
 
     /**
      * 大批量使用天凤位牌谱进行测试
@@ -73,7 +86,7 @@ public class TenhouPackageTest {
         } catch (Error | Exception e) {
             // 保存文件
             String projectPath = System.getProperty("user.dir").replaceAll("\\\\", "/");
-            String resourcePath = projectPath + "/src/test/resources/tehou";
+            String resourcePath = projectPath + "/src/test/resources/tenhou";
             String fullName = resourcePath + "/" + currentName;
             file = new File(fullName);
             try (FileOutputStream fo = new FileOutputStream(file)) {
@@ -93,23 +106,23 @@ public class TenhouPackageTest {
         System.out.println(order + ": " + name);
         order++;
 
-        TenhouTestPlayerBuilder builder = new TenhouTestPlayerBuilder();
-        builder.getPaifuParser().parseStream(gzipStream);
+        PaifuGame paifuGame = paifuParser.parseStream(gzipStream);
+        GameConfig config = GameConfig.defaultRule();
+        config.setEndBakaze(paifuGame.getEndBakaze());
 
-        GameConfig config = builder.getConfig();
-        List<QueueReplayPlayer> players = builder.getValue();
+        List<QueueReplayPlayer> players = PaifuGameQueueReplayPlayerBuilder.toPlayer(paifuGame);
 
         StreamMajongGame majongGame = MajongGameBuilder.withDefault() //
-                .setYamaWorker(new TenhouYamaWorker(builder.getSeed())) //
+                .setYamaWorker(new TenhouYamaWorker(paifuGame.getSeed())) //
                 .setConfig(config) //
                 // .addGameLogger(new PrintGameLogger())//
                 .build(players);
         // 东风战
-        majongGame.setConfig(builder.getConfig());
+        majongGame.setConfig(config);
 
         majongGame.startGame();
 
-        int[] expected = builder.getPlayerPoints();
+        int[] expected = paifuGame.getEndPoints();
         int[] actual = majongGame.getGameCore().getPlayerPoints();
         for (int i = 0; i < players.size(); i++) {
             assertEquals(expected[i], actual[i]);

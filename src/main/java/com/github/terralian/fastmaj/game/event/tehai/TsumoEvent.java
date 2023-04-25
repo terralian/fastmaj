@@ -1,7 +1,8 @@
 package com.github.terralian.fastmaj.game.event.tehai;
 
-import com.github.terralian.fastmaj.game.event.ActionEvent;
+import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.event.GameEventEnum;
+import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -13,7 +14,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class TsumoEvent implements ActionEvent {
+public class TsumoEvent implements TehaiActionEvent {
 
     /**
      * 自摸的玩家
@@ -23,5 +24,15 @@ public class TsumoEvent implements ActionEvent {
     @Override
     public GameEventEnum getType() {
         return GameEventEnum.TSUMO;
+    }
+
+    @Override
+    public TehaiActionType getActionType() {
+        return TehaiActionType.TSUMO;
+    }
+
+    @Override
+    public IHai getIfHai() {
+        return null;
     }
 }

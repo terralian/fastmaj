@@ -1,6 +1,8 @@
 package com.github.terralian.fastmaj.game.event.tehai;
 
+import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.event.GameEventEnum;
+import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -22,5 +24,15 @@ public class KitaEvent implements TehaiActionEvent {
     @Override
     public GameEventEnum getType() {
         return GameEventEnum.KITA;
+    }
+
+    @Override
+    public TehaiActionType getActionType() {
+        return TehaiActionType.KITA;
+    }
+
+    @Override
+    public IHai getIfHai() {
+        return null;
     }
 }

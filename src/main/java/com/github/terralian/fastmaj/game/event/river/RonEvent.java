@@ -1,6 +1,5 @@
 package com.github.terralian.fastmaj.game.event.river;
 
-import com.github.terralian.fastmaj.game.event.ActionEvent;
 import com.github.terralian.fastmaj.game.event.GameEventEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -11,7 +10,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-public class RonEvent implements ActionEvent {
+public class RonEvent implements RiverActionEvent {
 
     /**
      * 放铳的玩家

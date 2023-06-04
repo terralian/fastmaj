@@ -1,8 +1,5 @@
 package com.github.terralian.fastmaj.test.game;
 
-import java.util.ArrayList;
-
-import com.github.terralian.fastmaj.FastMajong;
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.GameCore;
 import com.github.terralian.fastmaj.game.IGameCore;
@@ -10,11 +7,14 @@ import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.log.ChainGameLoggerBuilder;
 import com.github.terralian.fastmaj.game.log.IGameLogger;
 import com.github.terralian.fastmaj.game.log.PrintGameLogger;
+import com.github.terralian.fastmaj.tehai.FastSyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
 import com.github.terralian.fastmaj.yama.SimpleRandomYamaWorker;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -31,7 +31,7 @@ public class GameCoreTest {
     @Before
     public void before() {
         yamaWorker = new SimpleRandomYamaWorker();
-        syatenCalculator = FastMajong.doGetSyatenCalculator();
+        syatenCalculator = new FastSyatenCalculator();
     }
 
     @Test

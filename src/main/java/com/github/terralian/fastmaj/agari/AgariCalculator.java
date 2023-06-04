@@ -1,25 +1,23 @@
 package com.github.terralian.fastmaj.agari;
 
-import java.util.Arrays;
-import java.util.List;
-
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
-import com.github.terralian.fastmaj.third.mjscore.MjscoreAdapter;
 import com.github.terralian.fastmaj.util.EmptyUtil;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.IYakuMatcher;
-import com.github.terralian.fastmaj.yaku.YakuMatcher;
 import com.github.terralian.fastmaj.yaku.hn.NormalDora;
 import com.github.terralian.fastmaj.yaku.hn.RedDora;
 import com.github.terralian.fastmaj.yaku.hn.UraDora;
 import com.github.terralian.fastmaj.yama.DoraHelper;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 默认和了计算器
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class AgariCalculator implements IAgariCalculator {
 
@@ -30,13 +28,13 @@ public class AgariCalculator implements IAgariCalculator {
      */
     private IYakuMatcher yakuMatcher;
     /**
+     * 和了时，手牌分割器
+     */
+    private ITehaiAgariDivider agariDivider;
+    /**
      * 符数计算
      */
     private IFuCalculator fuCalculator;
-    /**
-     * 和了时，手牌分割器
-     */
-    private ITehaiAgariDivider tehaiAgariDivider;
     /**
      * 分数计算器
      */
@@ -44,12 +42,18 @@ public class AgariCalculator implements IAgariCalculator {
 
     /**
      * 初始化构建和了计算器
+     *
+     * @param yakuMatcher 役种计算器
+     * @param agariDivider 和了分割器
+     * @param fuCalculator 符数计算器
+     * @param pointCalculator 分数计算器
      */
-    public AgariCalculator() {
-        yakuMatcher = new YakuMatcher();
-        fuCalculator = new FuCalculator();
-        tehaiAgariDivider = new MjscoreAdapter();
-        pointCalculator = new PointCalculator();
+    public AgariCalculator(IYakuMatcher yakuMatcher, ITehaiAgariDivider agariDivider, IFuCalculator fuCalculator,
+                           IPointCalculator pointCalculator) {
+        this.yakuMatcher = yakuMatcher;
+        this.agariDivider = agariDivider;
+        this.fuCalculator = fuCalculator;
+        this.pointCalculator = pointCalculator;
     }
 
     /**
@@ -65,16 +69,18 @@ public class AgariCalculator implements IAgariCalculator {
     public AgariInfo calc(ITehai tehai, IHai agariHai, Integer fromPlayer, List<IHai> doraHais, List<IHai> uraDoraHais,
             PlayerGameContext context) {
         int position = context.getPosition();
-        List<DivideInfo> divideInfos = tehaiAgariDivider.divide(tehai, position != fromPlayer, agariHai);
+        // 使用和了分割器对手牌进行分割，分割的结果更容易进行和了役种匹配
+        List<DivideInfo> divideInfos = agariDivider.divide(tehai, position != fromPlayer, agariHai);
 
-        AgariInfo max = null;
+        AgariInfo bestAgariInfo = null;
+        // 循环所有分割方案，找到使分数最大的一种
         for (DivideInfo divideInfo : divideInfos) {
-            AgariInfo agariInfo = calc(tehai, agariHai, divideInfo, fromPlayer, doraHais, uraDoraHais,context);
-            if (max == null || max.getScore() < agariInfo.getScore()) {
-                max = agariInfo;
+            AgariInfo agariInfo = this.calc(tehai, agariHai, divideInfo, fromPlayer, doraHais, uraDoraHais, context);
+            if (bestAgariInfo == null || bestAgariInfo.getScore() < agariInfo.getScore()) {
+                bestAgariInfo = agariInfo;
             }
         }
-        return max;
+        return bestAgariInfo;
     }
     
     /**
@@ -95,12 +101,12 @@ public class AgariCalculator implements IAgariCalculator {
         // 役种
         List<IYaku> yakus = yakuMatcher.match(tehai, divideInfo, context);
         // 悬赏役
-        buildDoraYaku(yakus, tehai, doraHais, uraDoraHais);
+        addDoraYaku(yakus, tehai, doraHais, uraDoraHais);
         // 番数
         int han = IYaku.sumHan(yakus, context.isNaki());
         // 符
         int fu = fuCalculator.compute(tehai, agariHai, divideInfo, context);
-        // 分数，玩家分数增减结果
+        // 计算底分
         int basePoint = pointCalculator.calcBasePoint(yakus, fu, han, context.getGameConfig());
         // 立直棒
         int kyotaku = context.getKyotaku();
@@ -129,13 +135,13 @@ public class AgariCalculator implements IAgariCalculator {
 
     /**
      * 组装悬赏役
-     * 
+     *
      * @param yakus 役种集合
      * @param tehai 手牌
      * @param doraHais 宝牌
      * @param uraDoraHais 里宝牌
      */
-    private void buildDoraYaku(List<IYaku> yakus, ITehai tehai, List<IHai> doraHais, List<IHai> uraDoraHais) {
+    protected void addDoraYaku(List<IYaku> yakus, ITehai tehai, List<IHai> doraHais, List<IHai> uraDoraHais) {
         // 役满的话，不计悬赏
         if (EmptyUtil.isNotEmpty(yakus) && yakus.get(0).isYakuman()) {
             return;
@@ -156,5 +162,41 @@ public class AgariCalculator implements IAgariCalculator {
         if (redDora > 0) {
             yakus.add(new RedDora(redDora));
         }
+    }
+
+    // ------------------------------------------
+    // Getter - Setter
+    // ------------------------------------------
+
+    public IYakuMatcher getYakuMatcher() {
+        return yakuMatcher;
+    }
+
+    public void setYakuMatcher(IYakuMatcher yakuMatcher) {
+        this.yakuMatcher = yakuMatcher;
+    }
+
+    public ITehaiAgariDivider getAgariDivider() {
+        return agariDivider;
+    }
+
+    public void setAgariDivider(ITehaiAgariDivider agariDivider) {
+        this.agariDivider = agariDivider;
+    }
+
+    public IFuCalculator getFuCalculator() {
+        return fuCalculator;
+    }
+
+    public void setFuCalculator(IFuCalculator fuCalculator) {
+        this.fuCalculator = fuCalculator;
+    }
+
+    public IPointCalculator getPointCalculator() {
+        return pointCalculator;
+    }
+
+    public void setPointCalculator(IPointCalculator pointCalculator) {
+        this.pointCalculator = pointCalculator;
     }
 }

@@ -1,15 +1,13 @@
 package com.github.terralian.fastmaj.game.validator.tehai;
 
-import java.util.Set;
-
-import com.github.terralian.fastmaj.FastMajong;
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.IYuukouhaiCalculator;
-import com.github.terralian.fastmaj.tehai.YuukouhaiCalculator;
+
+import java.util.Set;
 
 /**
  * 暗杠动作可执行判断
@@ -21,13 +19,13 @@ public class AnnkanValidator implements ITehaiActionValidator {
     /**
      * 有效牌计算器
      */
-    private IYuukouhaiCalculator yuukouhaiCalculator;
+    private final IYuukouhaiCalculator yuukouhaiCalculator;
 
     /**
      * 初始化构建暗杠判定器
      */
-    public AnnkanValidator() {
-        yuukouhaiCalculator = new YuukouhaiCalculator(FastMajong.doGetSyatenCalculator());
+    public AnnkanValidator(IYuukouhaiCalculator yuukouhaiCalculator) {
+        this.yuukouhaiCalculator = yuukouhaiCalculator;
     }
 
     @Override

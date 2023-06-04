@@ -1,5 +1,14 @@
 package com.github.terralian.fastmaj.game;
 
+import com.github.terralian.fastmaj.agari.AgariCalculator;
+import com.github.terralian.fastmaj.agari.FuCalculator;
+import com.github.terralian.fastmaj.agari.IAgariCalculator;
+import com.github.terralian.fastmaj.agari.IFuCalculator;
+import com.github.terralian.fastmaj.agari.IPointCalculator;
+import com.github.terralian.fastmaj.agari.IRonYakuMatcher;
+import com.github.terralian.fastmaj.agari.ITehaiAgariDivider;
+import com.github.terralian.fastmaj.agari.PointCalculator;
+import com.github.terralian.fastmaj.agari.RonYakuMatcher;
 import com.github.terralian.fastmaj.game.log.ChainGameLoggerBuilder;
 import com.github.terralian.fastmaj.game.log.IGameLogger;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyokuResolverManager;
@@ -7,6 +16,11 @@ import com.github.terralian.fastmaj.game.ryuuky.RyuukyokuResolverManager;
 import com.github.terralian.fastmaj.game.validator.GameEndValidator;
 import com.github.terralian.fastmaj.tehai.FastSyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
+import com.github.terralian.fastmaj.tehai.IYuukouhaiCalculator;
+import com.github.terralian.fastmaj.tehai.YuukouhaiCalculator;
+import com.github.terralian.fastmaj.third.mjscore.MjscoreAdapter;
+import com.github.terralian.fastmaj.yaku.IYakuMatcher;
+import com.github.terralian.fastmaj.yaku.YakuMatcher;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
 import com.github.terralian.fastmaj.yama.TenhouYamaWorker;
 import lombok.Getter;
@@ -20,6 +34,46 @@ import lombok.Getter;
 @Getter
 public class GameComponent {
 
+    // ----------------------------------------
+    // 计算器
+    // ----------------------------------------
+
+    /**
+     * 向听计算器
+     */
+    private ISyatenCalculator syatenCalculator;
+    /**
+     * 役种匹配器
+     */
+    private IYakuMatcher yakuMatcher;
+    /**
+     * 和了手牌分割器
+     */
+    private ITehaiAgariDivider agariDivider;
+    /**
+     * 有效牌计算器
+     */
+    private IYuukouhaiCalculator yuukouhaiCalculator;
+    /**
+     * 荣和计算器
+     */
+    private IRonYakuMatcher ronYakuMatcher;
+    /**
+     * 符计算器
+     */
+    private IFuCalculator fuCalculator;
+    /**
+     * 分数计算器
+     */
+    private IPointCalculator pointCalculator;
+    /**
+     * 和了计算器
+     */
+    private IAgariCalculator agariCalculator;
+
+    // ----------------------------------------
+    // 判定器 - 管理器 - 其他组件
+    // ----------------------------------------
     /**
      * 游戏结束判定器
      */
@@ -33,19 +87,13 @@ public class GameComponent {
      */
     private IPlayerActionManager playerActionManager;
     /**
-     * 向听计算器
+     * 日志构建器
      */
-    private ISyatenCalculator syatenCalculator;
-
+    private final ChainGameLoggerBuilder chainGameLoggerBuilder;
     /**
      * 牌山生成器
      */
     private IYamaWorker yamaWorker;
-
-    /**
-     * 日志构建器
-     */
-    private final ChainGameLoggerBuilder chainGameLoggerBuilder;
 
     /**
      * 使用天凤的组件配置
@@ -91,10 +139,21 @@ public class GameComponent {
      * 通用的默认组件
      */
     private void useCommonDefault() {
+        // 先构建计算器
+        this.syatenCalculator = new FastSyatenCalculator();
+        this.yakuMatcher = new YakuMatcher();
+        this.agariDivider = new MjscoreAdapter();
+        this.fuCalculator = new FuCalculator();
+        this.pointCalculator = new PointCalculator();
+        this.yuukouhaiCalculator = new YuukouhaiCalculator(this.syatenCalculator);
+        this.ronYakuMatcher = new RonYakuMatcher(this.yakuMatcher, this.agariDivider);
+        this.agariCalculator = new AgariCalculator(this.yakuMatcher, this.agariDivider, this.fuCalculator,
+                this.pointCalculator);
+
+        // 再构建其他组件
         this.gameEndValidator = new GameEndValidator();
         this.ryuukyokuResolverManager = RyuukyokuResolverManager.defaultManager();
-        this.playerActionManager = PlayerActionManager.defaultManager();
-        this.syatenCalculator = new FastSyatenCalculator();
+        this.playerActionManager = PlayerActionManager.defaultManager(this);
     }
 
     private GameComponent() {

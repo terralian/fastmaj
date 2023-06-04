@@ -1,11 +1,6 @@
 package com.github.terralian.fastmaj.game.validator.river;
 
-import java.util.List;
-import java.util.Set;
-
-import com.github.terralian.fastmaj.FastMajong;
 import com.github.terralian.fastmaj.agari.IRonYakuMatcher;
-import com.github.terralian.fastmaj.agari.RonYakuMatcher;
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
@@ -19,6 +14,9 @@ import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.IYuukouhaiCalculator;
 import com.github.terralian.fastmaj.yaku.IYaku;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * 计算荣和动作是否可执行
@@ -40,15 +38,17 @@ public class RonValidator implements IRiverActionValidator {
      */
     private IRonYakuMatcher ronYakuMatcher;
 
-    public RonValidator() {
-        this.yuukouhaiCalculator = FastMajong.doGetYuukouhaiCalculator();
-        this.syatenCalculator = FastMajong.doGetSyatenCalculator();
-        this.ronYakuMatcher = new RonYakuMatcher();
+    public RonValidator(ISyatenCalculator syatenCalculator, IYuukouhaiCalculator yuukouhaiCalculator,
+                        IRonYakuMatcher ronYakuMatcher) {
+        this.syatenCalculator = syatenCalculator;
+        this.yuukouhaiCalculator = yuukouhaiCalculator;
+        this.ronYakuMatcher = ronYakuMatcher;
     }
 
     @Override
-    public boolean resolveAction(int position, TehaiActionValue rivalTehaiAction, GameConfig gameConfig, IGameCore gameCore,
-            PlayerGameContext context) {
+    public boolean resolveAction(int position, TehaiActionValue rivalTehaiAction, GameConfig gameConfig,
+                                 IGameCore gameCore,
+                                 PlayerGameContext context) {
         // 未听牌或者振听
         PlayerHideStatus hideStatus = gameCore.getPlayerHide(position);
         if (hideStatus.getSyaten() > 0 || hideStatus.isFuriten()) {

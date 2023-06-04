@@ -1,20 +1,18 @@
 package com.github.terralian.fastmaj.agari;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
-import com.github.terralian.fastmaj.third.mjscore.MjscoreAdapter;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.IYakuMatcher;
-import com.github.terralian.fastmaj.yaku.YakuMatcher;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 可以荣和的役匹配，默认实现
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class RonYakuMatcher implements IRonYakuMatcher {
 
@@ -29,10 +27,15 @@ public class RonYakuMatcher implements IRonYakuMatcher {
      */
     private ITehaiAgariDivider tehaiAgariDivider;
 
-
-    public RonYakuMatcher() {
-        yakuMatcher = new YakuMatcher();
-        tehaiAgariDivider = new MjscoreAdapter();
+    /**
+     * 根据{@link IYakuMatcher}和{@link ITehaiAgariDivider}构建荣和役牌匹配器
+     *
+     * @param yakuMatcher
+     * @param divider
+     */
+    public RonYakuMatcher(IYakuMatcher yakuMatcher, ITehaiAgariDivider divider) {
+        this.yakuMatcher = yakuMatcher;
+        this.tehaiAgariDivider = divider;
     }
 
     @Override
@@ -52,5 +55,21 @@ public class RonYakuMatcher implements IRonYakuMatcher {
             }
         }
         return yakus;
+    }
+
+    public IYakuMatcher getYakuMatcher() {
+        return yakuMatcher;
+    }
+
+    public void setYakuMatcher(IYakuMatcher yakuMatcher) {
+        this.yakuMatcher = yakuMatcher;
+    }
+
+    public ITehaiAgariDivider getTehaiAgariDivider() {
+        return tehaiAgariDivider;
+    }
+
+    public void setTehaiAgariDivider(ITehaiAgariDivider tehaiAgariDivider) {
+        this.tehaiAgariDivider = tehaiAgariDivider;
     }
 }

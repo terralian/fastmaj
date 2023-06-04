@@ -18,11 +18,11 @@ public class FuritenChecker implements IFuritenChecker {
     /**
      * 向听计算器
      */
-    private ISyatenCalculator syatenCalculator;
+    private final ISyatenCalculator syatenCalculator;
     /**
      * 有效牌计算器
      */
-    private IYuukouhaiCalculator yuukouhaiCalculator;
+    private final IYuukouhaiCalculator yuukouhaiCalculator;
 
     public FuritenChecker(ISyatenCalculator syatenCalculator, IYuukouhaiCalculator yuukouhaiCalculator) {
         this.syatenCalculator = syatenCalculator;
@@ -42,25 +42,5 @@ public class FuritenChecker implements IFuritenChecker {
         }
         Set<IHai> yuukous = yuukouhaiCalculator.calcMin(tehai);
         return yuukous.stream().anyMatch(haiRiver::hasKiri);
-    }
-
-    // -----------------------------------------------
-    //  Getter - Setter
-    // -----------------------------------------------
-
-    public ISyatenCalculator getSyatenCalculator() {
-        return syatenCalculator;
-    }
-
-    public void setSyatenCalculator(ISyatenCalculator syatenCalculator) {
-        this.syatenCalculator = syatenCalculator;
-    }
-
-    public IYuukouhaiCalculator getYuukouhaiCalculator() {
-        return yuukouhaiCalculator;
-    }
-
-    public void setYuukouhaiCalculator(IYuukouhaiCalculator yuukouhaiCalculator) {
-        this.yuukouhaiCalculator = yuukouhaiCalculator;
     }
 }

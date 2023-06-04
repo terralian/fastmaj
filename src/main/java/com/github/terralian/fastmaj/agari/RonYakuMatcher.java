@@ -21,11 +21,11 @@ public class RonYakuMatcher implements IRonYakuMatcher {
      * <p/>
      * 通过更改役匹配器，可以决定规则使用什么役种，比如是否启用人和，古役。
      */
-    private IYakuMatcher yakuMatcher;
+    private final IYakuMatcher yakuMatcher;
     /**
      * 和了时，手牌分割器
      */
-    private ITehaiAgariDivider tehaiAgariDivider;
+    private final ITehaiAgariDivider tehaiAgariDivider;
 
     /**
      * 根据{@link IYakuMatcher}和{@link ITehaiAgariDivider}构建荣和役牌匹配器
@@ -57,19 +57,4 @@ public class RonYakuMatcher implements IRonYakuMatcher {
         return yakus;
     }
 
-    public IYakuMatcher getYakuMatcher() {
-        return yakuMatcher;
-    }
-
-    public void setYakuMatcher(IYakuMatcher yakuMatcher) {
-        this.yakuMatcher = yakuMatcher;
-    }
-
-    public ITehaiAgariDivider getTehaiAgariDivider() {
-        return tehaiAgariDivider;
-    }
-
-    public void setTehaiAgariDivider(ITehaiAgariDivider tehaiAgariDivider) {
-        this.tehaiAgariDivider = tehaiAgariDivider;
-    }
 }

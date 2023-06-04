@@ -1,7 +1,5 @@
 package com.github.terralian.fastmaj.agari;
 
-import java.util.List;
-
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
@@ -9,13 +7,20 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.ITehaiLock;
 import com.github.terralian.fastmaj.yaku.h1.Pinfu;
 
+import java.util.List;
+
 /**
  * 符数计算，在和牌时计算符数，会校验向听数，即仅在和牌时才能计算符数
- * 
+ *
  * @author 作者: terra.lian
- * 
  */
 public class FuCalculator implements IFuCalculator {
+
+    private final Pinfu pinfu;
+
+    public FuCalculator() {
+        pinfu = new Pinfu();
+    }
 
     @Override
     public int compute(ITehai tehai, IHai agariHai, List<DivideInfo> divideInfos, PlayerGameContext context) {
@@ -43,7 +48,6 @@ public class FuCalculator implements IFuCalculator {
         }
 
         // 【特殊】平和自摸固定20符，若荣和加10符
-        Pinfu pinfu = new Pinfu();
         if (pinfu.match(tehai, divideInfo, context)) {
             return fu;
         }
@@ -51,10 +55,7 @@ public class FuCalculator implements IFuCalculator {
         // 雀头字牌，客风0符，三元牌2符，自风场风各加2符
         IHai jantou = divideInfo.getJantou();
         if (jantou.isJiHai()) {
-            if (jantou.isSanGenHai())
-                fu += 2;
-            else
-                fu += getJantouKazeFu(jantou, context);
+            fu += jantou.isSanGenHai() ? 2 : getJantouKazeFu(jantou, context);
         }
 
         ITehaiLock tehaiLock = tehai.getLock();
@@ -120,12 +121,10 @@ public class FuCalculator implements IFuCalculator {
      */
     private int getJantouKazeFu(IHai jantou, PlayerGameContext context) {
         int fu = 0;
-        if (Encode34.toEncode34(context.getBakaze()) == jantou.getValue()) {
+        if (Encode34.equals(jantou, context.getBakaze()))
             fu += 2;
-        }
-        if (Encode34.toEncode34(context.getJikaze()) == jantou.getValue()) {
+        if (Encode34.equals(jantou, context.getJikaze()))
             fu += 2;
-        }
         return fu;
     }
 }

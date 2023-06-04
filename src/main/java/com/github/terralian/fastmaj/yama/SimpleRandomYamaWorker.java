@@ -1,8 +1,8 @@
 package com.github.terralian.fastmaj.yama;
 
-import java.util.Random;
-
 import com.github.terralian.fastmaj.yama.seed.random.IdWorker;
+
+import java.util.Random;
 
 /**
  * 一个简易随机的牌山生成器
@@ -11,7 +11,7 @@ import com.github.terralian.fastmaj.yama.seed.random.IdWorker;
  */
 public class SimpleRandomYamaWorker implements IYamaWorker {
 
-    private Random r;
+    private final Random r;
 
     private long seed;
 

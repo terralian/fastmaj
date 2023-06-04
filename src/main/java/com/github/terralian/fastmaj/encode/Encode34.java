@@ -1,16 +1,16 @@
 package com.github.terralian.fastmaj.encode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
-
 import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.hai.HaiTypeEnum;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.Tehai;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * 34编码相关方法和编码值
@@ -423,8 +423,18 @@ public abstract class Encode34 {
     // ------------------------------------
 
     /**
+     * 判断牌是否是某个风牌，如equals(东, KazeEnum.DON)
+     *
+     * @param hai 目标牌
+     * @param kaze 目标风
+     */
+    public static boolean equals(IHai hai, KazeEnum kaze) {
+        return toEncode34(kaze) == hai.getValue();
+    }
+
+    /**
      * 多张牌中获取最小的那张，该方法通过{@link IHai#getValue()}进行34编码比较
-     * 
+     *
      * @param hais 需要比较的牌
      */
     public static IHai min(IHai... hais) {

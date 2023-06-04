@@ -1,13 +1,12 @@
 package com.github.terralian.fastmaj.agari;
 
-import java.util.Set;
-
-import com.github.terralian.fastmaj.FastMajong;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.river.IHaiRiver;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.IYuukouhaiCalculator;
+
+import java.util.Set;
 
 /**
  * 振听判定的默认实现
@@ -25,14 +24,14 @@ public class FuritenChecker implements IFuritenChecker {
      */
     private IYuukouhaiCalculator yuukouhaiCalculator;
 
-    public FuritenChecker() {
-        syatenCalculator = FastMajong.doGetSyatenCalculator();
-        yuukouhaiCalculator = FastMajong.doGetYuukouhaiCalculator();
+    public FuritenChecker(ISyatenCalculator syatenCalculator, IYuukouhaiCalculator yuukouhaiCalculator) {
+        this.syatenCalculator = syatenCalculator;
+        this.yuukouhaiCalculator = yuukouhaiCalculator;
     }
 
     /**
      * 判定手牌是否振听
-     * 
+     *
      * @param tehai 手牌
      * @param haiRiver 牌河
      */
@@ -45,4 +44,23 @@ public class FuritenChecker implements IFuritenChecker {
         return yuukous.stream().anyMatch(haiRiver::hasKiri);
     }
 
+    // -----------------------------------------------
+    //  Getter - Setter
+    // -----------------------------------------------
+
+    public ISyatenCalculator getSyatenCalculator() {
+        return syatenCalculator;
+    }
+
+    public void setSyatenCalculator(ISyatenCalculator syatenCalculator) {
+        this.syatenCalculator = syatenCalculator;
+    }
+
+    public IYuukouhaiCalculator getYuukouhaiCalculator() {
+        return yuukouhaiCalculator;
+    }
+
+    public void setYuukouhaiCalculator(IYuukouhaiCalculator yuukouhaiCalculator) {
+        this.yuukouhaiCalculator = yuukouhaiCalculator;
+    }
 }

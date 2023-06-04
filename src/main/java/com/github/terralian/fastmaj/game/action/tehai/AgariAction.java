@@ -1,6 +1,5 @@
 package com.github.terralian.fastmaj.game.action.tehai;
 
-import com.github.terralian.fastmaj.FastMajong;
 import com.github.terralian.fastmaj.agari.IAgariCalculator;
 import com.github.terralian.fastmaj.game.action.IPlayerAction;
 
@@ -18,7 +17,7 @@ public abstract class AgariAction implements IPlayerAction {
      */
     protected IAgariCalculator agariCalculator;
 
-    public AgariAction() {
-        agariCalculator = FastMajong.doGetAgariCalculator();
+    public AgariAction(IAgariCalculator agariCalculator) {
+        this.agariCalculator = agariCalculator;
     }
 }

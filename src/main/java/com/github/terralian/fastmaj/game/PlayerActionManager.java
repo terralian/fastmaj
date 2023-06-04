@@ -1,9 +1,5 @@
 package com.github.terralian.fastmaj.game;
 
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.Set;
-
 import com.github.terralian.fastmaj.game.action.river.ChiiAction;
 import com.github.terralian.fastmaj.game.action.river.IRiverAction;
 import com.github.terralian.fastmaj.game.action.river.MinKanAction;
@@ -35,9 +31,13 @@ import com.github.terralian.fastmaj.game.validator.tehai.ReachValidator;
 import com.github.terralian.fastmaj.game.validator.tehai.Ryuukyoku99Validator;
 import com.github.terralian.fastmaj.game.validator.tehai.TsumoValidator;
 
+import java.util.EnumMap;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * 默认的玩家动作管理器实现，使用{@link EnumMap}进行存储
- * 
+ *
  * @author terra.lian
  */
 public class PlayerActionManager implements IPlayerActionManager {
@@ -51,11 +51,10 @@ public class PlayerActionManager implements IPlayerActionManager {
     /**
      * 初始化默认的玩家动作管理器
      */
-    public static PlayerActionManager defaultManager() {
+    public static PlayerActionManager defaultManager(GameComponent gameComponent) {
         PlayerActionManager actionManager = new PlayerActionManager();
-        actionManager.initialTehaiAction();
-        actionManager.initialRiverAction();
-
+        actionManager.initialTehaiAction(gameComponent);
+        actionManager.initialRiverAction(gameComponent);
         return actionManager;
     }
 
@@ -136,7 +135,7 @@ public class PlayerActionManager implements IPlayerActionManager {
     /**
      * 初始化手牌动作（及判定器）
      */
-    private void initialTehaiAction() {
+    private void initialTehaiAction(GameComponent gameComponent) {
         tehaiActionMap = new EnumMap<>(TehaiActionType.class);
         tehaiActionMap.put(TehaiActionType.ANNKAN, new AnnkanAction());
         tehaiActionMap.put(TehaiActionType.KAKAN, new KakanAction());
@@ -144,10 +143,11 @@ public class PlayerActionManager implements IPlayerActionManager {
         tehaiActionMap.put(TehaiActionType.KITA, new KitaAction());
         tehaiActionMap.put(TehaiActionType.REACH, new ReachAction());
         tehaiActionMap.put(TehaiActionType.RYUUKYOKU, new Ryuukyoku99Action());
-        tehaiActionMap.put(TehaiActionType.TSUMO, new TsumoAction());
+        tehaiActionMap.put(TehaiActionType.TSUMO, new TsumoAction(gameComponent.getAgariCalculator()));
 
         tehaiActionValidatorMap = new EnumMap<>(TehaiActionType.class);
-        tehaiActionValidatorMap.put(TehaiActionType.ANNKAN, new AnnkanValidator());
+        tehaiActionValidatorMap.put(TehaiActionType.ANNKAN,
+                new AnnkanValidator(gameComponent.getYuukouhaiCalculator()));
         tehaiActionValidatorMap.put(TehaiActionType.KAKAN, new KakanValidator());
         tehaiActionValidatorMap.put(TehaiActionType.KIRI, new KiriValidator());
         tehaiActionValidatorMap.put(TehaiActionType.KITA, new KitaValidator());
@@ -159,17 +159,18 @@ public class PlayerActionManager implements IPlayerActionManager {
     /**
      * 初始化手牌动作（及判定器）
      */
-    private void initialRiverAction() {
+    private void initialRiverAction(GameComponent gameComponent) {
         riverActionMap = new EnumMap<>(RiverActionType.class);
         riverActionMap.put(RiverActionType.CHII, new ChiiAction());
         riverActionMap.put(RiverActionType.MINKAN, new MinKanAction());
         riverActionMap.put(RiverActionType.PON, new PonAction());
-        riverActionMap.put(RiverActionType.RON, new RonAction());
+        riverActionMap.put(RiverActionType.RON, new RonAction(gameComponent.getAgariCalculator()));
 
         riverActionValidatorMap = new EnumMap<>(RiverActionType.class);
         riverActionValidatorMap.put(RiverActionType.CHII, new ChiiValidator());
         riverActionValidatorMap.put(RiverActionType.MINKAN, new MinKanValidator());
         riverActionValidatorMap.put(RiverActionType.PON, new PonValidator());
-        riverActionValidatorMap.put(RiverActionType.RON, new RonValidator());
+        riverActionValidatorMap.put(RiverActionType.RON, new RonValidator(gameComponent.getSyatenCalculator(),
+                gameComponent.getYuukouhaiCalculator(), gameComponent.getRonYakuMatcher()));
     }
 }

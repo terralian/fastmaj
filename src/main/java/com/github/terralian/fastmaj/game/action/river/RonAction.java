@@ -1,9 +1,7 @@
 package com.github.terralian.fastmaj.game.action.river;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.github.terralian.fastmaj.agari.AgariInfo;
+import com.github.terralian.fastmaj.agari.IAgariCalculator;
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.action.tehai.AgariAction;
@@ -12,12 +10,19 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 荣和动作
- * 
+ *
  * @author terra.lian
  */
 public class RonAction extends AgariAction implements IRiverAction {
+
+    public RonAction(IAgariCalculator agariCalculator) {
+        super(agariCalculator);
+    }
 
     /**
      * 执行荣和操作

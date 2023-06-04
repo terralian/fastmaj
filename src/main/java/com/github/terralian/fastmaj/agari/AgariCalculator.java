@@ -26,19 +26,19 @@ public class AgariCalculator implements IAgariCalculator {
      * <p/>
      * 通过更改役匹配器，可以决定规则使用什么役种，比如是否启用人和，古役。
      */
-    private IYakuMatcher yakuMatcher;
+    private final IYakuMatcher yakuMatcher;
     /**
      * 和了时，手牌分割器
      */
-    private ITehaiAgariDivider agariDivider;
+    private final ITehaiAgariDivider agariDivider;
     /**
      * 符数计算
      */
-    private IFuCalculator fuCalculator;
+    private final IFuCalculator fuCalculator;
     /**
      * 分数计算器
      */
-    private IPointCalculator pointCalculator;
+    private final IPointCalculator pointCalculator;
 
     /**
      * 初始化构建和了计算器
@@ -162,41 +162,5 @@ public class AgariCalculator implements IAgariCalculator {
         if (redDora > 0) {
             yakus.add(new RedDora(redDora));
         }
-    }
-
-    // ------------------------------------------
-    // Getter - Setter
-    // ------------------------------------------
-
-    public IYakuMatcher getYakuMatcher() {
-        return yakuMatcher;
-    }
-
-    public void setYakuMatcher(IYakuMatcher yakuMatcher) {
-        this.yakuMatcher = yakuMatcher;
-    }
-
-    public ITehaiAgariDivider getAgariDivider() {
-        return agariDivider;
-    }
-
-    public void setAgariDivider(ITehaiAgariDivider agariDivider) {
-        this.agariDivider = agariDivider;
-    }
-
-    public IFuCalculator getFuCalculator() {
-        return fuCalculator;
-    }
-
-    public void setFuCalculator(IFuCalculator fuCalculator) {
-        this.fuCalculator = fuCalculator;
-    }
-
-    public IPointCalculator getPointCalculator() {
-        return pointCalculator;
-    }
-
-    public void setPointCalculator(IPointCalculator pointCalculator) {
-        this.pointCalculator = pointCalculator;
     }
 }

@@ -1,9 +1,5 @@
 package com.github.terralian.fastmaj.paifu.tenhou;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.github.terralian.fastmaj.encode.Encode136;
 import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.event.ActionEvent;
@@ -24,6 +20,10 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
 import com.github.terralian.fastmaj.paifu.domain.PaifuKyoku;
 import com.github.terralian.fastmaj.tehai.ITehai;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 天凤牌谱解析器实例，用于将牌谱解析为{@link PaifuGame}
@@ -148,7 +148,7 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
                 .setFrom(from) //
                 .setPosition(position) //
                 .setSelfHais(getHaiByIds(selfHai)) //
-                .setNakiHai(getHaiById(nakiHai)); //
+                .setFromHai(getHaiById(nakiHai)); //
         currentKyoku.getActions().add(chiiEvent);
     }
 
@@ -158,7 +158,7 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
                 .setFrom(from) //
                 .setPosition(position) //
                 .setSelfHais(getHaiByIds(selfHai)) //
-                .setNakiHai(getHaiById(nakiHai)); //
+                .setFromHai(getHaiById(nakiHai)); //
         currentKyoku.getActions().add(ponEvent);
     }
 
@@ -176,7 +176,7 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
                 .setFrom(from)
                 .setPosition(position)
                 .setSelfHais(getHaiByIds(selfHai))
-                .setNakiHai(getHaiById(nakiHai));
+                .setFromHai(getHaiById(nakiHai));
         currentKyoku.getActions().add(minkanEvent);
     }
 

@@ -7,15 +7,16 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 
 /**
+ * CreateByTerra
+ *
  * @author terra.lian
- * @since 2023-03-29
+ * @since 2023-06-04
  */
 @Data
 @Accessors(chain = true)
-public class RonEvent implements RiverActionEvent {
-
+public class SkipEvent implements RiverActionEvent {
     /**
-     * 放铳的玩家
+     * 处理的玩家
      */
     private int from;
 
@@ -25,22 +26,23 @@ public class RonEvent implements RiverActionEvent {
     private int position;
 
     /**
-     * 荣和的牌
+     * 来源的牌
      */
     private IHai fromHai;
 
     /**
      * 优先级
      */
-    private final int order = 0;
+    private final int order = Integer.MIN_VALUE;
 
     @Override
     public GameEventEnum getType() {
-        return GameEventEnum.RON;
+        return GameEventEnum.SKIP;
     }
 
     @Override
     public RiverActionType getRiverType() {
-        return RiverActionType.RON;
+        return RiverActionType.SKIP;
     }
+
 }

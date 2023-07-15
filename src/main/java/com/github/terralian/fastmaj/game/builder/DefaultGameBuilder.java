@@ -1,8 +1,6 @@
 package com.github.terralian.fastmaj.game.builder;
 
-import java.util.List;
-
-import com.github.terralian.fastmaj.FastMajong;
+import com.github.terralian.fastmaj.game.GameComponent;
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.GameCore;
 import com.github.terralian.fastmaj.game.IGameCore;
@@ -16,6 +14,7 @@ import com.github.terralian.fastmaj.game.ryuuky.IRyuukyokuResolverManager;
 import com.github.terralian.fastmaj.game.ryuuky.RyuukyokuResolverManager;
 import com.github.terralian.fastmaj.game.validator.GameEndValidator;
 import com.github.terralian.fastmaj.player.IPlayer;
+import com.github.terralian.fastmaj.tehai.FastSyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.util.EmptyUtil;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
@@ -25,9 +24,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import java.util.List;
+
 /**
  * 默认的游戏构建器，除{@link IPlayer}外，其他都有默认配置
- * 
+ *
  * @author terra.lian
  */
 @Setter
@@ -54,10 +55,12 @@ public class DefaultGameBuilder {
      * 流局可执行事件判定器
      */
     private IRyuukyokuResolverManager ryuukyokuResolverManager = RyuukyokuResolverManager.defaultManager();
+
+    private GameComponent gameComponent = GameComponent.useTenhou();
     /**
      * 玩家动作管理器
      */
-    private IPlayerActionManager playerActionManager = PlayerActionManager.defaultManager();
+    private IPlayerActionManager playerActionManager = PlayerActionManager.defaultManager(gameComponent);
     /**
      * 牌山生成器
      */
@@ -65,7 +68,7 @@ public class DefaultGameBuilder {
     /**
      * 向听计算器
      */
-    private ISyatenCalculator syatenCalculator = FastMajong.doGetSyatenCalculator();
+    private ISyatenCalculator syatenCalculator = new FastSyatenCalculator();
     /**
      * 链式构建器
      */

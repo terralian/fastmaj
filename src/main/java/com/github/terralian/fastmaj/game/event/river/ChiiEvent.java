@@ -1,5 +1,6 @@
 package com.github.terralian.fastmaj.game.event.river;
 
+import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.event.GameEventEnum;
 import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
@@ -33,10 +34,20 @@ public class ChiiEvent implements RiverActionEvent {
     /**
      * 鸣的牌
      */
-    private IHai nakiHai;
+    private IHai fromHai;
+
+    /**
+     * 优先级
+     */
+    private final int order = 20;
 
     @Override
     public GameEventEnum getType() {
         return GameEventEnum.CHII;
+    }
+
+    @Override
+    public RiverActionType getRiverType() {
+        return RiverActionType.CHII;
     }
 }

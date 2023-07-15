@@ -1,15 +1,5 @@
 package com.github.terralian.fastmaj;
 
-import com.github.terralian.fastmaj.agari.AgariCalculator;
-import com.github.terralian.fastmaj.agari.FuritenChecker;
-import com.github.terralian.fastmaj.agari.IAgariCalculator;
-import com.github.terralian.fastmaj.agari.IFuritenChecker;
-import com.github.terralian.fastmaj.tehai.FastSyatenCalculator;
-import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
-import com.github.terralian.fastmaj.tehai.IYuukouhaiCalculator;
-import com.github.terralian.fastmaj.tehai.YuukouhaiCalculator;
-import com.github.terralian.fastmaj.util.SingletonFactory;
-
 /**
  * 快速麻将
  * <p/>
@@ -19,31 +9,4 @@ import com.github.terralian.fastmaj.util.SingletonFactory;
  */
 public abstract class FastMajong {
 
-    /**
-     * 单例获取默认的向听计算器实例
-     */
-    public static ISyatenCalculator doGetSyatenCalculator() {
-        return SingletonFactory.doGetBean(ISyatenCalculator.class, FastSyatenCalculator.class);
-    }
-
-    /**
-     * 单例获取振听判定器实例
-     */
-    public static IFuritenChecker doGetFuritenChecker() {
-        return SingletonFactory.doGetBean(IFuritenChecker.class, FuritenChecker.class);
-    }
-
-    /**
-     * 单例获取和了计算器实例
-     */
-    public static IAgariCalculator doGetAgariCalculator() {
-        return SingletonFactory.doGetBean(IAgariCalculator.class, AgariCalculator.class);
-    }
-
-    /**
-     * 单例获取有效牌计算器实例
-     */
-    public static IYuukouhaiCalculator doGetYuukouhaiCalculator() {
-        return new YuukouhaiCalculator(doGetSyatenCalculator());
-    }
 }

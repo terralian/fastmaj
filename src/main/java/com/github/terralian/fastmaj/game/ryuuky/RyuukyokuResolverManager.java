@@ -1,12 +1,12 @@
 package com.github.terralian.fastmaj.game.ryuuky;
 
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.util.EmptyUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 默认流局管理器实现
@@ -15,7 +15,7 @@ import com.github.terralian.fastmaj.util.EmptyUtil;
  */
 public class RyuukyokuResolverManager implements IRyuukyokuResolverManager {
 
-    private List<IRyuukyokuResolver> ryuukyokuResolvers;
+    private final List<IRyuukyokuResolver> ryuukyokuResolvers;
     
     /**
      * 根据流局集合初始化流局管理器

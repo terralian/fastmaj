@@ -1,16 +1,16 @@
 package com.github.terralian.fastmaj.test.tehai;
 
-import java.util.Set;
-
-import com.github.terralian.fastmaj.FastMajong;
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.hai.IHai;
+import com.github.terralian.fastmaj.tehai.FastSyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.IYuukouhaiCalculator;
 import com.github.terralian.fastmaj.tehai.SyatenCalculator;
 import com.github.terralian.fastmaj.tehai.TehaiBuilder;
 import com.github.terralian.fastmaj.tehai.YuukouhaiCalculator;
 import org.junit.Test;
+
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 
@@ -23,7 +23,7 @@ public class YuukouhaiCalculatorTest {
 
     @Test
     public void test() {
-        IYuukouhaiCalculator yuukouhaiCalculator = new YuukouhaiCalculator(FastMajong.doGetSyatenCalculator());
+        IYuukouhaiCalculator yuukouhaiCalculator = new YuukouhaiCalculator(new FastSyatenCalculator());
 
         ITehai tehai = EncodeMark.toTehai("6m234678p136678s9s");
         yuukouhaiCalculator.calcMin(tehai);

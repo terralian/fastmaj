@@ -1,9 +1,9 @@
 package com.github.terralian.fastmaj.yama;
 
+import com.github.terralian.fastmaj.third.mt19937ar.MersenneTwister;
+
 import java.security.MessageDigest;
 import java.util.Base64;
-
-import com.github.terralian.fastmaj.third.mt19937ar.MersenneTwister;
 
 /**
  * 天凤牌谱的根据种子生成牌山算法
@@ -60,7 +60,9 @@ public class TenhouYamaWorker implements IYamaWorker {
      */
     public TenhouYamaWorker(String seed) {
         this.seed = seed;
-        initialize();
+        if (seed != null) {
+            initialize();
+        }
     }
 
     /**
@@ -78,8 +80,6 @@ public class TenhouYamaWorker implements IYamaWorker {
 
     /**
      * 根据种子初始化生成器
-     * 
-     * @param seed 种子
      */
     public void initialize() {
         if (this.seed == null || this.seed.isEmpty()) {

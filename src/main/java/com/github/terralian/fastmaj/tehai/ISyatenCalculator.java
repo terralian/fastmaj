@@ -75,7 +75,7 @@ public interface ISyatenCalculator {
      * 但是为了性能，一般情况该方法不会校验传入的手牌枚数是否合法。
      * <p/>
      * 七对子的计算公式为：向听数= 6 - 对子数。并且在牌种类数不足7时，向听数 = 向听数 + 7 - 牌的种类。
-     * 
+     *
      * @param value34 手牌（34编码）
      */
     int calcTiitoitu(int[] value34);

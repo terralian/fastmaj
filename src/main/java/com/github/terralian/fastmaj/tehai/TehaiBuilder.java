@@ -31,6 +31,13 @@ public class TehaiBuilder {
     private final ITehai tehai;
 
     /**
+     * 创建一个空的手牌建造者
+     */
+    public static TehaiBuilder empty() {
+        return new TehaiBuilder();
+    }
+
+    /**
      * 根据一个记号法串初始化建造者（工厂方法）
      *
      * @param nameMark 记号法串，如“1234s”
@@ -307,13 +314,12 @@ public class TehaiBuilder {
     // -----------------------------------------------
 
     /**
-     * 为手牌增加多张相同的牌
+     * 为手牌增加多张相同的牌，可以增加任意张
      *
      * @param hai 手牌
-     * @param size 数量[1, 4]
+     * @param size 数量
      */
     public TehaiBuilder addSame(IHai hai, int size) {
-        Assert.isTrue(size >= 0 && size <= 4, "增加的牌数量需要在[1,4]内：" + size);
         for (int i = 0; i < size; i++) {
             tehai.draw(hai);
         }

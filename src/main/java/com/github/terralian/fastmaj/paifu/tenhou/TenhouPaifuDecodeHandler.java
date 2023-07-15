@@ -23,11 +23,10 @@ import org.xml.sax.helpers.DefaultHandler;
  * <p/>
  * 该方法代码来源为<code>tenhouvisualizer</code>，代码进行了一部分改造和补全
  *
- * @author terra.lian
  * @see <a href=
- *      "https://github.com/CrazyBBB/tenhou-visualizer/blob/master/src/main/java/tenhouvisualizer/domain/analyzer/ParseHandler.java">类原始来源</a>
+ * "https://github.com/CrazyBBB/tenhou-visualizer/blob/master/src/main/java/tenhouvisualizer/domain/analyzer/ParseHandler.java">类原始来源</a>
  * @see <a href=
- *      "https://m77.hatenablog.com/entry/2017/05/21/214529">天凤牌谱解析教程</a>
+ * "https://m77.hatenablog.com/entry/2017/05/21/214529">天凤牌谱解析教程</a>
  * @see ITenhouPaifuParseHandler
  */
 public class TenhouPaifuDecodeHandler extends DefaultHandler {
@@ -138,6 +137,7 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
 
     /**
      * 返回牌谱
+     *
      * @return
      */
     public ITenhouPaifuParseHandler getAnalyzer() {
@@ -195,7 +195,7 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
      * R值：rate="2135.55,2260.11,2018.07,2198.52"
      * <p/>
      * 性别：sx="M,M,M,M"
-     * 
+     *
      * @param attributes
      */
     private void visitUN(Attributes attributes) {
@@ -343,13 +343,13 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
         int[] selfHai;
         int nakiHai;
         if (r == 0) {
-            selfHai = new int[] {h[1], h[2]};
+            selfHai = new int[]{h[1], h[2]};
             nakiHai = h[0];
         } else if (r == 1) {
-            selfHai = new int[] {h[0], h[2]};
+            selfHai = new int[]{h[0], h[2]};
             nakiHai = h[1];
         } else if (r == 2) {
-            selfHai = new int[] {h[0], h[1]};
+            selfHai = new int[]{h[0], h[1]};
             nakiHai = h[2];
         } else {
             throw new RuntimeException();

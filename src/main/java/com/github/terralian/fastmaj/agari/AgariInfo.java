@@ -3,8 +3,8 @@ package com.github.terralian.fastmaj.agari;
 import java.util.List;
 
 import com.github.terralian.fastmaj.yaku.IYaku;
-
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * 和了信息
@@ -12,6 +12,7 @@ import lombok.Data;
  * @author terra.lian
  */
 @Data
+@Accessors(chain = true)
 public class AgariInfo {
 
     /**

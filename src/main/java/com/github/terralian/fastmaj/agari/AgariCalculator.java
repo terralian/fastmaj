@@ -1,8 +1,12 @@
 package com.github.terralian.fastmaj.agari;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
+import com.github.terralian.fastmaj.util.Assert;
 import com.github.terralian.fastmaj.util.EmptyUtil;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.IYakuMatcher;
@@ -10,15 +14,16 @@ import com.github.terralian.fastmaj.yaku.hn.NormalDora;
 import com.github.terralian.fastmaj.yaku.hn.RedDora;
 import com.github.terralian.fastmaj.yaku.hn.UraDora;
 import com.github.terralian.fastmaj.yama.DoraHelper;
-
-import java.util.Arrays;
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 默认和了计算器
  *
  * @author terra.lian
  */
+@Getter
+@Setter
 public class AgariCalculator implements IAgariCalculator {
 
     /**
@@ -26,19 +31,19 @@ public class AgariCalculator implements IAgariCalculator {
      * <p/>
      * 通过更改役匹配器，可以决定规则使用什么役种，比如是否启用人和，古役。
      */
-    private final IYakuMatcher yakuMatcher;
+    private IYakuMatcher yakuMatcher;
     /**
      * 和了时，手牌分割器
      */
-    private final ITehaiAgariDivider agariDivider;
+    private ITehaiAgariDivider agariDivider;
     /**
      * 符数计算
      */
-    private final IFuCalculator fuCalculator;
+    private IFuCalculator fuCalculator;
     /**
      * 分数计算器
      */
-    private final IPointCalculator pointCalculator;
+    private IPointCalculator pointCalculator;
 
     /**
      * 初始化构建和了计算器
@@ -58,7 +63,7 @@ public class AgariCalculator implements IAgariCalculator {
 
     /**
      * 和了计算
-     * 
+     *
      * @param tehai 手牌，已包含和了牌
      * @param agariHai 和了牌
      * @param fromPlayer 来自玩家，自摸则和自己一致
@@ -66,26 +71,31 @@ public class AgariCalculator implements IAgariCalculator {
      * @param context 玩家游戏上下文
      */
     @Override
-    public AgariInfo calc(ITehai tehai, IHai agariHai, Integer fromPlayer, List<IHai> doraHais, List<IHai> uraDoraHais,
-            PlayerGameContext context) {
+    public AgariInfo calculate(ITehai tehai, IHai agariHai, Integer fromPlayer, List<IHai> doraHais, List<IHai> uraDoraHais,
+                               PlayerGameContext context) {
         int position = context.getPosition();
         // 使用和了分割器对手牌进行分割，分割的结果更容易进行和了役种匹配
         List<DivideInfo> divideInfos = agariDivider.divide(tehai, position != fromPlayer, agariHai);
+        Assert.notEmpty(divideInfos, "手牌进行和了分割失败，请确认当前手牌是否尚未和了?");
 
-        AgariInfo bestAgariInfo = null;
-        // 循环所有分割方案，找到使分数最大的一种
-        for (DivideInfo divideInfo : divideInfos) {
-            AgariInfo agariInfo = this.calc(tehai, agariHai, divideInfo, fromPlayer, doraHais, uraDoraHais, context);
-            if (bestAgariInfo == null || bestAgariInfo.getScore() < agariInfo.getScore()) {
+        // 仅有单个分割的情况（大多数）
+        AgariInfo bestAgariInfo = calculateSingleDivide(tehai, agariHai, divideInfos.get(0), fromPlayer, doraHais, uraDoraHais, context);
+        if (divideInfos.size() == 1) {
+            return bestAgariInfo;
+        }
+        // 含多个分割的情况，循环剩余的分割方案，找到使分数最大的一种
+        for (int i = 1; i < divideInfos.size(); i++) {
+            AgariInfo agariInfo = calculateSingleDivide(tehai, agariHai, divideInfos.get(i), fromPlayer, doraHais, uraDoraHais, context);
+            if (bestAgariInfo.getScore() < agariInfo.getScore()) {
                 bestAgariInfo = agariInfo;
             }
         }
         return bestAgariInfo;
     }
-    
+
     /**
      * 计算其中一种手牌分割的和了信息
-     * 
+     *
      * @param tehai 手牌
      * @param agariHai 和了牌
      * @param divideInfo 分割信息
@@ -93,24 +103,24 @@ public class AgariCalculator implements IAgariCalculator {
      * @param doraHais 宝牌
      * @param context 游戏上下文
      */
-    private AgariInfo calc(ITehai tehai, IHai agariHai, DivideInfo divideInfo, Integer fromPlayer, List<IHai> doraHais,
-            List<IHai> uraDoraHais,
-            PlayerGameContext context) {
+    private AgariInfo calculateSingleDivide(ITehai tehai, IHai agariHai, DivideInfo divideInfo, Integer fromPlayer, List<IHai> doraHais,
+                                            List<IHai> uraDoraHais,
+                                            PlayerGameContext context) {
         // 玩家坐席
         int position = context.getPosition();
-        // 役种
-        List<IYaku> yakus = yakuMatcher.match(tehai, divideInfo, context);
-        // 悬赏役
-        addDoraYaku(yakus, tehai, doraHais, uraDoraHais);
-        // 番数
-        int han = IYaku.sumHan(yakus, context.isNaki());
-        // 符
+        // 匹配役种
+        List<IYaku> matchYakus = yakuMatcher.match(tehai, divideInfo, context);
+        // 为役种增加悬赏役
+        addDoraYaku(matchYakus, tehai, doraHais, uraDoraHais);
+        // 计算番数
+        int ban = IYaku.sumHan(matchYakus, context.isNaki());
+        // 计算符数
         int fu = fuCalculator.compute(tehai, agariHai, divideInfo, context);
         // 计算底分
-        int basePoint = pointCalculator.calcBasePoint(yakus, fu, han, context.getGameConfig());
-        // 立直棒
+        int basePoint = pointCalculator.calcBasePoint(matchYakus, fu, ban, context.getGameConfig());
+        // 当前场上存在的立直棒
         int kyotaku = context.getKyotaku();
-        // 本场数
+        // 当前本场数
         int honba = context.getRealHonba();
         // 玩家的分数
         int[] playerPoints = Arrays.copyOf(context.getPlayerPoints(), context.getPlayerPoints().length);
@@ -120,17 +130,14 @@ public class AgariCalculator implements IAgariCalculator {
         } else {
             pointCalculator.tsumoTransfer(position, context.getOya(), basePoint, honba, kyotaku, playerPoints);
         }
-
         // 返回和了信息
-        AgariInfo agariInfo = new AgariInfo();
-        agariInfo.setScore(playerPoints[position] - context.getPlayerPoints()[position]);
-        agariInfo.setFu(fu);
-        agariInfo.setBan(han);
-        agariInfo.setYakus(yakus);
-        agariInfo.setDivideInfo(divideInfo);
-        agariInfo.setIncreaseAndDecrease(playerPoints);
-
-        return agariInfo;
+        return new AgariInfo() //
+                .setScore(playerPoints[position] - context.getPlayerPoints()[position]) //
+                .setFu(fu) //
+                .setBan(ban) //
+                .setYakus(matchYakus) //
+                .setDivideInfo(divideInfo) //
+                .setIncreaseAndDecrease(playerPoints);
     }
 
     /**

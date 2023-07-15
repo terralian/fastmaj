@@ -35,7 +35,7 @@ public class TsumoAction extends AgariAction implements ITehaiAction {
         List<IHai> uraDoraHais = gameCore.getHaiRiver().isReach() ? gameCore.getUraDoras() : new ArrayList<>();
         // 计算和了信息
         PlayerGameContext context = PlayerGameContextFactory.buildByGameCore(position, gameOptions, gameCore);
-        AgariInfo agariInfo = agariCalculator.calc(tehai, tehai.getDrawHai(), position, doraHais, uraDoraHais, context);
+        AgariInfo agariInfo = agariCalculator.calculate(tehai, tehai.getDrawHai(), position, doraHais, uraDoraHais, context);
         // 自摸动作
         gameCore.agari(position, position, agariInfo.getYakus(), agariInfo.getBan(), agariInfo.getFu(), agariInfo.getScore(),
                 agariInfo.getIncreaseAndDecrease());

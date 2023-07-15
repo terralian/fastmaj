@@ -49,7 +49,7 @@ public class RonAction extends AgariAction implements IRiverAction {
         List<IHai> doraHais = gameCore.getDoras();
         List<IHai> uraDoras = context.getHaiRiver().isReach() ? gameCore.getUraDoras() : new ArrayList<>();
         // 计算和了信息
-        AgariInfo agariInfo = agariCalculator.calc(tehai, rivalActionHai, value.getFromPlayer(), doraHais, uraDoras, context);
+        AgariInfo agariInfo = agariCalculator.calculate(tehai, rivalActionHai, value.getFromPlayer(), doraHais, uraDoras, context);
         // 和了动作
         gameCore.agari(position, value.getFromPlayer(), agariInfo.getYakus(), agariInfo.getBan(), agariInfo.getFu(),
                 agariInfo.getScore(), agariInfo.getIncreaseAndDecrease());

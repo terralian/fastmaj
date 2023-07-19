@@ -13,7 +13,7 @@ import java.util.TreeMap;
 class MjsAgari {
 
     // 初始化数据树
-    private static TreeMap<Integer, int[]> tbl;
+    private static final TreeMap<Integer, int[]> tbl;
     static {
         tbl = new TreeMap<>();
         MjsAgariTbl.init(tbl);

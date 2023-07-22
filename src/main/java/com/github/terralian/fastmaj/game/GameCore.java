@@ -60,19 +60,19 @@ public class GameCore implements IGameCore {
     /**
      * 当前的牌山
      */
-    private IYama yama;
+    protected IYama yama;
     /**
      * 当局场风
      */
-    private KazeEnum bakaze;
+    protected KazeEnum bakaze;
     /**
      * 当前庄家
      */
-    private int oya;
+    protected int oya;
     /**
      * 当前对局数（依照局数本场数，递增）
      */
-    private int round;
+    protected int round;
     /**
      * 动作数
      */
@@ -80,15 +80,15 @@ public class GameCore implements IGameCore {
     /**
      * 本场数，0为实际值，1为展示值，2为是否清空标识（0为清空）
      */
-    private int[] honba;
+    protected int[] honba;
     /**
      * 供托（立直棒）
      */
-    private Integer kyotaku;
+    protected Integer kyotaku;
     /**
      * 当前玩家的坐席
      */
-    private int position;
+    protected int position;
     /**
      * 是否连庄
      */
@@ -244,8 +244,7 @@ public class GameCore implements IGameCore {
         // 其他状态重置
         resetKyokuStatus();
         // 初始化牌山
-        int[] yamaArray = yamaWorker.getNextYama(1);
-        yama = new Yama(yamaArray, gameConfig.isUseRedHai(), playerSize);
+        nextYama();
         // 初始化手牌和牌河
         tehais = yama.deals(oya);
         // 重算向听
@@ -257,6 +256,14 @@ public class GameCore implements IGameCore {
 
         // 返回当前对局数
         return round;
+    }
+
+    /**
+     * 创建下一个牌山
+     */
+    protected void nextYama() {
+        int[] yamaArray = yamaWorker.getNextYama(1);
+        yama = new Yama(yamaArray, gameConfig.isUseRedHai(), playerSize);
     }
 
     @Override

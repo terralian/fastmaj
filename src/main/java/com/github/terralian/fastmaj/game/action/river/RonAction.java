@@ -32,6 +32,7 @@ public class RonAction extends AgariAction implements IRiverAction {
      * @param gameConfig 游戏规则
      * @param gameCore 游戏核心
      */
+    @Override
     public void doAction(RiverActionEvent value, GameConfig gameConfig, IGameCore gameCore) {
         // 坐席
         int position = value.getPosition();
@@ -50,10 +51,12 @@ public class RonAction extends AgariAction implements IRiverAction {
         List<IHai> doraHais = gameCore.getDoras();
         List<IHai> uraDoras = context.getHaiRiver().isReach() ? gameCore.getUraDoras() : new ArrayList<>();
         // 计算和了信息
-        AgariInfo agariInfo = agariCalculator.calculate(tehai, rivalActionHai, value.getFrom(), doraHais, uraDoras, context);
+        AgariInfo agariInfo =
+                agariCalculator.calculate(tehai, rivalActionHai, value.getFrom(), doraHais, uraDoras, context);
         // 和了动作
         gameCore.agari(position, value.getFrom(), agariInfo.getYakus(), agariInfo.getBan(), agariInfo.getFu(),
-                agariInfo.getScore(), agariInfo.getIncreaseAndDecrease());
+                agariInfo.getScore(), agariInfo.getIncreaseAndDecrease()
+        );
         // 庄家是否荣和
         boolean isRenchan = position == gameCore.getOya();
         gameCore.setRenchan(isRenchan, !isRenchan);

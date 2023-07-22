@@ -11,6 +11,7 @@ import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
  */
 public class MinKanAction implements IRiverAction {
 
+    @Override
     public void doAction(RiverActionEvent value, GameConfig gameConfig, IGameCore gameCore) {
         if (!gameCore.getTehai().canMinkan(value.getFromHai())) {
             throw new IllegalArgumentException("手牌不可基于参数牌操作明杠：" + value.getFromHai());

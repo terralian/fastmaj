@@ -25,10 +25,8 @@ public interface IRiverActionValidator extends IPlayerActionValidator {
      * @param gameCore 游戏核心
      * @param context 玩家游戏上下文
      */
-    boolean resolveAction(
-            int position, TehaiActionEvent rivalTehaiAction, GameConfig gameConfig, IGameCore gameCore,
-            PlayerGameContext context
-    );
+    boolean resolveAction(int position, TehaiActionEvent rivalTehaiAction, GameConfig gameConfig, IGameCore gameCore,
+            PlayerGameContext context);
 
     /**
      * 获取牌河动作类型

@@ -15,6 +15,7 @@ import com.github.terralian.fastmaj.hai.IHai;
  */
 public class PonAction implements IRiverAction {
 
+    @Override
     public void doAction(RiverActionEvent value, GameConfig gameConfig, IGameCore gameCore) {
         PonEvent ponEvent = (PonEvent) value;
         if (!gameCore.getTehai().canPon(ponEvent.getFromHai())) {

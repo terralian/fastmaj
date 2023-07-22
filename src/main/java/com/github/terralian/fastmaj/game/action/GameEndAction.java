@@ -7,7 +7,7 @@ import com.github.terralian.fastmaj.game.IGameCore;
 
 /**
  * 游戏结束动作，除了调用核心结束游戏外，还需要处理剩余的场供
- * 
+ *
  * @author terra.lian
  */
 public class GameEndAction implements IGameAction {
@@ -15,7 +15,7 @@ public class GameEndAction implements IGameAction {
     /**
      * 点数计算器
      */
-    private IPointCalculator calculator;
+    private final IPointCalculator calculator;
 
     /**
      * 构建一个游戏结束动作
@@ -26,7 +26,7 @@ public class GameEndAction implements IGameAction {
 
     /**
      * 执行游戏结束动作
-     * 
+     *
      * @param config 游戏规则
      * @param gameCore 游戏核心
      */

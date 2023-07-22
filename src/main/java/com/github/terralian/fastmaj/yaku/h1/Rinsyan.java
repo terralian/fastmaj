@@ -2,9 +2,9 @@ package com.github.terralian.fastmaj.yaku.h1;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
-import com.github.terralian.fastmaj.game.action.river.RiverActionValue;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
@@ -24,9 +24,9 @@ public class Rinsyan implements IYaku {
             return false;
         }
         // 先判定是否明杠
-        RiverActionValue riverAction = holder.getLastRiverAction();
-        if (riverAction != null && riverAction.getActionPlayer() == holder.getPosition()) {
-            if (riverAction.getActionType() == RiverActionType.MINKAN) {
+        RiverActionEvent riverAction = holder.getLastRiverAction();
+        if (riverAction != null && riverAction.getPosition() == holder.getPosition()) {
+            if (riverAction.getRiverType() == RiverActionType.MINKAN) {
                 return true;
             }
         }

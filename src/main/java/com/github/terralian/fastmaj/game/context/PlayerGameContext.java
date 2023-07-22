@@ -6,6 +6,7 @@ import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.action.river.RiverActionValue;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
+import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.river.IHaiRiver;
 import com.github.terralian.fastmaj.tehai.ITehai;
@@ -137,7 +138,7 @@ public class PlayerGameContext {
     /**
      * 最近玩家的牌河动作
      */
-    private RiverActionValue lastRiverAction;
+    private RiverActionEvent lastRiverAction;
     /**
      * 最近一名玩家的最佳一次摸牌来源
      */

@@ -13,6 +13,12 @@ import com.github.terralian.fastmaj.hai.IHai;
 public interface RiverActionEvent extends ActionEvent {
 
     /**
+     * 设置手牌事件的玩家坐席
+     */
+    @SuppressWarnings("unchecked")
+    RiverActionEvent setPosition(int position);
+
+    /**
      * 获取来源的玩家坐席
      */
     int getFrom();

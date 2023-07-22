@@ -2,8 +2,8 @@ package com.github.terralian.fastmaj.game;
 
 import java.util.List;
 
-import com.github.terralian.fastmaj.game.action.river.RiverActionValue;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionValue;
+import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.log.IGameLogger;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyoku;
 import com.github.terralian.fastmaj.hai.IHai;
@@ -18,7 +18,7 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
  * <p/>
  * 该接口用于管理游戏状态，而不关心游戏的规则，通过一定顺序调用相关接口，即可实现游戏的进行。
  *
- * @author terra.lian 
+ * @author terra.lian
  */
 public interface IGameCore {
 
@@ -35,7 +35,7 @@ public interface IGameCore {
      * 调用该方法后，将会标记游戏为结束状态，其他游戏运行时方法将会变成非法操作
      * <p/>
      * 结束对局后将完成日志的构建
-     * 
+     *
      * @param increaseAndDecrease 最终得分
      */
     void endGame(int[] increaseAndDecrease);
@@ -48,7 +48,7 @@ public interface IGameCore {
      * <li>若连庄，则不改变当前的庄家，增加本场数
      * <li>若不连庄，则切换到下一位玩家坐庄
      * </ul>
-     * 
+     *
      * @return 总局数（增加本场也增加局数）
      */
     int nextKyoku();
@@ -67,7 +67,7 @@ public interface IGameCore {
 
     /**
      * 切换当前操作玩家到指定玩家
-     * 
+     *
      * @param position 玩家坐席
      */
     void switchPlayer(int position);
@@ -78,14 +78,14 @@ public interface IGameCore {
      * 可以从牌山或者王牌区摸一张牌，若从王牌区摸牌，<b>并不会自动增加新的宝牌</b>，这是由于不同规则新宝牌的时机并不一致。
      * <p/>
      * 当需要增加新宝牌时，可以调用{@link #nextDoraDisplay()}
-     * 
+     *
      * @param drawFrom 摸牌来源
      */
     IHai draw(DrawFrom drawFrom);
 
     /**
      * 当前玩家切一张手牌
-     * 
+     *
      * @param hai 要切的牌，通过id比较
      * @param reach 是否立直
      * @return 是否手切（true手切，false模切）
@@ -96,21 +96,21 @@ public interface IGameCore {
      * 立直（步骤2）玩家在{@link #kiri}动作后，放上一根立直棒
      * <p/>
      * 此时已经过荣和校验，立直成立，分数更新
-     * 
+     *
      * @param increaseAndDecrease
      */
     void reach2(int[] increaseAndDecrease);
 
     /**
      * 增加新的宝牌指示牌
-     * 
+     *
      * @return 新的宝牌指示牌
      */
     IHai nextDoraDisplay();
 
     /**
      * 从玩家的牌河吃一张牌
-     * 
+     *
      * @param fromPosition 被吃牌的玩家
      * @param selfHai1 自家的搭子1
      * @param selfHai2 自家的搭子2
@@ -119,7 +119,7 @@ public interface IGameCore {
 
     /**
      * 从玩家的牌河碰一张牌
-     * 
+     *
      * @param fromPosition 被碰牌的玩家
      * @param redFirst 红宝牌做搭子优先
      */
@@ -127,14 +127,14 @@ public interface IGameCore {
 
     /**
      * 从玩家的牌河明杠一张牌
-     * 
+     *
      * @param fromPosition 被杠的玩家
      */
     IHai minkan(int fromPosition);
 
     /**
      * 当前玩家加杠
-     * 
+     *
      * @param hai 操作的牌
      */
     void kakan(IHai hai);
@@ -145,14 +145,14 @@ public interface IGameCore {
      * 该行为<b>并不会自动增加新的宝牌</b>，这是由于不同规则新宝牌的时机并不一致。
      * <p/>
      * 当需要增加新宝牌时，可以调用{@link #nextDoraDisplay()}
-     * 
+     *
      * @param hai 暗杠的牌
      */
     void annkan(IHai hai);
 
     /**
      * 拔北
-     * 
+     *
      * @param hai 拔北的牌
      */
     void kita(IHai hai);
@@ -161,7 +161,7 @@ public interface IGameCore {
      * 和了，包含自摸和荣和
      * <p/>
      * 一个对局可能有多个人同时和了，该操作会清空累积的立直棒（本场数仅在切换玩家时会重置）
-     * 
+     *
      * @param agariPosition 和牌的玩家
      * @param fromPosition 从玩家，当自摸时该值为自身
      * @param yakus 和了的役
@@ -174,7 +174,7 @@ public interface IGameCore {
 
     /**
      * 流局，若庄家听牌则连庄，若庄家未听牌则不连庄。
-     * 
+     *
      * @param ryuukyoku 流局类
      * @param increaseAndDecrease 玩家的分数更新
      */
@@ -230,7 +230,7 @@ public interface IGameCore {
 
     /**
      * 获取某个玩家的手牌
-     * 
+     *
      * @param position 玩家的坐席
      */
     ITehai getTehai(int position);
@@ -247,7 +247,7 @@ public interface IGameCore {
 
     /**
      * 获取某个玩家的牌河
-     * 
+     *
      * @param position 玩家的坐席
      */
     IHaiRiver getHaiRiver(int position);
@@ -264,7 +264,7 @@ public interface IGameCore {
 
     /**
      * 获取某个的隐藏状态
-     * 
+     *
      * @param position 玩家的坐席
      */
     PlayerHideStatus getPlayerHide(int position);
@@ -351,7 +351,7 @@ public interface IGameCore {
 
     /**
      * 设置当前庄家是否连庄
-     * 
+     *
      * @param renchan 连庄
      * @param clearHonba 是否清除本场数，不清除则增加本场数
      */
@@ -369,7 +369,7 @@ public interface IGameCore {
 
     /**
      * 设置最近玩家的手牌动作
-     * 
+     *
      * @param action 手牌动作
      */
     void setLastTehaiAction(TehaiActionValue action);
@@ -381,15 +381,15 @@ public interface IGameCore {
 
     /**
      * 设置最近的一个牌河动作（不包含荣和）
-     * 
+     *
      * @param action 牌河动作
      */
-    void setLastRiverAction(RiverActionValue action);
+    void setLastRiverAction(RiverActionEvent action);
 
     /**
      * 获取最近的一个牌河动作（不包含荣和）
      */
-    RiverActionValue getLastRiverAction();
+    RiverActionEvent getLastRiverAction();
 
     /**
      * 获取游戏核心的日志处理器
@@ -398,7 +398,7 @@ public interface IGameCore {
 
     /**
      * 设置游戏核心的日志处理器
-     * 
+     *
      * @param gameLogger 游戏日志处理器
      */
     void setGameLogger(IGameLogger gameLogger);

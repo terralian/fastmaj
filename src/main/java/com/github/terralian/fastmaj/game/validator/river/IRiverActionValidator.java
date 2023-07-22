@@ -6,6 +6,7 @@ import com.github.terralian.fastmaj.game.action.river.IRiverAction;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionValue;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.game.validator.IPlayerActionValidator;
 
 /**
@@ -25,8 +26,8 @@ public interface IRiverActionValidator extends IPlayerActionValidator {
      * @param gameCore 游戏核心
      * @param context 玩家游戏上下文
      */
-    boolean resolveAction(int position, TehaiActionValue rivalTehaiAction, GameConfig gameConfig, IGameCore gameCore,
-            PlayerGameContext context);
+    boolean resolveAction(int position, TehaiActionEvent rivalTehaiAction, GameConfig gameConfig, IGameCore gameCore,
+                          PlayerGameContext context);
 
     /**
      * 获取牌河动作类型

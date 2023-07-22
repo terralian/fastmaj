@@ -11,7 +11,6 @@ import com.github.terralian.fastmaj.game.action.river.IRiverAction;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.ITehaiAction;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
-import com.github.terralian.fastmaj.game.action.tehai.TehaiActionValue;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
 import com.github.terralian.fastmaj.game.event.ActionEvents;
@@ -33,33 +32,7 @@ import lombok.Setter;
 
 /**
  * 按步骤执行游戏，该类为游戏的操作步骤基类，内部对各个动作进行了分类归纳，但还是需要按照一定步骤才可以正确的执行游戏。
- * 一个正确的自动执行的游戏可以参考{@link StreamMajongGame}
- * <p/>
- * 游戏的流程应当按照以下顺序调用：
- *
- * <pre>
- *  开始游戏
- *  -  {@link #startGame()}
- - （结束判定）下一局
- - {@link #nextKyoku()}
- - 摸牌
- - {@link #nextDraw()}
-            - 根据牌河动作判定是否摸牌
-            - 根据牌河动作及手牌动作判定切换玩家
-        - 手牌动作（弃牌，暗杠，自摸）
-            - {@link #nextTehaiAction()}或{@link #nextTehaiAction(TehaiActionEvent)}
-            - 清空牌河动作
-            - 缓存手牌动作
-        - 手牌动作后时点（新宝牌）
-            - {@link #optionBeforeTehaiAction()}
-        - 牌河动作（跳过，鸣牌，荣和）
-            - {@link #nextRiverAction()}或{@link #nextRiverAction(int, RiverActionEvent)}
-            - 缓存牌河动作
-        - 牌河动作后时点（立直2，新宝牌）
-            - {@link #optionAfterRiverAction()}
-        - 流局判定
-            - {@link #resolverRyuukyoku()}
- * </pre>
+ * 一个正确的自动执行的游戏可以参考 {@link StreamMajongGame}
  *
  * @author terra.lian
  */
@@ -162,7 +135,7 @@ public abstract class StepMajongGame {
         // 当玩家是暗杠加杠等动作，则可以从王牌区再进行一次摸牌
         // 当玩家被牌河动作鸣牌，在牌河动作方法里会进行一次玩家切换
         if (lastRiverAction == null && gameCore.getLastTehaiAction() != null //
-                && gameCore.getLastTehaiAction().isKiriAction()) {
+                && ActionEvents.needSwitchPlayer(gameCore.getLastTehaiAction())) {
             gameCore.nextPlayer();
         }
 
@@ -219,14 +192,14 @@ public abstract class StepMajongGame {
             throw new IllegalArgumentException("非法手牌动作：" + tehaiActionEvent.getActionType());
         }
 
-        // 将玩家动作缓存到游戏核心，方便其他地方查询
-        TehaiActionValue actionParam = new TehaiActionValue(tehaiActionEvent, gameCore.getPosition());
+        tehaiActionEvent.setPosition(gameCore.getPosition());
         // 执行动作
-        ITehaiAction tehaiAction = playerActionManager.getTehaiAction(actionParam.getActionType());
+        ITehaiAction tehaiAction = playerActionManager.getTehaiAction(tehaiActionEvent.getActionType());
         if (tehaiAction == null) {
-            throw new IllegalStateException("该手牌处理动作无法执行，动作管理器获取该动作为空：" + actionParam.getActionType());
+            throw new IllegalStateException(
+                    "该手牌处理动作无法执行，动作管理器获取该动作为空：" + tehaiActionEvent.getActionType());
         }
-        KyokuState kyokuState = tehaiAction.doAction(actionParam, gameCore, config);
+        KyokuState kyokuState = tehaiAction.doAction(tehaiActionEvent, gameCore, config);
         // 手牌动作后的规则可选时点，新宝牌处理
         // 在这种规则下，岭上开花等结束动作不会翻新的宝牌
         if (kyokuState != KyokuState.END) {
@@ -234,7 +207,7 @@ public abstract class StepMajongGame {
         }
 
         // 动作执行完成后，作为上一轮的手牌动作
-        gameCore.setLastTehaiAction(actionParam);
+        gameCore.setLastTehaiAction(tehaiActionEvent);
 
         // 清除上一轮牌河动作缓存
         // 当无人鸣牌时，相当于无效操作
@@ -275,8 +248,8 @@ public abstract class StepMajongGame {
      */
     public KyokuState nextRiverAction() {
         // 当前玩家的手牌动作信息
-        TehaiActionValue lastTehaiAction = gameCore.getLastTehaiAction();
-        IHai actionHai = lastTehaiAction.getActionHai();
+        TehaiActionEvent lastTehaiAction = gameCore.getLastTehaiAction();
+        IHai actionHai = lastTehaiAction.getIfHai();
         TehaiActionType actionType = lastTehaiAction.getActionType();
 
         // 循环所有玩家，获取其可执行动作集合
@@ -289,7 +262,8 @@ public abstract class StepMajongGame {
 
             PlayerGameContext playerGameContext = PlayerGameContextFactory.buildByGameCore(i, config, gameCore);
             Set<RiverActionType> enableActions = playerActionManager.validateRiverActions(i, //
-                    lastTehaiAction, config, gameCore, playerGameContext);
+                    lastTehaiAction, config, gameCore, playerGameContext
+            );
             // 没有可执行动作则跳过
             if (enableActions.isEmpty()) {
                 continue;
@@ -297,7 +271,8 @@ public abstract class StepMajongGame {
 
             // 为玩家执行动作，校验该动作合法，并加入到集合
             IPlayer player = gameCore.getPlayer(i);
-            RiverActionEvent nakiAction = player.nakiOrRon(gameCore.getPosition(), actionType, enableActions, playerGameContext);
+            RiverActionEvent nakiAction =
+                    player.nakiOrRon(gameCore.getPosition(), actionType, enableActions, playerGameContext);
             // 玩家跳过执行
             if (nakiAction == null || nakiAction.getRiverType() == RiverActionType.SKIP) {
                 continue;
@@ -315,7 +290,7 @@ public abstract class StepMajongGame {
 
     /**
      * 传入多个玩家的牌河处理动作值，执行优先级最高的动作。
-     * 当为荣和时，返回对局结束状态，非荣和时会将唯一的动作存入游戏核心{@link IGameCore#setLastRiverAction}，这个动作将是是否摸牌的判断依据
+     * 当为荣和时，返回对局结束状态， 非荣和时会将唯一的动作存入游戏核心{@link IGameCore#setLastRiverAction}，这个动作将是是否摸牌的判断依据
      *
      * @param actions 动作
      * @return 对局状态，若为结束状态则需要立即结束当前对局
@@ -326,14 +301,14 @@ public abstract class StepMajongGame {
             return KyokuState.CONTINUE;
         }
 
-        TehaiActionValue tehaiAction = gameCore.getLastTehaiAction();
+        TehaiActionEvent tehaiAction = gameCore.getLastTehaiAction();
 
         // 有动作的情况，先对动作排序，取优先级最高的
         // 若优先级相同，需要以手牌动作玩家的视角，按下家，对家，上家的顺序优先处理
         // 对于部分规则仅允许一人和牌时，取第一动作即可
         actions.sort((a, b) -> {
             if (a.getOrder() == b.getOrder()) {
-                return RivalEnum.compare(tehaiAction.getActionPlayer(), a.getPosition(), b.getPosition());
+                return RivalEnum.compare(tehaiAction.getPosition(), a.getPosition(), b.getPosition());
             }
             return a.getOrder() - b.getOrder();
         });
@@ -377,10 +352,10 @@ public abstract class StepMajongGame {
      * @param actionEvent 牌河事件
      */
     public void nextRiverAction(int playerPosition, RiverActionEvent actionEvent) {
-        TehaiActionValue lastTehaiAction = gameCore.getLastTehaiAction();
-        IHai actionHai = lastTehaiAction.getActionHai();
+        TehaiActionEvent lastTehaiAction = gameCore.getLastTehaiAction();
+        IHai actionHai = lastTehaiAction.getIfHai();
 
-        actionEvent.setFrom(lastTehaiAction.getActionPlayer()) //
+        actionEvent.setFrom(lastTehaiAction.getPosition()) //
                 .setPosition(playerPosition) //
                 .setFromHai(actionHai);
 
@@ -400,7 +375,7 @@ public abstract class StepMajongGame {
      */
     public void optionBeforeTehaiAction() {
         TehaiActionType tehaiActionType = Optional.ofNullable(gameCore.getLastTehaiAction()) //
-                .map(TehaiActionValue::getActionType) //
+                .map(TehaiActionEvent::getActionType) //
                 .orElse(null);
         RiverActionType riverActionType = Optional.ofNullable(gameCore.getLastRiverAction()) //
                 .map(RiverActionEvent::getRiverType) //
@@ -417,7 +392,7 @@ public abstract class StepMajongGame {
         // 不同规则下的动作可选执行点
         // 玩家打出一枚牌后才会增加宝牌的规则
         TehaiActionType tehaiActionType = Optional.ofNullable(gameCore.getLastTehaiAction()) //
-                .map(TehaiActionValue::getActionType) //
+                .map(TehaiActionEvent::getActionType) //
                 .orElse(null);
         RiverActionType riverActionType = Optional.ofNullable(gameCore.getLastRiverAction()) //
                 .map(RiverActionEvent::getRiverType) //
@@ -439,10 +414,10 @@ public abstract class StepMajongGame {
      * 玩家立直时，点数扣减，增加点棒
      */
     protected void reach2() {
-        TehaiActionValue lastTehaiAction = gameCore.getLastTehaiAction();
+        TehaiActionEvent lastTehaiAction = gameCore.getLastTehaiAction();
         if (lastTehaiAction.getActionType() == TehaiActionType.REACH) {
             int[] increaseAndDecrease = gameCore.getPlayerPoints();
-            increaseAndDecrease[lastTehaiAction.getActionPlayer()] -= 1000;
+            increaseAndDecrease[lastTehaiAction.getPosition()] -= 1000;
             gameCore.reach2(increaseAndDecrease);
         }
     }
@@ -455,9 +430,9 @@ public abstract class StepMajongGame {
         if (gameCore.getLastTehaiAction() == null) {
             return;
         }
-        if (gameCore.getLastTehaiAction().isKanAction()
-                || gameCore.getLastRiverAction() != null
-                && gameCore.getLastRiverAction().getRiverType() == RiverActionType.MINKAN) {
+        if (ActionEvents.needAddDraw(gameCore.getLastTehaiAction()) //
+                || gameCore.getLastRiverAction() != null && gameCore.getLastRiverAction()
+                .getRiverType() == RiverActionType.MINKAN) {
             gameCore.nextDoraDisplay();
         }
     }
@@ -465,6 +440,7 @@ public abstract class StepMajongGame {
     // --------------------------------------------
     // 私有方法
     // --------------------------------------------
+
 
     /**
      * 游戏的运行状态

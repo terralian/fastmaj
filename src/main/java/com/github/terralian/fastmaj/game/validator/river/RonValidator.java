@@ -1,5 +1,8 @@
 package com.github.terralian.fastmaj.game.validator.river;
 
+import java.util.List;
+import java.util.Set;
+
 import com.github.terralian.fastmaj.agari.IRonYakuMatcher;
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.game.GameConfig;
@@ -7,7 +10,6 @@ import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.PlayerHideStatus;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
-import com.github.terralian.fastmaj.game.action.tehai.TehaiActionValue;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.hai.IHai;
@@ -16,12 +18,9 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.IYuukouhaiCalculator;
 import com.github.terralian.fastmaj.yaku.IYaku;
 
-import java.util.List;
-import java.util.Set;
-
 /**
  * 计算荣和动作是否可执行
- * 
+ *
  * @author terra.lian
  */
 public class RonValidator implements IRiverActionValidator {
@@ -39,17 +38,21 @@ public class RonValidator implements IRiverActionValidator {
      */
     private IRonYakuMatcher ronYakuMatcher;
 
-    public RonValidator(ISyatenCalculator syatenCalculator, IYuukouhaiCalculator yuukouhaiCalculator,
-                        IRonYakuMatcher ronYakuMatcher) {
+    public RonValidator(
+            ISyatenCalculator syatenCalculator, IYuukouhaiCalculator yuukouhaiCalculator,
+            IRonYakuMatcher ronYakuMatcher
+    ) {
         this.syatenCalculator = syatenCalculator;
         this.yuukouhaiCalculator = yuukouhaiCalculator;
         this.ronYakuMatcher = ronYakuMatcher;
     }
 
     @Override
-    public boolean resolveAction(int position, TehaiActionEvent rivalTehaiAction, GameConfig gameConfig,
-                                 IGameCore gameCore,
-                                 PlayerGameContext context) {
+    public boolean resolveAction(
+            int position, TehaiActionEvent rivalTehaiAction, GameConfig gameConfig,
+            IGameCore gameCore,
+            PlayerGameContext context
+    ) {
         // 未听牌或者振听
         PlayerHideStatus hideStatus = gameCore.getPlayerHide(position);
         if (hideStatus.getSyaten() > 0 || hideStatus.isFuriten()) {

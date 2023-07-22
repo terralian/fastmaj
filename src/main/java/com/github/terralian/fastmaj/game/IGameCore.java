@@ -2,8 +2,8 @@ package com.github.terralian.fastmaj.game;
 
 import java.util.List;
 
-import com.github.terralian.fastmaj.game.action.tehai.TehaiActionValue;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.game.log.IGameLogger;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyoku;
 import com.github.terralian.fastmaj.hai.IHai;
@@ -372,12 +372,12 @@ public interface IGameCore {
      *
      * @param action 手牌动作
      */
-    void setLastTehaiAction(TehaiActionValue action);
+    void setLastTehaiAction(TehaiActionEvent action);
 
     /**
      * 获取最近玩家的手牌动作
      */
-    TehaiActionValue getLastTehaiAction();
+    TehaiActionEvent getLastTehaiAction();
 
     /**
      * 设置最近的一个牌河动作（不包含荣和）

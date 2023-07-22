@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.github.terralian.fastmaj.game.action.tehai.TehaiActionValue;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.game.log.IGameLogger;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyoku;
 import com.github.terralian.fastmaj.hai.IHai;
@@ -101,7 +101,7 @@ public class GameCore implements IGameCore {
     /**
      * 最近的手牌动作
      */
-    private TehaiActionValue lastTehaiAction;
+    private TehaiActionEvent lastTehaiAction;
     /**
      * 最近的牌河动作
      */
@@ -953,7 +953,7 @@ public class GameCore implements IGameCore {
      * {@inheritDoc}
      */
     @Override
-    public void setLastTehaiAction(TehaiActionValue action) {
+    public void setLastTehaiAction(TehaiActionEvent action) {
         this.lastTehaiAction = action;
     }
 
@@ -961,7 +961,7 @@ public class GameCore implements IGameCore {
      * {@inheritDoc}
      */
     @Override
-    public TehaiActionValue getLastTehaiAction() {
+    public TehaiActionEvent getLastTehaiAction() {
         return lastTehaiAction;
     }
 

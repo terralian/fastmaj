@@ -1,5 +1,9 @@
 package com.github.terralian.fastmaj.game;
 
+import java.util.EnumMap;
+import java.util.HashSet;
+import java.util.Set;
+
 import com.github.terralian.fastmaj.game.action.river.ChiiAction;
 import com.github.terralian.fastmaj.game.action.river.IRiverAction;
 import com.github.terralian.fastmaj.game.action.river.MinKanAction;
@@ -14,9 +18,9 @@ import com.github.terralian.fastmaj.game.action.tehai.KitaAction;
 import com.github.terralian.fastmaj.game.action.tehai.ReachAction;
 import com.github.terralian.fastmaj.game.action.tehai.Ryuukyoku99Action;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
-import com.github.terralian.fastmaj.game.action.tehai.TehaiActionValue;
 import com.github.terralian.fastmaj.game.action.tehai.TsumoAction;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.game.validator.river.ChiiValidator;
 import com.github.terralian.fastmaj.game.validator.river.IRiverActionValidator;
 import com.github.terralian.fastmaj.game.validator.river.MinKanValidator;
@@ -30,10 +34,6 @@ import com.github.terralian.fastmaj.game.validator.tehai.KitaValidator;
 import com.github.terralian.fastmaj.game.validator.tehai.ReachValidator;
 import com.github.terralian.fastmaj.game.validator.tehai.Ryuukyoku99Validator;
 import com.github.terralian.fastmaj.game.validator.tehai.TsumoValidator;
-
-import java.util.EnumMap;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * 默认的玩家动作管理器实现，使用{@link EnumMap}进行存储
@@ -99,8 +99,8 @@ public class PlayerActionManager implements IPlayerActionManager {
     }
 
     @Override
-    public Set<RiverActionType> validateRiverActions(int position, TehaiActionValue rivalTehaiAction, GameConfig gameConfig,
-            IGameCore gameCore, PlayerGameContext context) {
+    public Set<RiverActionType> validateRiverActions(int position, TehaiActionEvent rivalTehaiAction, GameConfig gameConfig,
+                                                     IGameCore gameCore, PlayerGameContext context) {
         Set<RiverActionType> enables = new HashSet<>();
         for (IRiverActionValidator validator : riverActionValidatorMap.values()) {
             if (validator.resolveAction(position, rivalTehaiAction, gameConfig, gameCore, context)) {
@@ -111,8 +111,8 @@ public class PlayerActionManager implements IPlayerActionManager {
     }
 
     @Override
-    public boolean validateRiverAction(RiverActionType actionType, int position, TehaiActionValue rivalTehaiAction, GameConfig gameConfig,
-            IGameCore gameCore, PlayerGameContext context) {
+    public boolean validateRiverAction(RiverActionType actionType, int position, TehaiActionEvent rivalTehaiAction, GameConfig gameConfig,
+                                       IGameCore gameCore, PlayerGameContext context) {
         IRiverActionValidator validator = riverActionValidatorMap.get(actionType);
         if (validator == null) {
             throw new IllegalArgumentException("动作未启用");

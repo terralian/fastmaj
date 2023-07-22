@@ -6,6 +6,7 @@ import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionValue;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.yama.DrawFrom;
 
 /**
@@ -28,7 +29,7 @@ public class DrawAction implements IGameAction {
      */
     public void doAction(GameConfig gameConfig, IGameCore gameCore) {
         RiverActionEvent lastRiverAction = gameCore.getLastRiverAction();
-        TehaiActionValue lastTehaiAction = gameCore.getLastTehaiAction();
+        TehaiActionEvent lastTehaiAction = gameCore.getLastTehaiAction();
         DrawFrom drawFrom = DrawFrom.YAMA;
         if (lastRiverAction != null && lastRiverAction.getRiverType() == RiverActionType.MINKAN) {
             drawFrom = DrawFrom.RINSYAN;

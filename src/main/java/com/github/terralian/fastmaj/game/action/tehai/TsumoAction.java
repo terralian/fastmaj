@@ -1,5 +1,8 @@
 package com.github.terralian.fastmaj.game.action.tehai;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.github.terralian.fastmaj.agari.AgariInfo;
 import com.github.terralian.fastmaj.agari.IAgariCalculator;
 import com.github.terralian.fastmaj.game.GameConfig;
@@ -7,11 +10,9 @@ import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.KyokuState;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 自摸动作
@@ -25,9 +26,9 @@ public class TsumoAction extends AgariAction implements ITehaiAction {
     }
 
     @Override
-    public KyokuState doAction(TehaiActionValue actionParam, IGameCore gameCore, GameConfig gameOptions) {
+    public KyokuState doAction(TehaiActionEvent actionParam, IGameCore gameCore, GameConfig gameOptions) {
         // 当前玩家坐席
-        int position = actionParam.getActionPlayer();
+        int position = actionParam.getPosition();
         // 玩家的手牌
         ITehai tehai = gameCore.getTehai();
         // 根据当前玩家是否立直获取手牌

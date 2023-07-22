@@ -1,5 +1,7 @@
 package com.github.terralian.fastmaj.game.event;
 
+import com.github.terralian.fastmaj.game.action.river.RiverActionType;
+import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.event.river.SkipEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
@@ -31,7 +33,8 @@ public abstract class ActionEvents {
      * @param actionEvent 事件
      */
     public static boolean needAddDraw(ActionEvent actionEvent) {
-        if (actionEvent == null) return false;
+        if (actionEvent == null)
+            return false;
         return actionEvent.getType() == GameEventEnum.MINKAN  //
                 || actionEvent.getType() == GameEventEnum.ANNKAN //
                 || actionEvent.getType() == GameEventEnum.KITA //
@@ -44,9 +47,9 @@ public abstract class ActionEvents {
      * @param actionEvent 事件
      */
     public static boolean needAddDraw(RiverActionEvent actionEvent) {
-        if (actionEvent == null) return false;
-        return actionEvent.getType() == GameEventEnum.MINKAN  //
-                || actionEvent.getType() == GameEventEnum.ANNKAN;
+        if (actionEvent == null)
+            return false;
+        return actionEvent.getRiverType() == RiverActionType.MINKAN;
     }
 
     /**
@@ -55,8 +58,18 @@ public abstract class ActionEvents {
      * @param actionEvent 事件
      */
     public static boolean needAddDraw(TehaiActionEvent actionEvent) {
-        if (actionEvent == null) return false;
-        return actionEvent.getType() == GameEventEnum.KAKAN //
-                || actionEvent.getType() == GameEventEnum.KITA;
+        return actionEvent.getActionType() == TehaiActionType.KAKAN //
+                || actionEvent.getActionType() == TehaiActionType.ANNKAN //
+                || actionEvent.getActionType() == TehaiActionType.KITA;
+    }
+
+    /**
+     * 该事件执行完成后，是否需要切换玩家
+     *
+     * @param actionEvent 事件
+     */
+    public static boolean needSwitchPlayer(TehaiActionEvent actionEvent) {
+        return actionEvent.getType() == GameEventEnum.KIRI //
+                || actionEvent.getType() == GameEventEnum.REACH;
     }
 }

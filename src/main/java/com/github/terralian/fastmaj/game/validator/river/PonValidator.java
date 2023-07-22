@@ -5,6 +5,7 @@ import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionValue;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.tehai.ITehai;
 
 /**
@@ -15,8 +16,8 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 public class PonValidator implements IRiverActionValidator {
 
     @Override
-    public boolean resolveAction(int position, TehaiActionValue rivalTehaiAction, GameConfig gameConfig, IGameCore gameCore,
-            PlayerGameContext context) {
+    public boolean resolveAction(int position, TehaiActionEvent rivalTehaiAction, GameConfig gameConfig, IGameCore gameCore,
+                                 PlayerGameContext context) {
         // 需要牌山还有可摸的牌
         // 玩家未立直
         // 宝牌数需要小于5，即没有人操作开四杠
@@ -25,7 +26,7 @@ public class PonValidator implements IRiverActionValidator {
         }
         // 手牌能够操作碰
         ITehai tehai = gameCore.getTehai(position);
-        return tehai.canPon(rivalTehaiAction.getActionHai());
+        return tehai.canPon(rivalTehaiAction.getIfHai());
     }
 
     @Override

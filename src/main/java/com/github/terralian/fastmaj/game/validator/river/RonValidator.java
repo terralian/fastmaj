@@ -9,6 +9,7 @@ import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionValue;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
@@ -46,7 +47,7 @@ public class RonValidator implements IRiverActionValidator {
     }
 
     @Override
-    public boolean resolveAction(int position, TehaiActionValue rivalTehaiAction, GameConfig gameConfig,
+    public boolean resolveAction(int position, TehaiActionEvent rivalTehaiAction, GameConfig gameConfig,
                                  IGameCore gameCore,
                                  PlayerGameContext context) {
         // 未听牌或者振听
@@ -57,7 +58,7 @@ public class RonValidator implements IRiverActionValidator {
         // 听的牌是这几枚
         ITehai tehai = gameCore.getTehai(position);
         Set<IHai> agariHais = yuukouhaiCalculator.calcMin(tehai);
-        if (!Encode34.contains(agariHais, rivalTehaiAction.getActionHai())) {
+        if (!Encode34.contains(agariHais, rivalTehaiAction.getIfHai())) {
             return false;
         }
         // 抢暗杠
@@ -72,7 +73,7 @@ public class RonValidator implements IRiverActionValidator {
             return true;
         }
         // 弃牌，得判断手牌是否有役
-        List<IYaku> yakus = ronYakuMatcher.match(tehai, rivalTehaiAction.getActionHai(), context);
+        List<IYaku> yakus = ronYakuMatcher.match(tehai, rivalTehaiAction.getIfHai(), context);
         return !yakus.isEmpty();
     }
 

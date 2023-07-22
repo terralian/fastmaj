@@ -170,7 +170,8 @@ public interface IGameCore {
      * @param score 和了点数
      * @param increaseAndDecrease 玩家的分数更新
      */
-    void agari(int agariPosition, int fromPosition, List<IYaku> yakus, int ban, int fu, int score, int[] increaseAndDecrease);
+    void agari(int agariPosition, int fromPosition, List<IYaku> yakus, int ban, int fu, int score,
+            int[] increaseAndDecrease);
 
     /**
      * 流局，若庄家听牌则连庄，若庄家未听牌则不连庄。
@@ -214,14 +215,35 @@ public interface IGameCore {
     KazeEnum getBakaze();
 
     /**
+     * 设置当前的场风
+     *
+     * @param bakaze 场风
+     */
+    void setBakaze(KazeEnum bakaze);
+
+    /**
      * 获取庄家的坐席
      */
     int getOya();
 
     /**
+     * 设置庄家的坐席，并且会切换当前玩家的坐席
+     *
+     * @param oya 庄家坐席
+     */
+    void setOya(int oya);
+
+    /**
      * 获取玩家的分数
      */
     int[] getPlayerPoints();
+
+    /**
+     * 设置玩家的分数
+     *
+     * @param currentPlayerPoints 当前玩家的分数
+     */
+    void setPlayerPoints(int[] currentPlayerPoints);
 
     /**
      * 获取当前玩家的手牌
@@ -286,12 +308,25 @@ public interface IGameCore {
     int getActionCount();
 
     /**
-     * 获取本场数
+     * 获取本场数（展示值），本场数的展示值和实际值仅在多人荣和时存在差异。
+     * <p/>
+     * 当荣和数大于1时，仅有第一位荣和者会计算增加本场棒，
+     * 由于本场棒已被消费，此时其余荣和结算获取的本场棒实际值应为0，而由于当前对局还未结束，类似日志记录时需要展示旧值。
      */
     int getHonba();
 
     /**
-     * 获取本场数的实际值
+     * 设置当前的本场数，将会同时设置实际值与展示值
+     *
+     * @param honba 本场数
+     */
+    void setHonba(int honba);
+
+    /**
+     * 获取本场数的实际值，本场数的展示值和实际值仅在多人荣和时存在差异。
+     * <p/>
+     * 当荣和数大于1时，仅有第一位荣和者会计算增加本场棒，
+     * 由于本场棒已被消费，此时其余荣和结算获取的本场棒实际值应为0，而由于当前对局还未结束，类似日志记录时需要展示旧值。
      */
     int getRealHonba();
 
@@ -299,6 +334,13 @@ public interface IGameCore {
      * 获取供托（立直棒）
      */
     int getKyotaku();
+
+    /**
+     * 设置供托数（立直棒）
+     *
+     * @param kyotaku 供托数
+     */
+    void setKyotaku(int kyotaku);
 
     /**
      * 获取当前操作的玩家坐席

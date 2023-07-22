@@ -1,9 +1,13 @@
 package com.github.terralian.fastmaj.player;
 
+import java.util.Set;
+
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
+import com.github.terralian.fastmaj.game.event.river.RonEvent;
 import com.github.terralian.fastmaj.game.event.tehai.KiriEvent;
 import com.github.terralian.fastmaj.game.event.tehai.ReachEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
@@ -11,8 +15,6 @@ import com.github.terralian.fastmaj.game.event.tehai.TsumoEvent;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
-
-import java.util.Set;
 
 /**
  * 按照向听数，从左到右选择一个能使向听数减少的牌，若没有则模切。不会吃碰杠，会立直和了
@@ -60,10 +62,10 @@ public class SimpleSyatenKiriPlayer implements IPlayer {
     }
 
     @Override
-    public RiverActionCall nakiOrRon(int fromPosition, TehaiActionType fromDealAction, Set<RiverActionType> enableActions,
-            PlayerGameContext context) {
+    public RiverActionEvent nakiOrRon(int fromPosition, TehaiActionType fromDealAction, Set<RiverActionType> enableActions,
+                                      PlayerGameContext context) {
         if (enableActions.contains(RiverActionType.RON)) {
-            return RiverActionCall.RON;
+            return new RonEvent();
         }
         return null;
     }

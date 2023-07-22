@@ -11,6 +11,8 @@ import java.util.Set;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.event.ActionEvents;
+import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.tehai.ITehai;
 
@@ -30,7 +32,7 @@ public class QueueReplayPlayer implements IPlayer {
     /**
      * 牌河动作
      */
-    private Map<Integer, Map<Integer, RiverActionCall>> riverActionCalls;
+    private Map<Integer, Map<Integer, RiverActionEvent>> riverActionCalls;
 
     /**
      * 初始化构建队列回放玩家{@link QueueReplayPlayer}
@@ -53,11 +55,11 @@ public class QueueReplayPlayer implements IPlayer {
      * {@inheritDoc}
      */
     @Override
-    public RiverActionCall nakiOrRon(int fromPosition, TehaiActionType fromDealAction, Set<RiverActionType> enableActions,
-            PlayerGameContext context) {
-        Map<Integer, RiverActionCall> roundActionMap = riverActionCalls.get(context.getRound());
+    public RiverActionEvent nakiOrRon(int fromPosition, TehaiActionType fromDealAction, Set<RiverActionType> enableActions,
+                                      PlayerGameContext context) {
+        Map<Integer, RiverActionEvent> roundActionMap = riverActionCalls.get(context.getRound());
         if (roundActionMap == null) {
-            return RiverActionCall.SKIP;
+            return ActionEvents.SKIP;
         }
         return roundActionMap.get(context.getActionCount());
     }
@@ -77,13 +79,13 @@ public class QueueReplayPlayer implements IPlayer {
 
     /**
      * 将一个牌河动作增加到动作队列末尾，后续会按先进先出使用。
-     * 
+     *
      * @param round 对局数
      * @param actionCount 动作数
      * @param action 动作
      */
-    public void addRiverAction(int round, int actionCount, RiverActionCall action) {
-        Map<Integer, RiverActionCall> roundActionMap = riverActionCalls.computeIfAbsent(round, k -> new HashMap<>());
+    public void addRiverAction(int round, int actionCount, RiverActionEvent action) {
+        Map<Integer, RiverActionEvent> roundActionMap = riverActionCalls.computeIfAbsent(round, k -> new HashMap<>());
         roundActionMap.put(actionCount, action);
     }
 

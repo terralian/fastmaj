@@ -4,6 +4,7 @@ import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.action.IPlayerAction;
 import com.github.terralian.fastmaj.game.action.tehai.KakanAction;
+import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.tehai.ITehai;
 
 /**
@@ -26,7 +27,7 @@ public interface IRiverAction extends IPlayerAction {
      * @param gameConfig 游戏规则
      * @param gameCore 游戏核心
      */
-    void doAction(RiverActionValue value, GameConfig gameConfig, IGameCore gameCore);
+    void doAction(RiverActionEvent value, GameConfig gameConfig, IGameCore gameCore);
 
     /**
      * 获取牌河动作类型

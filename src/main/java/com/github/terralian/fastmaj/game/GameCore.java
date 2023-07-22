@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.github.terralian.fastmaj.game.action.river.RiverActionValue;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionValue;
+import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.log.IGameLogger;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyoku;
 import com.github.terralian.fastmaj.hai.IHai;
@@ -105,7 +106,7 @@ public class GameCore implements IGameCore {
     /**
      * 最近的牌河动作
      */
-    private RiverActionValue lastRiverAction;
+    private RiverActionEvent lastRiverAction;
     /**
      * 最近一枚牌的摸牌来源，开始时为空
      */
@@ -969,7 +970,7 @@ public class GameCore implements IGameCore {
      * {@inheritDoc}
      */
     @Override
-    public void setLastRiverAction(RiverActionValue action) {
+    public void setLastRiverAction(RiverActionEvent action) {
         this.lastRiverAction = action;
     }
 
@@ -977,7 +978,7 @@ public class GameCore implements IGameCore {
      * {@inheritDoc}
      */
     @Override
-    public RiverActionValue getLastRiverAction() {
+    public RiverActionEvent getLastRiverAction() {
         return lastRiverAction;
     }
 

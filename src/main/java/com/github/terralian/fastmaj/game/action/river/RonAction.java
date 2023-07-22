@@ -1,5 +1,8 @@
 package com.github.terralian.fastmaj.game.action.river;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.github.terralian.fastmaj.agari.AgariInfo;
 import com.github.terralian.fastmaj.agari.IAgariCalculator;
 import com.github.terralian.fastmaj.game.GameConfig;
@@ -7,11 +10,9 @@ import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.action.tehai.AgariAction;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
+import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 荣和动作
@@ -31,13 +32,13 @@ public class RonAction extends AgariAction implements IRiverAction {
      * @param gameConfig 游戏规则
      * @param gameCore 游戏核心
      */
-    public void doAction(RiverActionValue value, GameConfig gameConfig, IGameCore gameCore) {
+    public void doAction(RiverActionEvent value, GameConfig gameConfig, IGameCore gameCore) {
         // 坐席
-        int position = value.getActionPlayer();
+        int position = value.getPosition();
         // 手牌
         ITehai tehai = gameCore.getTehai(position);
         // 对手动作的牌
-        IHai rivalActionHai = value.getActionHai();
+        IHai rivalActionHai = value.getFromHai();
         // 将荣和的牌加入手牌
         tehai.draw(rivalActionHai);
 
@@ -49,9 +50,9 @@ public class RonAction extends AgariAction implements IRiverAction {
         List<IHai> doraHais = gameCore.getDoras();
         List<IHai> uraDoras = context.getHaiRiver().isReach() ? gameCore.getUraDoras() : new ArrayList<>();
         // 计算和了信息
-        AgariInfo agariInfo = agariCalculator.calculate(tehai, rivalActionHai, value.getFromPlayer(), doraHais, uraDoras, context);
+        AgariInfo agariInfo = agariCalculator.calculate(tehai, rivalActionHai, value.getFrom(), doraHais, uraDoras, context);
         // 和了动作
-        gameCore.agari(position, value.getFromPlayer(), agariInfo.getYakus(), agariInfo.getBan(), agariInfo.getFu(),
+        gameCore.agari(position, value.getFrom(), agariInfo.getYakus(), agariInfo.getBan(), agariInfo.getFu(),
                 agariInfo.getScore(), agariInfo.getIncreaseAndDecrease());
         // 庄家是否荣和
         boolean isRenchan = position == gameCore.getOya();

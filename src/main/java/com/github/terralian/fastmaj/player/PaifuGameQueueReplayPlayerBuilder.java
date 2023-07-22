@@ -92,26 +92,22 @@ public abstract class PaifuGameQueueReplayPlayerBuilder {
 
     private static void addChii(ChiiEvent event, List<QueueReplayPlayer> list, int round, int actionCount) {
         QueueReplayPlayer targetPlayer = list.get(event.getPosition());
-        RiverActionCall riverActionCall = RiverActionCall.newChii(event.getSelfHais());
-        targetPlayer.addRiverAction(round, actionCount, riverActionCall);
+        targetPlayer.addRiverAction(round, actionCount, event);
     }
 
     private static void addMinkan(MinkanEvent event, List<QueueReplayPlayer> list, int round, int actionCount) {
         QueueReplayPlayer targetPlayer = list.get(event.getPosition());
-        RiverActionCall riverActionCall = RiverActionCall.newMinkan(event.getSelfHais());
-        targetPlayer.addRiverAction(round, actionCount, riverActionCall);
+        targetPlayer.addRiverAction(round, actionCount, event);
     }
 
     private static void addPon(PonEvent event, List<QueueReplayPlayer> list, int round, int actionCount) {
         QueueReplayPlayer targetPlayer = list.get(event.getPosition());
-        RiverActionCall riverActionCall = RiverActionCall.newPon(event.getSelfHais());
-        targetPlayer.addRiverAction(round, actionCount, riverActionCall);
+        targetPlayer.addRiverAction(round, actionCount, event);
     }
 
     private static void addRon(RonEvent event, List<QueueReplayPlayer> list, int round, int actionCount) {
         QueueReplayPlayer targetPlayer = list.get(event.getPosition());
-        RiverActionCall riverActionCall = RiverActionCall.RON;
-        targetPlayer.addRiverAction(round, actionCount, riverActionCall);
+        targetPlayer.addRiverAction(round, actionCount, event);
     }
 
     private static void addAnnkan(AnnkanEvent event, List<QueueReplayPlayer> list, int round) {

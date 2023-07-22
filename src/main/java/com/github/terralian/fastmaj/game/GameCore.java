@@ -24,7 +24,10 @@ import com.github.terralian.fastmaj.yama.SimpleRandomYamaWorker;
 import com.github.terralian.fastmaj.yama.Yama;
 
 /**
- * 默认的游戏核心实现
+ * 默认的游戏核心实现，该核心设计为通过调用内部定义方法，从东一局开始到游戏结束，自动初始化所需信息（牌山、手牌、牌河...）,
+ * 变更内其部状态。在对局过程中，未提供可直接修改内核状态的方法，这种设计可保证运行状态的连贯性和一致性。
+ * <p/>
+ * 该实现适用于一般情形的完整对局流程，若需要指定某种场景开始对局，那么可选择使用{@link CustomizedGameCore}实现
  *
  * @author terra.lian
  */
@@ -32,11 +35,11 @@ public class GameCore implements IGameCore {
     /**
      * 玩家人数
      */
-    private final int playerSize;
+    protected final int playerSize;
     /**
      * 游戏规则
      */
-    private final GameConfig gameConfig;
+    protected final GameConfig gameConfig;
     /**
      * 牌山生成器，有值时使用指定的牌山生成器。若未指定，则使用{@link SimpleRandomYamaWorker}
      * <p/>
@@ -145,6 +148,7 @@ public class GameCore implements IGameCore {
      * @param players 玩家集合（可选）
      * @param gameConfig 游戏规则
      * @param yamaWorker 牌山生成器
+     * @param syatenCalculator 向听计算器
      * @param gameLogger 日志处理器
      */
     public GameCore(List<IPlayer> players, GameConfig gameConfig, IYamaWorker yamaWorker,
@@ -689,6 +693,7 @@ public class GameCore implements IGameCore {
      *
      * @param bakaze 场风
      */
+    @Override
     public void setBakaze(KazeEnum bakaze) {
         this.bakaze = bakaze;
     }
@@ -706,8 +711,10 @@ public class GameCore implements IGameCore {
      *
      * @param oya 当前庄家
      */
+    @Override
     public void setOya(int oya) {
         this.oya = oya;
+        this.position = oya;
     }
 
     /**
@@ -723,6 +730,7 @@ public class GameCore implements IGameCore {
      *
      * @param playerPoints 玩家分数
      */
+    @Override
     public void setPlayerPoints(int[] playerPoints) {
         this.playerPoints = playerPoints;
     }
@@ -827,6 +835,12 @@ public class GameCore implements IGameCore {
         return honba[1];
     }
 
+    @Override
+    public void setHonba(int honba) {
+        if (honba < 0) throw new IllegalArgumentException("本场数需要 >= 0 : " + honba);
+        this.honba[0] = this.honba[1] = this.honba[2] = honba;
+    }
+
     /**
      * 获取本场数（实际值）
      */
@@ -841,6 +855,16 @@ public class GameCore implements IGameCore {
     @Override
     public int getKyotaku() {
         return this.kyotaku;
+    }
+
+    /**
+     * 设置供托数（立直棒）
+     *
+     * @param kyotaku 供托数
+     */
+    @Override
+    public void setKyotaku(int kyotaku) {
+        this.kyotaku = kyotaku;
     }
 
     /**

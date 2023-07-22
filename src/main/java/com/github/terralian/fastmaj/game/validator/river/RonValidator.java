@@ -28,31 +28,27 @@ public class RonValidator implements IRiverActionValidator {
     /**
      * 有效牌计算器
      */
-    private IYuukouhaiCalculator yuukouhaiCalculator;
+    private final IYuukouhaiCalculator yuukouhaiCalculator;
     /**
      * 向听计算器
      */
-    private ISyatenCalculator syatenCalculator;
+    private final ISyatenCalculator syatenCalculator;
     /**
      * 荣和役计算器
      */
-    private IRonYakuMatcher ronYakuMatcher;
+    private final IRonYakuMatcher ronYakuMatcher;
 
-    public RonValidator(
-            ISyatenCalculator syatenCalculator, IYuukouhaiCalculator yuukouhaiCalculator,
-            IRonYakuMatcher ronYakuMatcher
-    ) {
+    public RonValidator(ISyatenCalculator syatenCalculator, IYuukouhaiCalculator yuukouhaiCalculator,
+            IRonYakuMatcher ronYakuMatcher) {
         this.syatenCalculator = syatenCalculator;
         this.yuukouhaiCalculator = yuukouhaiCalculator;
         this.ronYakuMatcher = ronYakuMatcher;
     }
 
     @Override
-    public boolean resolveAction(
-            int position, TehaiActionEvent rivalTehaiAction, GameConfig gameConfig,
+    public boolean resolveAction(int position, TehaiActionEvent rivalTehaiAction, GameConfig gameConfig,
             IGameCore gameCore,
-            PlayerGameContext context
-    ) {
+            PlayerGameContext context) {
         // 未听牌或者振听
         PlayerHideStatus hideStatus = gameCore.getPlayerHide(position);
         if (hideStatus.getSyaten() > 0 || hideStatus.isFuriten()) {

@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.KazeEnum;
-import com.github.terralian.fastmaj.game.action.river.RiverActionValue;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.hai.IHai;
@@ -12,15 +11,14 @@ import com.github.terralian.fastmaj.river.IHaiRiver;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.ITehaiLock;
 import com.github.terralian.fastmaj.yama.DrawFrom;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
  * 玩家的游戏上下文
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -192,7 +190,7 @@ public class PlayerGameContext {
 
     /**
      * 获取某个玩家的牌河
-     * 
+     *
      * @param position 玩家坐席
      */
     public IHaiRiver getHaiRiver(int position) {

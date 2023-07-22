@@ -148,7 +148,7 @@ public class GameCore implements IGameCore {
      * @param gameLogger 日志处理器
      */
     public GameCore(List<IPlayer> players, GameConfig gameConfig, IYamaWorker yamaWorker,
-                    ISyatenCalculator syatenCalculator, IGameLogger gameLogger) {
+            ISyatenCalculator syatenCalculator, IGameLogger gameLogger) {
         this.playerSize = gameConfig.getPlayerSize();
         this.players = players;
         this.gameConfig = gameConfig;
@@ -593,7 +593,8 @@ public class GameCore implements IGameCore {
      * @param increaseAndDecrease 玩家的分数更新
      */
     @Override
-    public void agari(int agariPosition, int fromPosition, List<IYaku> yakus, int ban, int fu, int score, int[] increaseAndDecrease) {
+    public void agari(int agariPosition, int fromPosition, List<IYaku> yakus, int ban, int fu, int score,
+            int[] increaseAndDecrease) {
         gameState.requireKyokuStarted();
 
         // 更新分数

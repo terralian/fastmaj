@@ -20,6 +20,8 @@ import com.github.terralian.fastmaj.yaku.IYaku;
 
 /**
  * 计算荣和动作是否可执行
+ * <p>
+ * TODO 优化多次调用向听计算及手牌分割的问题
  *
  * @author terra.lian
  */

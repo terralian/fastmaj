@@ -1,16 +1,18 @@
 package com.github.terralian.fastmaj.agari;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.IYakuMatcher;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 可以荣和的役匹配，默认实现
+ * <p>
+ * TODO 可能可以进行优化
  *
  * @author terra.lian
  */

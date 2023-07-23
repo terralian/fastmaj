@@ -12,6 +12,8 @@ import com.github.terralian.fastmaj.hai.IHai;
 
 /**
  * 有效牌计算器的默认实现
+ * <p>
+ * TODO 看看怎么优化，每次都遍历所有情况太过于昂贵
  *
  * @author terra.lian
  * @see <a href= "https://web.archive.org/web/20190402234201/http://cmj3.web.fc2.com/index.htm#yuukou">麻雀C言語プログラム集</a>

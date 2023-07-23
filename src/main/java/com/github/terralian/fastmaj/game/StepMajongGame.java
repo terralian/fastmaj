@@ -103,6 +103,7 @@ public abstract class StepMajongGame {
      */
     public GameRunningState nextKyoku() {
         // 校验游戏是否结束
+        // 在这里进行游戏判定需要额外进行多1次判定，但是可以简化固定上层逻辑
         if (gameEndValidator.validate(config, gameCore)) {
             gameEndAction.doAction(config, gameCore);
             return GameRunningState.END;

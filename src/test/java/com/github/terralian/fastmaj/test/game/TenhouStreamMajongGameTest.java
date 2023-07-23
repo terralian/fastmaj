@@ -1,5 +1,6 @@
 package com.github.terralian.fastmaj.test.game;
 
+import java.io.File;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,8 @@ import com.github.terralian.fastmaj.game.log.PrintGameLogger;
 import com.github.terralian.fastmaj.paifu.IPaifuParser;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
 import com.github.terralian.fastmaj.paifu.domain.PaifuKyoku;
+import com.github.terralian.fastmaj.paifu.source.FileSource;
+import com.github.terralian.fastmaj.paifu.source.GZIPSource;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuGameParseHandler;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuParser;
 import com.github.terralian.fastmaj.player.PaifuGameQueueReplayPlayerBuilder;
@@ -129,7 +132,8 @@ public class TenhouStreamMajongGameTest {
     }
 
     private void simulate_run_game(String simplePaifuName, boolean shortKyokuSummary) throws Exception {
-        PaifuGame paifuGame = paifuParser.parseFile(TestResourceUtil.readToFile("tenhou", simplePaifuName));
+        File file = TestResourceUtil.readToFile("tenhou", simplePaifuName);
+        PaifuGame paifuGame = paifuParser.parse(new GZIPSource(new FileSource(file)));
         List<QueueReplayPlayer> players = PaifuGameQueueReplayPlayerBuilder.toPlayer(paifuGame);
 
         List<int[]> allRound = paifuGame.getKyokus()

@@ -2,14 +2,14 @@ package com.github.terralian.fastmaj.paifu.tenhou;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
 
 import com.github.terralian.fastmaj.paifu.IPaifuParser;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
-import com.github.terralian.fastmaj.util.Assert;
-import com.github.terralian.fastmaj.util.ZipUtil;
+import com.github.terralian.fastmaj.paifu.source.IPaifuSource;
 import org.xml.sax.InputSource;
 
 /**
@@ -38,25 +38,16 @@ public class TenhouPaifuParser implements IPaifuParser<PaifuGame> {
     }
 
     /**
-     * 解析牌谱文件，该文件应当是单个牌谱的GZIP形式压缩文件，比如天凤位下载下来的牌谱为一个牌谱压缩包，内部含多个牌谱压缩文件。
-     * 这里能够处理的为压缩包里内的单个压缩文件
-     */
-    @Override
-    public PaifuGame parseFile(File file) throws Exception {
-        Assert.isTrue(file != null, "牌谱文件不存在，请检查路径");
-        Assert.isTrue(!file.isDirectory(), "参数是一个文件夹，请检查路径");
-        String data = ZipUtil.unGzip(file);
-        return parseContent(data);
-    }
-
-    /**
      * 解析牌谱流，该流应当是单个牌谱的GZIP形式压缩文件，比如天凤位下载下来的牌谱为一个牌谱压缩包，内部含多个牌谱压缩文件。
      * 这里能够处理的为压缩包里内的单个压缩文件流
      */
     @Override
-    public PaifuGame parseStream(InputStream in) throws Exception {
-        String data = ZipUtil.unGzip(in);
-        return parseContent(data);
+    public PaifuGame parse(IPaifuSource paifuSource) throws Exception {
+        try (InputStreamReader ir = new InputStreamReader(paifuSource.getInputStream());
+                BufferedReader br = new BufferedReader(ir)) {
+            String data = br.lines().collect(Collectors.joining());
+            return parseContent(data);
+        }
     }
 
     /**
@@ -64,8 +55,7 @@ public class TenhouPaifuParser implements IPaifuParser<PaifuGame> {
      *
      * @param content XML内容
      */
-    @Override
-    public PaifuGame parseContent(String content) throws Exception {
+    private PaifuGame parseContent(String content) throws Exception {
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         SAXParser saxParser = saxParserFactory.newSAXParser();
         InputSource inputSource = new InputSource(new ByteArrayInputStream(content.getBytes()));

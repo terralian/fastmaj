@@ -17,6 +17,8 @@ import com.github.terralian.fastmaj.game.StreamMajongGame;
 import com.github.terralian.fastmaj.game.builder.MajongGameBuilder;
 import com.github.terralian.fastmaj.paifu.IPaifuParser;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
+import com.github.terralian.fastmaj.paifu.source.GZIPSource;
+import com.github.terralian.fastmaj.paifu.source.InputSource;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuGameParseHandler;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuParser;
 import com.github.terralian.fastmaj.player.PaifuGameQueueReplayPlayerBuilder;
@@ -106,7 +108,7 @@ public class TenhouPackageTest {
         System.out.println(order + ": " + name);
         order++;
 
-        PaifuGame paifuGame = paifuParser.parseStream(gzipStream);
+        PaifuGame paifuGame = paifuParser.parse(new GZIPSource(new InputSource(gzipStream)));
         GameConfig config = GameConfig.defaultRule();
         config.setEndBakaze(paifuGame.getEndBakaze());
 

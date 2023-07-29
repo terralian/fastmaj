@@ -16,7 +16,6 @@ import com.github.terralian.fastmaj.paifu.source.FileSource;
 import com.github.terralian.fastmaj.paifu.source.GZIPSource;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuGameParseHandler;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuParser;
-import com.github.terralian.fastmaj.paifu.tenhou.TenhouRuleVersionEnum;
 import com.github.terralian.fastmaj.player.PaifuGameQueueReplayPlayerBuilder;
 import com.github.terralian.fastmaj.player.QueueReplayPlayer;
 import com.github.terralian.fastmaj.util.StringUtil;
@@ -93,6 +92,8 @@ public class TenhouStreamMajongGameTest {
         simulate_run_game("2009072917gm-0061-0000-85a7478c&tw=3.mjlog", true);
         // 旧版岭上区和新版的顺序不一致
         simulate_run_game("2009072918gm-0061-0000-e6e91672&tw=0.mjlog", true);
+        // 饼参加了一场无红宝牌
+        simulate_run_game("2009082817gm-00ab-0000-997dbe26&tw=0.mjlog", true);
     }
 
     @Test
@@ -171,10 +172,7 @@ public class TenhouStreamMajongGameTest {
                 .addLogger(new PrintGameLogger(shortKyokuSummary))
                 .addLogger(new PointCheckLogger(allRound));
         // 配置
-        GameConfig gameConfig = TenhouRuleVersionEnum.T2010.name().equals(paifuGame.getRuleVersion()) //
-                                ? GameConfig.defaultRule() //
-                                : GameConfig.useTenhouOld();
-        gameConfig.setEndBakaze(paifuGame.getEndBakaze());
+        GameConfig gameConfig = GameConfig.useTenhou(paifuGame);
 
         StreamMajongGame majongGame = new StreamMajongGame(players, gameConfig, gameComponent);
         majongGame.startGame();

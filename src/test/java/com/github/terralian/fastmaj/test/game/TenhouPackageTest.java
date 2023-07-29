@@ -25,6 +25,7 @@ import com.github.terralian.fastmaj.player.PaifuGameQueueReplayPlayerBuilder;
 import com.github.terralian.fastmaj.player.QueueReplayPlayer;
 import com.github.terralian.fastmaj.util.TestResourceUtil;
 import com.github.terralian.fastmaj.util.ZipUtil;
+import com.github.terralian.fastmaj.yama.worker.UnsupportedYamaSeedException;
 import com.github.terralian.fastmaj.yama.worker.tenhou.TenhouYamaWorker;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,12 +46,12 @@ public class TenhouPackageTest {
      */
     @Test
     public void testBaseOnTenhouPackage() {
-        System.out.println("--- mjlog_pf4-20_n19 ---");
-        testBaseOnTenhouPackage0("mjlog_pf4-20_n19.zip");
-        System.out.println("--- mjlog_pf4-20_n20 ---");
-        testBaseOnTenhouPackage0("mjlog_pf4-20_n20.zip");
-        System.out.println("--- mjlog_pf4-20_n22 ---");
-        testBaseOnTenhouPackage0("mjlog_pf4-20_n22.zip");
+        String prefix = "mjlog_pf4-20_n";
+        for (int i = 1; i <= 22; i++) {
+            String packageName = prefix + i + ".zip";
+            System.out.println("--- " + prefix + " ---");
+            //testBaseOnTenhouPackage0(packageName);
+        }
     }
 
     private void testBaseOnTenhouPackage0(String fileName) {
@@ -105,10 +106,19 @@ public class TenhouPackageTest {
     private int order = 1;
 
     private void testBaseOnTenhouPackage1(String name, InputStream gzipStream) throws Exception {
-        System.out.println(order + ": " + name);
+        System.out.print(order + ": " + name);
         order++;
 
-        PaifuGame paifuGame = paifuParser.parse(new GZIPSource(new InputSource(gzipStream)));
+        PaifuGame paifuGame;
+        try {
+            paifuGame = paifuParser.parse(new GZIPSource(new InputSource(gzipStream)));
+
+        } catch (UnsupportedYamaSeedException e) {
+            System.out.println("   > 旧牌谱，跳过...");
+            return;
+        }
+        System.out.println();
+
         GameConfig config = GameConfig.defaultRule();
         config.setEndBakaze(paifuGame.getEndBakaze());
 

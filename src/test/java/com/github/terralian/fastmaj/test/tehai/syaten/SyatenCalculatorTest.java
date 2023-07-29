@@ -52,7 +52,6 @@ public class SyatenCalculatorTest {
         nameMark = "1m3s111122223333z";
         tehai = EncodeMark.toTehai(nameMark);
         assertEquals(2, calculator.calcMin(tehai.getHand()));
-
     }
 
     @Test
@@ -78,6 +77,11 @@ public class SyatenCalculatorTest {
         nameMark = "123m245779p1355z5z";
         tehai = EncodeMark.toTehai(nameMark);
         assertEquals(2, calculator.calcMin(tehai.getHand()));
+
+        // 手牌包含红包拍
+        nameMark = "40m11333s";
+        tehai = EncodeMark.toTehai(nameMark);
+        assertEquals(0, calculator.calcMin(tehai.getHand()));
     }
 
     /**
@@ -113,7 +117,8 @@ public class SyatenCalculatorTest {
     /**
      * 使用问题集进行测试
      *
-     * @see <a href="https://mahjong.ara.black/etc/shanten/shanten9.htm">问题集来源 :https://mahjong.ara.black/etc/shanten/shanten9.htm</a>
+     * @see <a href="https://mahjong.ara.black/etc/shanten/shanten9.htm">问题集来源
+     * :https://mahjong.ara.black/etc/shanten/shanten9.htm</a>
      */
     @Test
     public void problemsTest() {

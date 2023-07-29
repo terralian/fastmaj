@@ -90,6 +90,8 @@ public class TenhouStreamMajongGameTest {
     public void old_paifu_sample() throws Exception {
         // 旧版牌山和新版存在一丢丢差异
         simulate_run_game("2009072917gm-0061-0000-85a7478c&tw=3.mjlog", true);
+        //
+        simulate_run_game("2009072918gm-0061-0000-e6e91672&tw=0.mjlog", false);
     }
 
     @Test

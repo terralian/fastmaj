@@ -5,6 +5,7 @@ import java.util.Base64;
 
 import com.github.terralian.fastmaj.third.mt19937ar.MersenneTwister;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
+import com.github.terralian.fastmaj.yama.YamaArray;
 
 /**
  * 天凤牌谱的根据种子生成牌山算法
@@ -44,12 +45,18 @@ public class TenhouYamaWorker implements IYamaWorker {
     private String seed;
 
     /**
+     * 种子
+     */
+    private TenhouYamaVersionEnum version;
+
+    /**
      * 构建一个空的牌山生成器
      * <p/>
      * 由于此时种子为空，生成器是不可使用的状态
      */
     public TenhouYamaWorker() {
         seed = null;
+        version = null;
     }
 
     /**
@@ -61,6 +68,7 @@ public class TenhouYamaWorker implements IYamaWorker {
      */
     public TenhouYamaWorker(String seed) {
         this.seed = seed;
+        this.version = null;
         if (seed != null) {
             initialize();
         }
@@ -70,13 +78,13 @@ public class TenhouYamaWorker implements IYamaWorker {
      * 获取牌山
      */
     @Override
-    public int[] getNextYama(int nextSize) {
+    public YamaArray getNextYama(int nextSize) {
         if (r == null) {
             throw new IllegalMonitorStateException("牌山生成器未进行初始化（无种子）");
         }
         int[] wall = new int[136];
         generate(nextSize, wall);
-        return wall;
+        return new YamaArray(wall, version.name());
     }
 
     /**
@@ -93,6 +101,7 @@ public class TenhouYamaWorker implements IYamaWorker {
         long[] seedValues = new long[624];
         // 当前版本的种子值转换
         if (seed.indexOf("mt19937ar-sha512-n288-base64") == 0) {
+            version = TenhouYamaVersionEnum.T2019_AFTER;
             byte[] seedBytes = Base64.getDecoder().decode(seedText);
             // 转换为无符号32位INT数组，由于java没有无符号，使用Long来表示
             for (int i = 0; i < seedValues.length; i++) {
@@ -104,9 +113,9 @@ public class TenhouYamaWorker implements IYamaWorker {
         }
 
         // 旧风格的种子值
-        else if (seed.startsWith("mt19937ar")) {
-            // 原类中有对旧牌谱进行解析的实例，但是解析不正确，目前没有找到可以解析2009-07之前的天凤牌谱方法
-            throw new UnsupportedOperationException("当前牌谱为旧天凤牌谱，其格式与后续格式存在差异，暂不支持解析");
+        else {
+            version = TenhouYamaVersionEnum.T2009_BEFORE;
+            seedValues = decompositeHexList(seedText);
         }
 
         // 根据种子值初始化梅森旋转随机数生成器
@@ -115,6 +124,30 @@ public class TenhouYamaWorker implements IYamaWorker {
         } else {
             r.init_by_array(seedValues, seedValues.length);
         }
+    }
+
+    /**
+     * 兼容较老的天凤牌谱
+     *
+     * @param text 实际种子的值
+     */
+    private long[] decompositeHexList(String text) {
+        if (text == null) {
+            throw new IllegalArgumentException("yama seed value is empty");
+        }
+
+        String[] textArray = text.split(",");
+        long[] result = new long[textArray.length];
+
+        for (int i = 0; i < textArray.length; i++) {
+            int index = textArray[i].indexOf('.');
+            if (index >= 0)
+                textArray[i] = textArray[i].substring(0, index);
+
+            result[i] = Long.valueOf(textArray[i], 16);
+        }
+
+        return result;
     }
 
     /**

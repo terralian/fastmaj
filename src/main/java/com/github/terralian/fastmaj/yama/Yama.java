@@ -8,6 +8,7 @@ import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.Tehai;
+import com.github.terralian.fastmaj.yama.worker.tenhou.TenhouYamaVersionEnum;
 
 /**
  * 牌山的默认实现
@@ -18,8 +19,8 @@ import com.github.terralian.fastmaj.tehai.Tehai;
  * <li>牌山的上下两枚牌，在数组是线性表示，由于倒序的关系，放置也是倒序
  * <li>其红宝牌为同类型的第1枚
  * </ul>
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class Yama implements IYama {
 
@@ -31,7 +32,7 @@ public class Yama implements IYama {
     /**
      * 原始数据
      */
-    private List<IHai> raw;
+    private final List<IHai> raw;
 
     /**
      * 当前牌山偏移
@@ -53,6 +54,16 @@ public class Yama implements IYama {
     private int doraSize;
 
     /**
+     * 宝牌指示牌位置
+     */
+    private int[] doraDisplayIndex = DORA_INDEX_A;
+
+    /**
+     * 里宝牌指示牌位置，和宝牌指示牌为位置互换
+     */
+    private int[] uraDoraDisplayIndex = DORA_INDEX_B;
+
+    /**
      * 王牌区顺序索引
      */
     private static final int[] KING_HAI_INDEX = {1, 0, 3, 2};
@@ -63,8 +74,14 @@ public class Yama implements IYama {
     private static final Integer RED_INDEX = 0;
 
     /**
+     * 两组宝牌指示牌位置，在不同时期所使用的不一致
+     */
+    private static final int[] DORA_INDEX_A = {5, 7, 9, 11, 13};
+    private static final int[] DORA_INDEX_B = {4, 6, 8, 10, 12};
+
+    /**
      * 通过136编码的牌山数组来构建牌
-     * 
+     *
      * @param yama 136编码的牌山数组
      * @param useRedHai 是否用红色的牌
      * @param playerSize 玩家人数
@@ -81,6 +98,22 @@ public class Yama implements IYama {
         this.playerSize = playerSize;
 
         reset();
+    }
+
+    /**
+     * 根据牌山数组来构建牌山
+     *
+     * @param yamaArray 牌山数组
+     * @param useRedHai 是否用红色的牌
+     * @param playerSize 玩家人数
+     */
+    public Yama(IYamaArray yamaArray, boolean useRedHai, int playerSize) {
+        this(yamaArray.value(), useRedHai, playerSize);
+        // 使用旧牌山
+        if (TenhouYamaVersionEnum.T2009_BEFORE.name().equals(yamaArray.version())) {
+            this.doraDisplayIndex = DORA_INDEX_B;
+            this.uraDoraDisplayIndex = DORA_INDEX_A;
+        }
     }
 
     /**
@@ -175,7 +208,7 @@ public class Yama implements IYama {
             return null;
         }
         doraSize += 1;
-        return raw.get(5 + (doraSize - 1) * 2);
+        return raw.get(doraDisplayIndex[doraSize - 1]);
     }
 
     /**
@@ -193,7 +226,7 @@ public class Yama implements IYama {
     public List<IHai> getDoraDisplay() {
         List<IHai> doraDisplay = new ArrayList<>();
         for (int i = 0; i < doraSize; i++) {
-            doraDisplay.add(raw.get(5 + i * 2));
+            doraDisplay.add(raw.get(doraDisplayIndex[i]));
         }
         return doraDisplay;
     }
@@ -205,7 +238,7 @@ public class Yama implements IYama {
     public List<IHai> getUraDoraDisplay() {
         List<IHai> uraDoraDisplay = new ArrayList<>();
         for (int i = 0; i < doraSize; i++) {
-            uraDoraDisplay.add(raw.get(6 + (i - 1) * 2));
+            uraDoraDisplay.add(raw.get(uraDoraDisplayIndex[i]));
         }
         return uraDoraDisplay;
     }

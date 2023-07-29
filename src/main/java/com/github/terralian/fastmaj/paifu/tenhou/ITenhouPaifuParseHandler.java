@@ -47,8 +47,9 @@ public interface ITenhouPaifuParseHandler {
      * @param playerRates 各个玩家的R值
      * @param playerDans 各个玩家的段位
      */
-    default void startGame(boolean isSanma, int taku, boolean isTonnan, boolean isSoku, boolean isUseAka, boolean isAriAri,
-                           String[] playerNames, int[] playerRates, String[] playerDans) {
+    default void startGame(boolean isSanma, int taku, boolean isTonnan, boolean isSoku, boolean isUseAka,
+            boolean isAriAri,
+            String[] playerNames, int[] playerRates, String[] playerDans) {
     }
 
     /**
@@ -73,8 +74,9 @@ public interface ITenhouPaifuParseHandler {
      * @param firstDoraDisplay 最初的dora表示牌
      * @param yama 牌山
      */
-    default void startKyoku(int[] playerPoints, List<List<Integer>> playerHaipais, int oya, int bakaze, int kyoku, int honba, int kyotaku,
-                            int firstDoraDisplay, int[] yama) {
+    default void startKyoku(int[] playerPoints, List<List<Integer>> playerHaipais, int oya, int bakaze, int kyoku,
+            int honba, int kyotaku,
+            int firstDoraDisplay, int[] yama) {
     }
 
     /**
@@ -181,7 +183,7 @@ public interface ITenhouPaifuParseHandler {
      * 立直打出一枚指示牌到还未放置立直棒的一刻可以被荣和，此时分数计算不会将立直棒的点数收益也算计在内。
      *
      * @param position 立直的玩家
-     * @param playerPoints 当前玩家的分数
+     * @param playerPoints 当前玩家的分数（旧牌谱中可能为空）
      */
     default void reach2(int position, int[] playerPoints) {
     }
@@ -205,7 +207,8 @@ public interface ITenhouPaifuParseHandler {
      * @param score 点数
      * @param increaseAndDecrease 各个玩家增减后的当前点数
      */
-    default void agari(int position, int from, List<String> yaku, int han, int hu, int score, int[] increaseAndDecrease) {
+    default void agari(int position, int from, List<String> yaku, int han, int hu, int score,
+            int[] increaseAndDecrease) {
     }
 
     /**

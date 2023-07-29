@@ -19,9 +19,10 @@ import com.github.terralian.fastmaj.tehai.NakiEnum;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yama.DrawFrom;
 import com.github.terralian.fastmaj.yama.IYama;
+import com.github.terralian.fastmaj.yama.IYamaArray;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
-import com.github.terralian.fastmaj.yama.worker.common.SimpleRandomYamaWorker;
 import com.github.terralian.fastmaj.yama.Yama;
+import com.github.terralian.fastmaj.yama.worker.common.SimpleRandomYamaWorker;
 
 /**
  * 默认的游戏核心实现，该核心设计为通过调用内部定义方法，从东一局开始到游戏结束，自动初始化所需信息（牌山、手牌、牌河...）,
@@ -266,7 +267,7 @@ public class GameCore implements IGameCore {
      * 创建下一个牌山
      */
     protected void nextYama() {
-        int[] yamaArray = yamaWorker.getNextYama(1);
+        IYamaArray yamaArray = yamaWorker.getNextYama(1);
         yama = new Yama(yamaArray, gameConfig.isUseRedHai(), playerSize);
     }
 

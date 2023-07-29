@@ -83,6 +83,15 @@ public class TenhouStreamMajongGameTest {
         simulate_run_game("2015012707gm-0029-0000-bf2d93df&tw=2.mjlog", true);
     }
 
+    /**
+     * 一些老牌谱的解析支持
+     */
+    @Test
+    public void old_paifu_sample() throws Exception {
+        // 旧版牌山和新版存在一丢丢差异
+        simulate_run_game("2009072917gm-0061-0000-85a7478c&tw=3.mjlog", true);
+    }
+
     @Test
     public void special_sample_paifu_test_2() throws Exception {
         // 红5万加杠，加杠在天凤解析内使用的是不同的值，易错（后续看看能否统一为一个值）

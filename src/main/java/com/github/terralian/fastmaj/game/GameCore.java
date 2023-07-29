@@ -16,6 +16,7 @@ import com.github.terralian.fastmaj.river.IHaiRiver;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.NakiEnum;
+import com.github.terralian.fastmaj.util.Assert;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yama.DrawFrom;
 import com.github.terralian.fastmaj.yama.IYama;
@@ -98,9 +99,9 @@ public class GameCore implements IGameCore {
      */
     private boolean renchan;
     /**
-     * 是否是中途流局
+     * 对局结束类型
      */
-    private boolean halfwayRyuukyoku;
+    private KyokuEndEnum kyokuEndEnum;
 
     /**
      * 最近的手牌动作
@@ -276,6 +277,8 @@ public class GameCore implements IGameCore {
         gameState = GameState.KYOKU_END;
         // 对局结束
         gameLogger.kyokuEnd(round, getPlayerPoints());
+
+        Assert.notNull(kyokuEndEnum, "状态错误，当前对局结束类型不能为空，请确认是否未调用流局或者和了方法");
     }
 
     /**
@@ -298,8 +301,8 @@ public class GameCore implements IGameCore {
         lastDrawFrom = null;
         // 动作数设置0
         actionCount = 0;
-        // 中途流局设置为false
-        halfwayRyuukyoku = false;
+        // 清空对局结束类型
+        kyokuEndEnum = null;
     }
 
     @Override
@@ -618,8 +621,10 @@ public class GameCore implements IGameCore {
         this.honba[0] = 0;
         // 日志处理
         if (agariPosition == fromPosition) {
+            kyokuEndEnum = KyokuEndEnum.TSUMO;
             gameLogger.tsumo(fromPosition, yakus, ban, fu, score, increaseAndDecrease);
         } else {
+            kyokuEndEnum = KyokuEndEnum.RON;
             gameLogger.ron(agariPosition, fromPosition, yakus, ban, fu, score, increaseAndDecrease);
         }
     }
@@ -635,8 +640,8 @@ public class GameCore implements IGameCore {
         gameState = GameState.KYOKU_END;
         // 更新分数
         this.playerPoints = increaseAndDecrease;
-        // 是否是中途流局
-        halfwayRyuukyoku = ryuukyoku.isHalfway();
+        // 流局类型
+        kyokuEndEnum = ryuukyoku.isHalfway() ? KyokuEndEnum.HALF_RYUUKYOKU : KyokuEndEnum.RYUUKYOKU;
         // 日志处理
         gameLogger.ryuukyoku(ryuukyoku.getRyuukyokuName(), increaseAndDecrease);
         // 对局结束
@@ -974,12 +979,9 @@ public class GameCore implements IGameCore {
         return renchan;
     }
 
-    /**
-     * 中途流局
-     */
     @Override
-    public boolean isHalfwayRyuukyuku() {
-        return halfwayRyuukyoku;
+    public KyokuEndEnum getKyoKuEndType() {
+        return kyokuEndEnum;
     }
 
     /**

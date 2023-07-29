@@ -61,6 +61,9 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
         currentKyoku = null;
         reachStep1 = false;
         paifuGame.setSeed(seed);
+        paifuGame.setRuleVersion(seed.startsWith("mt19937ar-sha512-n288-base64") //
+                                 ? TenhouRuleVersionEnum.T2010.name() //
+                                 : TenhouRuleVersionEnum.T2009.name());
     }
 
     @Override

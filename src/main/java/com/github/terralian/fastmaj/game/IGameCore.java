@@ -405,9 +405,9 @@ public interface IGameCore {
     boolean isRenchan();
 
     /**
-     * 是否是中途流局，仅当[流局动作触发]到[下一对局]开始时间内会存在值变更
+     * 获取对局结束类型
      */
-    boolean isHalfwayRyuukyuku();
+    KyokuEndEnum getKyoKuEndType();
 
     /**
      * 设置最近玩家的手牌动作

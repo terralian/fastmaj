@@ -5,6 +5,7 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.terralian.fastmaj.paifu.domain.SeedModeEnum;
 import com.github.terralian.fastmaj.yama.worker.tenhou.TenhouYamaWorker;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -85,6 +86,10 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
      * 和了分数
      */
     private int[] increaseAndDecrease;
+    /**
+     * 种子模式
+     */
+    private SeedModeEnum seedMode = SeedModeEnum.MULTI;
 
     /**
      * 实例化{@link TenhouPaifuDecodeHandler}
@@ -152,6 +157,7 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
         tenhouLogYamaWorker.setSeed(seed);
         tenhouLogYamaWorker.initialize();
         analyzer.shuffleMeta(seed);
+        seedMode = SeedModeEnum.SINGLE;
     }
 
     /**
@@ -183,6 +189,11 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
         isUseAka = (type & 0b00000010) == 0;
         // 食断规则
         isAriAri = (type & 0b00000100) == 0;
+
+        // 没找到2009-07月之前的天凤旧牌山根据种子还原牌山的方法
+        if (seedMode == SeedModeEnum.MULTI) {
+            throw new UnsupportedOperationException("暂时不支持天凤旧牌谱的牌山解析");
+        }
     }
 
     /**
@@ -274,7 +285,6 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
                 playerHaipais.get(i).add(hai);
             }
         }
-
         int[] yamas = tenhouLogYamaWorker.getNextYama(1);
         analyzer.startKyoku(playerPoints, playerHaipais, oya, bakaze, kyoku, honba, kyotaku, firstDoraDisplay, yamas);
     }
@@ -343,13 +353,13 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
         int[] selfHai;
         int nakiHai;
         if (r == 0) {
-            selfHai = new int[]{h[1], h[2]};
+            selfHai = new int[] {h[1], h[2]};
             nakiHai = h[0];
         } else if (r == 1) {
-            selfHai = new int[]{h[0], h[2]};
+            selfHai = new int[] {h[0], h[2]};
             nakiHai = h[1];
         } else if (r == 2) {
-            selfHai = new int[]{h[0], h[1]};
+            selfHai = new int[] {h[0], h[1]};
             nakiHai = h[2];
         } else {
             throw new RuntimeException();

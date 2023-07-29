@@ -17,12 +17,12 @@ import com.github.terralian.fastmaj.yama.IYamaWorker;
  * <li>即数组的[0]枚是王牌区最近一栋的下面那枚牌。按实际看，王牌区的第一枚是数组的[1]
  * <li>牌山的宝牌指示牌为[6, 8, 10, 12, 14]枚
  * </ul>
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  * @see <a href=
- *      "http://blog.tenhou.net/article/30503297.html">天凤官方的牌山生成算法公开（c）</a>
+ * "http://blog.tenhou.net/article/30503297.html">天凤官方的牌山生成算法公开（c）</a>
  * @see <a href=
- *      "https://github.com/nwalker/tenhouviewer/blob/master/Tenhou/WallGenerator.cs">github上的牌山生成算法(c#)</a>
+ * "https://github.com/nwalker/tenhouviewer/blob/master/Tenhou/WallGenerator.cs">github上的牌山生成算法(c#)</a>
  */
 public class TenhouYamaWorker implements IYamaWorker {
 
@@ -104,8 +104,9 @@ public class TenhouYamaWorker implements IYamaWorker {
         }
 
         // 旧风格的种子值
-        else {
-            seedValues = decompositeHexList(seedText);
+        else if (seed.startsWith("mt19937ar")) {
+            // 原类中有对旧牌谱进行解析的实例，但是解析不正确，目前没有找到可以解析2009-07之前的天凤牌谱方法
+            throw new UnsupportedOperationException("当前牌谱为旧天凤牌谱，其格式与后续格式存在差异，暂不支持解析");
         }
 
         // 根据种子值初始化梅森旋转随机数生成器
@@ -117,32 +118,8 @@ public class TenhouYamaWorker implements IYamaWorker {
     }
 
     /**
-     * 兼容较老的天凤牌谱
-     * 
-     * @param text 实际种子的值
-     */
-    private long[] decompositeHexList(String text) {
-        if (text == null) {
-            throw new IllegalArgumentException("yama seed value is empty");
-        }
-
-        String[] textArray = text.split(",");
-        long[] result = new long[textArray.length];
-
-        for (int i = 0; i < textArray.length; i++) {
-            int index = textArray[i].indexOf('.');
-            if (index >= 0)
-                textArray[i] = textArray[i].substring(0, index);
-
-            result[i] = Long.valueOf(textArray[i]);
-        }
-
-        return result;
-    }
-
-    /**
      * 生成牌山算法
-     * 
+     *
      * @param nextSize 循环次数
      */
     private void generate(int nextSize, int[] wall) {
@@ -224,7 +201,7 @@ public class TenhouYamaWorker implements IYamaWorker {
 
     /**
      * 设置种子
-     * 
+     *
      * @param seed 种子
      */
     @Override

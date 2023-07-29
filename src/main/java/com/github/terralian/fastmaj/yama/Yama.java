@@ -63,10 +63,14 @@ public class Yama implements IYama {
      */
     private int[] uraDoraDisplayIndex = DORA_INDEX_B;
 
+
+    private int[] kingHaiIndex = KING_HAI_INDEX_NEW;
+
     /**
      * 王牌区顺序索引
      */
-    private static final int[] KING_HAI_INDEX = {1, 0, 3, 2};
+    private static final int[] KING_HAI_INDEX_NEW = {1, 0, 3, 2};
+    private static final int[] KING_HAI_INDEX_OLD = {0, 1, 2, 3};
 
     /**
      * 红宝牌所在的位置，天凤为同类型的第1枚，下标为0
@@ -113,6 +117,7 @@ public class Yama implements IYama {
         if (TenhouYamaVersionEnum.T2009_BEFORE.name().equals(yamaArray.version())) {
             this.doraDisplayIndex = DORA_INDEX_B;
             this.uraDoraDisplayIndex = DORA_INDEX_A;
+            this.kingHaiIndex = KING_HAI_INDEX_OLD;
         }
     }
 
@@ -196,7 +201,7 @@ public class Yama implements IYama {
         trumpOffset += 1;
         countdown -= 1;
         // 倒2，倒1，倒4，倒3
-        return raw.get(KING_HAI_INDEX[currentKingOffset]);
+        return raw.get(kingHaiIndex[currentKingOffset]);
     }
 
     /**

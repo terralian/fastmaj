@@ -5,7 +5,6 @@ import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.option.DoraAddRule;
 import com.github.terralian.fastmaj.game.option.ReachRule;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
-import com.github.terralian.fastmaj.paifu.tenhou.TenhouRuleVersionEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -113,15 +112,9 @@ public class GameConfig {
      * 使用天凤的旧版规则，越2009年及之前
      */
     public static GameConfig useTenhou(PaifuGame paifuGame) {
-        GameConfig gameConfig = new GameConfig() //
+        return new GameConfig() //
                 .setUseRedHai(paifuGame.isUseRed())
                 .setEndBakaze(paifuGame.getEndBakaze());
-        // 旧规则
-        boolean oldRule = TenhouRuleVersionEnum.T2009.name().equals(paifuGame.getRuleVersion());
-        if (oldRule) {
-            gameConfig.setGameContinueIfOyaRenchanRyuukyokuAtLastKyoku(true);
-        }
-        return gameConfig;
     }
 
     /**

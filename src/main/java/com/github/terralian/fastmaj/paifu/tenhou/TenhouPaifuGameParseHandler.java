@@ -61,15 +61,12 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
         currentKyoku = null;
         reachStep1 = false;
         paifuGame.setSeed(seed);
-        paifuGame.setRuleVersion(seed.startsWith("mt19937ar-sha512-n288-base64") //
-                                 ? TenhouRuleVersionEnum.T2010.name() //
-                                 : TenhouRuleVersionEnum.T2009.name());
     }
 
     @Override
     public void startGame(boolean isSanma, int taku, boolean isTonnan, boolean isSoku, boolean isUseAka,
-            boolean isAriAri,
-            String[] playerNames, int[] playerRates, String[] playerDans) {
+                          boolean isAriAri,
+                          String[] playerNames, int[] playerRates, String[] playerDans) {
         paifuGame.setRoom(TenhouPaifuStringPool.TAKU[taku]) //
                 .setPlatform(TenhouPaifuStringPool.PLATFORM) //
                 .setPlayerSize(isSanma ? 3 : 4) //
@@ -86,8 +83,8 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
 
     @Override
     public void startKyoku(int[] playerPoints, List<List<Integer>> playerHaipais, int oya, int bakaze, int kyoku,
-            int honba, int kyotaku,
-            int firstDoraDisplay, int[] yama) {
+                           int honba, int kyotaku,
+                           int firstDoraDisplay, int[] yama) {
         List<ITehai> startTehais = playerHaipais.stream() //
                 .map(k -> Encode136.toTehai(k, paifuGame.isUseRed())) //
                 .collect(Collectors.toList());
@@ -202,7 +199,7 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
 
     @Override
     public void agari(int position, int from, List<String> yaku, int han, int hu, int score,
-            int[] increaseAndDecrease) {
+                      int[] increaseAndDecrease) {
         if (position != from) {
             RonEvent ronEvent = new RonEvent()
                     .setFrom(from)

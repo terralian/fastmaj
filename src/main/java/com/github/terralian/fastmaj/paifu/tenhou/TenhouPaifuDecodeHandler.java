@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.terralian.fastmaj.paifu.domain.SeedModeEnum;
+import com.github.terralian.fastmaj.yama.IYamaArray;
+import com.github.terralian.fastmaj.yama.worker.UnsupportedYamaSeedException;
 import com.github.terralian.fastmaj.yama.worker.tenhou.TenhouYamaWorker;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -192,7 +194,7 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
 
         // 没找到2009-07月之前的天凤旧牌山根据种子还原牌山的方法
         if (seedMode == SeedModeEnum.MULTI) {
-            throw new UnsupportedOperationException("暂时不支持天凤旧牌谱的牌山解析");
+            throw new UnsupportedYamaSeedException("暂时不支持天凤旧牌谱的牌山解析");
         }
     }
 
@@ -285,8 +287,9 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
                 playerHaipais.get(i).add(hai);
             }
         }
-        int[] yamas = tenhouLogYamaWorker.getNextYama(1);
-        analyzer.startKyoku(playerPoints, playerHaipais, oya, bakaze, kyoku, honba, kyotaku, firstDoraDisplay, yamas);
+        IYamaArray yamaArray = tenhouLogYamaWorker.getNextYama(1);
+        analyzer.startKyoku(
+                playerPoints, playerHaipais, oya, bakaze, kyoku, honba, kyotaku, firstDoraDisplay, yamaArray.value());
     }
 
     /**
@@ -480,9 +483,13 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
         } else {
             String tenCsv = attributes.getValue("ten");
             int[] playerPoints = new int[4];
-            String[] splitPointCsv = tenCsv.split(",");
-            for (int i = 0; i < 4; i++) {
-                playerPoints[i] = Integer.parseInt(splitPointCsv[i]) * 100;
+            if (tenCsv != null) {
+                String[] splitPointCsv = tenCsv.split(",");
+                for (int i = 0; i < 4; i++) {
+                    playerPoints[i] = Integer.parseInt(splitPointCsv[i]) * 100;
+                }
+            } else {
+                playerPoints = null;
             }
             analyzer.reach2(position, playerPoints);
         }

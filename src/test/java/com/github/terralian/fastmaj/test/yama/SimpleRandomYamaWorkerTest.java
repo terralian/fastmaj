@@ -1,9 +1,9 @@
 package com.github.terralian.fastmaj.test.yama;
 
-import org.junit.Test;
-
+import com.github.terralian.fastmaj.yama.IYamaArray;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
 import com.github.terralian.fastmaj.yama.worker.common.SimpleRandomYamaWorker;
+import org.junit.Test;
 
 public class SimpleRandomYamaWorkerTest {
 
@@ -14,8 +14,8 @@ public class SimpleRandomYamaWorkerTest {
     public void test100() {
         IYamaWorker yamaWorker = new SimpleRandomYamaWorker();
         for (int i = 0; i < 100; i++) {
-            int[] yama = yamaWorker.getNextYama(1);
-            for (int k : yama) {
+            IYamaArray yama = yamaWorker.getNextYama(1);
+            for (int k : yama.value()) {
                 System.out.print(format(k));
             }
             System.out.println();
@@ -26,8 +26,8 @@ public class SimpleRandomYamaWorkerTest {
     public void testEqual() {
         for (int i = 0; i < 100; i++) {
             IYamaWorker yamaWorker = new SimpleRandomYamaWorker(1L);
-            int[] yama = yamaWorker.getNextYama(1);
-            for (int k : yama) {
+            IYamaArray yama = yamaWorker.getNextYama(1);
+            for (int k : yama.value()) {
                 System.out.print(format(k));
             }
             System.out.println();

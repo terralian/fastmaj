@@ -8,8 +8,8 @@ package com.github.terralian.fastmaj.yama;
  * 获取到的牌山一般使用136编码，即每种牌占4个编号，从0编码到135
  * <p/>
  * 获取到的数组和实际的牌山，如何使用需要根据实际平台决定
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public interface IYamaWorker {
 
@@ -18,7 +18,7 @@ public interface IYamaWorker {
      *
      * @param nextSize 接下来获取的次数[1 ~ N]
      */
-    int[] getNextYama(int nextSize);
+    IYamaArray getNextYama(int nextSize);
 
     /**
      * 获取种子

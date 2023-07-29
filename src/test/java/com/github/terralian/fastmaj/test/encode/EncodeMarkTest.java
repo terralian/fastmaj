@@ -1,18 +1,18 @@
 package com.github.terralian.fastmaj.test.encode;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.hai.HaiTypeEnum;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yama.IYama;
+import com.github.terralian.fastmaj.yama.IYamaArray;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
-import com.github.terralian.fastmaj.yama.worker.common.SimpleRandomYamaWorker;
 import com.github.terralian.fastmaj.yama.Yama;
+import com.github.terralian.fastmaj.yama.worker.common.SimpleRandomYamaWorker;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class EncodeMarkTest {
 
@@ -105,7 +105,7 @@ public class EncodeMarkTest {
     public void toEncode34_string() {
         for (int i = 0; i < 10000; i++) {
             IYamaWorker worker = new SimpleRandomYamaWorker();
-            int[] yamas = worker.getNextYama(1);
+            IYamaArray yamas = worker.getNextYama(1);
             IYama yama = new Yama(yamas, true, 1);
             ITehai tehai = yama.deals(0).get(0);
             String encodeString = EncodeMark.encode(tehai);

@@ -2,13 +2,15 @@ package com.github.terralian.fastmaj.yama.worker.common;
 
 import java.util.Random;
 
+import com.github.terralian.fastmaj.yama.IYamaArray;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
+import com.github.terralian.fastmaj.yama.YamaArray;
 import com.github.terralian.fastmaj.yama.seed.random.IdWorker;
 
 /**
  * 一个简易随机的牌山生成器
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class SimpleRandomYamaWorker implements IYamaWorker {
 
@@ -27,7 +29,7 @@ public class SimpleRandomYamaWorker implements IYamaWorker {
     }
 
     @Override
-    public int[] getNextYama(int nextSize) {
+    public IYamaArray getNextYama(int nextSize) {
         // 144
         int[] rnd = new int[136];
         // SHA512 hash
@@ -46,7 +48,7 @@ public class SimpleRandomYamaWorker implements IYamaWorker {
             yama[i] = yama[j];
             yama[j] = tmp;
         }
-        return yama;
+        return new YamaArray(yama);
     }
 
     @Override

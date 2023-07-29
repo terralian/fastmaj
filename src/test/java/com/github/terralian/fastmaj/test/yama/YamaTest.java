@@ -1,27 +1,27 @@
 package com.github.terralian.fastmaj.test.yama;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import java.util.List;
-
-import org.junit.Test;
 
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yama.IYama;
+import com.github.terralian.fastmaj.yama.IYamaArray;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
-import com.github.terralian.fastmaj.yama.worker.tenhou.TenhouYamaWorker;
 import com.github.terralian.fastmaj.yama.Yama;
+import com.github.terralian.fastmaj.yama.worker.tenhou.TenhouYamaWorker;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 /**
  * {@link Yama}的测试
  * <p/>
  * 牌山的构建基于{@link TenhouYamaWorker}
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class YamaTest {
 
@@ -211,7 +211,7 @@ public class YamaTest {
         assertEquals(Encode34.SO_5, nextDoraDisplay.getValue());
         uraDoraDisplays = yama.getUraDoraDisplay();
         assertEquals(Encode34.MAN_8, uraDoraDisplays.get(1).getValue());
-        
+
         nextDoraDisplay = yama.nextDoraDisplay();
         assertEquals(Encode34.SO_8, nextDoraDisplay.getValue());
         uraDoraDisplays = yama.getUraDoraDisplay();
@@ -292,15 +292,44 @@ public class YamaTest {
         assertEquals("357m2249p238s446z", EncodeMark.encode(tehais.get(3)));
     }
 
+    @Test
+    public void test_old_paifu_yama() {
+        // 2009072917gm-0061-0000-85a7478c&tw=3
+        String seed =
+                "mt19937ar-sha512-n288,06AA9AE4,DA374A46,6B21D0F1,1E5AD872,7BE787B4,15814627,1C477FA5,CB52BBB9,11B78680,3F1A6AC7,91A601C9,FF98DB56,552541DD,7DBC63CE,A3AD1699,5749C7EB,B6687FC2,5011CAA5,62EEB0D5,7CAFC7BC,BB0A9147,11698EC0,121542D3,4B960B35,2049D888,C812293D,A97C4D14,B0E2F963,4FFA13AF,A4CBE215,149CCBFA,24A170F1";
+        // 旧版的宝牌指示牌和新版的宝牌指示牌不是一个位置
+        IYamaWorker parser = new TenhouYamaWorker(seed);
+        IYamaArray array = parser.getNextYama(1);
+        IYama yama = new Yama(array, true, 4);
+        // 白板
+        assertEquals(Encode34.BAI, yama.getDoraDisplay().get(0).getValue());
+        assertEquals(Encode34.SO_4, yama.getUraDoraDisplay().get(0).getValue());
+
+        // 东二局
+        array = parser.getNextYama(1);
+        yama = new Yama(array, true, 4);
+        assertEquals(Encode34.MAN_9, yama.getDoraDisplay().get(0).getValue());
+
+        // 东三局
+        array = parser.getNextYama(1);
+        yama = new Yama(array, true, 4);
+        assertEquals(Encode34.PIN_7, yama.getDoraDisplay().get(0).getValue());
+
+        // 东四局
+        array = parser.getNextYama(1);
+        yama = new Yama(array, true, 4);
+        assertEquals(Encode34.SO_4, yama.getDoraDisplay().get(0).getValue());
+    }
+
     /**
      * 根据种子构建牌山
-     * 
+     *
      * @param seed 种子
      * @param round 场次
      */
     private IYama createYama(String seed, int round) {
         IYamaWorker parser = new TenhouYamaWorker(seed);
-        int[] yama = parser.getNextYama(round + 1);
+        int[] yama = parser.getNextYama(round + 1).value();
         return new Yama(yama, true, 4);
     }
 }

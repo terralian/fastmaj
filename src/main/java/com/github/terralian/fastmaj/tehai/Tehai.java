@@ -13,8 +13,8 @@ import com.github.terralian.fastmaj.player.RivalEnum;
  * {@link ITehai}的默认实现
  * <p/>
  * 该牌的手牌顺序是按摸牌顺序排序的
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class Tehai implements ITehai {
 
@@ -53,7 +53,7 @@ public class Tehai implements ITehai {
 
     /**
      * 根据当前手牌实例化手牌
-     * 
+     *
      * @param value 值
      */
     public Tehai(List<IHai> value) {
@@ -130,7 +130,7 @@ public class Tehai implements ITehai {
 
     /**
      * 弃牌动作，将牌从手牌中打出的动作
-     * 
+     *
      * @param hai 弃的牌
      */
     @Override
@@ -161,7 +161,7 @@ public class Tehai implements ITehai {
      * 副露[吃]操作
      * <p/>
      * 通过指定打搭子牌，完成吃牌的操作，该操作会首先调用{@link #draw(IHai)}将牌加入手中
-     * 
+     *
      * @param chiHai 吃的牌
      * @param tehai1 搭子牌1
      * @param tehai2 搭子牌2
@@ -180,7 +180,7 @@ public class Tehai implements ITehai {
      * 副露[碰]操作
      * <p/>
      * 该操作会首先调用{@link #draw(IHai)}将牌加入手中
-     * 
+     *
      * @param ponHai 碰的牌
      * @param redFirst 当有红宝牌时，优先使用红宝牌做搭子
      * @param fromPlayer 来源玩家
@@ -200,7 +200,7 @@ public class Tehai implements ITehai {
      * 明杠
      * <p/>
      * 该操作会首先调用{@link #draw(IHai)}将牌加入手中
-     * 
+     *
      * @param hai 鸣的牌
      * @param fromPlayer 来源玩家
      */
@@ -218,7 +218,7 @@ public class Tehai implements ITehai {
 
     /**
      * 加杠
-     * 
+     *
      * @param hai 加杠的牌
      * @see {@link #canKakan()}
      */
@@ -234,7 +234,7 @@ public class Tehai implements ITehai {
      * [非进张操作] 暗杠
      * <p/>
      * 当手上由4枚牌时，通过该操作进行暗杠，暗杠的牌会固定，不可进行后续操作
-     * 
+     *
      * @param hai 暗杠的牌
      */
     @Override
@@ -250,7 +250,7 @@ public class Tehai implements ITehai {
      * [非进张操作] 拔北（限三麻）
      * <p/>
      * 从手中拔北，将北从手牌里去除，仅作为宝牌记录
-     * 
+     *
      * @param hai 北
      */
     @Override
@@ -283,7 +283,7 @@ public class Tehai implements ITehai {
      * 校验手牌中是否存在可以吃目标牌的搭子，这个搭子应该是可操作的，该方法也会校验字牌（false）.
      * <p/>
      * 该方法不会校验玩家的坐席，上下家的判断应当由该方法的使用者自行判断.
-     * 
+     *
      * @param hai 牌
      * @return 若可以吃 true，否则 false.
      */
@@ -314,7 +314,7 @@ public class Tehai implements ITehai {
      * 校验某张牌是否可以碰
      * <p/>
      * 校验手牌中是否存在可用碰的搭子，在一般规则内碰的优先级要大于吃，调用时需要注意。
-     * 
+     *
      * @param hai 牌
      */
     @Override
@@ -326,7 +326,7 @@ public class Tehai implements ITehai {
      * 校验某张牌是否可以明杠
      * <p/>
      * 校验手牌中是否存在可用杠的搭子，在一般规则内杠的优先级要大于吃，调用时需要注意。
-     * 
+     *
      * @param hai 牌
      */
     @Override
@@ -338,7 +338,7 @@ public class Tehai implements ITehai {
      * 手牌是否能够加杠
      * <p/>
      * 对手牌进行判断，是否存在可操作加杠的牌
-     * 
+     *
      * @return 若存在则返回true，若不存在则返回false
      */
     @Override
@@ -353,7 +353,7 @@ public class Tehai implements ITehai {
 
     /**
      * 手牌中的某一枚牌是否能够加杠
-     * 
+     *
      * @param hai 牌
      */
     @Override
@@ -381,7 +381,7 @@ public class Tehai implements ITehai {
 
     /**
      * 手牌中的某一枚牌是否能够暗杠
-     * 
+     *
      * @param hai 牌
      */
     @Override
@@ -450,7 +450,7 @@ public class Tehai implements ITehai {
      * 增加牌
      * <p/>
      * 该方法用于原子增加一张牌，该方法会处理内部的值List及34编码数组，该方法也会同步给可操作List
-     * 
+     *
      * @param hai 牌
      * @param operable 是否可操作
      */
@@ -470,7 +470,8 @@ public class Tehai implements ITehai {
     private void reduceOperable(IHai... hais) {
         for (IHai hai : hais) {
             if (!hand.remove(hai)) {
-                throw new IllegalStateException("从手牌移除牌失败：" + hai + " 当前手牌：" + this.hand);
+                throw new IllegalStateException(
+                        "从手牌移除牌失败：" + hai + "(" + hai.getId() + ") 当前手牌：" + this.hand);
             }
             hand34[hai.getValue()]--;
         }
@@ -478,7 +479,7 @@ public class Tehai implements ITehai {
 
     /**
      * 根据值获取对应的牌，该方法默认手牌中需要的牌数量足够（但不限制超过）
-     * 
+     *
      * @param value 值
      * @param size 获取的枚数
      */
@@ -498,7 +499,7 @@ public class Tehai implements ITehai {
      * 获取鸣牌的自身搭子
      * <p/>
      * 默认返回所有的牌，若优先使用红宝牌，则红宝牌在第一枚
-     * 
+     *
      * @param value 牌的值
      * @param redFirst 是否优先使用红宝牌作为搭子
      */

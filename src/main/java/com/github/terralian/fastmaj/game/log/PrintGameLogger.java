@@ -17,7 +17,7 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
 
 /**
  * 使用{@link System#out}进行日志打印，在控制台输出日志信息
- * 
+ *
  * @author terra.lian
  * @since 2022-10-28
  */
@@ -105,7 +105,7 @@ public class PrintGameLogger implements IGameLogger {
                 gameCore.getHonba(), //
                 gameCore.getYamaCountdown(), //
                 position + 1, //
-                hai, //
+                hai.toIdString(), //
                 gameCore.getPlayerHide(position).getSyaten(), //
                 gameCore.getActionCount()
         );
@@ -123,8 +123,8 @@ public class PrintGameLogger implements IGameLogger {
                 gameCore.getHonba(), //
                 gameCore.getYamaCountdown(), //
                 position + 1, //
-                handKiri ? "手切" : "模切",
-                hai, //
+                handKiri ? "手切" : "模切", //
+                hai.toIdString(), //
                 reach ? "(立直)" : "", //
                 gameCore.getPlayerHide(position).getSyaten(), //
                 gameCore.getActionCount()
@@ -312,7 +312,7 @@ public class PrintGameLogger implements IGameLogger {
 
     /**
      * 设置简短的打印对局信息
-     * 
+     *
      * @param shortKyokuSummary 是否简要对局信息
      */
     public PrintGameLogger setShortKyokuSummary(boolean shortKyokuSummary) {

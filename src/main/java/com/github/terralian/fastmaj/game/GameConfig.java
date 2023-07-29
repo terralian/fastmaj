@@ -85,9 +85,11 @@ public class GameConfig {
     private Boolean useRon3Ryuukyoku = true;
 
     /**
-     * 庄家听牌连庄，其分数在加上听牌分时正好过分数线时，结束游戏
+     * 当庄家末巡玩家连庄时，游戏继续。这种规则常见于职业赛。
+     * <p/>
+     * 旧版天凤规则也是，但是新版天凤或者雀魂则会直接结束游戏。
      */
-    private Boolean gameEndWhenOyaOverPointLine = true;
+    private Boolean gameContinueIfOyaRenchanAtLastKyoku = false;
 
     // ------------------------------------------------
     // 游戏行为配置
@@ -110,7 +112,7 @@ public class GameConfig {
      */
     public static GameConfig useTenhouOld() {
         return new GameConfig() //
-                .setGameEndWhenOyaOverPointLine(false);
+                .setGameContinueIfOyaRenchanAtLastKyoku(true);
     }
 
     /**

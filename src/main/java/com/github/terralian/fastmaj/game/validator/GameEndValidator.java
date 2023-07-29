@@ -65,7 +65,8 @@ public class GameEndValidator implements IGameValidator {
         Integer endPointLine = gameConfig.getEndPointLine();
         if (playerPoints[oya] >= endPointLine && ranking[oya] == 1) {
             // 存在特例，若庄家在2900，末局听牌，这种时候旧版天凤规则下游戏还不会结束，新版会结束
-            if (!gameConfig.getGameEndWhenOyaOverPointLine() && kyokuEndType == KyokuEndEnum.RYUUKYOKU && playerPoints[oya] - 1000 < endPointLine) {
+            if (!gameConfig.getGameEndWhenOyaOverPointLine() && kyokuEndType == KyokuEndEnum.RYUUKYOKU //
+                    && gameCore.isRenchan() && playerPoints[oya] - 1000 < endPointLine) {
                 return false;
             }
             return true;

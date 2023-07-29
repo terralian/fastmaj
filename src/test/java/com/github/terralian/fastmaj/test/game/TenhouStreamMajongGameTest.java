@@ -107,6 +107,8 @@ public class TenhouStreamMajongGameTest {
         // 东4局庄家连庄，加1000点超过3w分数线
         // 旧版不能结束
         simulate_run_game("2009082713gm-00e1-0000-8820f355&tw=3.mjlog", true);
+        // 旧版，庄家未连庄
+        simulate_run_game("2009082812gm-00e1-0000-47dd79cf&tw=3.mjlog", true);
         // 新版结束
         simulate_run_game("2015060814gm-0029-0000-f1ac5f4d&tw=3.mjlog", true);
     }

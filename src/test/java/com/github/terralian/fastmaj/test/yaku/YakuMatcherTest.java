@@ -161,7 +161,7 @@ public class YakuMatcherTest {
 
     /**
      * 单役测试
-     * 
+     *
      * @param tehaiMark 记号法手牌
      * @param yakuClass 役种类
      */
@@ -175,7 +175,7 @@ public class YakuMatcherTest {
 
     /**
      * 无役测试
-     * 
+     *
      * @param tehaiMark 记号法手牌
      */
     private void zeroYakuTest(String tehaiMark) {
@@ -384,12 +384,13 @@ public class YakuMatcherTest {
         divideInfos = tehaiAgariDivider.divide(tehai);
         yakus = yakuMatcher.match(tehai, divideInfos, gameContext);
         assertEquals(7, yakus.size());
-        assertYakus(yakus, Rinsyan.class, Haku.class, Hatu.class, Jikaze.class, Sankanzu.class, Toitoi.class, Honitu.class);
+        assertYakus(
+                yakus, Rinsyan.class, Haku.class, Hatu.class, Jikaze.class, Sankanzu.class, Toitoi.class, Honitu.class);
     }
 
     /**
      * 役匹配校验
-     * 
+     *
      * @param actuals 实际匹配到的役
      * @param expecteds 预期的役
      */
@@ -422,7 +423,6 @@ public class YakuMatcherTest {
     /**
      * 性能测试
      */
-    @Test
     public void performance_test() {
         PlayerGameContext gameContext = PlayerGameContextFactory.buildByNormal(0);
         // 立直一发自摸，清一色，一气，一杯口，平和

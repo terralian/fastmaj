@@ -10,7 +10,7 @@ import com.github.terralian.fastmaj.game.log.PrintGameLogger;
 import com.github.terralian.fastmaj.tehai.FastSyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
-import com.github.terralian.fastmaj.yama.SimpleRandomYamaWorker;
+import com.github.terralian.fastmaj.yama.worker.common.SimpleRandomYamaWorker;
 import org.junit.Before;
 import org.junit.Test;
 

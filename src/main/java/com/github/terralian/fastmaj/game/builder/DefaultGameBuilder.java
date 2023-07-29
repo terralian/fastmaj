@@ -18,7 +18,7 @@ import com.github.terralian.fastmaj.tehai.FastSyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.util.EmptyUtil;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
-import com.github.terralian.fastmaj.yama.SimpleRandomYamaWorker;
+import com.github.terralian.fastmaj.yama.worker.common.SimpleRandomYamaWorker;
 import com.github.terralian.fastmaj.yama.seed.random.IdWorker;
 import lombok.Getter;
 import lombok.Setter;

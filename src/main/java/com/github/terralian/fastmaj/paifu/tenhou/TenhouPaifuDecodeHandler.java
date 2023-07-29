@@ -5,7 +5,7 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.terralian.fastmaj.yama.TenhouYamaWorker;
+import com.github.terralian.fastmaj.yama.worker.tenhou.TenhouYamaWorker;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;

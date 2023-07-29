@@ -13,7 +13,7 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yama.IYama;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
-import com.github.terralian.fastmaj.yama.TenhouYamaWorker;
+import com.github.terralian.fastmaj.yama.worker.tenhou.TenhouYamaWorker;
 import com.github.terralian.fastmaj.yama.Yama;
 
 /**

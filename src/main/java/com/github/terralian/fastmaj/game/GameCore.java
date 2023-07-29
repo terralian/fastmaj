@@ -20,7 +20,7 @@ import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yama.DrawFrom;
 import com.github.terralian.fastmaj.yama.IYama;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
-import com.github.terralian.fastmaj.yama.SimpleRandomYamaWorker;
+import com.github.terralian.fastmaj.yama.worker.common.SimpleRandomYamaWorker;
 import com.github.terralian.fastmaj.yama.Yama;
 
 /**

@@ -22,7 +22,7 @@ import com.github.terralian.fastmaj.third.mjscore.MjscoreAdapter;
 import com.github.terralian.fastmaj.yaku.IYakuMatcher;
 import com.github.terralian.fastmaj.yaku.YakuMatcher;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
-import com.github.terralian.fastmaj.yama.TenhouYamaWorker;
+import com.github.terralian.fastmaj.yama.worker.tenhou.TenhouYamaWorker;
 import lombok.Getter;
 
 /**

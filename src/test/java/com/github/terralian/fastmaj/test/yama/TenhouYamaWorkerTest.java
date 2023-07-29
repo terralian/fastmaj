@@ -6,7 +6,7 @@ import java.security.NoSuchAlgorithmException;
 
 import org.junit.Test;
 
-import com.github.terralian.fastmaj.yama.TenhouYamaWorker;
+import com.github.terralian.fastmaj.yama.worker.tenhou.TenhouYamaWorker;
 
 
 /**

@@ -61,7 +61,7 @@ public class GameEndValidator implements IGameValidator {
             return true;
         }
         // 末局庄家连庄规则下，游戏继续
-        if (gameConfig.getGameContinueIfOyaRenchanAtLastKyoku() && gameCore.isRenchan()) {
+        if (gameConfig.getGameContinueIfOyaRenchanRyuukyokuAtLastKyoku() && gameCore.isRenchan() && kyokuEndType == KyokuEndEnum.RYUUKYOKU) {
             return false;
         }
 

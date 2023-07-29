@@ -85,11 +85,11 @@ public class GameConfig {
     private Boolean useRon3Ryuukyoku = true;
 
     /**
-     * 当庄家末巡玩家连庄时，游戏继续。这种规则常见于职业赛。
+     * 当庄家末巡玩家连庄时流局时，游戏继续。
      * <p/>
      * 旧版天凤规则也是，但是新版天凤或者雀魂则会直接结束游戏。
      */
-    private Boolean gameContinueIfOyaRenchanAtLastKyoku = false;
+    private Boolean gameContinueIfOyaRenchanRyuukyokuAtLastKyoku = false;
 
     // ------------------------------------------------
     // 游戏行为配置
@@ -112,7 +112,7 @@ public class GameConfig {
      */
     public static GameConfig useTenhouOld() {
         return new GameConfig() //
-                .setGameContinueIfOyaRenchanAtLastKyoku(true);
+                .setGameContinueIfOyaRenchanRyuukyokuAtLastKyoku(true);
     }
 
     /**

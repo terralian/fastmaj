@@ -93,7 +93,6 @@ public class TenhouStreamMajongGameTest {
         simulate_run_game("2009072917gm-0061-0000-85a7478c&tw=3.mjlog", true);
         // 旧版岭上区和新版的顺序不一致
         simulate_run_game("2009072918gm-0061-0000-e6e91672&tw=0.mjlog", true);
-
     }
 
     @Test
@@ -110,6 +109,8 @@ public class TenhouStreamMajongGameTest {
         simulate_run_game("2009082812gm-00e1-0000-47dd79cf&tw=3.mjlog", true);
         // 旧版，庄家连庄，不结束
         simulate_run_game("2009082815gm-00e1-0000-b7e41fe8&tw=3.mjlog", true);
+        // 旧版，庄家和了，结束
+        simulate_run_game("2009073112gm-0061-0000-cad1a977&tw=3.mjlog", true);
         // 新版结束
         simulate_run_game("2015060814gm-0029-0000-f1ac5f4d&tw=3.mjlog", true);
     }

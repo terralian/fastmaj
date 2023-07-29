@@ -4,8 +4,8 @@ import com.github.terralian.fastmaj.encode.Encode34;
 
 /**
  * {@link IHai}的默认实现，内部使用3种编码格式来表示一张牌
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public class Hai implements IHai {
 
@@ -42,16 +42,16 @@ public class Hai implements IHai {
     /**
      * 中文形式的名称
      */
-   private static final String[] NAME_ZH =  {
-       "一万", "二万", "三万", "四万", "五万", "六万", "七万", "八万", "九万", 
-       "一筒", "二筒", "三筒", "四筒", "五筒", "六筒", "七筒", "八筒", "九筒",
-       "一索", "二索", "三索", "四索", "五索", "六索", "七索", "八索", "九索",
-       "东", "南", "西", "北", "白", "发", "中"
-   };
+    private static final String[] NAME_ZH = {
+            "一万", "二万", "三万", "四万", "五万", "六万", "七万", "八万", "九万",
+            "一筒", "二筒", "三筒", "四筒", "五筒", "六筒", "七筒", "八筒", "九筒",
+            "一索", "二索", "三索", "四索", "五索", "六索", "七索", "八索", "九索",
+            "东", "南", "西", "北", "白", "发", "中"
+    };
 
     /**
      * 初始化牌，该牌非宝牌
-     * 
+     *
      * @param id 唯一值
      * @param value 值
      */
@@ -61,7 +61,7 @@ public class Hai implements IHai {
 
     /**
      * 初始化牌，并判断牌是否宝牌
-     * 
+     *
      * @param id 唯一值
      * @param value 值
      * @param isRedDora 是否是红宝牌
@@ -79,7 +79,7 @@ public class Hai implements IHai {
 
     /**
      * 工厂构造牌方法
-     * 
+     *
      * @param id 唯一值
      * @param value 值
      * @param isRedDora 是否是红宝牌
@@ -90,7 +90,7 @@ public class Hai implements IHai {
 
     /**
      * 牌的值，<b>该值使用34编码法。</b>
-     * 
+     *
      * @return 返回一个整形数字，其范围为[0, 33]
      * @see Encode34
      */
@@ -98,10 +98,10 @@ public class Hai implements IHai {
     public int getValue() {
         return value;
     }
-    
+
     /**
      * 获取牌的唯一ID，<b>该值使用136编码法。</b>
-     * 
+     *
      * @return [0, 135]
      */
     @Override
@@ -120,7 +120,7 @@ public class Hai implements IHai {
      * 获取牌的字面量，<b>该值使用记号法</b>
      * <p/>
      * 如一万一索一筒返回1，对于东南西北白中发，从1开始编码
-     * 
+     *
      * @return [0, 9] | [1, 9] | [1, 7]
      */
     @Override
@@ -208,7 +208,7 @@ public class Hai implements IHai {
     // -----------------------------------------------------
     //                      其他
     // -----------------------------------------------------
-    
+
     @Override
     public int hashCode() {
         return value + literal;
@@ -252,5 +252,10 @@ public class Hai implements IHai {
     @Override
     public String toString() {
         return isRedDora ? "红" + NAME_ZH[value] : NAME_ZH[value];
+    }
+
+    @Override
+    public String toIdString() {
+        return this + "(" + id + ")";
     }
 }

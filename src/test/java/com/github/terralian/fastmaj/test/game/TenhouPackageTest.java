@@ -21,7 +21,6 @@ import com.github.terralian.fastmaj.paifu.source.GZIPSource;
 import com.github.terralian.fastmaj.paifu.source.InputSource;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuGameParseHandler;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuParser;
-import com.github.terralian.fastmaj.paifu.tenhou.TenhouRuleVersionEnum;
 import com.github.terralian.fastmaj.player.PaifuGameQueueReplayPlayerBuilder;
 import com.github.terralian.fastmaj.player.QueueReplayPlayer;
 import com.github.terralian.fastmaj.util.TestResourceUtil;
@@ -133,9 +132,7 @@ public class TenhouPackageTest {
         }
         System.out.println();
 
-        GameConfig config = TenhouRuleVersionEnum.T2010.name().equals(paifuGame.getRuleVersion())//
-                            ? GameConfig.defaultRule()//
-                            : GameConfig.useTenhouOld();
+        GameConfig config = GameConfig.useTenhou(paifuGame);
         config.setEndBakaze(paifuGame.getEndBakaze());
 
         List<QueueReplayPlayer> players = PaifuGameQueueReplayPlayerBuilder.toPlayer(paifuGame);

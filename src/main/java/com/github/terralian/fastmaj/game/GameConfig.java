@@ -4,6 +4,8 @@ import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.option.DoraAddRule;
 import com.github.terralian.fastmaj.game.option.ReachRule;
+import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
+import com.github.terralian.fastmaj.paifu.tenhou.TenhouRuleVersionEnum;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -110,9 +112,16 @@ public class GameConfig {
     /**
      * 使用天凤的旧版规则，越2009年及之前
      */
-    public static GameConfig useTenhouOld() {
-        return new GameConfig() //
-                .setGameContinueIfOyaRenchanRyuukyokuAtLastKyoku(true);
+    public static GameConfig useTenhou(PaifuGame paifuGame) {
+        GameConfig gameConfig = new GameConfig() //
+                .setUseRedHai(paifuGame.isUseRed())
+                .setEndBakaze(paifuGame.getEndBakaze());
+        // 旧规则
+        boolean oldRule = TenhouRuleVersionEnum.T2009.name().equals(paifuGame.getRuleVersion());
+        if (oldRule) {
+            gameConfig.setGameContinueIfOyaRenchanRyuukyokuAtLastKyoku(true);
+        }
+        return gameConfig;
     }
 
     /**
@@ -123,7 +132,7 @@ public class GameConfig {
      * @param riverActionType 牌河的动作（可为空）
      */
     public boolean newDoraAction(DoraAddRule timePoint, TehaiActionType tehaiActionType,
-            RiverActionType riverActionType) {
+                                 RiverActionType riverActionType) {
         if (tehaiActionType == null && riverActionType == null) {
             return false;
         }

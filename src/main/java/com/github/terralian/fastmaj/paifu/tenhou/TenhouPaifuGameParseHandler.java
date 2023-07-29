@@ -1,5 +1,9 @@
 package com.github.terralian.fastmaj.paifu.tenhou;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.github.terralian.fastmaj.encode.Encode136;
 import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.event.ActionEvent;
@@ -20,10 +24,6 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
 import com.github.terralian.fastmaj.paifu.domain.PaifuKyoku;
 import com.github.terralian.fastmaj.tehai.ITehai;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 天凤牌谱解析器实例，用于将牌谱解析为{@link PaifuGame}
@@ -64,8 +64,9 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
     }
 
     @Override
-    public void startGame(boolean isSanma, int taku, boolean isTonnan, boolean isSoku, boolean isUseAka, boolean isAriAri,
-                          String[] playerNames, int[] playerRates, String[] playerDans) {
+    public void startGame(boolean isSanma, int taku, boolean isTonnan, boolean isSoku, boolean isUseAka,
+            boolean isAriAri,
+            String[] playerNames, int[] playerRates, String[] playerDans) {
         paifuGame.setRoom(TenhouPaifuStringPool.TAKU[taku]) //
                 .setPlatform(TenhouPaifuStringPool.PLATFORM) //
                 .setPlayerSize(isSanma ? 3 : 4) //
@@ -81,8 +82,9 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
     }
 
     @Override
-    public void startKyoku(int[] playerPoints, List<List<Integer>> playerHaipais, int oya, int bakaze, int kyoku, int honba, int kyotaku,
-                           int firstDoraDisplay, int[] yama) {
+    public void startKyoku(int[] playerPoints, List<List<Integer>> playerHaipais, int oya, int bakaze, int kyoku,
+            int honba, int kyotaku,
+            int firstDoraDisplay, int[] yama) {
         List<ITehai> startTehais = playerHaipais.stream() //
                 .map(k -> Encode136.toTehai(k, paifuGame.isUseRed())) //
                 .collect(Collectors.toList());
@@ -197,7 +199,7 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
 
     @Override
     public void agari(int position, int from, List<String> yaku, int han, int hu, int score,
-                      int[] increaseAndDecrease) {
+            int[] increaseAndDecrease) {
         if (position != from) {
             RonEvent ronEvent = new RonEvent()
                     .setFrom(from)

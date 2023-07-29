@@ -60,15 +60,15 @@ public class GameEndValidator implements IGameValidator {
         if (bakaze == KazeEnum.next(endBakaze) && oya == gameCore.getPlayerSize() - 1 && !gameCore.isRenchan()) {
             return true;
         }
+        // 末局庄家连庄规则下，游戏继续
+        if (gameConfig.getGameContinueIfOyaRenchanAtLastKyoku() && gameCore.isRenchan()) {
+            return false;
+        }
+
         // 东四或者南四这样的末局，当庄家分数超过结束线，并且排名第一则直接结束
         int[] ranking = RankingUtil.calcRanking(playerPoints);
         Integer endPointLine = gameConfig.getEndPointLine();
         if (playerPoints[oya] >= endPointLine && ranking[oya] == 1) {
-            // 存在特例，若庄家在2900，末局听牌，这种时候旧版天凤规则下游戏还不会结束，新版会结束
-            if (!gameConfig.getGameEndWhenOyaOverPointLine() && kyokuEndType == KyokuEndEnum.RYUUKYOKU //
-                    && gameCore.isRenchan() && playerPoints[oya] - 1000 < endPointLine) {
-                return false;
-            }
             return true;
         }
         // 或者庄家未连庄，有人分数大于等于结束线，则直接结束

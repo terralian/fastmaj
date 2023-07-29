@@ -45,6 +45,7 @@ public class TenhouPackageTest {
     /**
      * 大批量使用天凤位牌谱进行测试
      */
+    @Test
     public void testBaseOnTenhouPackage() {
         String prefix = "mjlog_pf4-20_n";
         for (int i = 1; i <= 22; i++) {

@@ -25,7 +25,7 @@ import com.github.terralian.fastmaj.player.PaifuGameQueueReplayPlayerBuilder;
 import com.github.terralian.fastmaj.player.QueueReplayPlayer;
 import com.github.terralian.fastmaj.util.TestResourceUtil;
 import com.github.terralian.fastmaj.util.ZipUtil;
-import com.github.terralian.fastmaj.yama.TenhouYamaWorker;
+import com.github.terralian.fastmaj.yama.worker.tenhou.TenhouYamaWorker;
 import org.junit.Before;
 import org.junit.Test;
 

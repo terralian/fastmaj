@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.test.yama;
 import org.junit.Test;
 
 import com.github.terralian.fastmaj.yama.IYamaWorker;
-import com.github.terralian.fastmaj.yama.SimpleRandomYamaWorker;
+import com.github.terralian.fastmaj.yama.worker.common.SimpleRandomYamaWorker;
 
 public class SimpleRandomYamaWorkerTest {
 

@@ -11,7 +11,7 @@ import com.github.terralian.fastmaj.hai.HaiTypeEnum;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yama.IYama;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
-import com.github.terralian.fastmaj.yama.SimpleRandomYamaWorker;
+import com.github.terralian.fastmaj.yama.worker.common.SimpleRandomYamaWorker;
 import com.github.terralian.fastmaj.yama.Yama;
 
 public class EncodeMarkTest {

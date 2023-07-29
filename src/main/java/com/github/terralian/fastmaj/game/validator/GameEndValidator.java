@@ -5,6 +5,7 @@ import java.util.Arrays;
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.KazeEnum;
+import com.github.terralian.fastmaj.game.KyokuEndEnum;
 import com.github.terralian.fastmaj.util.RankingUtil;
 
 /**
@@ -15,14 +16,14 @@ import com.github.terralian.fastmaj.util.RankingUtil;
  * <li>若当前庄家未连庄，并且已经为最后一局(结束风+1 | 北)，游戏结束。
  * <li>若当前庄家连庄，并且分数超过精算点，游戏结束。
  * </ul>
- * 
+ *
  * @author terra.lian
  */
 public class GameEndValidator implements IGameValidator {
 
     /**
      * 判定一场游戏是否游戏结束
-     * 
+     *
      * @param gameConfig 游戏规则
      * @param gameCore 游戏核心
      */
@@ -43,8 +44,10 @@ public class GameEndValidator implements IGameValidator {
         int oya = gameCore.getOya();
         // 结束的场风
         KazeEnum endBakaze = gameConfig.getEndBakaze();
+        // 对局结束类型
+        KyokuEndEnum kyokuEndType = gameCore.getKyoKuEndType();
         // 中途流局，对局继续
-        if (gameCore.isHalfwayRyuukyuku()) {
+        if (kyokuEndType == KyokuEndEnum.HALF_RYUUKYOKU) {
             return false;
         }
 
@@ -61,6 +64,10 @@ public class GameEndValidator implements IGameValidator {
         int[] ranking = RankingUtil.calcRanking(playerPoints);
         Integer endPointLine = gameConfig.getEndPointLine();
         if (playerPoints[oya] >= endPointLine && ranking[oya] == 1) {
+            // 存在特例，若庄家在2900，末局听牌，这种时候旧版天凤规则下游戏还不会结束，新版会结束
+            if (!gameConfig.getGameEndWhenOyaOverPointLine() && kyokuEndType == KyokuEndEnum.RYUUKYOKU && playerPoints[oya] - 1000 < endPointLine) {
+                return false;
+            }
             return true;
         }
         // 或者庄家未连庄，有人分数大于等于结束线，则直接结束

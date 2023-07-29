@@ -16,6 +16,7 @@ import com.github.terralian.fastmaj.paifu.source.FileSource;
 import com.github.terralian.fastmaj.paifu.source.GZIPSource;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuGameParseHandler;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuParser;
+import com.github.terralian.fastmaj.paifu.tenhou.TenhouRuleVersionEnum;
 import com.github.terralian.fastmaj.player.PaifuGameQueueReplayPlayerBuilder;
 import com.github.terralian.fastmaj.player.QueueReplayPlayer;
 import com.github.terralian.fastmaj.util.StringUtil;
@@ -90,14 +91,24 @@ public class TenhouStreamMajongGameTest {
     public void old_paifu_sample() throws Exception {
         // 旧版牌山和新版存在一丢丢差异
         simulate_run_game("2009072917gm-0061-0000-85a7478c&tw=3.mjlog", true);
-        //
-        simulate_run_game("2009072918gm-0061-0000-e6e91672&tw=0.mjlog", false);
+        // 旧版岭上区和新版的顺序不一致
+        simulate_run_game("2009072918gm-0061-0000-e6e91672&tw=0.mjlog", true);
     }
 
     @Test
     public void special_sample_paifu_test_2() throws Exception {
         // 红5万加杠，加杠在天凤解析内使用的是不同的值，易错（后续看看能否统一为一个值）
         simulate_run_game("2015070814gm-00a9-0000-37705455&tw=1.mjlog", true);
+    }
+
+    @Test
+    public void old_new_rule_conflict() throws Exception {
+        // 新旧规则冲突
+        // 东4局庄家连庄，加1000点超过3w分数线
+        // 旧版不能结束
+        simulate_run_game("2009082713gm-00e1-0000-8820f355&tw=3.mjlog", true);
+        // 新版结束
+        simulate_run_game("2015060814gm-0029-0000-f1ac5f4d&tw=3.mjlog", true);
     }
 
     /**
@@ -156,7 +167,9 @@ public class TenhouStreamMajongGameTest {
                 .addLogger(new PrintGameLogger(shortKyokuSummary))
                 .addLogger(new PointCheckLogger(allRound));
         // 配置
-        GameConfig gameConfig = GameConfig.defaultRule();
+        GameConfig gameConfig = TenhouRuleVersionEnum.T2010.name().equals(paifuGame.getRuleVersion()) //
+                                ? GameConfig.defaultRule() //
+                                : GameConfig.useTenhouOld();
         gameConfig.setEndBakaze(paifuGame.getEndBakaze());
 
         StreamMajongGame majongGame = new StreamMajongGame(players, gameConfig, gameComponent);

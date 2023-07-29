@@ -9,7 +9,7 @@ import lombok.experimental.Accessors;
 
 /**
  * 游戏可自定义配置
- * 
+ *
  * @author terra.lian
  */
 @Data
@@ -84,6 +84,11 @@ public class GameConfig {
      */
     private Boolean useRon3Ryuukyoku = true;
 
+    /**
+     * 庄家听牌连庄，其分数在加上听牌分时正好过分数线时，结束游戏
+     */
+    private Boolean gameEndWhenOyaOverPointLine = true;
+
     // ------------------------------------------------
     // 游戏行为配置
     // ------------------------------------------------
@@ -101,13 +106,22 @@ public class GameConfig {
     }
 
     /**
+     * 使用天凤的旧版规则，越2009年及之前
+     */
+    public static GameConfig useTenhouOld() {
+        return new GameConfig() //
+                .setGameEndWhenOyaOverPointLine(false);
+    }
+
+    /**
      * 根据配置判定是否需要翻新宝牌
-     * 
+     *
      * @param timePoint 增加时机
      * @param tehaiActionType 手牌的动作（可为空）
      * @param riverActionType 牌河的动作（可为空）
      */
-    public boolean newDoraAction(DoraAddRule timePoint, TehaiActionType tehaiActionType, RiverActionType riverActionType) {
+    public boolean newDoraAction(DoraAddRule timePoint, TehaiActionType tehaiActionType,
+            RiverActionType riverActionType) {
         if (tehaiActionType == null && riverActionType == null) {
             return false;
         }

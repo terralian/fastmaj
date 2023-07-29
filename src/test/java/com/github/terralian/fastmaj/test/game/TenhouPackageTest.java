@@ -21,6 +21,7 @@ import com.github.terralian.fastmaj.paifu.source.GZIPSource;
 import com.github.terralian.fastmaj.paifu.source.InputSource;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuGameParseHandler;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuParser;
+import com.github.terralian.fastmaj.paifu.tenhou.TenhouRuleVersionEnum;
 import com.github.terralian.fastmaj.player.PaifuGameQueueReplayPlayerBuilder;
 import com.github.terralian.fastmaj.player.QueueReplayPlayer;
 import com.github.terralian.fastmaj.util.TestResourceUtil;
@@ -44,7 +45,6 @@ public class TenhouPackageTest {
     /**
      * 大批量使用天凤位牌谱进行测试
      */
-    @Test
     public void testBaseOnTenhouPackage() {
         String prefix = "mjlog_pf4-20_n";
         for (int i = 1; i <= 22; i++) {
@@ -52,6 +52,19 @@ public class TenhouPackageTest {
             System.out.println("--- " + prefix + " ---");
             //testBaseOnTenhouPackage0(packageName);
         }
+    }
+
+    /**
+     * 旧版测试逻辑，先保留用于保证代码不会被改错
+     */
+    @Test
+    public void old_test_package() {
+        System.out.println("--- mjlog_pf4-20_n19 ---");
+        testBaseOnTenhouPackage0("mjlog_pf4-20_n19.zip");
+        System.out.println("--- mjlog_pf4-20_n20 ---");
+        testBaseOnTenhouPackage0("mjlog_pf4-20_n20.zip");
+        System.out.println("--- mjlog_pf4-20_n22 ---");
+        testBaseOnTenhouPackage0("mjlog_pf4-20_n22.zip");
     }
 
     private void testBaseOnTenhouPackage0(String fileName) {
@@ -119,7 +132,9 @@ public class TenhouPackageTest {
         }
         System.out.println();
 
-        GameConfig config = GameConfig.defaultRule();
+        GameConfig config = TenhouRuleVersionEnum.T2010.name().equals(paifuGame.getRuleVersion())//
+                            ? GameConfig.defaultRule()//
+                            : GameConfig.useTenhouOld();
         config.setEndBakaze(paifuGame.getEndBakaze());
 
         List<QueueReplayPlayer> players = PaifuGameQueueReplayPlayerBuilder.toPlayer(paifuGame);

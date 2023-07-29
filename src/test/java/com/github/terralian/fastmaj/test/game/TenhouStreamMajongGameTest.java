@@ -16,6 +16,7 @@ import com.github.terralian.fastmaj.paifu.source.FileSource;
 import com.github.terralian.fastmaj.paifu.source.GZIPSource;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuGameParseHandler;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuParser;
+import com.github.terralian.fastmaj.paifu.tenhou.TenhouRuleTimelineHandler;
 import com.github.terralian.fastmaj.player.PaifuGameQueueReplayPlayerBuilder;
 import com.github.terralian.fastmaj.player.QueueReplayPlayer;
 import com.github.terralian.fastmaj.util.StringUtil;
@@ -33,10 +34,12 @@ import static org.junit.Assert.assertEquals;
 public class TenhouStreamMajongGameTest {
 
     private IPaifuParser<PaifuGame> paifuParser;
+    private TenhouRuleTimelineHandler ruleTimelineHandler;
 
     @Before
     public void before() {
         paifuParser = new TenhouPaifuParser(new TenhouPaifuGameParseHandler());
+        ruleTimelineHandler = new TenhouRuleTimelineHandler();
     }
 
     @Test
@@ -94,6 +97,8 @@ public class TenhouStreamMajongGameTest {
         simulate_run_game("2009072918gm-0061-0000-e6e91672&tw=0.mjlog", true);
         // 饼参加了一场无红宝牌
         simulate_run_game("2009082817gm-00ab-0000-997dbe26&tw=0.mjlog", true);
+        // 时间更后，已经切换了种子规则
+        simulate_run_game("2010030412gm-00e1-0000-4a275c59&tw=0.mjlog", true);
     }
 
     @Test
@@ -173,6 +178,7 @@ public class TenhouStreamMajongGameTest {
                 .addLogger(new PointCheckLogger(allRound));
         // 配置
         GameConfig gameConfig = GameConfig.useTenhou(paifuGame);
+        ruleTimelineHandler.deduce(gameConfig, paifuGame, simplePaifuName);
 
         StreamMajongGame majongGame = new StreamMajongGame(players, gameConfig, gameComponent);
         majongGame.startGame();

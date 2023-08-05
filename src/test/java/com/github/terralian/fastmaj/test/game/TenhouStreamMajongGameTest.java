@@ -113,6 +113,11 @@ public class TenhouStreamMajongGameTest {
     }
 
     @Test
+    public void wait_test() throws Exception {
+        simulate_run_game("2010060800gm-0061-0000-6d767860&tw=1.mjlog", false);
+    }
+
+    @Test
     public void blame_sample_test() throws Exception {
         // 大三元包牌
         simulate_run_game("2010060416gm-0061-0000-2d91fbe3&tw=0.mjlog", true);
@@ -128,6 +133,8 @@ public class TenhouStreamMajongGameTest {
         simulate_run_game("2009082815gm-00e1-0000-b7e41fe8&tw=3.mjlog", true);
         // 旧版，庄家和了，结束
         simulate_run_game("2009073112gm-0061-0000-cad1a977&tw=3.mjlog", true);
+        // 新版规则导入的附近的时间的牌谱
+        simulate_run_game("2010060800gm-0061-0000-6d767860&tw=1.mjlog", true);
         // 新版结束
         simulate_run_game("2015060814gm-0029-0000-f1ac5f4d&tw=3.mjlog", true);
     }

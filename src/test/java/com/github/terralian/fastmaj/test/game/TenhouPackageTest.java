@@ -52,8 +52,8 @@ public class TenhouPackageTest {
         String prefix = "mjlog_pf4-20_n";
         for (int i = 1; i <= 22; i++) {
             String packageName = prefix + i + ".zip";
-            System.out.println("--- " + prefix + " ---");
-            //testBaseOnTenhouPackage0(packageName);
+            System.out.println("--- " + packageName + " ---");
+            // testBaseOnTenhouPackage0(packageName);
         }
     }
 

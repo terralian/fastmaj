@@ -41,9 +41,9 @@ public class AgariCalculator implements IAgariCalculator {
      */
     private IFuCalculator fuCalculator;
     /**
-     * 分数计算器
+     * 分数计算管理器
      */
-    private IPointCalculator pointCalculator;
+    private IPointCalculatorManager pointCalculatorManager;
 
     /**
      * 初始化构建和了计算器
@@ -51,14 +51,14 @@ public class AgariCalculator implements IAgariCalculator {
      * @param yakuMatcher 役种计算器
      * @param agariDivider 和了分割器
      * @param fuCalculator 符数计算器
-     * @param pointCalculator 分数计算器
+     * @param pointCalculatorManager 分数计算器管理器
      */
     public AgariCalculator(IYakuMatcher yakuMatcher, ITehaiAgariDivider agariDivider, IFuCalculator fuCalculator,
-                           IPointCalculator pointCalculator) {
+            IPointCalculatorManager pointCalculatorManager) {
         this.yakuMatcher = yakuMatcher;
         this.agariDivider = agariDivider;
         this.fuCalculator = fuCalculator;
-        this.pointCalculator = pointCalculator;
+        this.pointCalculatorManager = pointCalculatorManager;
     }
 
     /**
@@ -71,8 +71,9 @@ public class AgariCalculator implements IAgariCalculator {
      * @param context 玩家游戏上下文
      */
     @Override
-    public AgariInfo calculate(ITehai tehai, IHai agariHai, Integer fromPlayer, List<IHai> doraHais, List<IHai> uraDoraHais,
-                               PlayerGameContext context) {
+    public AgariInfo calculate(ITehai tehai, IHai agariHai, Integer fromPlayer, List<IHai> doraHais,
+            List<IHai> uraDoraHais,
+            PlayerGameContext context) {
         int position = context.getPosition();
         // 使用和了分割器对手牌进行分割，分割的结果更容易进行和了役种匹配
         List<DivideInfo> divideInfos = agariDivider.divide(tehai, position != fromPlayer, agariHai);
@@ -103,9 +104,10 @@ public class AgariCalculator implements IAgariCalculator {
      * @param doraHais 宝牌
      * @param context 游戏上下文
      */
-    private AgariInfo calculateSingleDivide(ITehai tehai, IHai agariHai, DivideInfo divideInfo, Integer fromPlayer, List<IHai> doraHais,
-                                            List<IHai> uraDoraHais,
-                                            PlayerGameContext context) {
+    private AgariInfo calculateSingleDivide(ITehai tehai, IHai agariHai, DivideInfo divideInfo, Integer fromPlayer,
+            List<IHai> doraHais,
+            List<IHai> uraDoraHais,
+            PlayerGameContext context) {
         // 玩家坐席
         int position = context.getPosition();
         // 匹配役种
@@ -113,28 +115,18 @@ public class AgariCalculator implements IAgariCalculator {
         // 为役种增加悬赏役
         addDoraYaku(matchYakus, tehai, doraHais, uraDoraHais);
         // 计算番数
-        int ban = IYaku.sumHan(matchYakus, context.isNaki());
+        int han = IYaku.sumHan(matchYakus, context.isNaki());
         // 计算符数
         int fu = fuCalculator.compute(tehai, agariHai, divideInfo, context);
-        // 计算底分
-        int basePoint = pointCalculator.calcBasePoint(matchYakus, fu, ban, context.getGameConfig());
-        // 当前场上存在的立直棒
-        int kyotaku = context.getKyotaku();
-        // 当前本场数
-        int honba = context.getRealHonba();
-        // 玩家的分数
+        // 玩家的点数
         int[] playerPoints = Arrays.copyOf(context.getPlayerPoints(), context.getPlayerPoints().length);
-        // 荣和的场合
-        if (position != fromPlayer) {
-            pointCalculator.ronTransfer(position, fromPlayer, context.getOya(), basePoint, honba, kyotaku, playerPoints);
-        } else {
-            pointCalculator.tsumoTransfer(position, context.getOya(), basePoint, honba, kyotaku, playerPoints);
-        }
+        // 点数转移
+        pointCalculatorManager.dispatchTransfer(tehai, fromPlayer, matchYakus, han, fu, playerPoints, context);
         // 返回和了信息
         return new AgariInfo() //
                 .setScore(playerPoints[position] - context.getPlayerPoints()[position]) //
                 .setFu(fu) //
-                .setBan(ban) //
+                .setBan(han) //
                 .setYakus(matchYakus) //
                 .setDivideInfo(divideInfo) //
                 .setIncreaseAndDecrease(playerPoints);

@@ -5,9 +5,11 @@ import com.github.terralian.fastmaj.agari.FuCalculator;
 import com.github.terralian.fastmaj.agari.IAgariCalculator;
 import com.github.terralian.fastmaj.agari.IFuCalculator;
 import com.github.terralian.fastmaj.agari.IPointCalculator;
+import com.github.terralian.fastmaj.agari.IPointCalculatorManager;
 import com.github.terralian.fastmaj.agari.IRonYakuMatcher;
 import com.github.terralian.fastmaj.agari.ITehaiAgariDivider;
 import com.github.terralian.fastmaj.agari.PointCalculator;
+import com.github.terralian.fastmaj.agari.PointCalculatorManager;
 import com.github.terralian.fastmaj.agari.RonYakuMatcher;
 import com.github.terralian.fastmaj.game.log.ChainGameLoggerBuilder;
 import com.github.terralian.fastmaj.game.log.IGameLogger;
@@ -66,6 +68,10 @@ public class GameComponent {
      * 分数计算器
      */
     private IPointCalculator pointCalculator;
+    /**
+     * 分数计算管理器
+     */
+    private IPointCalculatorManager pointCalculatorManager;
     /**
      * 和了计算器
      */
@@ -145,10 +151,11 @@ public class GameComponent {
         this.agariDivider = new MjscoreAdapter();
         this.fuCalculator = new FuCalculator();
         this.pointCalculator = new PointCalculator();
+        this.pointCalculatorManager = new PointCalculatorManager(pointCalculator);
         this.yuukouhaiCalculator = new YuukouhaiCalculator(this.syatenCalculator);
         this.ronYakuMatcher = new RonYakuMatcher(this.yakuMatcher, this.agariDivider);
         this.agariCalculator = new AgariCalculator(this.yakuMatcher, this.agariDivider, this.fuCalculator,
-                this.pointCalculator);
+                this.pointCalculatorManager);
 
         // 再构建其他组件
         this.gameEndValidator = new GameEndValidator();

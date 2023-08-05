@@ -25,7 +25,7 @@ public class Ron3RyuukyokuResolver implements IRyuukyoku {
      */
     public boolean validate(List<RiverActionEvent> actions, GameConfig gameConfig, IGameCore gameCore) {
         // 不使用三家和了的情况
-        if (!gameConfig.getUseRon3Ryuukyoku()) {
+        if (!gameConfig.isUseRon3Ryuukyoku()) {
             return false;
         }
         // 玩家无动作，或者没有3人

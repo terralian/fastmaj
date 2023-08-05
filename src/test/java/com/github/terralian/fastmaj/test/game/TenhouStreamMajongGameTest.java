@@ -113,6 +113,12 @@ public class TenhouStreamMajongGameTest {
     }
 
     @Test
+    public void blame_sample_test() throws Exception {
+        // 大三元包牌
+        simulate_run_game("2010060416gm-0061-0000-2d91fbe3&tw=0.mjlog", true);
+    }
+
+    @Test
     public void test_game_if_end_when_oya_renchan() throws Exception {
         // 新旧规则冲突
         simulate_run_game("2009082713gm-00e1-0000-8820f355&tw=3.mjlog", true);

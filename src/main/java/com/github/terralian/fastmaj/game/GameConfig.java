@@ -4,6 +4,7 @@ import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.option.DoraAddRule;
 import com.github.terralian.fastmaj.game.option.ReachRule;
+import com.github.terralian.fastmaj.game.option.YakuBlameRule;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -36,7 +37,7 @@ public class GameConfig {
     /**
      * 单局胜负，为true时，对局仅有一局
      */
-    private Boolean singleKyoku = false;
+    private boolean singleKyoku = false;
     /**
      * 结束的场风，东风战 = 东风，至多到南风结束
      */
@@ -62,15 +63,15 @@ public class GameConfig {
     /**
      * 需要有足够的分数才可以进行立直操作（1000）
      */
-    private Boolean reachNeedEnoughPoint = true;
+    private boolean reachNeedEnoughPoint = true;
     /**
      * 双倍役满规则，如部分规则中四暗刻单骑，国士十三面，纯九莲计双倍。
      */
-    private Boolean doubleYakuman = false;
+    private boolean doubleYakuman = false;
     /**
      * 复合役满规则
      */
-    private Boolean multipleYakuman = true;
+    private boolean multipleYakuman = true;
     /**
      * 玩家的开始分数
      */
@@ -83,14 +84,39 @@ public class GameConfig {
     /**
      * 特殊流局：使用三家和了流局（天凤）
      */
-    private Boolean useRon3Ryuukyoku = true;
+    private boolean useRon3Ryuukyoku = true;
 
     /**
      * 当庄家末巡玩家连庄时流局时，游戏继续。
      * <p/>
      * 旧版天凤规则也是，但是新版天凤或者雀魂则会直接结束游戏。
      */
-    private Boolean gameContinueIfOyaRenchanRyuukyokuAtLastKyoku = false;
+    private boolean gameContinueIfOyaRenchanRyuukyokuAtLastKyoku = false;
+
+
+    // ------------------------------------------------
+    // 包牌规则
+    // ------------------------------------------------
+
+    /**
+     * 包牌规则，默认采用天凤的全包规则
+     */
+    private YakuBlameRule blameRule = YakuBlameRule.ALL_YAKU;
+
+    /**
+     * 大三元是否包牌，默认包牌
+     */
+    private boolean usingDaisangenBlameRule = true;
+
+    /**
+     * 大四喜是否包牌，默认包牌
+     */
+    private boolean usingDaisuusiiBlameRule = true;
+
+    /**
+     * 大四喜是否包牌，默认不包牌
+     */
+    private boolean usingSuukanzuBlameRule = false;
 
     // ------------------------------------------------
     // 游戏行为配置
@@ -125,7 +151,7 @@ public class GameConfig {
      * @param riverActionType 牌河的动作（可为空）
      */
     public boolean newDoraAction(DoraAddRule timePoint, TehaiActionType tehaiActionType,
-                                 RiverActionType riverActionType) {
+            RiverActionType riverActionType) {
         if (tehaiActionType == null && riverActionType == null) {
             return false;
         }

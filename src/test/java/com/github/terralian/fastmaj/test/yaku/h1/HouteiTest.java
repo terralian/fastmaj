@@ -1,20 +1,19 @@
 package com.github.terralian.fastmaj.test.yaku.h1;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
 import com.github.terralian.fastmaj.agari.DivideInfo;
+import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h1.Houtei;
-import com.github.terralian.fastmaj.yama.DrawFrom;
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * {@link Houtei}测试
- * 
+ *
  * @author terra.lian
  */
 public class HouteiTest {
@@ -30,8 +29,8 @@ public class HouteiTest {
         ITehai tehai = null;
         // 结果
         boolean result = false;
-        // 需要从牌山摸牌，而非岭上
-        gameContext.setLastDrawFrom(DrawFrom.YAMA);
+        // 最后的手牌动作是模切
+        gameContext.setLastTehaiActionType(TehaiActionType.KIRI);
 
         // 最后一枚，非荣和
         gameContext.setRon(false);

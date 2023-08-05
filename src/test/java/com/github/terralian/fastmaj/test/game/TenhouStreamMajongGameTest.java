@@ -110,11 +110,13 @@ public class TenhouStreamMajongGameTest {
         simulate_run_game("2010050507gm-00a9-0000-f13f215d&tw=1.mjlog", true);
         // 四暗刻单骑
         simulate_run_game("2010112211gm-00a9-0000-56a320b2&tw=1.mjlog", true);
+        // 地和
+        simulate_run_game("2013111600gm-00a9-0000-506bac66&tw=1.mjlog", true);
     }
 
     @Test
     public void wait_test() throws Exception {
-        simulate_run_game("2010113000gm-0061-0000-ef7062e1&tw=3.mjlog", false);
+        simulate_run_game("2013111600gm-00a9-0000-506bac66&tw=1.mjlog", false);
     }
 
     @Test
@@ -134,7 +136,7 @@ public class TenhouStreamMajongGameTest {
         // 旧版，庄家和了，结束
         simulate_run_game("2009073112gm-0061-0000-cad1a977&tw=3.mjlog", true);
         // 新版规则导入那一天的牌谱（庄家听牌不结束）
-        simulate_run_game("2010060106gm-00a9-0000-30d6de3b&tw=0.mjlog", false);
+        simulate_run_game("2010060106gm-00a9-0000-30d6de3b&tw=0.mjlog", true);
         // 新版规则导入的附近的时间的牌谱
         simulate_run_game("2010060800gm-0061-0000-6d767860&tw=1.mjlog", true);
         // 新版结束
@@ -146,7 +148,7 @@ public class TenhouStreamMajongGameTest {
      */
     @Test
     public void test_ron3_ryuukyoku() throws Exception {
-        simulate_run_game("2010113000gm-0061-0000-ef7062e1&tw=3.mjlog", false);
+        simulate_run_game("2010113000gm-0061-0000-ef7062e1&tw=3.mjlog", true);
     }
 
     /**

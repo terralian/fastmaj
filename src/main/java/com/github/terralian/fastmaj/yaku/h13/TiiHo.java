@@ -23,10 +23,12 @@ public class TiiHo implements IYakuman {
         }
         IHaiRiver haiRiver = holder.getHaiRiver();
         return !holder.isOya() // 非庄家
+                && haiRiver.isEmpty() // 没有打过牌
                 && haiRiver.isSameFirstJun() // 第一巡同巡
                 && tehai.getLock().isEmpty() // 未鸣牌且未暗杠
                 && tehai.countKita() == 0 // 未拔北
-                && haiRiver.isEmpty(); // 没有打过牌
+                && !holder.isRon() // 非荣和
+                ;
     }
 
     @Override

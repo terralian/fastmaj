@@ -51,10 +51,10 @@ public class MjscoreAdapter implements ITehaiAgariDivider {
 
             // 刻子
             int numKozu = r & 0x7;
-            Set<IHai> handKozuFirst = new LinkedHashSet<>();
+            Set<IHai> annkoDivideFirst = new LinkedHashSet<>();
             for (int i = 0; i < numKozu; i++) {
                 IHai hai = HaiPool.getByValue(pos[(r >> (10 + i * 4)) & 0xF]);
-                handKozuFirst.add(hai);
+                annkoDivideFirst.add(hai);
             }
 
             // 顺子
@@ -70,7 +70,6 @@ public class MjscoreAdapter implements ITehaiAgariDivider {
 
             DivideInfo divide = new DivideInfo();
             divide.setJantou(HaiPool.getByValue(jantou)) //
-                    .setHandKozuFirst(handKozuFirst)//
                     .setAllShunzuFirst(allShunzuFirst) //
                     .setHandShunzuFirst(handShunzuFirst) //
                     .setTiitoitu((r & (1 << 26)) != 0) //
@@ -79,7 +78,7 @@ public class MjscoreAdapter implements ITehaiAgariDivider {
                     .setIipeikou((r & (1 << 30)) != 0);
 
             fixIipeikou(tehai, divide);
-            partitionKozu(tehai, divide, isRon, agariHai);
+            partitionKozu(tehai, divide, annkoDivideFirst, isRon, agariHai);
             divides.add(divide);
         }
 
@@ -91,18 +90,18 @@ public class MjscoreAdapter implements ITehaiAgariDivider {
      *
      * @param tehai 手牌
      * @param agariDivide 分割
+     * @param annkoDivideFirst 从手牌分割出的暗刻后补，需要二次校验是否荣和而成的假暗刻
      * @param isRon 是否荣和
      * @param agariHai 和了的牌
      */
-    private void partitionKozu(ITehai tehai, DivideInfo agariDivide, boolean isRon, IHai agariHai) {
+    private void partitionKozu(ITehai tehai, DivideInfo agariDivide, Set<IHai> annkoDivideFirst, boolean isRon, IHai agariHai) {
         ITehaiLock tehaiLock = tehai.getLock();
 
-        Set<IHai> annko = new HashSet<>(agariDivide.getHandKozuFirst());
+        // 所有杠刻（先取鸣牌部分固定的暗杠、明刻、明杠）
         Set<IHai> allKanzu = new HashSet<>(tehaiLock.getNotChiFirst());
+        // 加入暗刻后补（包含暗刻和荣和形成的明刻）
+        allKanzu.addAll(annkoDivideFirst);
 
-        // 所有的刻子/杠子
-        allKanzu.addAll(agariDivide.getHandKozuFirst());
-        // 明刻包含杠
         Set<IHai> minKozu = new HashSet<>(tehaiLock.getPonFirst());
 
         // 移除红宝牌信息
@@ -110,18 +109,18 @@ public class MjscoreAdapter implements ITehaiAgariDivider {
                 ? HaiPool.getByValue(agariHai.getValue()) //
                 : agariHai;
         // 荣和情况下要二次判定和了的牌是否是暗刻
-        if (isRon && annko.contains(clearRed)) {
+        if (isRon && annkoDivideFirst.contains(clearRed)) {
             // 若和了的牌是顺子组成的一个，则无需处理
             List<IHai> hais = agariDivide.getHandShunzuFirst();
             boolean inShunzu = hais.stream().anyMatch(k -> Encode34.isInShunzu(k, clearRed));
             if (!inShunzu) {
-                annko.remove(clearRed);
+                annkoDivideFirst.remove(clearRed);
                 minKozu.add(clearRed);
             }
         }
 
         agariDivide.setAllKanKozuFirst(allKanzu);
-        agariDivide.setAnnkoFirst(annko);
+        agariDivide.setAnnkoFirst(annkoDivideFirst);
         agariDivide.setMinkoFirst(minKozu);
     }
 
@@ -172,7 +171,6 @@ public class MjscoreAdapter implements ITehaiAgariDivider {
 
         DivideInfo divide = new DivideInfo();
         divide.setJantou(HaiPool.getByValue(jantou)) //
-                .setHandKozuFirst(Collections.emptySet())//
                 .setAllKanKozuFirst(Collections.emptySet()) //
                 .setAnnkoFirst(Collections.emptySet()) //
                 .setMinkoFirst(Collections.emptySet()) //

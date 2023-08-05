@@ -107,6 +107,8 @@ public class TenhouStreamMajongGameTest {
         simulate_run_game("2015070814gm-00a9-0000-37705455&tw=1.mjlog", true);
         // 河底
         simulate_run_game("2010050507gm-00a9-0000-f13f215d&tw=1.mjlog", true);
+        // 四暗刻单骑
+        simulate_run_game("2010112211gm-00a9-0000-56a320b2&tw=1.mjlog", true);
     }
 
     @Test

@@ -30,8 +30,8 @@ public class SuuankouTanki implements IYakuman {
         if (value34[agariHai.getValue()] != 2) {
             return false;
         }
-
-        return divide.getAnnkoFirst().size() == 4;
+        // 暗刻+暗杠 = 4
+        return divide.getAnnkoFirst().size() + tehai.getLock().getAnnkanFirst().size() == 4;
     }
 
     @Override

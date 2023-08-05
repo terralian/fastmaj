@@ -21,6 +21,7 @@ import com.github.terralian.fastmaj.player.PaifuGameQueueReplayPlayerBuilder;
 import com.github.terralian.fastmaj.player.QueueReplayPlayer;
 import com.github.terralian.fastmaj.util.StringUtil;
 import com.github.terralian.fastmaj.util.TestResourceUtil;
+import com.github.terralian.fastmaj.yama.worker.UnsupportedYamaSeedException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -165,6 +166,12 @@ public class TenhouStreamMajongGameTest {
         simulate_run_game("2021041720gm-00a9-0000-f3b19e15&tw=3.mjlog", true);
         simulate_run_game("2021010917gm-0089-0000-d9225d74&tw=1.mjlog", true);
         simulate_run_game("2021100323gm-00a9-0000-d0ac1302&tw=1.mjlog", true);
+    }
+
+    @Test(expected = UnsupportedYamaSeedException.class)
+    public void current_un_support_old_paifu() throws Exception {
+        // 四暗刻单骑
+        simulate_run_game("2009071823gm-0041-0000-ff3a2214&tw=0.mjlog", true);
     }
 
     private void simulate_run_game(String simplePaifuName, boolean shortKyokuSummary) throws Exception {

@@ -91,7 +91,7 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
     /**
      * 种子模式
      */
-    private SeedModeEnum seedMode = SeedModeEnum.MULTI;
+    private SeedModeEnum seedMode;
 
     /**
      * 实例化{@link TenhouPaifuDecodeHandler}
@@ -108,6 +108,8 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
         super.startDocument();
         // 初始化
         isAgari = false;
+        // 种子模式
+        seedMode = SeedModeEnum.MULTI;
     }
 
     @Override
@@ -356,13 +358,13 @@ public class TenhouPaifuDecodeHandler extends DefaultHandler {
         int[] selfHai;
         int nakiHai;
         if (r == 0) {
-            selfHai = new int[] {h[1], h[2]};
+            selfHai = new int[]{h[1], h[2]};
             nakiHai = h[0];
         } else if (r == 1) {
-            selfHai = new int[] {h[0], h[2]};
+            selfHai = new int[]{h[0], h[2]};
             nakiHai = h[1];
         } else if (r == 2) {
-            selfHai = new int[] {h[0], h[1]};
+            selfHai = new int[]{h[0], h[1]};
             nakiHai = h[2];
         } else {
             throw new RuntimeException();

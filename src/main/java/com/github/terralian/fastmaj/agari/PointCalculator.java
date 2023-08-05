@@ -10,7 +10,7 @@ import com.github.terralian.fastmaj.yaku.IYakuman;
 
 /**
  * 默认的分数计算器
- * 
+ *
  * @author terra.lian
  */
 public class PointCalculator implements IPointCalculator {
@@ -114,7 +114,8 @@ public class PointCalculator implements IPointCalculator {
     }
 
     @Override
-    public void ronTransfer(int position, int rivalPlayer, int oya, int basePoint, int honba, int kyotaku, int[] playerPoints) {
+    public void ronTransfer(int position, int rivalPlayer, int oya, int basePoint, int honba, int kyotaku,
+            int[] playerPoints) {
         // 自己为庄家的情况，得分为底分的两倍（取整）
         // 放铳者需要支付3人份的得分（在3麻也是）
         basePoint = ceilPoint(position == oya ? basePoint * 6 : basePoint * 4) + honba * 100 * 3;
@@ -129,11 +130,11 @@ public class PointCalculator implements IPointCalculator {
             return yakumanMultiple * 8000;
         }
         // 非役满役
-        if      (han >= 13) return 8000;  // 累计役満
+        if (han >= 13) return 8000;  // 累计役満
         else if (han >= 11) return 6000;  // 三倍満
-        else if (han >=  8) return 4000;  // 倍満
-        else if (han >=  6) return 3000;  // 跳満 
-        else if (han ==  5) return 2000;  // 满贯
+        else if (han >= 8) return 4000;  // 倍満
+        else if (han >= 6) return 3000;  // 跳満
+        else if (han == 5) return 2000;  // 满贯
         // 满贯及以下
         int BP = (int) (fu * Math.pow(2, han + 2));
         return Math.min(2000, BP);
@@ -152,7 +153,7 @@ public class PointCalculator implements IPointCalculator {
 
     /**
      * 计算役满倍数，若非役满返回0
-     * 
+     *
      * @param yakus 和了的所有役
      * @param gameConfig 游戏配置
      */
@@ -160,11 +161,11 @@ public class PointCalculator implements IPointCalculator {
         if (yakus.get(0).isYakuman()) {
             int multiple = 1;
             // 复合役满及多倍役满
-            if (gameConfig.getMultipleYakuman() && gameConfig.getDoubleYakuman()) {
+            if (gameConfig.isMultipleYakuman() && gameConfig.isDoubleYakuman()) {
                 multiple = yakus.stream().mapToInt(k -> ((IYakuman) k).isDoubleYakuman() ? 2 : 1).sum();
             }
             // 只计复合役满
-            else if (gameConfig.getMultipleYakuman()) {
+            else if (gameConfig.isMultipleYakuman()) {
                 multiple = yakus.size();
             }
             return multiple;

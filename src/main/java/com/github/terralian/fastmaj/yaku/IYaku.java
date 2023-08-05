@@ -12,14 +12,14 @@ import com.github.terralian.fastmaj.tehai.ITehai;
  * 该接口为役的顶层类，其实现类包含所有麻将相关的役种
  * <p/>
  * 役种实现类的匹配方式各不相同，部分役判断仅需要手牌即可，而部分役的判断则与手牌无关，需要根据场况才能确定（如抢杠）。
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public interface IYaku {
 
     /**
      * 匹配
-     * 
+     *
      * @param tehai 手牌
      * @param divide 和牌分割，手牌少数情况下有多种分割
      * @param gameContext 玩家对局数据容器
@@ -41,17 +41,24 @@ public interface IYaku {
      * 役代表的番数，该番数在役的构建时固定
      * <p/>
      * 役的番数根据不同规则可能有所不同
-     * 
+     *
      * @param isNaki 是否鸣牌
      */
     int getHan(boolean isNaki);
 
     /**
      * 是否是役满，仅役满{@link IYakuman}需要修改该方法
-     * 
+     *
      * @return 若该役是役满，返回true，否则返回false
      */
     default boolean isYakuman() {
+        return false;
+    }
+
+    /**
+     * 是否是包牌役
+     */
+    default boolean isYakuBlame() {
         return false;
     }
 
@@ -76,7 +83,7 @@ public interface IYaku {
 
     /**
      * 统计役种共多少番数，仅按配置的符数计算，不区别役满
-     * 
+     *
      * @param yakus 役满
      * @param isNaki 是否鸣牌
      */

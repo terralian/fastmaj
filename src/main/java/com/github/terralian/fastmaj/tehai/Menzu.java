@@ -9,8 +9,8 @@ import com.github.terralian.fastmaj.player.RivalEnum;
  * 面子为3枚或者4枚牌组成，其中顺子为3枚相近的牌，刻子（明刻暗刻）为3枚相同的牌，杠子为4枚相同的牌。
  * <p/>
  * 该类设计为不可修改类
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public final class Menzu {
 
@@ -48,7 +48,7 @@ public final class Menzu {
     private final IHai menzuFirst;
     /**
      * 鸣牌的形状
-     * 
+     *
      * @see NakiShape
      */
     private final int shape;
@@ -59,7 +59,7 @@ public final class Menzu {
 
     /**
      * 根据参数构建一个面子
-     * 
+     *
      * @param type 面子的类型
      * @param firstHai 第一枚牌
      * @param shape 鸣牌的形状
@@ -74,7 +74,7 @@ public final class Menzu {
      * 从动作吃构建一副面子
      * <p/>
      * 其形状会固定为鸣最小的那枚牌，若需要固定形状，可以使用{@link #fromChi(IHai, int)}
-     * 
+     *
      * @param firstHai 第一枚牌
      */
     public static Menzu fromChi(IHai firstHai) {
@@ -83,7 +83,7 @@ public final class Menzu {
 
     /**
      * 从吃动作构建一副面子
-     * 
+     *
      * @param firstHai
      * @param nakiSize {@link NakiShape}中的鸣牌大小
      */
@@ -95,7 +95,7 @@ public final class Menzu {
      * 从碰动作构建一副面子
      * <p/>
      * 该牌的形状固定为从上家碰，若需要固定，可以使用{@link #fromPon(IHai, RivalEnum)}
-     * 
+     *
      * @param firstHai 第一枚牌
      */
     public static Menzu fromPon(IHai firstHai) {
@@ -104,7 +104,7 @@ public final class Menzu {
 
     /**
      * 从碰动作构建一副面子
-     * 
+     *
      * @param firstHai 第一枚牌
      * @param fromRival 被鸣牌的对手
      */
@@ -116,7 +116,7 @@ public final class Menzu {
      * 从明杠动作构建一副面子
      * <p/>
      * 该牌的形状固定为从上家杠，若需要固定，可以使用{@link #fromMinkan(IHai, RivalEnum)}
-     * 
+     *
      * @param firstHai 第一枚牌
      */
     public static Menzu fromMinkan(IHai firstHai) {
@@ -125,7 +125,7 @@ public final class Menzu {
 
     /**
      * 从明杠动作构建一副面子
-     * 
+     *
      * @param firstHai 第一枚牌
      * @param fromRival 被鸣牌的对手
      */
@@ -135,7 +135,7 @@ public final class Menzu {
 
     /**
      * 从暗杠动作构建一副面子
-     * 
+     *
      * @param firstHai
      */
     public static Menzu fromAnnkan(IHai firstHai) {
@@ -221,7 +221,7 @@ public final class Menzu {
     public IHai getMenzuFirst() {
         return this.menzuFirst;
     }
-    
+
     /**
      * 获取形状
      */
@@ -235,10 +235,10 @@ public final class Menzu {
 
     /**
      * 鸣牌的来源玩家
-     * 
+     *
      * @param selfPosition 自身的坐席
      */
-    public RivalEnum fromRival(int selfPosition) {
+    public RivalEnum fromRival() {
         if (shape == SHAPE_NON) {
             return null;
         }

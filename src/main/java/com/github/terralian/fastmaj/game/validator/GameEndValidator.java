@@ -29,7 +29,7 @@ public class GameEndValidator implements IGameValidator {
      */
     public boolean validate(GameConfig gameConfig, IGameCore gameCore) {
         // 单局胜负，直接结束
-        if (gameConfig.getSingleKyoku()) {
+        if (gameConfig.isSingleKyoku()) {
             return true;
         }
         // 当玩家分数存在小于0时，游戏结束
@@ -61,7 +61,7 @@ public class GameEndValidator implements IGameValidator {
             return true;
         }
         // 末局庄家连庄规则下，游戏继续
-        if (gameConfig.getGameContinueIfOyaRenchanRyuukyokuAtLastKyoku() && gameCore.isRenchan() && kyokuEndType == KyokuEndEnum.RYUUKYOKU) {
+        if (gameConfig.isGameContinueIfOyaRenchanRyuukyokuAtLastKyoku() && gameCore.isRenchan() && kyokuEndType == KyokuEndEnum.RYUUKYOKU) {
             return false;
         }
 

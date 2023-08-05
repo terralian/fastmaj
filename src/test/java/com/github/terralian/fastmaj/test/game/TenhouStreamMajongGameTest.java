@@ -114,7 +114,7 @@ public class TenhouStreamMajongGameTest {
 
     @Test
     public void wait_test() throws Exception {
-        simulate_run_game("2010060800gm-0061-0000-6d767860&tw=1.mjlog", false);
+        simulate_run_game("2010060106gm-00a9-0000-30d6de3b&tw=0.mjlog", false);
     }
 
     @Test
@@ -133,6 +133,8 @@ public class TenhouStreamMajongGameTest {
         simulate_run_game("2009082815gm-00e1-0000-b7e41fe8&tw=3.mjlog", true);
         // 旧版，庄家和了，结束
         simulate_run_game("2009073112gm-0061-0000-cad1a977&tw=3.mjlog", true);
+        // 新版规则导入那一天的牌谱（庄家听牌不结束）
+        simulate_run_game("2010060106gm-00a9-0000-30d6de3b&tw=0.mjlog", false);
         // 新版规则导入的附近的时间的牌谱
         simulate_run_game("2010060800gm-0061-0000-6d767860&tw=1.mjlog", true);
         // 新版结束

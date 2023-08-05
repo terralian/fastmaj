@@ -20,7 +20,7 @@ public class TenhouRuleTimelineHandler implements IRuleTimelineHandler {
     private static final Pattern TIME_PATTERN = Pattern.compile("([0-9]{10})gm-\\w{4}-[0-9]{4}");
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHH");
 
-    private static final LocalDateTime TIME_POINT_A = LocalDateTime.of(2010, 6, 1, 0, 0);
+    private static final LocalDateTime TIME_POINT_A = LocalDateTime.of(2010, 6, 1, 7, 0);
 
     @Override
     public void deduce(GameConfig gameConfig, PaifuGame paifuGame, String... params) {

@@ -105,6 +105,8 @@ public class TenhouStreamMajongGameTest {
     public void special_sample_paifu_test_2() throws Exception {
         // 红5万加杠，加杠在天凤解析内使用的是不同的值，易错（后续看看能否统一为一个值）
         simulate_run_game("2015070814gm-00a9-0000-37705455&tw=1.mjlog", true);
+        // 河底
+        simulate_run_game("2010050507gm-00a9-0000-f13f215d&tw=1.mjlog", true);
     }
 
     @Test

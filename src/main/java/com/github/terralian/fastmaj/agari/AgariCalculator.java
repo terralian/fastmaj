@@ -27,6 +27,11 @@ import lombok.Setter;
 public class AgariCalculator implements IAgariCalculator {
 
     /**
+     * 无役对象
+     */
+    private static final AgariInfo NOT_AGARI = new AgariInfo().setScore(0);
+
+    /**
      * 役匹配器，有值时使用指定的役匹配器。若为指定，则使用默认的
      * <p/>
      * 通过更改役匹配器，可以决定规则使用什么役种，比如是否启用人和，古役。
@@ -81,9 +86,6 @@ public class AgariCalculator implements IAgariCalculator {
 
         // 仅有单个分割的情况（大多数）
         AgariInfo bestAgariInfo = calculateSingleDivide(tehai, agariHai, divideInfos.get(0), fromPlayer, doraHais, uraDoraHais, context);
-        if (divideInfos.size() == 1) {
-            return bestAgariInfo;
-        }
         // 含多个分割的情况，循环剩余的分割方案，找到使分数最大的一种
         for (int i = 1; i < divideInfos.size(); i++) {
             AgariInfo agariInfo = calculateSingleDivide(tehai, agariHai, divideInfos.get(i), fromPlayer, doraHais, uraDoraHais, context);
@@ -91,6 +93,9 @@ public class AgariCalculator implements IAgariCalculator {
                 bestAgariInfo = agariInfo;
             }
         }
+        // 判定是否匹配正确
+        Assert.isTrue(bestAgariInfo != NOT_AGARI, "未从手牌分割匹配到任意一个启和役，请检查");
+
         return bestAgariInfo;
     }
 
@@ -112,6 +117,10 @@ public class AgariCalculator implements IAgariCalculator {
         int position = context.getPosition();
         // 匹配役种
         List<IYaku> matchYakus = yakuMatcher.match(tehai, divideInfo, context);
+        // 比如三色同顺时，123m11223344p123s，在分割为11p雀头，234p顺子时会无役
+        if (EmptyUtil.isEmpty(matchYakus)) {
+            return NOT_AGARI;
+        }
         // 为役种增加悬赏役
         addDoraYaku(matchYakus, tehai, doraHais, uraDoraHais);
         // 计算番数

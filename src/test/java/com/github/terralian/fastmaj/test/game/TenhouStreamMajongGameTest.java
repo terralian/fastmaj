@@ -118,11 +118,13 @@ public class TenhouStreamMajongGameTest {
         simulate_run_game("2013112515gm-00a9-0000-baa070ad&tw=0.mjlog", true);
         // 九莲
         simulate_run_game("2010050420gm-0089-0000-1e338bad&tw=1.mjlog", true);
+        // 抢杠瞬间放铳时的一发判定
+        simulate_run_game("2014121823gm-00e1-0000-375a275e&tw=1.mjlog", true);
     }
 
     @Test
     public void wait_test() throws Exception {
-        simulate_run_game("2010050420gm-0089-0000-1e338bad&tw=1.mjlog", false);
+        simulate_run_game("2014121823gm-00e1-0000-375a275e&tw=1.mjlog", false);
     }
 
     @Test

@@ -112,6 +112,8 @@ public class TenhouStreamMajongGameTest {
         simulate_run_game("2010112211gm-00a9-0000-56a320b2&tw=1.mjlog", true);
         // 地和
         simulate_run_game("2013111600gm-00a9-0000-506bac66&tw=1.mjlog", true);
+        // 单河底
+        simulate_run_game("2013020314gm-0029-0000-6d6d3c5d&tw=0.mjlog", true);
     }
 
     @Test

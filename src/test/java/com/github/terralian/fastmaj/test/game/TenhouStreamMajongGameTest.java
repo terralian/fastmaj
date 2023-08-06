@@ -114,11 +114,13 @@ public class TenhouStreamMajongGameTest {
         simulate_run_game("2013111600gm-00a9-0000-506bac66&tw=1.mjlog", true);
         // 单河底
         simulate_run_game("2013020314gm-0029-0000-6d6d3c5d&tw=0.mjlog", true);
+        // 多分割下的单三色同顺
+        simulate_run_game("2013112515gm-00a9-0000-baa070ad&tw=0.mjlog", true);
     }
 
     @Test
     public void wait_test() throws Exception {
-        simulate_run_game("2013111600gm-00a9-0000-506bac66&tw=1.mjlog", false);
+        simulate_run_game("2013112515gm-00a9-0000-baa070ad&tw=0.mjlog", false);
     }
 
     @Test

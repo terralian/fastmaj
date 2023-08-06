@@ -7,14 +7,14 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYakuman;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
-import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
+import com.github.terralian.fastmaj.yaku.meta.MenchanYaku;
 
 /**
  * 九蓮宝燈
  *
  * @author 作者: terra.lian
  */
-@ShunzuYaku
+@MenchanYaku
 public class Tyuuren implements IYakuman {
 
     @Override

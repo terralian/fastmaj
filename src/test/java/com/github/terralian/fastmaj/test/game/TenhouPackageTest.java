@@ -46,14 +46,16 @@ public class TenhouPackageTest {
 
     /**
      * 大批量使用天凤位牌谱进行测试
+     * <p/>
+     * 天凤位中，ウルトラ立直的牌谱ZIP包中，前面存在不少0KB的错误，建议跳过mjlog_pf4-20_n10.zip
      */
     @Test
     public void testBaseOnTenhouPackage() {
         String prefix = "mjlog_pf4-20_n";
-        for (int i = 1; i <= 22; i++) {
+        for (int i = 14; i <= 22; i++) {
             String packageName = prefix + i + ".zip";
             System.out.println("--- " + packageName + " ---");
-            // testBaseOnTenhouPackage0(packageName);
+            testBaseOnTenhouPackage0(packageName);
         }
     }
 
@@ -91,7 +93,8 @@ public class TenhouPackageTest {
 
                 // 读取到内存，若出错则保存
                 String zipString = ZipUtil.unGzip(zipFile.getInputStream(entry));
-                currentName = entry.getName().split("/")[1];
+                String[] splits = entry.getName().split("/");
+                currentName = splits[splits.length - 1];
                 // 转回GZIP
                 ByteArrayOutputStream bi = new ByteArrayOutputStream();
                 GZIPOutputStream gzipStream = new GZIPOutputStream(bi);

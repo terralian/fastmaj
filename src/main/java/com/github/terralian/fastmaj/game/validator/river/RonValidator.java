@@ -73,8 +73,14 @@ public class RonValidator implements IRiverActionValidator {
         else if (rivalTehaiAction.getActionType() == TehaiActionType.KAKAN) {
             return true;
         }
+        // 尝试为其设置荣标识，来匹配役种
+        boolean isRon = context.isRon();
+        context.setRon(true);
         // 弃牌，得判断手牌是否有役
         List<IYaku> yakus = ronYakuMatcher.match(tehai, rivalTehaiAction.getIfHai(), context);
+        // 还原标识
+        context.setRon(isRon);
+
         return !yakus.isEmpty();
     }
 

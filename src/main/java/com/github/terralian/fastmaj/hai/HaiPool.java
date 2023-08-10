@@ -1,13 +1,13 @@
 package com.github.terralian.fastmaj.hai;
 
+import com.github.terralian.fastmaj.encode.Encode136;
+import com.github.terralian.fastmaj.encode.Encode34;
+import com.github.terralian.fastmaj.encode.EncodeMark;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
-
-import com.github.terralian.fastmaj.encode.Encode136;
-import com.github.terralian.fastmaj.encode.Encode34;
-import com.github.terralian.fastmaj.encode.EncodeMark;
 
 /**
  * 牌池
@@ -46,11 +46,6 @@ public abstract class HaiPool {
      * 存储34编码值的红五宝牌的值
      */
     private static final int[] RED_ENCODE34_ARRAY = new int[] {Encode34.MAN_5, Encode34.PIN_5, Encode34.SO_5};
-
-    /**
-     * 随机生成器
-     */
-    private static final ThreadLocalRandom r = ThreadLocalRandom.current();
 
     static {
         generate();
@@ -262,7 +257,7 @@ public abstract class HaiPool {
      * 随机获取一枚牌
      */
     public static IHai random() {
-        return getById(r.nextInt(Encode136.length()));
+        return getById(ThreadLocalRandom.current().nextInt(Encode136.length()));
     }
 
     // -------------------------------------------------------

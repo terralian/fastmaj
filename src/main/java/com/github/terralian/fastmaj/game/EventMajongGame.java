@@ -1,9 +1,9 @@
 package com.github.terralian.fastmaj.game;
 
 import com.github.terralian.fastmaj.game.event.GameEvent;
+import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
-import com.github.terralian.fastmaj.game.event.system.SystemEventCode;
 import com.github.terralian.fastmaj.util.Assert;
 import lombok.Getter;
 import lombok.Setter;
@@ -49,7 +49,7 @@ public class EventMajongGame implements IEventMajongGame {
      */
     @Override
     public void startGame() {
-        eventQueue.addNormal(CommonSystemEventPool.get(SystemEventCode.GAME_START));
+        eventQueue.addNormal(CommonSystemEventPool.get(GameEventCode.GAME_START));
     }
 
     /**

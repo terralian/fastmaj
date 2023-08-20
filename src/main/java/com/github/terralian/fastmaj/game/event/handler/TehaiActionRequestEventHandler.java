@@ -10,8 +10,8 @@ import com.github.terralian.fastmaj.game.action.tehai.ITehaiAction;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
-import com.github.terralian.fastmaj.game.event.ActionRequestCode;
 import com.github.terralian.fastmaj.game.event.GameEvent;
+import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionRequestEvent;
 import com.github.terralian.fastmaj.game.validator.tehai.ITehaiActionValidator;
@@ -37,7 +37,7 @@ public class TehaiActionRequestEventHandler implements IGameEventHandler {
 
     @Override
     public int handleEventCode() {
-        return ActionRequestCode.REQUEST_TEHAI_ACTION;
+        return GameEventCode.REQUEST_TEHAI_ACTION;
     }
 
     @Override

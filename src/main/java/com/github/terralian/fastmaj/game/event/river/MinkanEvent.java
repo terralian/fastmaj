@@ -1,6 +1,7 @@
 package com.github.terralian.fastmaj.game.event.river;
 
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
+import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -42,7 +43,7 @@ public class MinkanEvent implements RiverActionEvent {
 
     @Override
     public int getCode() {
-        return RiverEventCode.MINKAN;
+        return GameEventCode.MINKAN;
     }
 
     @Override

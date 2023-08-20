@@ -6,8 +6,8 @@ import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.event.GameEvent;
+import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
-import com.github.terralian.fastmaj.game.event.system.SystemEventCode;
 
 /**
  * 游戏结束动作，除了调用核心结束游戏外，还需要处理剩余的场供
@@ -46,7 +46,7 @@ public class GameEndAction implements IGameAction, IGameEventHandler {
      */
     @Override
     public int handleEventCode() {
-        return SystemEventCode.GAME_END;
+        return GameEventCode.GAME_END;
     }
 
     /**

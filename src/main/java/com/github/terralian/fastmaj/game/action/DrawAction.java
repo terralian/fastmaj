@@ -8,6 +8,7 @@ import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.event.DrawEvent;
 import com.github.terralian.fastmaj.game.event.GameEvent;
 import com.github.terralian.fastmaj.game.event.GameEventCode;
+import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionRequestEvent;
@@ -20,7 +21,7 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
  *
  * @author terra.lian
  */
-public class DrawAction implements IGameAction, IActionEventHandler {
+public class DrawAction implements IGameAction, IGameEventHandler {
 
     /**
      * 执行摸牌动作，向当前等待的玩家摸进一枚手牌

@@ -16,7 +16,6 @@ import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
-import com.github.terralian.fastmaj.game.event.system.SystemEventCode;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 
@@ -84,6 +83,6 @@ public class RonAction extends AgariAction implements IRiverAction, IGameEventHa
         gameCore.switchPlayer(riverActionEvent.getPosition());
         doAction(riverActionEvent, gameConfig, gameCore);
         // 产生对局结束优先事件
-        eventQueue.addPriority(CommonSystemEventPool.get(SystemEventCode.KYOKU_END));
+        eventQueue.addPriority(CommonSystemEventPool.get(GameEventCode.KYOKU_END));
     }
 }

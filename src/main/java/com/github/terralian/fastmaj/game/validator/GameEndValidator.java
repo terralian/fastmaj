@@ -8,9 +8,9 @@ import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.KyokuEndEnum;
 import com.github.terralian.fastmaj.game.event.GameEvent;
+import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
-import com.github.terralian.fastmaj.game.event.system.SystemEventCode;
 import com.github.terralian.fastmaj.util.RankingUtil;
 
 /**
@@ -28,7 +28,7 @@ public class GameEndValidator implements IGameValidator, IGameEventHandler {
 
     @Override
     public int handleEventCode() {
-        return SystemEventCode.GAME_END_CHECK;
+        return GameEventCode.GAME_END_CHECK;
     }
 
     @Override
@@ -36,11 +36,11 @@ public class GameEndValidator implements IGameValidator, IGameEventHandler {
         boolean check = validate(gameConfig, gameCore);
         if (check) {
             // 发起结束优先事件
-            eventQueue.addPriority(CommonSystemEventPool.get(SystemEventCode.GAME_END));
+            eventQueue.addPriority(CommonSystemEventPool.get(GameEventCode.GAME_END));
         } else {
             // 开始下一局事件
             eventQueue.clear();
-            eventQueue.addPriority(CommonSystemEventPool.get(SystemEventCode.KYOKU_START));
+            eventQueue.addPriority(CommonSystemEventPool.get(GameEventCode.KYOKU_START));
         }
     }
 

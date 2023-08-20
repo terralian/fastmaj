@@ -1,5 +1,6 @@
 package com.github.terralian.fastmaj.game.event.system;
 
+import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyokuResolver;
 import lombok.Getter;
 
@@ -19,6 +20,6 @@ public class RyuukyokuEvent implements SystemEvent {
 
     @Override
     public int getCode() {
-        return SystemEventCode.RYUUKYOKU;
+        return GameEventCode.RYUUKYOKU;
     }
 }

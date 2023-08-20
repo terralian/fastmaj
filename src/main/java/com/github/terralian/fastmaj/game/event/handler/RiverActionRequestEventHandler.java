@@ -11,13 +11,11 @@ import com.github.terralian.fastmaj.game.IPlayerActionManager;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
-import com.github.terralian.fastmaj.game.event.ActionRequestCode;
 import com.github.terralian.fastmaj.game.event.GameEvent;
 import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.event.river.RiverActionRequestEvent;
 import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
-import com.github.terralian.fastmaj.game.event.system.SystemEventCode;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.player.RivalEnum;
@@ -38,7 +36,7 @@ public class RiverActionRequestEventHandler implements IGameEventHandler {
 
     @Override
     public int handleEventCode() {
-        return ActionRequestCode.REQUEST_RIVER_ACTION;
+        return GameEventCode.REQUEST_RIVER_ACTION;
     }
 
     @Override
@@ -104,7 +102,7 @@ public class RiverActionRequestEventHandler implements IGameEventHandler {
         // 对局没结束就继续消费下一个事件
         boolean isRon = firstAction.getRiverType() == RiverActionType.RON;
         if (isRon) {
-            eventQueue.addPriority(CommonSystemEventPool.get(SystemEventCode.RON3_RYUUKYOKU_CHECK));
+            eventQueue.addPriority(CommonSystemEventPool.get(GameEventCode.RON3_RYUUKYOKU_CHECK));
         }
         for (RiverActionEvent action : actions) {
             if (firstAction.getRiverType() != action.getRiverType()) {

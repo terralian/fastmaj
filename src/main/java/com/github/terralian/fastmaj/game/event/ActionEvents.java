@@ -4,7 +4,6 @@ import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.event.river.SkipEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
-import com.github.terralian.fastmaj.game.event.tehai.TehaiEventCode;
 
 /**
  * CreateByTerra
@@ -58,9 +57,9 @@ public abstract class ActionEvents {
      * @param actionEvent 事件
      */
     public static boolean needAddDraw(TehaiActionEvent actionEvent) {
-        return actionEvent.getCode() == TehaiEventCode.KAKAN //
-                || actionEvent.getCode() == TehaiEventCode.ANNKAN //
-                || actionEvent.getCode() == TehaiEventCode.KITA;
+        return actionEvent.getCode() == GameEventCode.KAKAN //
+                || actionEvent.getCode() == GameEventCode.ANNKAN //
+                || actionEvent.getCode() == GameEventCode.KITA;
     }
 
     /**

@@ -18,7 +18,7 @@ public class Tyuuren9 extends Tyuuren {
 
     @Override
     public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
-        if (!divide.isTyuuren() || tehai.isNaki() || tehai.isAnnkan()) {
+        if (divide == null || !divide.isTyuuren() || tehai.isNaki() || tehai.isAnnkan()) {
             return false;
         }
 

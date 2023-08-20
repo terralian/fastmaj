@@ -28,8 +28,6 @@ import com.github.terralian.fastmaj.yama.worker.common.SimpleRandomYamaWorker;
 /**
  * 默认的游戏核心实现，该核心设计为通过调用内部定义方法，从东一局开始到游戏结束，自动初始化所需信息（牌山、手牌、牌河...）,
  * 变更内其部状态。在对局过程中，未提供可直接修改内核状态的方法，这种设计可保证运行状态的连贯性和一致性。
- * <p/>
- * 该实现适用于一般情形的完整对局流程，若需要指定某种场景开始对局，那么可选择使用{@link CustomizedGameCore}实现
  *
  * @author terra.lian
  */

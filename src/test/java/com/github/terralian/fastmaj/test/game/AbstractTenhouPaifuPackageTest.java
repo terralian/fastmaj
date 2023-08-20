@@ -25,6 +25,23 @@ public abstract class AbstractTenhouPaifuPackageTest extends AbstractTenhouPaifu
 
     private int order = 1;
 
+    /**
+     * 大批量使用天凤位牌谱进行测试
+     * <p/>
+     * 天凤位中，ウルトラ立直的牌谱ZIP包中，前面存在不少0KB的错误，建议跳过mjlog_pf4-20_n10.zip
+     */
+    @Test
+    public void testBaseOnTenhouPackage() {
+        order = 1;
+
+        String prefix = "mjlog_pf4-20_n";
+        for (int i = 14; i <= 22; i++) {
+            String packageName = prefix + i + ".zip";
+            System.out.println("--- " + packageName + " ---");
+            // testBaseOnTenhouPackage0(packageName);
+        }
+    }
+
     @Test
     public void old_test_package() {
         order = 1;

@@ -131,7 +131,6 @@ public class TenhouPackageTest {
         PaifuGame paifuGame;
         try {
             paifuGame = paifuParser.parse(new GZIPSource(new InputSource(gzipStream)));
-
         } catch (UnsupportedYamaSeedException e) {
             System.out.println("   > 旧牌谱，跳过...");
             return;

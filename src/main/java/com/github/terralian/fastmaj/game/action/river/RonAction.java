@@ -7,10 +7,16 @@ import com.github.terralian.fastmaj.agari.AgariInfo;
 import com.github.terralian.fastmaj.agari.IAgariCalculator;
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
+import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.action.tehai.AgariAction;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
+import com.github.terralian.fastmaj.game.event.GameEvent;
+import com.github.terralian.fastmaj.game.event.GameEventCode;
+import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
+import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
+import com.github.terralian.fastmaj.game.event.system.SystemEventCode;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 
@@ -19,7 +25,7 @@ import com.github.terralian.fastmaj.tehai.ITehai;
  *
  * @author terra.lian
  */
-public class RonAction extends AgariAction implements IRiverAction {
+public class RonAction extends AgariAction implements IRiverAction, IGameEventHandler {
 
     public RonAction(IAgariCalculator agariCalculator) {
         super(agariCalculator);
@@ -65,5 +71,19 @@ public class RonAction extends AgariAction implements IRiverAction {
     @Override
     public RiverActionType getRiverActionType() {
         return RiverActionType.RON;
+    }
+
+    @Override
+    public int handleEventCode() {
+        return GameEventCode.RON;
+    }
+
+    @Override
+    public void handle(GameEvent gameEvent, IGameCore gameCore, GameConfig gameConfig, IGameEventQueue eventQueue) {
+        RiverActionEvent riverActionEvent = (RiverActionEvent) gameEvent;
+        gameCore.switchPlayer(riverActionEvent.getPosition());
+        doAction(riverActionEvent, gameConfig, gameCore);
+        // 产生对局结束优先事件
+        eventQueue.addPriority(CommonSystemEventPool.get(SystemEventCode.KYOKU_END));
     }
 }

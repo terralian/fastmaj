@@ -1,7 +1,6 @@
 package com.github.terralian.fastmaj.game.event.river;
 
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
-import com.github.terralian.fastmaj.game.event.GameEventEnum;
 import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -42,8 +41,8 @@ public class ChiiEvent implements RiverActionEvent {
     private final int order = 20;
 
     @Override
-    public GameEventEnum getType() {
-        return GameEventEnum.CHII;
+    public int getCode() {
+        return RiverEventCode.CHI;
     }
 
     @Override

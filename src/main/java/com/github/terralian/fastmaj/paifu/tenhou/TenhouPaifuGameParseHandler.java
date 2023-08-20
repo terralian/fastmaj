@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import com.github.terralian.fastmaj.encode.Encode136;
 import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.event.ActionEvent;
-import com.github.terralian.fastmaj.game.event.DrawEvent;
+import com.github.terralian.fastmaj.game.event.DrawResEvent;
 import com.github.terralian.fastmaj.game.event.river.ChiiEvent;
 import com.github.terralian.fastmaj.game.event.river.MinkanEvent;
 import com.github.terralian.fastmaj.game.event.river.PonEvent;
@@ -65,8 +65,8 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
 
     @Override
     public void startGame(boolean isSanma, int taku, boolean isTonnan, boolean isSoku, boolean isUseAka,
-                          boolean isAriAri,
-                          String[] playerNames, int[] playerRates, String[] playerDans) {
+            boolean isAriAri,
+            String[] playerNames, int[] playerRates, String[] playerDans) {
         paifuGame.setRoom(TenhouPaifuStringPool.TAKU[taku]) //
                 .setPlatform(TenhouPaifuStringPool.PLATFORM) //
                 .setPlayerSize(isSanma ? 3 : 4) //
@@ -83,8 +83,8 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
 
     @Override
     public void startKyoku(int[] playerPoints, List<List<Integer>> playerHaipais, int oya, int bakaze, int kyoku,
-                           int honba, int kyotaku,
-                           int firstDoraDisplay, int[] yama) {
+            int honba, int kyotaku,
+            int firstDoraDisplay, int[] yama) {
         List<ITehai> startTehais = playerHaipais.stream() //
                 .map(k -> Encode136.toTehai(k, paifuGame.isUseRed())) //
                 .collect(Collectors.toList());
@@ -111,7 +111,7 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
 
     @Override
     public void draw(int position, int tsumoHai) {
-        DrawEvent drawEvent = new DrawEvent() //
+        DrawResEvent drawEvent = new DrawResEvent() //
                 .setDrawHai(getHaiById(tsumoHai)) //
                 .setPosition(position);
         currentKyoku.getActions().add(drawEvent);
@@ -199,7 +199,7 @@ public class TenhouPaifuGameParseHandler implements ITenhouPaifuParseHandler {
 
     @Override
     public void agari(int position, int from, List<String> yaku, int han, int hu, int score,
-                      int[] increaseAndDecrease) {
+            int[] increaseAndDecrease) {
         if (position != from) {
             RonEvent ronEvent = new RonEvent()
                     .setFrom(from)

@@ -2,17 +2,17 @@ package com.github.terralian.fastmaj.game.option;
 
 /**
  * 新宝牌指示牌翻开的规则
- * 
- * @author terra.lian 
+ *
+ * @author terra.lian
  */
 public enum DoraAddRule {
 
     /**
-     * 在玩家切牌之前就会翻开新的宝牌
+     * 在玩家杠后摸牌之前就先翻新包牌
      * <p/>
      * 这种规则下，新宝牌会即刻加入玩家的和了计算
      */
-    BEFORE_KIRI,
+    BEFORE_DRAW,
 
     /**
      * 在玩家切牌之后才会翻开新的宝牌

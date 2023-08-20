@@ -46,7 +46,7 @@ public class GameConfig {
     /**
      * 暗杠宝牌规则
      */
-    private DoraAddRule newDoraByAnnkanRule = DoraAddRule.BEFORE_KIRI;
+    private DoraAddRule newDoraByAnnkanRule = DoraAddRule.BEFORE_DRAW;
     /**
      * 加杠宝牌规则
      */

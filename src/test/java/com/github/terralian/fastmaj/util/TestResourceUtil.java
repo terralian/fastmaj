@@ -29,7 +29,7 @@ public abstract class TestResourceUtil {
     /**
      * 读取文件
      *
-     * @param prefix 前缀包
+     * @param prefix 包前缀
      * @param simpleFileName 文件名
      */
     public static File readToFile(String prefix, String simpleFileName) {
@@ -37,6 +37,21 @@ public abstract class TestResourceUtil {
         File targetFile = new File(fullFileName);
         if (!targetFile.exists()) {
             throw new IllegalArgumentException("文件不存在：" + fullFileName);
+        }
+        return targetFile;
+    }
+
+    /**
+     * 若文件存在读取文件，若文件不存在返回null
+     *
+     * @param prefix 包前缀
+     * @param simpleFileName 文件名
+     */
+    public static File tryReadToFile(String prefix, String simpleFileName) {
+        String fullFileName = getFullFileName(prefix, simpleFileName);
+        File targetFile = new File(fullFileName);
+        if (!targetFile.exists()) {
+            return null;
         }
         return targetFile;
     }
@@ -51,4 +66,5 @@ public abstract class TestResourceUtil {
         String projectUrl = Objects.requireNonNull(TestResourceUtil.class.getResource("/")).getPath();
         return projectUrl + prefix + "/" + simpleFileName;
     }
+
 }

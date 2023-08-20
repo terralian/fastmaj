@@ -338,10 +338,11 @@ public class GameCore implements IGameCore {
      * <p/>
      * 当需要增加新宝牌时，可以调用{@link #nextDoraDisplay()}
      *
+     * @param position 玩家坐席
      * @param drawFrom true从牌山，false从王牌区
      */
     @Override
-    public IHai draw(DrawFrom drawFrom) {
+    public IHai draw(int position, DrawFrom drawFrom) {
         gameState.requireForDraw();
         gameState = GameState.WAIT_TEHAI_ACTION;
 
@@ -449,7 +450,7 @@ public class GameCore implements IGameCore {
         IHai nakiHai = fromRiver.naki(position, NakiEnum.CHII);
         tehai.chii(nakiHai, selfHai1, selfHai2);
         // 移除同巡标识
-        setSameJunFalse();
+        breakSameJun();
         // 计算第一巡同巡
         setSameFirstJun(fromPosition, position);
         // 计算向听
@@ -479,7 +480,7 @@ public class GameCore implements IGameCore {
 
         tehai.pon(nakiHai, redFirst, RivalEnum.calc(position, fromPosition));
         // 移除同巡标识
-        setSameJunFalse();
+        breakSameJun();
         // 计算第一巡同巡
         setSameFirstJun(fromPosition, position);
         // 计算向听
@@ -507,7 +508,7 @@ public class GameCore implements IGameCore {
         IHai nakiHai = fromRiver.naki(position, NakiEnum.KAN);
         tehai.minkan(nakiHai, RivalEnum.calc(position, fromPosition));
         // 移除同巡标识
-        setSameJunFalse();
+        breakSameJun();
         // 计算第一巡同巡
         setSameFirstJun(fromPosition, position);
         // 计算向听
@@ -532,8 +533,6 @@ public class GameCore implements IGameCore {
 
         ITehai tehai = tehais.get(position);
         tehai.kakan(hai);
-        // 移除同巡标识
-        setSameJunFalse();
         // 计算向听
         calcCurrentPlayerSyaten();
         // 日志处理
@@ -558,8 +557,6 @@ public class GameCore implements IGameCore {
 
         ITehai tehai = tehais.get(position);
         tehai.annkan(hai);
-        // 移除同巡标识
-        setSameJunFalse();
         // 计算第一巡同巡
         setSameFirstJun(position, position);
         // 计算向听
@@ -582,8 +579,6 @@ public class GameCore implements IGameCore {
 
         ITehai tehai = tehais.get(position);
         tehai.kita(hai);
-        // 移除同巡标识
-        setSameJunFalse();
         // 计算第一巡同巡
         setSameFirstJun(position, position);
         // 计算向听
@@ -651,6 +646,14 @@ public class GameCore implements IGameCore {
     // --------------------------------------------------------
     // 状态获取
     // --------------------------------------------------------
+
+    /**
+     * 获取游戏状态
+     */
+    @Override
+    public GameState getGameState() {
+        return gameState;
+    }
 
     /**
      * 获取玩家人数
@@ -979,6 +982,16 @@ public class GameCore implements IGameCore {
         return renchan;
     }
 
+    /**
+     * 破坏同巡状态
+     */
+    @Override
+    public void breakSameJun() {
+        for (int i = 0; i < playerSize; i++) {
+            haiRivers[i].setSameJun(false);
+        }
+    }
+
     @Override
     public KyokuEndEnum getKyoKuEndType() {
         return kyokuEndEnum;
@@ -1051,15 +1064,6 @@ public class GameCore implements IGameCore {
     // --------------------------------------------------------
     // 私有方法
     // --------------------------------------------------------
-
-    /**
-     * 设置玩家的同巡状态
-     */
-    private void setSameJunFalse() {
-        for (int i = 0; i < playerSize; i++) {
-            haiRivers[i].setSameJun(false);
-        }
-    }
 
     /**
      * 设置第一巡是否同巡

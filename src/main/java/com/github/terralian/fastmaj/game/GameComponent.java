@@ -100,6 +100,10 @@ public class GameComponent {
      * 牌山生成器
      */
     private IYamaWorker yamaWorker;
+    /**
+     * 游戏事件处理器的管理器
+     */
+    private IGameEventHandlerManager gameEventHandlerManager;
 
     /**
      * 使用天凤的组件配置
@@ -161,6 +165,7 @@ public class GameComponent {
         this.gameEndValidator = new GameEndValidator();
         this.ryuukyokuResolverManager = RyuukyokuResolverManager.defaultManager();
         this.playerActionManager = PlayerActionManager.defaultManager(this);
+        this.gameEventHandlerManager = new GameEventHandlerManager(this);
     }
 
     private GameComponent() {

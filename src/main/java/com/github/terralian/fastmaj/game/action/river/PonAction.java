@@ -4,8 +4,13 @@ import java.util.Arrays;
 
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
+import com.github.terralian.fastmaj.game.IGameEventQueue;
+import com.github.terralian.fastmaj.game.event.GameEvent;
+import com.github.terralian.fastmaj.game.event.GameEventCode;
+import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.river.PonEvent;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionRequestEvent;
 import com.github.terralian.fastmaj.hai.IHai;
 
 /**
@@ -13,7 +18,7 @@ import com.github.terralian.fastmaj.hai.IHai;
  *
  * @author terra.lian
  */
-public class PonAction implements IRiverAction {
+public class PonAction implements IRiverAction, IGameEventHandler {
 
     @Override
     public void doAction(RiverActionEvent value, GameConfig gameConfig, IGameCore gameCore) {
@@ -27,6 +32,22 @@ public class PonAction implements IRiverAction {
     @Override
     public RiverActionType getRiverActionType() {
         return RiverActionType.PON;
+    }
+
+    @Override
+    public int handleEventCode() {
+        return GameEventCode.PON;
+    }
+
+    @Override
+    public void handle(GameEvent gameEvent, IGameCore gameCore, GameConfig gameConfig, IGameEventQueue eventQueue) {
+        RiverActionEvent riverActionEvent = (RiverActionEvent) gameEvent;
+        int position = riverActionEvent.getPosition();
+        gameCore.switchPlayer(position);
+        doAction(riverActionEvent, gameConfig, gameCore);
+
+        // 请求一次切牌动作
+        eventQueue.addNormal(new TehaiActionRequestEvent(position, riverActionEvent));
     }
 }
 

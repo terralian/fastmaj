@@ -38,7 +38,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public abstract class StepMajongGame {
+public abstract class StepMajongGame implements IMajongGame {
     /**
      * 游戏规则
      */
@@ -372,7 +372,7 @@ public abstract class StepMajongGame {
     }
 
     /**
-     * 在手牌动作之前的一个执行时点，特别的规则设置会在这里执行。如宝牌增加规则设置为{@link DoraAddRule#BEFORE_KIRI}时，会增加新的宝牌
+     * 在手牌动作之前的一个执行时点，特别的规则设置会在这里执行。如宝牌增加规则设置为{@link DoraAddRule#BEFORE_DRAW}时，会增加新的宝牌
      */
     public void optionBeforeTehaiAction() {
         TehaiActionType tehaiActionType = Optional.ofNullable(gameCore.getLastTehaiAction()) //
@@ -381,7 +381,7 @@ public abstract class StepMajongGame {
         RiverActionType riverActionType = Optional.ofNullable(gameCore.getLastRiverAction()) //
                 .map(RiverActionEvent::getRiverType) //
                 .orElse(null);
-        if (config.newDoraAction(DoraAddRule.BEFORE_KIRI, tehaiActionType, riverActionType)) {
+        if (config.newDoraAction(DoraAddRule.BEFORE_DRAW, tehaiActionType, riverActionType)) {
             nextDoraDisplayOnActionKan();
         }
     }

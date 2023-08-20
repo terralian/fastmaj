@@ -4,8 +4,14 @@ import java.util.List;
 
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
+import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
+import com.github.terralian.fastmaj.game.event.GameEvent;
+import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
+import com.github.terralian.fastmaj.game.event.river.RiverEventCode;
+import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
+import com.github.terralian.fastmaj.game.event.system.SystemEventCode;
 import com.github.terralian.fastmaj.util.EmptyUtil;
 
 /**
@@ -14,7 +20,7 @@ import com.github.terralian.fastmaj.util.EmptyUtil;
  * @author terra.lian
  * @since 2022-12-05
  */
-public class Ron3RyuukyokuResolver implements IRyuukyoku {
+public class Ron3RyuukyokuResolver implements IRyuukyoku, IGameEventHandler {
 
     /**
      * 判定是否三家和了
@@ -56,5 +62,24 @@ public class Ron3RyuukyokuResolver implements IRyuukyoku {
     @Override
     public String getRyuukyokuName() {
         return "三家和了";
+    }
+
+    @Override
+    public int handleEventCode() {
+        return SystemEventCode.RON3_RYUUKYOKU_CHECK;
+    }
+
+    @Override
+    public void handle(GameEvent gameEvent, IGameCore gameCore, GameConfig gameConfig, IGameEventQueue eventQueue) {
+        // 不使用三家和了的情况
+        if (!gameConfig.isUseRon3Ryuukyoku() || eventQueue.prioritySizeof(RiverEventCode.RON) < 3) {
+            return;
+        }
+        // TODO 和一般场景整合
+        execute(gameConfig, gameCore);
+        // 移除荣和事件
+        eventQueue.removePriority(RiverEventCode.RON);
+        // 发起游戏结束校验事件
+        eventQueue.addPriority(CommonSystemEventPool.get(SystemEventCode.GAME_END_CHECK));
     }
 }

@@ -1,36 +1,37 @@
 package com.github.terralian.fastmaj.game.event;
 
-import com.github.terralian.fastmaj.hai.IHai;
+import com.github.terralian.fastmaj.yama.DrawFrom;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
- * 一个摸牌事件，通过牌山或者王牌区摸牌
+ * 摸牌事件（请求）
  *
- * @author terra.lian
- * @since 2023-03-29
+ * @author Terra.Lian
  */
 @Data
 @Accessors(chain = true)
-public class DrawEvent implements ActionEvent {
+@AllArgsConstructor
+@NoArgsConstructor
+public class DrawEvent implements GameEvent {
 
     /**
-     * 从玩家
+     * 摸牌玩家坐席
      */
     private int position;
-
     /**
-     * 摸的牌
+     * 摸牌来源
      */
-    private IHai drawHai;
-
+    private DrawFrom drawFrom;
     /**
-     * 是否从牌山摸牌
+     * 来源事件
      */
-    private boolean fromYama;
+    private GameEvent fromEvent;
 
     @Override
-    public GameEventEnum getType() {
-        return GameEventEnum.DRAW;
+    public int getCode() {
+        return GameEventCode.DRAW;
     }
 }

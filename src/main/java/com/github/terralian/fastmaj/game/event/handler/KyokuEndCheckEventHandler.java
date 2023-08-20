@@ -4,9 +4,9 @@ import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.event.GameEvent;
+import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.check.KyokuEndCheckEvent;
 import com.github.terralian.fastmaj.game.event.system.RyuukyokuEvent;
-import com.github.terralian.fastmaj.game.event.system.SystemEventCode;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyokuResolver;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyokuResolverManager;
 
@@ -27,7 +27,7 @@ public class KyokuEndCheckEventHandler implements IGameEventHandler {
 
     @Override
     public int handleEventCode() {
-        return SystemEventCode.KYOKU_END_CHECK;
+        return GameEventCode.KYOKU_END_CHECK;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.github.terralian.fastmaj.game.event.tehai;
 
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
+import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -19,7 +20,7 @@ public class Ryuukyoku99Event implements TehaiActionEvent {
 
     @Override
     public int getCode() {
-        return TehaiEventCode.RYUUKYOKU99;
+        return GameEventCode.RYUUKYOKU99;
     }
 
     @Override

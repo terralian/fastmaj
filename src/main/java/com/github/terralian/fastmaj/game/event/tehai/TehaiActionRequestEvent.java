@@ -1,7 +1,7 @@
 package com.github.terralian.fastmaj.game.event.tehai;
 
-import com.github.terralian.fastmaj.game.event.ActionRequestCode;
 import com.github.terralian.fastmaj.game.event.GameEvent;
+import com.github.terralian.fastmaj.game.event.GameEventCode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +28,6 @@ public class TehaiActionRequestEvent implements GameEvent {
 
     @Override
     public int getCode() {
-        return ActionRequestCode.REQUEST_TEHAI_ACTION;
+        return GameEventCode.REQUEST_TEHAI_ACTION;
     }
 }

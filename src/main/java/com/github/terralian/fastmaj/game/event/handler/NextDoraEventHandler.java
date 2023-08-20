@@ -4,7 +4,7 @@ import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.system.SystemEventCode;
+import com.github.terralian.fastmaj.game.event.GameEventCode;
 
 /**
  * @author Terra.Lian
@@ -13,7 +13,7 @@ public class NextDoraEventHandler implements IGameEventHandler {
 
     @Override
     public int handleEventCode() {
-        return SystemEventCode.NEXT_DORA_EVENT;
+        return GameEventCode.NEXT_DORA_EVENT;
     }
 
     @Override

@@ -11,7 +11,6 @@ import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.river.RiverActionRequestEvent;
 import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
 import com.github.terralian.fastmaj.game.event.system.NextDoraEvent;
-import com.github.terralian.fastmaj.game.event.system.SystemEventCode;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.game.option.DoraAddRule;
 import com.github.terralian.fastmaj.yama.DrawFrom;
@@ -51,7 +50,7 @@ public class KakanAction implements ITehaiAction, IGameEventHandler {
         // 进行一次荣和动作请求
         eventQueue.addNormal(new RiverActionRequestEvent(tehaiActionEvent));
         // 破坏同巡标识
-        eventQueue.addNormal(CommonSystemEventPool.get(SystemEventCode.BREAK_SAME_JUN));
+        eventQueue.addNormal(CommonSystemEventPool.get(GameEventCode.BREAK_SAME_JUN));
         // 先新宝牌规则下，翻一张新宝牌
         if (doraAddRule == DoraAddRule.BEFORE_DRAW) {
             eventQueue.addNormal(new NextDoraEvent());

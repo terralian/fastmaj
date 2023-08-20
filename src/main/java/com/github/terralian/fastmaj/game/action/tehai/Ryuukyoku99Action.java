@@ -8,7 +8,6 @@ import com.github.terralian.fastmaj.game.event.GameEvent;
 import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
-import com.github.terralian.fastmaj.game.event.system.SystemEventCode;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.game.ryuuky.IHalfwayRyuukyoku;
 
@@ -46,6 +45,6 @@ public class Ryuukyoku99Action implements ITehaiAction, IHalfwayRyuukyoku, IGame
     @Override
     public void handle(GameEvent gameEvent, IGameCore gameCore, GameConfig gameConfig, IGameEventQueue eventQueue) {
         // 产生对局结束优先事件
-        eventQueue.addPriority(CommonSystemEventPool.get(SystemEventCode.KYOKU_END));
+        eventQueue.addPriority(CommonSystemEventPool.get(GameEventCode.KYOKU_END));
     }
 }

@@ -1,7 +1,7 @@
 package com.github.terralian.fastmaj.game.event.river;
 
-import com.github.terralian.fastmaj.game.event.ActionRequestCode;
 import com.github.terralian.fastmaj.game.event.GameEvent;
+import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,6 +22,6 @@ public class RiverActionRequestEvent implements GameEvent {
 
     @Override
     public int getCode() {
-        return ActionRequestCode.REQUEST_RIVER_ACTION;
+        return GameEventCode.REQUEST_RIVER_ACTION;
     }
 }

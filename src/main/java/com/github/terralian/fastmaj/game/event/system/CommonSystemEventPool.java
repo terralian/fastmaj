@@ -3,6 +3,8 @@ package com.github.terralian.fastmaj.game.event.system;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.github.terralian.fastmaj.game.event.GameEventCode;
+
 /**
  * 通用系统事件池
  *
@@ -12,15 +14,15 @@ public class CommonSystemEventPool {
     private static final Map<Integer, SystemEvent> eventMap = new HashMap<>();
 
     static {
-        eventMap.put(SystemEventCode.GAME_START, new CommonSystemEvent(SystemEventCode.GAME_START));
-        eventMap.put(SystemEventCode.GAME_END, new CommonSystemEvent(SystemEventCode.GAME_END));
-        eventMap.put(SystemEventCode.GAME_END_CHECK, new CommonSystemEvent(SystemEventCode.GAME_END_CHECK));
-        eventMap.put(SystemEventCode.KYOKU_START, new CommonSystemEvent(SystemEventCode.KYOKU_START));
-        eventMap.put(SystemEventCode.KYOKU_END_CHECK, new CommonSystemEvent(SystemEventCode.KYOKU_END_CHECK));
-        eventMap.put(SystemEventCode.KYOKU_END, new CommonSystemEvent(SystemEventCode.KYOKU_END));
-        eventMap.put(SystemEventCode.RYUUKYOKU, new CommonSystemEvent(SystemEventCode.RYUUKYOKU));
-        eventMap.put(SystemEventCode.RON3_RYUUKYOKU_CHECK, new CommonSystemEvent(SystemEventCode.RON3_RYUUKYOKU_CHECK));
-        eventMap.put(SystemEventCode.BREAK_SAME_JUN, new CommonSystemEvent(SystemEventCode.BREAK_SAME_JUN));
+        eventMap.put(GameEventCode.GAME_START, new CommonSystemEvent(GameEventCode.GAME_START));
+        eventMap.put(GameEventCode.GAME_END, new CommonSystemEvent(GameEventCode.GAME_END));
+        eventMap.put(GameEventCode.GAME_END_CHECK, new CommonSystemEvent(GameEventCode.GAME_END_CHECK));
+        eventMap.put(GameEventCode.KYOKU_START, new CommonSystemEvent(GameEventCode.KYOKU_START));
+        eventMap.put(GameEventCode.KYOKU_END_CHECK, new CommonSystemEvent(GameEventCode.KYOKU_END_CHECK));
+        eventMap.put(GameEventCode.KYOKU_END, new CommonSystemEvent(GameEventCode.KYOKU_END));
+        eventMap.put(GameEventCode.RYUUKYOKU, new CommonSystemEvent(GameEventCode.RYUUKYOKU));
+        eventMap.put(GameEventCode.RON3_RYUUKYOKU_CHECK, new CommonSystemEvent(GameEventCode.RON3_RYUUKYOKU_CHECK));
+        eventMap.put(GameEventCode.BREAK_SAME_JUN, new CommonSystemEvent(GameEventCode.BREAK_SAME_JUN));
     }
 
     /**

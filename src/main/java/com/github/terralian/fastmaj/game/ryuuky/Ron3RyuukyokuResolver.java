@@ -7,11 +7,10 @@ import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.event.GameEvent;
+import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
-import com.github.terralian.fastmaj.game.event.river.RiverEventCode;
 import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
-import com.github.terralian.fastmaj.game.event.system.SystemEventCode;
 import com.github.terralian.fastmaj.util.EmptyUtil;
 
 /**
@@ -66,20 +65,20 @@ public class Ron3RyuukyokuResolver implements IRyuukyoku, IGameEventHandler {
 
     @Override
     public int handleEventCode() {
-        return SystemEventCode.RON3_RYUUKYOKU_CHECK;
+        return GameEventCode.RON3_RYUUKYOKU_CHECK;
     }
 
     @Override
     public void handle(GameEvent gameEvent, IGameCore gameCore, GameConfig gameConfig, IGameEventQueue eventQueue) {
         // 不使用三家和了的情况
-        if (!gameConfig.isUseRon3Ryuukyoku() || eventQueue.prioritySizeof(RiverEventCode.RON) < 3) {
+        if (!gameConfig.isUseRon3Ryuukyoku() || eventQueue.prioritySizeof(GameEventCode.RON) < 3) {
             return;
         }
         // TODO 和一般场景整合
         execute(gameConfig, gameCore);
         // 移除荣和事件
-        eventQueue.removePriority(RiverEventCode.RON);
+        eventQueue.removePriority(GameEventCode.RON);
         // 发起游戏结束校验事件
-        eventQueue.addPriority(CommonSystemEventPool.get(SystemEventCode.GAME_END_CHECK));
+        eventQueue.addPriority(CommonSystemEventPool.get(GameEventCode.GAME_END_CHECK));
     }
 }

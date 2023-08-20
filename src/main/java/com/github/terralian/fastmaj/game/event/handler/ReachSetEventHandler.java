@@ -4,8 +4,8 @@ import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.event.GameEvent;
+import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.system.ReachSetEvent;
-import com.github.terralian.fastmaj.game.event.system.SystemEventCode;
 
 /**
  * @author Terra.Lian
@@ -14,7 +14,7 @@ public class ReachSetEventHandler implements IGameEventHandler {
 
     @Override
     public int handleEventCode() {
-        return SystemEventCode.REACH_SET;
+        return GameEventCode.REACH_SET;
     }
 
     @Override

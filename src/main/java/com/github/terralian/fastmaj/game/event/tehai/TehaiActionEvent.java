@@ -15,7 +15,15 @@ public interface TehaiActionEvent extends ActionEvent {
     /**
      * 获取动作类型
      */
-    TehaiActionType getActionType();
+    TehaiActionType getEventType();
+
+    /**
+     * 获取事件编码
+     */
+    @Override
+    default int getEventCode() {
+        return getEventType().getCode();
+    }
 
     /**
      * 返回操作的手牌（可能为空）

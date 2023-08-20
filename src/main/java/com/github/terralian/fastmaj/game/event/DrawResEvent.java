@@ -1,5 +1,6 @@
 package com.github.terralian.fastmaj.game.event;
 
+import com.github.terralian.fastmaj.game.event.system.SystemEventType;
 import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -29,7 +30,15 @@ public class DrawResEvent implements ActionEvent {
     private boolean fromYama;
 
     @Override
-    public int getCode() {
-        return GameEventCode.DRAW;
+    public int getEventCode() {
+        return SystemEventType.DRAW.getCode();
+    }
+
+    /**
+     * @return
+     */
+    @Override
+    public Enum getEventType() {
+        return null;
     }
 }

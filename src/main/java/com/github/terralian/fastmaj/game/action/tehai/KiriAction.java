@@ -6,10 +6,8 @@ import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.KyokuState;
 import com.github.terralian.fastmaj.game.event.DrawEvent;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.system.KyokuEndCheckEvent;
-import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
-import com.github.terralian.fastmaj.game.event.river.RiverActionRequestEvent;
+import com.github.terralian.fastmaj.game.event.system.RiverActionRequestEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.player.PlayerHelper;
 import com.github.terralian.fastmaj.yama.DrawFrom;
@@ -19,7 +17,7 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
  *
  * @author terra.lian
  */
-public class KiriAction implements ITehaiAction, IGameEventHandler {
+public class KiriAction implements ITehaiAction {
 
     @Override
     public KyokuState doAction(TehaiActionEvent actionParam, IGameCore gameCore, GameConfig gameOptions) {
@@ -33,13 +31,8 @@ public class KiriAction implements ITehaiAction, IGameEventHandler {
     }
 
     @Override
-    public TehaiActionType getTehaiActionType() {
+    public TehaiActionType getEventType() {
         return TehaiActionType.KIRI;
-    }
-
-    @Override
-    public int handleEventCode() {
-        return GameEventCode.KIRI;
     }
 
     @Override

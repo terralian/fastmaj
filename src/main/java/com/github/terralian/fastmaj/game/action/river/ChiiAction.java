@@ -4,11 +4,9 @@ import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
-import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.river.ChiiEvent;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
-import com.github.terralian.fastmaj.game.event.tehai.TehaiActionRequestEvent;
+import com.github.terralian.fastmaj.game.event.system.TehaiActionRequestEvent;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 
@@ -17,7 +15,7 @@ import com.github.terralian.fastmaj.tehai.ITehai;
  *
  * @author terra.lian
  */
-public class ChiiAction implements IRiverAction, IGameEventHandler {
+public class ChiiAction implements IRiverAction {
 
     @Override
     public void doAction(RiverActionEvent value, GameConfig gameConfig, IGameCore gameCore) {
@@ -35,13 +33,8 @@ public class ChiiAction implements IRiverAction, IGameEventHandler {
     }
 
     @Override
-    public RiverActionType getRiverActionType() {
+    public RiverActionType getEventType() {
         return RiverActionType.CHII;
-    }
-
-    @Override
-    public int handleEventCode() {
-        return GameEventCode.CHI;
     }
 
     @Override

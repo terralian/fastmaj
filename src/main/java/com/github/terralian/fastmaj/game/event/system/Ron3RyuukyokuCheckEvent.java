@@ -1,14 +1,14 @@
 package com.github.terralian.fastmaj.game.event.system;
 
 /**
- * 对局结束确认事件
+ * 三家和了校验
  *
  * @author Terra.Lian
  */
-public class KyokuEndCheckEvent implements SystemGameEvent {
+public class Ron3RyuukyokuCheckEvent implements SystemGameEvent {
 
     @Override
     public SystemEventType getEventType() {
-        return SystemEventType.KYOKU_END_CHECK;
+        return SystemEventType.RON3_RYUUKYOKU_CHECK;
     }
 }

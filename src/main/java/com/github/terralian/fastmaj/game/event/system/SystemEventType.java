@@ -75,12 +75,12 @@ public enum SystemEventType {
     /**
      * 请求玩家手牌动作
      */
-    REQUEST_TEHAI_ACTION(111),
+    TEHAI_ACTION_REQUEST(111),
 
     /**
      * 请求玩家牌河动作
      */
-    REQUEST_RIVER_ACTION(112);
+    RIVER_ACTION_REQUEST(112);
 
     /**
      * 事件编码

@@ -12,10 +12,8 @@ import com.github.terralian.fastmaj.game.action.tehai.AgariAction;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
-import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
-import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
+import com.github.terralian.fastmaj.game.event.system.KyokuEndEvent;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 
@@ -24,7 +22,7 @@ import com.github.terralian.fastmaj.tehai.ITehai;
  *
  * @author terra.lian
  */
-public class RonAction extends AgariAction implements IRiverAction, IGameEventHandler {
+public class RonAction extends AgariAction implements IRiverAction {
 
     public RonAction(IAgariCalculator agariCalculator) {
         super(agariCalculator);
@@ -68,13 +66,8 @@ public class RonAction extends AgariAction implements IRiverAction, IGameEventHa
     }
 
     @Override
-    public RiverActionType getRiverActionType() {
+    public RiverActionType getEventType() {
         return RiverActionType.RON;
-    }
-
-    @Override
-    public int handleEventCode() {
-        return GameEventCode.RON;
     }
 
     @Override
@@ -83,6 +76,6 @@ public class RonAction extends AgariAction implements IRiverAction, IGameEventHa
         gameCore.switchPlayer(riverActionEvent.getPosition());
         doAction(riverActionEvent, gameConfig, gameCore);
         // 产生对局结束优先事件
-        eventQueue.addPriority(CommonSystemEventPool.get(GameEventCode.KYOKU_END));
+        eventQueue.addPriority(new KyokuEndEvent());
     }
 }

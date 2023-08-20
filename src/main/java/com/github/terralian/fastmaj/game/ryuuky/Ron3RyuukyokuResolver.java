@@ -7,10 +7,10 @@ import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
-import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
+import com.github.terralian.fastmaj.game.event.handler.ISystemGameEventHandler;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
-import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
+import com.github.terralian.fastmaj.game.event.system.GameEndCheckEvent;
+import com.github.terralian.fastmaj.game.event.system.SystemEventType;
 import com.github.terralian.fastmaj.util.EmptyUtil;
 
 /**
@@ -19,7 +19,7 @@ import com.github.terralian.fastmaj.util.EmptyUtil;
  * @author terra.lian
  * @since 2022-12-05
  */
-public class Ron3RyuukyokuResolver implements IRyuukyoku, IGameEventHandler {
+public class Ron3RyuukyokuResolver implements IRyuukyoku, ISystemGameEventHandler {
 
     /**
      * 判定是否三家和了
@@ -38,7 +38,7 @@ public class Ron3RyuukyokuResolver implements IRyuukyoku, IGameEventHandler {
             return false;
         }
         // 玩家动作非荣和
-        RiverActionType riverActionType = actions.get(0).getRiverType();
+        RiverActionType riverActionType = actions.get(0).getEventType();
         if (riverActionType != RiverActionType.RON) {
             return false;
         }
@@ -64,21 +64,21 @@ public class Ron3RyuukyokuResolver implements IRyuukyoku, IGameEventHandler {
     }
 
     @Override
-    public int handleEventCode() {
-        return GameEventCode.RON3_RYUUKYOKU_CHECK;
+    public SystemEventType getEventType() {
+        return SystemEventType.RON3_RYUUKYOKU_CHECK;
     }
 
     @Override
     public void handle(GameEvent gameEvent, IGameCore gameCore, GameConfig gameConfig, IGameEventQueue eventQueue) {
         // 不使用三家和了的情况
-        if (!gameConfig.isUseRon3Ryuukyoku() || eventQueue.prioritySizeof(GameEventCode.RON) < 3) {
+        if (!gameConfig.isUseRon3Ryuukyoku() || eventQueue.prioritySizeof(RiverActionType.RON.getCode()) < 3) {
             return;
         }
         // TODO 和一般场景整合
         execute(gameConfig, gameCore);
         // 移除荣和事件
-        eventQueue.removePriority(GameEventCode.RON);
+        eventQueue.removePriority(RiverActionType.RON.getCode());
         // 发起游戏结束校验事件
-        eventQueue.addPriority(CommonSystemEventPool.get(GameEventCode.GAME_END_CHECK));
+        eventQueue.addPriority(new GameEndCheckEvent());
     }
 }

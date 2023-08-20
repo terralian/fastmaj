@@ -1,7 +1,7 @@
 package com.github.terralian.fastmaj.game;
 
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
+import com.github.terralian.fastmaj.game.event.IGameEventHandler;
 
 /**
  * {@link IGameEventHandlerManager} 管理器，提供对事件处理器的初始化及调度

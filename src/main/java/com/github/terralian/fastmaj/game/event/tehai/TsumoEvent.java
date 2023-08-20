@@ -1,7 +1,6 @@
 package com.github.terralian.fastmaj.game.event.tehai;
 
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -22,12 +21,7 @@ public class TsumoEvent implements TehaiActionEvent {
     private int position;
 
     @Override
-    public int getCode() {
-        return GameEventCode.TSUMO;
-    }
-
-    @Override
-    public TehaiActionType getActionType() {
+    public TehaiActionType getEventType() {
         return TehaiActionType.TSUMO;
     }
 

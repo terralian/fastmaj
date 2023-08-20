@@ -4,6 +4,7 @@ import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.KyokuState;
 import com.github.terralian.fastmaj.game.action.IPlayerAction;
+import com.github.terralian.fastmaj.game.event.IDefaultGameEventHandler;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 
 /**
@@ -18,7 +19,7 @@ import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
  *
  * @author terra.lian
  */
-public interface ITehaiAction extends IPlayerAction {
+public interface ITehaiAction extends IPlayerAction, IDefaultGameEventHandler {
 
     /**
      * 执行牌流入动作，根据动作的不同，执行不同的功能
@@ -31,7 +32,16 @@ public interface ITehaiAction extends IPlayerAction {
     KyokuState doAction(TehaiActionEvent actionParam, IGameCore gameCore, GameConfig gameOptions);
 
     /**
-     * 获取牌河动作类型
+     * 获取牌河动作对应的实际类型
      */
-    TehaiActionType getTehaiActionType();
+    @Override
+    TehaiActionType getEventType();
+
+    /**
+     * 获取牌河的
+     */
+    @Override
+    default int getEventCode() {
+        return getEventType().getCode();
+    }
 }

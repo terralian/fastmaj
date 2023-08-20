@@ -26,7 +26,7 @@ public class Rinsyan implements IYaku {
         // 先判定是否明杠
         RiverActionEvent riverAction = holder.getLastRiverAction();
         if (riverAction != null && riverAction.getPosition() == holder.getPosition()) {
-            if (riverAction.getRiverType() == RiverActionType.MINKAN) {
+            if (riverAction.getEventType() == RiverActionType.MINKAN) {
                 return true;
             }
         }

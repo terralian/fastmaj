@@ -19,7 +19,7 @@ import com.github.terralian.fastmaj.game.action.tehai.TsumoAction;
 import com.github.terralian.fastmaj.game.event.GameEvent;
 import com.github.terralian.fastmaj.game.event.handler.BreakSameJunEventHandler;
 import com.github.terralian.fastmaj.game.event.handler.GameStartEventHandler;
-import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
+import com.github.terralian.fastmaj.game.event.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.handler.KyokuEndCheckEventHandler;
 import com.github.terralian.fastmaj.game.event.handler.KyokuEndEventHandler;
 import com.github.terralian.fastmaj.game.event.handler.KyokuStartEventHandler;
@@ -51,12 +51,12 @@ public class GameEventHandlerManager implements IGameEventHandlerManager {
 
     @Override
     public void override(IGameEventHandler gameEventHandler) {
-        eventHandlerMap.put(gameEventHandler.handleEventCode(), gameEventHandler);
+        eventHandlerMap.put(gameEventHandler.getEventCode(), gameEventHandler);
     }
 
     @Override
     public IGameEventHandler get(GameEvent gameEvent) {
-        return eventHandlerMap.get(gameEvent.getCode());
+        return eventHandlerMap.get(gameEvent.getEventCode());
     }
 
     /**

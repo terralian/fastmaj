@@ -11,9 +11,10 @@ import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
+import com.github.terralian.fastmaj.game.event.IGameEventHandler;
+import com.github.terralian.fastmaj.game.event.system.SystemEventType;
+import com.github.terralian.fastmaj.game.event.system.TehaiActionRequestEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
-import com.github.terralian.fastmaj.game.event.tehai.TehaiActionRequestEvent;
 import com.github.terralian.fastmaj.game.validator.tehai.ITehaiActionValidator;
 import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.tehai.ITehai;
@@ -24,7 +25,7 @@ import com.github.terralian.fastmaj.util.Assert;
  *
  * @author Terra.Lian
  */
-public class TehaiActionRequestEventHandler implements IGameEventHandler {
+public class TehaiActionRequestEventHandler implements ISystemGameEventHandler {
 
     /**
      * 玩家动作管理器
@@ -36,8 +37,8 @@ public class TehaiActionRequestEventHandler implements IGameEventHandler {
     }
 
     @Override
-    public int handleEventCode() {
-        return GameEventCode.REQUEST_TEHAI_ACTION;
+    public SystemEventType getEventType() {
+        return SystemEventType.TEHAI_ACTION_REQUEST;
     }
 
     @Override
@@ -54,7 +55,7 @@ public class TehaiActionRequestEventHandler implements IGameEventHandler {
         PlayerGameContext playerGameContext = PlayerGameContextFactory.buildByGameCore(position, gameConfig, gameCore);
         TehaiActionEvent tehaiActionEvent = player.drawHai(tehai, enableActions, playerGameContext);
 
-        TehaiActionType actionType = tehaiActionEvent.getActionType();
+        TehaiActionType actionType = tehaiActionEvent.getEventType();
         // 校验动作是否可执行
         ITehaiActionValidator validator = playerActionManager.getTehaiActionValidator(actionType);
         if (!validator.resolveAction(position, gameConfig, gameCore)) {
@@ -63,7 +64,7 @@ public class TehaiActionRequestEventHandler implements IGameEventHandler {
 
         // 执行玩家动作
         tehaiActionEvent.setPosition(gameCore.getPosition());
-        ITehaiAction tehaiAction = playerActionManager.getTehaiAction(tehaiActionEvent.getActionType());
+        ITehaiAction tehaiAction = playerActionManager.getTehaiAction(tehaiActionEvent.getEventType());
         if (tehaiAction == null) {
             throw new IllegalStateException("该手牌处理动作无法执行，动作管理器获取该动作为空：" + actionType);
         }

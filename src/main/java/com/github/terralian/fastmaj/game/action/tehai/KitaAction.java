@@ -6,10 +6,8 @@ import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.KyokuState;
 import com.github.terralian.fastmaj.game.event.DrawEvent;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
-import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
-import com.github.terralian.fastmaj.game.event.river.RiverActionRequestEvent;
-import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
+import com.github.terralian.fastmaj.game.event.system.BreakSameJunEvent;
+import com.github.terralian.fastmaj.game.event.system.RiverActionRequestEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.yama.DrawFrom;
 
@@ -18,7 +16,7 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
  *
  * @author terra.lian
  */
-public class KitaAction implements ITehaiAction, IGameEventHandler {
+public class KitaAction implements ITehaiAction {
 
     @Override
     public KyokuState doAction(TehaiActionEvent actionParam, IGameCore gameCore, GameConfig gameOptions) {
@@ -30,13 +28,8 @@ public class KitaAction implements ITehaiAction, IGameEventHandler {
     }
 
     @Override
-    public TehaiActionType getTehaiActionType() {
+    public TehaiActionType getEventType() {
         return TehaiActionType.KITA;
-    }
-
-    @Override
-    public int handleEventCode() {
-        return GameEventCode.KITA;
     }
 
     @Override
@@ -47,7 +40,7 @@ public class KitaAction implements ITehaiAction, IGameEventHandler {
         // 进行一次荣和动作请求
         eventQueue.addNormal(new RiverActionRequestEvent(tehaiActionEvent));
         // 破坏同巡标识
-        eventQueue.addNormal(CommonSystemEventPool.get(GameEventCode.BREAK_SAME_JUN));
+        eventQueue.addNormal(new BreakSameJunEvent());
         // 新摸牌事件
         eventQueue.addNormal(new DrawEvent(position, DrawFrom.RINSYAN, tehaiActionEvent));
     }

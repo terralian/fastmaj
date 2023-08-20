@@ -4,19 +4,19 @@ import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
-import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
+import com.github.terralian.fastmaj.game.event.system.KyokuStartEvent;
+import com.github.terralian.fastmaj.game.event.system.SystemEventType;
 
 /**
  * 游戏开始事件处理器
  *
  * @author Terra.Lian
  */
-public class GameStartEventHandler implements IGameEventHandler {
+public class GameStartEventHandler implements ISystemGameEventHandler {
 
     @Override
-    public int handleEventCode() {
-        return GameEventCode.GAME_START;
+    public SystemEventType getEventType() {
+        return SystemEventType.GAME_START;
     }
 
     /**
@@ -25,6 +25,6 @@ public class GameStartEventHandler implements IGameEventHandler {
     @Override
     public void handle(GameEvent gameEvent, IGameCore gameCore, GameConfig gameConfig, IGameEventQueue eventQueue) {
         gameCore.startGame();
-        eventQueue.addNormal(CommonSystemEventPool.get(GameEventCode.KYOKU_START));
+        eventQueue.addNormal(new KyokuStartEvent());
     }
 }

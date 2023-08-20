@@ -64,13 +64,13 @@ public class RonValidator implements IRiverActionValidator {
         }
         // 抢暗杠
         // 对手动作是暗杠，且自己未固定牌，且国士听牌
-        if (rivalTehaiAction.getActionType() == TehaiActionType.ANNKAN && tehai.getLock().isEmpty()) {
+        if (rivalTehaiAction.getEventType() == TehaiActionType.ANNKAN && tehai.getLock().isEmpty()) {
             int syaten = syatenCalculator.calcKokusi(tehai.getHand());
             return syaten == 0;
         }
         // 抢加杠
         // 只要听这张，且非振听
-        else if (rivalTehaiAction.getActionType() == TehaiActionType.KAKAN) {
+        else if (rivalTehaiAction.getEventType() == TehaiActionType.KAKAN) {
             return true;
         }
         // 尝试为其设置荣标识，来匹配役种

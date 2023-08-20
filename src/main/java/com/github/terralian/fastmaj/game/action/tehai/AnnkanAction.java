@@ -6,11 +6,9 @@ import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.KyokuState;
 import com.github.terralian.fastmaj.game.event.DrawEvent;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
-import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
-import com.github.terralian.fastmaj.game.event.river.RiverActionRequestEvent;
-import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
+import com.github.terralian.fastmaj.game.event.system.BreakSameJunEvent;
 import com.github.terralian.fastmaj.game.event.system.NextDoraEvent;
+import com.github.terralian.fastmaj.game.event.system.RiverActionRequestEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.game.option.DoraAddRule;
 import com.github.terralian.fastmaj.hai.IHai;
@@ -21,7 +19,7 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
  *
  * @author terra.lian
  */
-public class AnnkanAction implements ITehaiAction, IGameEventHandler {
+public class AnnkanAction implements ITehaiAction {
 
     /**
      * 根据构建的暗杠动作信息，执行暗杠动作。
@@ -40,13 +38,8 @@ public class AnnkanAction implements ITehaiAction, IGameEventHandler {
     }
 
     @Override
-    public TehaiActionType getTehaiActionType() {
+    public TehaiActionType getEventType() {
         return TehaiActionType.ANNKAN;
-    }
-
-    @Override
-    public int handleEventCode() {
-        return GameEventCode.ANNKAN;
     }
 
     @Override
@@ -58,7 +51,7 @@ public class AnnkanAction implements ITehaiAction, IGameEventHandler {
         // 进行一次荣和动作请求
         eventQueue.addNormal(new RiverActionRequestEvent(tehaiActionEvent));
         // 破坏同巡标识
-        eventQueue.addNormal(CommonSystemEventPool.get(GameEventCode.BREAK_SAME_JUN));
+        eventQueue.addNormal(new BreakSameJunEvent());
         // 先宝牌规则下，翻一张新宝牌
         if (doraAddRule == DoraAddRule.BEFORE_DRAW) {
             eventQueue.addNormal(new NextDoraEvent());

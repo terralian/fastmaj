@@ -4,18 +4,18 @@ import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
+import com.github.terralian.fastmaj.game.event.system.SystemEventType;
 
 /**
  * 破坏同巡状态事件处理器
  *
  * @author Terra.Lian
  */
-public class BreakSameJunEventHandler implements IGameEventHandler {
+public class BreakSameJunEventHandler implements ISystemGameEventHandler {
 
     @Override
-    public int handleEventCode() {
-        return GameEventCode.BREAK_SAME_JUN;
+    public SystemEventType getEventType() {
+        return SystemEventType.BREAK_SAME_JUN;
     }
 
     /**

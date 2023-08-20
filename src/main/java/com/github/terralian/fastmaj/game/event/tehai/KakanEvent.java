@@ -1,7 +1,6 @@
 package com.github.terralian.fastmaj.game.event.tehai;
 
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -21,12 +20,7 @@ public class KakanEvent implements TehaiActionEvent {
     private IHai kakanHai;
 
     @Override
-    public int getCode() {
-        return GameEventCode.KAKAN;
-    }
-
-    @Override
-    public TehaiActionType getActionType() {
+    public TehaiActionType getEventType() {
         return TehaiActionType.KAKAN;
     }
 

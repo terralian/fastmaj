@@ -12,9 +12,7 @@ import com.github.terralian.fastmaj.game.KyokuState;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
-import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
-import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
+import com.github.terralian.fastmaj.game.event.system.KyokuEndEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
@@ -24,7 +22,7 @@ import com.github.terralian.fastmaj.tehai.ITehai;
  *
  * @author terra.lian
  */
-public class TsumoAction extends AgariAction implements ITehaiAction, IGameEventHandler {
+public class TsumoAction extends AgariAction implements ITehaiAction {
 
     public TsumoAction(IAgariCalculator agariCalculator) {
         super(agariCalculator);
@@ -55,18 +53,13 @@ public class TsumoAction extends AgariAction implements ITehaiAction, IGameEvent
     }
 
     @Override
-    public TehaiActionType getTehaiActionType() {
+    public TehaiActionType getEventType() {
         return TehaiActionType.TSUMO;
-    }
-
-    @Override
-    public int handleEventCode() {
-        return GameEventCode.TSUMO;
     }
 
     @Override
     public void handle(GameEvent gameEvent, IGameCore gameCore, GameConfig gameConfig, IGameEventQueue eventQueue) {
         // 产生对局结束优先事件
-        eventQueue.addPriority(CommonSystemEventPool.get(GameEventCode.KYOKU_END));
+        eventQueue.addPriority(new KyokuEndEvent());
     }
 }

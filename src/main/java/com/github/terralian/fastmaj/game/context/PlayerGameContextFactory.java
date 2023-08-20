@@ -12,14 +12,14 @@ import com.github.terralian.fastmaj.util.CollectionUtil;
 
 /**
  * {@link PlayerGameContext} 工厂类
- * 
+ *
  * @author terra.lian
  */
 public class PlayerGameContextFactory {
 
     /**
      * 根据游戏核心构建玩家上下文
-     * 
+     *
      * @param position 玩家的坐席
      * @param config 游戏配置
      * @param gameCore 游戏核心
@@ -28,7 +28,7 @@ public class PlayerGameContextFactory {
         PlayerGameContext context = new PlayerGameContext();
         TehaiActionType lastActionType = gameCore.getLastTehaiAction() == null //
                 ? null //
-                : gameCore.getLastTehaiAction().getActionType();
+                : gameCore.getLastTehaiAction().getEventType();
         context.setGameConfig(config) //
                 .setPlayerSize(gameCore.getPlayerSize()) //
                 .setRound(gameCore.getRound()) //
@@ -59,7 +59,7 @@ public class PlayerGameContextFactory {
 
     /**
      * 为某个玩家创建一个平场的游戏上下文
-     * 
+     *
      * @param position 玩家
      */
     public static PlayerGameContext buildByNormal(int position) {
@@ -71,7 +71,7 @@ public class PlayerGameContextFactory {
                 .setHonba(0) //
                 .setKyotaku(0) //
                 .setOya(0) //
-                .setPlayerPoints(new int[] {25000, 25000, 25000, 25000}) //
+                .setPlayerPoints(new int[]{25000, 25000, 25000, 25000}) //
                 .setYamaCountdown(70) //
                 .setDoraDisplays(CollectionUtil.newArrayList(HaiPool.m(1))) //
                 .setHaiRivers(CollectionUtil.newArrayList(new HaiRiver(0), new HaiRiver(1), new HaiRiver(2), new HaiRiver(3))) //

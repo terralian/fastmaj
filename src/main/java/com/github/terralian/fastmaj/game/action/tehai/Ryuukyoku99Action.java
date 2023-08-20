@@ -29,7 +29,7 @@ public class Ryuukyoku99Action implements ITehaiAction, IHalfwayRyuukyoku, IGame
 
     @Override
     public TehaiActionType getTehaiActionType() {
-        return TehaiActionType.RYUUKYOKU;
+        return TehaiActionType.RYUUKYOKU99;
     }
 
     @Override

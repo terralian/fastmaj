@@ -35,6 +35,6 @@ public class Ryuukyoku99Validator implements ITehaiActionValidator {
 
     @Override
     public TehaiActionType getTehaiActionType() {
-        return TehaiActionType.RYUUKYOKU;
+        return TehaiActionType.RYUUKYOKU99;
     }
 }

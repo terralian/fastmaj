@@ -7,7 +7,7 @@ import com.github.terralian.fastmaj.game.KyokuState;
 import com.github.terralian.fastmaj.game.event.DrawEvent;
 import com.github.terralian.fastmaj.game.event.GameEvent;
 import com.github.terralian.fastmaj.game.event.GameEventCode;
-import com.github.terralian.fastmaj.game.event.check.KyokuEndCheckEvent;
+import com.github.terralian.fastmaj.game.event.system.KyokuEndCheckEvent;
 import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.river.RiverActionRequestEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;

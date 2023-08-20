@@ -1,33 +1,43 @@
 package com.github.terralian.fastmaj.game.action.river;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * 牌河动作类型
- * 
+ *
  * @author terra.lian
  */
+@Getter
+@AllArgsConstructor
 public enum RiverActionType {
     /**
      * 吃
      */
-    CHII,
+    CHII(301),
 
     /**
      * 碰
      */
-    PON,
+    PON(302),
 
     /**
      * 明杠
      */
-    MINKAN,
+    MINKAN(303),
 
     /**
      * 荣和
      */
-    RON,
+    RON(304),
 
     /**
      * 跳过
      */
-    SKIP,
+    SKIP(300);
+
+    /**
+     * 编码
+     */
+    private final int code;
 }

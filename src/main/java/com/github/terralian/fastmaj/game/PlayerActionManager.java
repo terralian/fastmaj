@@ -142,7 +142,7 @@ public class PlayerActionManager implements IPlayerActionManager {
         tehaiActionMap.put(TehaiActionType.KIRI, new KiriAction());
         tehaiActionMap.put(TehaiActionType.KITA, new KitaAction());
         tehaiActionMap.put(TehaiActionType.REACH, new ReachAction());
-        tehaiActionMap.put(TehaiActionType.RYUUKYOKU, new Ryuukyoku99Action());
+        tehaiActionMap.put(TehaiActionType.RYUUKYOKU99, new Ryuukyoku99Action());
         tehaiActionMap.put(TehaiActionType.TSUMO, new TsumoAction(gameComponent.getAgariCalculator()));
 
         tehaiActionValidatorMap = new EnumMap<>(TehaiActionType.class);
@@ -152,7 +152,7 @@ public class PlayerActionManager implements IPlayerActionManager {
         tehaiActionValidatorMap.put(TehaiActionType.KIRI, new KiriValidator());
         tehaiActionValidatorMap.put(TehaiActionType.KITA, new KitaValidator());
         tehaiActionValidatorMap.put(TehaiActionType.REACH, new ReachValidator());
-        tehaiActionValidatorMap.put(TehaiActionType.RYUUKYOKU, new Ryuukyoku99Validator());
+        tehaiActionValidatorMap.put(TehaiActionType.RYUUKYOKU99, new Ryuukyoku99Validator());
         tehaiActionValidatorMap.put(TehaiActionType.TSUMO, new TsumoValidator());
     }
 

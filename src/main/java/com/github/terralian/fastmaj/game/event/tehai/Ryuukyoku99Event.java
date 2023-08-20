@@ -25,7 +25,7 @@ public class Ryuukyoku99Event implements TehaiActionEvent {
 
     @Override
     public TehaiActionType getActionType() {
-        return TehaiActionType.RYUUKYOKU;
+        return TehaiActionType.RYUUKYOKU99;
     }
 
     @Override

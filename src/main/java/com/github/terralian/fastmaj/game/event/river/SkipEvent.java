@@ -1,7 +1,6 @@
 package com.github.terralian.fastmaj.game.event.river;
 
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
-import com.github.terralian.fastmaj.game.event.GameEventEnum;
 import com.github.terralian.fastmaj.hai.IHai;
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -36,8 +35,8 @@ public class SkipEvent implements RiverActionEvent {
     private final int order = Integer.MIN_VALUE;
 
     @Override
-    public GameEventEnum getType() {
-        return GameEventEnum.SKIP;
+    public int getCode() {
+        return RiverEventCode.SKIP;
     }
 
     @Override

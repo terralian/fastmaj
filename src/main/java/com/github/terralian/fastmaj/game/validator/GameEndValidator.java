@@ -4,8 +4,13 @@ import java.util.Arrays;
 
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
+import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.KyokuEndEnum;
+import com.github.terralian.fastmaj.game.event.GameEvent;
+import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
+import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
+import com.github.terralian.fastmaj.game.event.system.SystemEventCode;
 import com.github.terralian.fastmaj.util.RankingUtil;
 
 /**
@@ -19,7 +24,25 @@ import com.github.terralian.fastmaj.util.RankingUtil;
  *
  * @author terra.lian
  */
-public class GameEndValidator implements IGameValidator {
+public class GameEndValidator implements IGameValidator, IGameEventHandler {
+
+    @Override
+    public int handleEventCode() {
+        return SystemEventCode.GAME_END_CHECK;
+    }
+
+    @Override
+    public void handle(GameEvent gameEvent, IGameCore gameCore, GameConfig gameConfig, IGameEventQueue eventQueue) {
+        boolean check = validate(gameConfig, gameCore);
+        if (check) {
+            // 发起结束优先事件
+            eventQueue.addPriority(CommonSystemEventPool.get(SystemEventCode.GAME_END));
+        } else {
+            // 开始下一局事件
+            eventQueue.clear();
+            eventQueue.addPriority(CommonSystemEventPool.get(SystemEventCode.KYOKU_START));
+        }
+    }
 
     /**
      * 判定一场游戏是否游戏结束

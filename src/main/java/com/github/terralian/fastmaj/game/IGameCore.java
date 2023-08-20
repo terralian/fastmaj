@@ -79,9 +79,10 @@ public interface IGameCore {
      * <p/>
      * 当需要增加新宝牌时，可以调用{@link #nextDoraDisplay()}
      *
+     * @param position 玩家坐席
      * @param drawFrom 摸牌来源
      */
-    IHai draw(DrawFrom drawFrom);
+    IHai draw(int position, DrawFrom drawFrom);
 
     /**
      * 当前玩家切一张手牌
@@ -184,6 +185,11 @@ public interface IGameCore {
     // --------------------------------------------------------
     // 状态获取
     // --------------------------------------------------------
+
+    /**
+     * 获取当前游戏状态
+     */
+    GameState getGameState();
 
     /**
      * 玩家人数
@@ -403,6 +409,11 @@ public interface IGameCore {
      * 庄家是否连庄
      */
     boolean isRenchan();
+
+    /**
+     * 破坏同巡状态
+     */
+    void breakSameJun();
 
     /**
      * 获取对局结束类型

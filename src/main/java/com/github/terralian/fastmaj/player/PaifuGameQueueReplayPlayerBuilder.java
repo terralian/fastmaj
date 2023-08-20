@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.terralian.fastmaj.game.event.ActionEvent;
+import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.river.ChiiEvent;
 import com.github.terralian.fastmaj.game.event.river.MinkanEvent;
 import com.github.terralian.fastmaj.game.event.river.PonEvent;
@@ -44,43 +45,43 @@ public abstract class PaifuGameQueueReplayPlayerBuilder {
             int actionCount = -1;
             for (ActionEvent abstractEvent : events) {
                 actionCount += 1;
-                switch (abstractEvent.getType()) {
-                    case CHII:
+                switch (abstractEvent.getCode()) {
+                    case GameEventCode.CHI:
                         addChii((ChiiEvent) abstractEvent, list, round, actionCount);
                         break;
-                    case MINKAN:
+                    case GameEventCode.MINKAN:
                         addMinkan((MinkanEvent) abstractEvent, list, round, actionCount);
                         break;
-                    case PON:
+                    case GameEventCode.PON:
                         addPon((PonEvent) abstractEvent, list, round, actionCount);
                         break;
-                    case RON:
+                    case GameEventCode.RON:
                         addRon((RonEvent) abstractEvent, list, round, actionCount);
                         // 存在多人和了的可能性，保持actionCount不变
                         actionCount -= 1;
                         break;
-                    case ANNKAN:
+                    case GameEventCode.ANNKAN:
                         addAnnkan((AnnkanEvent) abstractEvent, list, round);
                         break;
-                    case KAKAN:
+                    case GameEventCode.KAKAN:
                         addKakan((KakanEvent) abstractEvent, list, round);
                         break;
-                    case KIRI:
+                    case GameEventCode.KIRI:
                         addKiri((KiriEvent) abstractEvent, list, round);
                         break;
-                    case KITA:
+                    case GameEventCode.KITA:
                         addKita((KitaEvent) abstractEvent, list, round);
                         break;
-                    case REACH:
+                    case GameEventCode.REACH:
                         addReach((ReachEvent) abstractEvent, list, round);
                         break;
-                    case RYUUKYOKU99:
+                    case GameEventCode.RYUUKYOKU99:
                         addRyuukyoku99((Ryuukyoku99Event) abstractEvent, list, round);
                         break;
-                    case TSUMO:
+                    case GameEventCode.TSUMO:
                         addTsumo((TsumoEvent) abstractEvent, list, round);
                         break;
-                    case DRAW:
+                    case GameEventCode.DRAW:
                         // 无需处理
                         break;
                 }

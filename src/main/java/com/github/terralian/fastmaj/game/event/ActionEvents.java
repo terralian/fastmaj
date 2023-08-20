@@ -1,10 +1,10 @@
 package com.github.terralian.fastmaj.game.event;
 
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
-import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.event.river.SkipEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiEventCode;
 
 /**
  * CreateByTerra
@@ -24,7 +24,7 @@ public abstract class ActionEvents {
      * @param actionEvent 结束的事件
      */
     public static boolean isEndEvent(ActionEvent actionEvent) {
-        return actionEvent.getType() == GameEventEnum.RON || actionEvent.getType() == GameEventEnum.TSUMO;
+        return actionEvent.getCode() == GameEventCode.RON || actionEvent.getCode() == GameEventCode.TSUMO;
     }
 
     /**
@@ -35,10 +35,10 @@ public abstract class ActionEvents {
     public static boolean needAddDraw(ActionEvent actionEvent) {
         if (actionEvent == null)
             return false;
-        return actionEvent.getType() == GameEventEnum.MINKAN  //
-                || actionEvent.getType() == GameEventEnum.ANNKAN //
-                || actionEvent.getType() == GameEventEnum.KITA //
-                || actionEvent.getType() == GameEventEnum.KAKAN;
+        return actionEvent.getCode() == GameEventCode.MINKAN  //
+                || actionEvent.getCode() == GameEventCode.ANNKAN //
+                || actionEvent.getCode() == GameEventCode.KITA //
+                || actionEvent.getCode() == GameEventCode.KAKAN;
     }
 
     /**
@@ -58,9 +58,9 @@ public abstract class ActionEvents {
      * @param actionEvent 事件
      */
     public static boolean needAddDraw(TehaiActionEvent actionEvent) {
-        return actionEvent.getActionType() == TehaiActionType.KAKAN //
-                || actionEvent.getActionType() == TehaiActionType.ANNKAN //
-                || actionEvent.getActionType() == TehaiActionType.KITA;
+        return actionEvent.getCode() == TehaiEventCode.KAKAN //
+                || actionEvent.getCode() == TehaiEventCode.ANNKAN //
+                || actionEvent.getCode() == TehaiEventCode.KITA;
     }
 
     /**
@@ -69,7 +69,7 @@ public abstract class ActionEvents {
      * @param actionEvent 事件
      */
     public static boolean needSwitchPlayer(TehaiActionEvent actionEvent) {
-        return actionEvent.getType() == GameEventEnum.KIRI //
-                || actionEvent.getType() == GameEventEnum.REACH;
+        return actionEvent.getCode() == GameEventCode.KIRI //
+                || actionEvent.getCode() == GameEventCode.REACH;
     }
 }

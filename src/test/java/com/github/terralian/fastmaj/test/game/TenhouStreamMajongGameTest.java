@@ -43,6 +43,9 @@ public class TenhouStreamMajongGameTest {
         ruleTimelineHandler = new TenhouRuleTimelineHandler();
     }
 
+    /**
+     * 曾经易出错的点的特别样本测试，只是错误的地方未进行标记
+     */
     @Test
     public void special_sample_paifu_test() throws Exception {
         simulate_run_game("2014050315gm-0041-0000-0f3f6de5&tw=3.mjlog", true);
@@ -124,7 +127,8 @@ public class TenhouStreamMajongGameTest {
 
     @Test
     public void wait_test() throws Exception {
-        simulate_run_game("2014121823gm-00e1-0000-375a275e&tw=1.mjlog", false);
+        // simulate_run_game("2014121823gm-00e1-0000-375a275e&tw=1.mjlog", false);
+        simulate_run_game("2014051204gm-0041-0000-c9ebd8d8&tw=1.mjlog", false);
     }
 
     @Test

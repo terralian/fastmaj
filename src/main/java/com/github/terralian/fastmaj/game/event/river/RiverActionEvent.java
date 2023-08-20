@@ -47,7 +47,15 @@ public interface RiverActionEvent extends ActionEvent {
     /**
      * 获取牌河动作类型
      */
-    RiverActionType getRiverType();
+    RiverActionType getEventType();
+
+    /**
+     * 获取牌河事件编码
+     */
+    @Override
+    default int getEventCode() {
+        return getEventType().getCode();
+    }
 
     /**
      * 获取优先级

@@ -5,8 +5,6 @@ import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.event.DrawEvent;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
-import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.event.system.NextDoraEvent;
 import com.github.terralian.fastmaj.game.option.DoraAddRule;
@@ -17,7 +15,7 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
  *
  * @author terra.lian
  */
-public class MinKanAction implements IRiverAction, IGameEventHandler {
+public class MinKanAction implements IRiverAction {
 
     @Override
     public void doAction(RiverActionEvent value, GameConfig gameConfig, IGameCore gameCore) {
@@ -28,13 +26,8 @@ public class MinKanAction implements IRiverAction, IGameEventHandler {
     }
 
     @Override
-    public RiverActionType getRiverActionType() {
+    public RiverActionType getEventType() {
         return RiverActionType.MINKAN;
-    }
-
-    @Override
-    public int handleEventCode() {
-        return GameEventCode.MINKAN;
     }
 
     @Override

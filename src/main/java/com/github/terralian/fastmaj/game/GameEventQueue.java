@@ -77,7 +77,7 @@ public class GameEventQueue implements IGameEventQueue {
 
     @Override
     public void removeNormal(int eventCode) {
-        normalQueue.removeIf(k -> k.getCode() == eventCode);
+        normalQueue.removeIf(k -> k.getEventCode() == eventCode);
     }
 
     /**
@@ -85,7 +85,7 @@ public class GameEventQueue implements IGameEventQueue {
      */
     @Override
     public void removePriority(int eventCode) {
-        priorityQueue.removeIf(k -> k.getCode() == eventCode);
+        priorityQueue.removeIf(k -> k.getEventCode() == eventCode);
     }
 
     @Override
@@ -96,7 +96,7 @@ public class GameEventQueue implements IGameEventQueue {
 
     @Override
     public int prioritySizeof(int eventCode) {
-        return (int) priorityQueue.stream().filter(k -> k.getCode() == eventCode).count();
+        return (int) priorityQueue.stream().filter(k -> k.getEventCode() == eventCode).count();
     }
 
     /**
@@ -104,7 +104,7 @@ public class GameEventQueue implements IGameEventQueue {
      */
     private static class DelayFill implements GameEvent {
         @Override
-        public int getCode() {
+        public int getEventCode() {
             return -1;
         }
     }

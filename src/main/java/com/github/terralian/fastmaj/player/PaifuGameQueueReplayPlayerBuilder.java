@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.terralian.fastmaj.game.event.ActionEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.river.ChiiEvent;
 import com.github.terralian.fastmaj.game.event.river.MinkanEvent;
 import com.github.terralian.fastmaj.game.event.river.PonEvent;
+import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.event.river.RonEvent;
 import com.github.terralian.fastmaj.game.event.tehai.AnnkanEvent;
 import com.github.terralian.fastmaj.game.event.tehai.KakanEvent;
@@ -15,6 +15,7 @@ import com.github.terralian.fastmaj.game.event.tehai.KiriEvent;
 import com.github.terralian.fastmaj.game.event.tehai.KitaEvent;
 import com.github.terralian.fastmaj.game.event.tehai.ReachEvent;
 import com.github.terralian.fastmaj.game.event.tehai.Ryuukyoku99Event;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TsumoEvent;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
 import com.github.terralian.fastmaj.paifu.domain.PaifuKyoku;
@@ -45,45 +46,50 @@ public abstract class PaifuGameQueueReplayPlayerBuilder {
             int actionCount = -1;
             for (ActionEvent abstractEvent : events) {
                 actionCount += 1;
-                switch (abstractEvent.getCode()) {
-                    case GameEventCode.CHI:
-                        addChii((ChiiEvent) abstractEvent, list, round, actionCount);
-                        break;
-                    case GameEventCode.MINKAN:
-                        addMinkan((MinkanEvent) abstractEvent, list, round, actionCount);
-                        break;
-                    case GameEventCode.PON:
-                        addPon((PonEvent) abstractEvent, list, round, actionCount);
-                        break;
-                    case GameEventCode.RON:
-                        addRon((RonEvent) abstractEvent, list, round, actionCount);
-                        // 存在多人和了的可能性，保持actionCount不变
-                        actionCount -= 1;
-                        break;
-                    case GameEventCode.ANNKAN:
-                        addAnnkan((AnnkanEvent) abstractEvent, list, round);
-                        break;
-                    case GameEventCode.KAKAN:
-                        addKakan((KakanEvent) abstractEvent, list, round);
-                        break;
-                    case GameEventCode.KIRI:
-                        addKiri((KiriEvent) abstractEvent, list, round);
-                        break;
-                    case GameEventCode.KITA:
-                        addKita((KitaEvent) abstractEvent, list, round);
-                        break;
-                    case GameEventCode.REACH:
-                        addReach((ReachEvent) abstractEvent, list, round);
-                        break;
-                    case GameEventCode.RYUUKYOKU99:
-                        addRyuukyoku99((Ryuukyoku99Event) abstractEvent, list, round);
-                        break;
-                    case GameEventCode.TSUMO:
-                        addTsumo((TsumoEvent) abstractEvent, list, round);
-                        break;
-                    case GameEventCode.DRAW:
-                        // 无需处理
-                        break;
+
+                if (abstractEvent instanceof TehaiActionEvent) {
+                    TehaiActionEvent tehaiActionEvent = (TehaiActionEvent) abstractEvent;
+                    switch (tehaiActionEvent.getEventType()) {
+                        case ANNKAN:
+                            addAnnkan((AnnkanEvent) abstractEvent, list, round);
+                            break;
+                        case KAKAN:
+                            addKakan((KakanEvent) abstractEvent, list, round);
+                            break;
+                        case KIRI:
+                            addKiri((KiriEvent) abstractEvent, list, round);
+                            break;
+                        case KITA:
+                            addKita((KitaEvent) abstractEvent, list, round);
+                            break;
+                        case REACH:
+                            addReach((ReachEvent) abstractEvent, list, round);
+                            break;
+                        case RYUUKYOKU99:
+                            addRyuukyoku99((Ryuukyoku99Event) abstractEvent, list, round);
+                            break;
+                        case TSUMO:
+                            addTsumo((TsumoEvent) abstractEvent, list, round);
+                            break;
+                    }
+                } else if (abstractEvent instanceof RiverActionEvent) {
+                    RiverActionEvent riverActionEvent = (RiverActionEvent) abstractEvent;
+                    switch (riverActionEvent.getEventType()) {
+                        case CHII:
+                            addChii((ChiiEvent) abstractEvent, list, round, actionCount);
+                            break;
+                        case MINKAN:
+                            addMinkan((MinkanEvent) abstractEvent, list, round, actionCount);
+                            break;
+                        case PON:
+                            addPon((PonEvent) abstractEvent, list, round, actionCount);
+                            break;
+                        case RON:
+                            addRon((RonEvent) abstractEvent, list, round, actionCount);
+                            // 存在多人和了的可能性，保持actionCount不变
+                            actionCount -= 1;
+                            break;
+                    }
                 }
             }
         }

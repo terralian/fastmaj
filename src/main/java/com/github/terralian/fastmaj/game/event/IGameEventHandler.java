@@ -1,9 +1,8 @@
-package com.github.terralian.fastmaj.game.event.handler;
+package com.github.terralian.fastmaj.game.event;
 
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.IGameEventQueue;
-import com.github.terralian.fastmaj.game.event.GameEvent;
 
 /**
  * 事件处理器，不同的事件有着不同的处理方式，如动作的执行器、游戏结束的校验器等。
@@ -12,12 +11,12 @@ import com.github.terralian.fastmaj.game.event.GameEvent;
  *
  * @author Terra.Lian
  */
-public interface IGameEventHandler {
+public interface IGameEventHandler extends GameEventBase {
 
     /**
-     * 会处理的实际
+     * 获取事件类型，每种系统默认定义的实际都有其对应的类型
      */
-    int handleEventCode();
+    Enum getEventType();
 
     /**
      * 进行事件处理

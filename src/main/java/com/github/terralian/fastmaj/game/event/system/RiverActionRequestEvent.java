@@ -1,19 +1,19 @@
-package com.github.terralian.fastmaj.game.event.river;
+package com.github.terralian.fastmaj.game.event.system;
 
-import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
+ * 牌河动作请求事件
+ *
  * @author Terra.Lian
  */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RiverActionRequestEvent implements GameEvent {
+public class RiverActionRequestEvent implements SystemGameEvent {
 
     /**
      * 从请求动作来
@@ -21,7 +21,7 @@ public class RiverActionRequestEvent implements GameEvent {
     private TehaiActionEvent fromEvent;
 
     @Override
-    public int getCode() {
-        return GameEventCode.REQUEST_RIVER_ACTION;
+    public SystemEventType getEventType() {
+        return SystemEventType.RIVER_ACTION_REQUEST;
     }
 }

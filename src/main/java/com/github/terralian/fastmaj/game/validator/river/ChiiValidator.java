@@ -18,15 +18,16 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 public class ChiiValidator implements IRiverActionValidator {
 
     @Override
-    public boolean resolveAction(int position, TehaiActionEvent rivalTehaiAction, GameConfig gameConfig, IGameCore gameCore,
-                                 PlayerGameContext context) {
+    public boolean resolveAction(int position, TehaiActionEvent rivalTehaiAction, GameConfig gameConfig,
+            IGameCore gameCore,
+            PlayerGameContext context) {
         // 需要牌山还有可摸的牌
         // 玩家未立直
         if (gameCore.getYamaCountdown() <= 0 || gameCore.getHaiRiver(position).isReach()) {
             return false;
         }
         // 对手的动作需要是模切或者立直
-        if (rivalTehaiAction.getActionType() != TehaiActionType.KIRI && rivalTehaiAction.getActionType() != TehaiActionType.REACH) {
+        if (rivalTehaiAction.getEventType() != TehaiActionType.KIRI && rivalTehaiAction.getEventType() != TehaiActionType.REACH) {
             return false;
         }
         // 需要是上家，且手牌有对应的搭子

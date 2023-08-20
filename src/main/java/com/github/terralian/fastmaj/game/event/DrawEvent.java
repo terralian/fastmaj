@@ -1,5 +1,7 @@
 package com.github.terralian.fastmaj.game.event;
 
+import com.github.terralian.fastmaj.game.event.system.SystemEventType;
+import com.github.terralian.fastmaj.game.event.system.SystemGameEvent;
 import com.github.terralian.fastmaj.yama.DrawFrom;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,7 +17,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class DrawEvent implements GameEvent {
+public class DrawEvent implements SystemGameEvent {
 
     /**
      * 摸牌玩家坐席
@@ -31,7 +33,7 @@ public class DrawEvent implements GameEvent {
     private GameEvent fromEvent;
 
     @Override
-    public int getCode() {
-        return GameEventCode.DRAW;
+    public SystemEventType getEventType() {
+        return SystemEventType.DRAW;
     }
 }

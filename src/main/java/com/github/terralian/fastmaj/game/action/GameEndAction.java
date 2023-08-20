@@ -6,15 +6,15 @@ import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
-import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
+import com.github.terralian.fastmaj.game.event.handler.ISystemGameEventHandler;
+import com.github.terralian.fastmaj.game.event.system.SystemEventType;
 
 /**
  * 游戏结束动作，除了调用核心结束游戏外，还需要处理剩余的场供
  *
  * @author terra.lian
  */
-public class GameEndAction implements IGameAction, IGameEventHandler {
+public class GameEndAction implements IGameAction, ISystemGameEventHandler {
 
     /**
      * 点数计算器
@@ -41,12 +41,9 @@ public class GameEndAction implements IGameAction, IGameEventHandler {
         gameCore.endGame(playerPoints);
     }
 
-    /**
-     * @return
-     */
     @Override
-    public int handleEventCode() {
-        return GameEventCode.GAME_END;
+    public SystemEventType getEventType() {
+        return SystemEventType.GAME_END;
     }
 
     /**

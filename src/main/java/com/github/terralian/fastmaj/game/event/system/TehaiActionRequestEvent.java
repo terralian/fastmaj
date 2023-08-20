@@ -1,7 +1,6 @@
-package com.github.terralian.fastmaj.game.event.tehai;
+package com.github.terralian.fastmaj.game.event.system;
 
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class TehaiActionRequestEvent implements GameEvent {
+public class TehaiActionRequestEvent implements SystemGameEvent {
 
     /**
      * 请求动作的玩家坐席
@@ -27,7 +26,7 @@ public class TehaiActionRequestEvent implements GameEvent {
     private GameEvent fromEvent;
 
     @Override
-    public int getCode() {
-        return GameEventCode.REQUEST_TEHAI_ACTION;
+    public SystemEventType getEventType() {
+        return SystemEventType.TEHAI_ACTION_REQUEST;
     }
 }

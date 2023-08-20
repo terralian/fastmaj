@@ -6,11 +6,9 @@ import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
-import com.github.terralian.fastmaj.game.event.handler.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.river.PonEvent;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
-import com.github.terralian.fastmaj.game.event.tehai.TehaiActionRequestEvent;
+import com.github.terralian.fastmaj.game.event.system.TehaiActionRequestEvent;
 import com.github.terralian.fastmaj.hai.IHai;
 
 /**
@@ -18,7 +16,7 @@ import com.github.terralian.fastmaj.hai.IHai;
  *
  * @author terra.lian
  */
-public class PonAction implements IRiverAction, IGameEventHandler {
+public class PonAction implements IRiverAction {
 
     @Override
     public void doAction(RiverActionEvent value, GameConfig gameConfig, IGameCore gameCore) {
@@ -30,13 +28,8 @@ public class PonAction implements IRiverAction, IGameEventHandler {
     }
 
     @Override
-    public RiverActionType getRiverActionType() {
+    public RiverActionType getEventType() {
         return RiverActionType.PON;
-    }
-
-    @Override
-    public int handleEventCode() {
-        return GameEventCode.PON;
     }
 
     @Override

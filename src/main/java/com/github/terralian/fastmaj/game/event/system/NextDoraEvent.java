@@ -1,14 +1,14 @@
 package com.github.terralian.fastmaj.game.event.system;
 
-import com.github.terralian.fastmaj.game.event.GameEventCode;
-
 /**
+ * 下一枚Dora事件
+ *
  * @author Terra.Lian
  */
-public class NextDoraEvent implements SystemEvent {
+public class NextDoraEvent implements SystemGameEvent {
 
     @Override
-    public int getCode() {
-        return GameEventCode.NEXT_DORA_EVENT;
+    public SystemEventType getEventType() {
+        return SystemEventType.NEXT_DORA;
     }
 }

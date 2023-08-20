@@ -5,7 +5,7 @@ import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.event.DrawEvent;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
+import com.github.terralian.fastmaj.game.event.system.SystemEventType;
 import com.github.terralian.fastmaj.yama.DrawFrom;
 
 /**
@@ -13,11 +13,11 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
  *
  * @author Terra.Lian
  */
-public class KyokuStartEventHandler implements IGameEventHandler {
+public class KyokuStartEventHandler implements ISystemGameEventHandler {
 
     @Override
-    public int handleEventCode() {
-        return GameEventCode.KYOKU_START;
+    public SystemEventType getEventType() {
+        return SystemEventType.KYOKU_START;
     }
 
     /**

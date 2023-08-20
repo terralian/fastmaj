@@ -12,10 +12,10 @@ import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
-import com.github.terralian.fastmaj.game.event.river.RiverActionRequestEvent;
-import com.github.terralian.fastmaj.game.event.system.CommonSystemEventPool;
+import com.github.terralian.fastmaj.game.event.system.RiverActionRequestEvent;
+import com.github.terralian.fastmaj.game.event.system.Ron3RyuukyokuCheckEvent;
+import com.github.terralian.fastmaj.game.event.system.SystemEventType;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.player.RivalEnum;
@@ -23,7 +23,7 @@ import com.github.terralian.fastmaj.player.RivalEnum;
 /**
  * @author Terra.Lian
  */
-public class RiverActionRequestEventHandler implements IGameEventHandler {
+public class RiverActionRequestEventHandler implements ISystemGameEventHandler {
 
     /**
      * 玩家动作管理器
@@ -35,8 +35,8 @@ public class RiverActionRequestEventHandler implements IGameEventHandler {
     }
 
     @Override
-    public int handleEventCode() {
-        return GameEventCode.REQUEST_RIVER_ACTION;
+    public SystemEventType getEventType() {
+        return SystemEventType.RIVER_ACTION_REQUEST;
     }
 
     @Override
@@ -62,14 +62,14 @@ public class RiverActionRequestEventHandler implements IGameEventHandler {
 
             // 为玩家执行动作，校验该动作合法，并加入到集合
             IPlayer player = gameCore.getPlayer(i);
-            RiverActionEvent nakiAction = player.nakiOrRon(gameCore.getPosition(), fromEvent.getActionType(),
+            RiverActionEvent nakiAction = player.nakiOrRon(gameCore.getPosition(), fromEvent.getEventType(),
                     enableActions, playerGameContext);
             // 玩家跳过执行
-            if (nakiAction == null || nakiAction.getRiverType() == RiverActionType.SKIP) {
+            if (nakiAction == null || nakiAction.getEventType() == RiverActionType.SKIP) {
                 continue;
             }
-            if (!enableActions.contains(nakiAction.getRiverType())) {
-                throw new IllegalStateException("玩家" + (i + 1) + "不可执行的牌河动作：" + nakiAction.getRiverType());
+            if (!enableActions.contains(nakiAction.getEventType())) {
+                throw new IllegalStateException("玩家" + (i + 1) + "不可执行的牌河动作：" + nakiAction.getEventType());
             }
             // 设置无需由玩家设置的项
             nakiAction.setFromHai(fromEvent.getIfHai()).setPosition(i).setFrom(gameCore.getPosition());
@@ -82,7 +82,7 @@ public class RiverActionRequestEventHandler implements IGameEventHandler {
         }
 
         // 由于被牌河事件打断，移除队列中的新摸牌事件
-        eventQueue.removeNormal(GameEventCode.DRAW);
+        eventQueue.removeNormal(SystemEventType.DRAW.getCode());
 
         // 有动作的情况，先对动作排序，取优先级最高的
         // 若优先级相同，需要以手牌动作玩家的视角，按下家，对家，上家的顺序优先处理
@@ -100,12 +100,12 @@ public class RiverActionRequestEventHandler implements IGameEventHandler {
         // 发起一个流局校验（三家和了）
         // 对局结束会发起一个游戏结束判定，判定没过的话会发起下一局事件
         // 对局没结束就继续消费下一个事件
-        boolean isRon = firstAction.getRiverType() == RiverActionType.RON;
+        boolean isRon = firstAction.getEventType() == RiverActionType.RON;
         if (isRon) {
-            eventQueue.addPriority(CommonSystemEventPool.get(GameEventCode.RON3_RYUUKYOKU_CHECK));
+            eventQueue.addPriority(new Ron3RyuukyokuCheckEvent());
         }
         for (RiverActionEvent action : actions) {
-            if (firstAction.getRiverType() != action.getRiverType()) {
+            if (firstAction.getEventType() != action.getEventType()) {
                 break;
             }
             if (isRon) {

@@ -4,9 +4,9 @@ import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.IGameEventQueue;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.GameEventCode;
 import com.github.terralian.fastmaj.game.event.system.KyokuEndCheckEvent;
 import com.github.terralian.fastmaj.game.event.system.RyuukyokuEvent;
+import com.github.terralian.fastmaj.game.event.system.SystemEventType;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyokuResolver;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyokuResolverManager;
 
@@ -17,7 +17,7 @@ import com.github.terralian.fastmaj.game.ryuuky.IRyuukyokuResolverManager;
  * @apiNote 荣和或者自摸的结束校验不通过该类，而是直接发起对局结束事件
  * @see KyokuEndCheckEvent
  */
-public class KyokuEndCheckEventHandler implements IGameEventHandler {
+public class KyokuEndCheckEventHandler implements ISystemGameEventHandler {
 
     protected IRyuukyokuResolverManager ryuukyokuResolverManager;
 
@@ -26,8 +26,8 @@ public class KyokuEndCheckEventHandler implements IGameEventHandler {
     }
 
     @Override
-    public int handleEventCode() {
-        return GameEventCode.KYOKU_END_CHECK;
+    public SystemEventType getEventType() {
+        return SystemEventType.KYOKU_END_CHECK;
     }
 
     @Override

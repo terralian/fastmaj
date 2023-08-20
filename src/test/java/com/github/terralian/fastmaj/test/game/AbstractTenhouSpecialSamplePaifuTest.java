@@ -113,7 +113,7 @@ public abstract class AbstractTenhouSpecialSamplePaifuTest extends AbstractTenho
     @Test
     public void tenhou_2009_old_paifu_support_test() throws Exception {
         // 旧版牌山和新版存在一丢丢差异
-        simulate_run_game("2009072917gm-0061-0000-85a7478c&tw=3.mjlog", true);
+        simulate_run_game("2009072917gm-0061-0000-85a7478c&tw=3.mjlog", false);
         // 旧版岭上区和新版的顺序不一致
         simulate_run_game("2009072918gm-0061-0000-e6e91672&tw=0.mjlog", true);
         // 饼参加了一场无红宝牌

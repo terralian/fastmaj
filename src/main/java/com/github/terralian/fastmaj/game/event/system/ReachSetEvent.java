@@ -1,20 +1,21 @@
 package com.github.terralian.fastmaj.game.event.system;
 
-import com.github.terralian.fastmaj.game.event.GameEventCode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
+ * 放置立直棒事件，扣取玩家1000点数
+ *
  * @author Terra.Lian
  */
 @Data
 @AllArgsConstructor
-public class ReachSetEvent implements SystemEvent {
+public class ReachSetEvent implements SystemGameEvent {
 
     private int position;
 
     @Override
-    public int getCode() {
-        return GameEventCode.REACH_SET;
+    public SystemEventType getEventType() {
+        return SystemEventType.REACH_SET;
     }
 }

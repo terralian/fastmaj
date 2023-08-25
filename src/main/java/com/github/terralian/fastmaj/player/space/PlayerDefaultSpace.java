@@ -5,13 +5,14 @@ import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.tehai.ITehai;
+import com.github.terralian.fastmaj.util.Assert;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 /**
  * 由多种不同类型的玩家空间组成的默认玩家空间完全体，一般由玩家自身及系统持有。
  * <p/>
- * 玩家空间内，包含玩家私有部分的信息，这部分信息是非对称游戏的玩法核心。在使用时，
+ * 与逻辑无关，规则部分的值初始化需要由外部进行设置，如自风，是否庄家等。
  *
  * @author Terra.Lian
  */
@@ -28,9 +29,13 @@ public class PlayerDefaultSpace extends PlayerPublicSpace implements IPlayerPriv
      */
     private ITehai tehai;
     /**
+     * 最大向听数
+     */
+    private static final int MAX_SYATEN = 13;
+    /**
      * 向听数
      */
-    private int syaten = 13;
+    private int syaten = MAX_SYATEN;
 
     /**
      * 是否振听
@@ -58,6 +63,8 @@ public class PlayerDefaultSpace extends PlayerPublicSpace implements IPlayerPriv
      * @param lastAction 上一个动作
      */
     public void setLastAction(ActionEvent lastAction) {
+        Assert.notNull(lastAction, "上一个动作不能为空");
+
         this.lastAction = lastAction;
         if (lastAction instanceof TehaiActionEvent)
             this.setLastTehaiActionType(((TehaiActionEvent) lastAction).getEventType());
@@ -76,5 +83,33 @@ public class PlayerDefaultSpace extends PlayerPublicSpace implements IPlayerPriv
             defaultSpace.setLastAction(lastAction);
         }
         super.copyTo(playerSpace);
+    }
+
+    /**
+     * 重置对局信息，令可以进行下一局游戏
+     */
+    public void resetKyokuState() {
+        this.setTehaiLock(null);
+        this.setHaiRiver(null);
+        this.setReach(false);
+        this.setLastTehaiActionType(null);
+        this.setLastRiverActionType(null);
+        this.setOya(false);
+        this.setJikaze(null);
+
+        this.tehai = null;
+        this.syaten = MAX_SYATEN;
+        this.furiten = false;
+        this.lastAction = null;
+    }
+
+    /**
+     * 重置游戏信息，令可以开始下一次游戏
+     */
+    public void resetGameState() {
+        this.resetKyokuState();
+
+        this.setPlayerPoint(0);
+        this.setRanking(-1);
     }
 }

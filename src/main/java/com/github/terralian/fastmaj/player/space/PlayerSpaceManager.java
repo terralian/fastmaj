@@ -3,6 +3,8 @@ package com.github.terralian.fastmaj.player.space;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.terralian.fastmaj.player.IPlayer;
+
 /**
  * 玩家空间管理器的默认实现
  *
@@ -32,6 +34,18 @@ public class PlayerSpaceManager implements IPlayerSpaceManager {
                 publicSpaces.add(new PlayerPublicSpace());
             }
             clonePublicSpaceContainer.add(publicSpaces);
+        }
+    }
+
+    /**
+     * 根据玩家接口初始化构建{@link PlayerSpaceManager}
+     *
+     * @param players 玩家接口
+     */
+    public PlayerSpaceManager(List<IPlayer> players) {
+        this(players.size());
+        for (int i = 0; i < players.size(); i++) {
+            playerDefaultSpaces.get(i).setSelf(players.get(i));
         }
     }
 

@@ -1,6 +1,7 @@
 package com.github.terralian.fastmaj.player.space;
 
 import java.util.List;
+import java.util.function.BiConsumer;
 
 /**
  * 玩家空间管理器
@@ -8,6 +9,24 @@ import java.util.List;
  * @author Terra.Lian
  */
 public interface IPlayerSpaceManager {
+
+    /**
+     * 为所有玩家统一设置某项的值
+     *
+     * @param data 数据
+     * @param consumer 消费者
+     * @param <T> 值类型
+     */
+    <T> void setState(List<T> data, BiConsumer<PlayerDefaultSpace, T> consumer);
+
+    /**
+     * 为所有玩家统一设置某项的值
+     *
+     * @param data 数据
+     * @param consumer 消费者
+     * @param <T> 值类型
+     */
+    <T> void setState(T[] data, BiConsumer<PlayerDefaultSpace, T> consumer);
 
     /**
      * 获取某个玩家的玩家空间

@@ -2,6 +2,7 @@ package com.github.terralian.fastmaj.player.space;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BiConsumer;
 
 import com.github.terralian.fastmaj.player.IPlayer;
 
@@ -50,6 +51,20 @@ public class PlayerSpaceManager implements IPlayerSpaceManager {
     }
 
     @Override
+    public <T> void setState(List<T> data, BiConsumer<PlayerDefaultSpace, T> consumer) {
+        for (int i = 0; i < data.size(); i++) {
+            consumer.accept(playerDefaultSpaces.get(i), data.get(i));
+        }
+    }
+
+    @Override
+    public <T> void setState(T[] data, BiConsumer<PlayerDefaultSpace, T> consumer) {
+        for (int i = 0; i < data.length; i++) {
+            consumer.accept(playerDefaultSpaces.get(i), data[i]);
+        }
+    }
+
+    @Override
     public PlayerDefaultSpace getDefaultSpace(int position) {
         return playerDefaultSpaces.get(position);
     }
@@ -73,14 +88,14 @@ public class PlayerSpaceManager implements IPlayerSpaceManager {
     @Override
     public void resetGameState() {
         for (PlayerDefaultSpace space : playerDefaultSpaces) {
-            space.resetKyokuState();
+            space.resetGameState();
         }
     }
 
     @Override
     public void resetKyokuState() {
         for (PlayerDefaultSpace space : playerDefaultSpaces) {
-            space.resetGameState();
+            space.resetKyokuState();
         }
     }
 }

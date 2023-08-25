@@ -38,6 +38,10 @@ public class PlayerPublicSpace extends PlayerStaticSpace {
     private IHaiRiver haiRiver;
 
     /**
+     * 是否是庄家
+     */
+    private boolean oya = false;
+    /**
      * 是否立直
      */
     private boolean reach = false;

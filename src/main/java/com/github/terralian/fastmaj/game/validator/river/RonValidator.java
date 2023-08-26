@@ -7,7 +7,6 @@ import com.github.terralian.fastmaj.agari.IRonYakuMatcher;
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
-import com.github.terralian.fastmaj.game.PlayerHideStatus;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
@@ -52,8 +51,7 @@ public class RonValidator implements IRiverActionValidator {
             IGameCore gameCore,
             PlayerGameContext context) {
         // 未听牌或者振听
-        PlayerHideStatus hideStatus = gameCore.getPlayerHide(position);
-        if (hideStatus.getSyaten() > 0 || hideStatus.isFuriten()) {
+        if (gameCore.getSyaten(position) > 0 || gameCore.isFuriten(position)) {
             return false;
         }
         // 听的牌是这几枚

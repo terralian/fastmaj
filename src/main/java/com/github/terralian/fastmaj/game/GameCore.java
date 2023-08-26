@@ -785,25 +785,6 @@ public class GameCore implements IGameCore {
     }
 
     /**
-     * {@inheritDoc}
-     */
-    @Override
-    public PlayerHideStatus getPlayerHide() {
-        return getPlayerHide(position);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public PlayerHideStatus getPlayerHide(int position) {
-        PlayerDefaultSpace playerSpace = playerSpaceManager.getDefaultSpace(position);
-        PlayerHideStatus hideStatus = new PlayerHideStatus();
-        hideStatus.setSyaten(playerSpace.getSyaten());
-        return hideStatus;
-    }
-
-    /**
      * 获取总对局数
      */
     @Override
@@ -931,6 +912,16 @@ public class GameCore implements IGameCore {
                 .map(PlayerPublicSpace::getHaiRiver) //
                 .map(IHaiRiver::isSameJun) //
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public int getSyaten(int position) {
+        return playerSpaceManager.getDefaultSpace(position).getSyaten();
+    }
+
+    @Override
+    public boolean isFuriten(int position) {
+        return playerSpaceManager.getDefaultSpace(position).isFuriten();
     }
 
     // --------------------------------------------------------

@@ -39,6 +39,8 @@ public class PlayerDefaultSpace extends PlayerPublicSpace implements IPlayerPriv
 
     /**
      * 是否振听
+     * <p/>
+     * 同巡振听、立直振听、切牌振听
      */
     private boolean furiten = false;
 

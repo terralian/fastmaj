@@ -11,6 +11,9 @@ import com.github.terralian.fastmaj.game.ryuuky.IRyuukyoku;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.player.RivalEnum;
+import com.github.terralian.fastmaj.player.space.IPlayerSpaceManager;
+import com.github.terralian.fastmaj.player.space.PlayerDefaultSpace;
+import com.github.terralian.fastmaj.player.space.PlayerPublicSpace;
 import com.github.terralian.fastmaj.river.HaiRiver;
 import com.github.terralian.fastmaj.river.IHaiRiver;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
@@ -40,6 +43,11 @@ public class GameCore implements IGameCore {
      * 游戏规则
      */
     protected final GameConfig gameConfig;
+
+    /**
+     * 玩家空间管理器
+     */
+    protected IPlayerSpaceManager playerSpaceManager;
     /**
      * 牌山生成器，有值时使用指定的牌山生成器。若未指定，则使用{@link SimpleRandomYamaWorker}
      * <p/>
@@ -118,18 +126,6 @@ public class GameCore implements IGameCore {
     // 玩家区
     // -------------------------------------
     /**
-     * 所有玩家的分数
-     */
-    private int[] playerPoints;
-    /**
-     * 所有玩家的手牌
-     */
-    private List<ITehai> tehais;
-    /**
-     * 所有玩家的牌河
-     */
-    private IHaiRiver[] haiRivers;
-    /**
      * 玩家隐藏状态
      */
     private PlayerHideStatus[] playerHides;
@@ -137,24 +133,20 @@ public class GameCore implements IGameCore {
      * 日志处理器
      */
     private IGameLogger gameLogger;
-    /**
-     * 玩家集合
-     */
-    private List<IPlayer> players;
 
     /**
      * 初始化构建游戏内核
      *
-     * @param players 玩家集合（可选）
+     * @param playerSpaceManager 玩家空间管理器
      * @param gameConfig 游戏规则
      * @param yamaWorker 牌山生成器
      * @param syatenCalculator 向听计算器
      * @param gameLogger 日志处理器
      */
-    public GameCore(List<IPlayer> players, GameConfig gameConfig, IYamaWorker yamaWorker,
+    public GameCore(IPlayerSpaceManager playerSpaceManager, GameConfig gameConfig, IYamaWorker yamaWorker,
             ISyatenCalculator syatenCalculator, IGameLogger gameLogger) {
         this.playerSize = gameConfig.getPlayerSize();
-        this.players = players;
+        this.playerSpaceManager = playerSpaceManager;
         this.gameConfig = gameConfig;
         this.yamaWorker = yamaWorker;
         this.syatenCalculator = syatenCalculator;
@@ -188,20 +180,22 @@ public class GameCore implements IGameCore {
         // 无动作
         actionCount = 0;
 
-        // 初始化玩家分数
-        playerPoints = new int[playerSize];
-        // 玩家牌河
-        haiRivers = new HaiRiver[playerSize];
+        playerSpaceManager.resetGameState();
         // 初始化玩家隐藏状态
         playerHides = new PlayerHideStatus[playerSize];
         for (int i = 0; i < playerSize; i++) {
-            playerPoints[i] = gameConfig.getStartPoint();
-            haiRivers[i] = new HaiRiver(i);
+            PlayerDefaultSpace playerSpace = playerSpaceManager.getDefaultSpace(i);
+            playerSpace.setPlayerPoint(gameConfig.getStartPoint());
+            playerSpace.setHaiRiver(new HaiRiver(i));
             playerHides[i] = new PlayerHideStatus();
         }
         // 初始化对局状态
         resetKyokuStatus();
         // 日志处理
+        List<IPlayer> players = playerSpaceManager.getDefaultSpaces()
+                .stream()
+                .map(PlayerDefaultSpace::getSelf)
+                .collect(Collectors.toList());
         gameLogger.gameStart(players, this);
     }
 
@@ -216,7 +210,7 @@ public class GameCore implements IGameCore {
     public void endGame(int[] increaseAndDecrease) {
         gameState.requireGameStarted();
         gameState = GameState.GAME_UN_START;
-        this.playerPoints = increaseAndDecrease;
+        playerSpaceManager.setState(increaseAndDecrease, PlayerPublicSpace::setPlayerPoint);
         // 日志处理
         gameLogger.gameEnd();
     }
@@ -250,7 +244,8 @@ public class GameCore implements IGameCore {
         // 初始化牌山
         nextYama();
         // 初始化手牌和牌河
-        tehais = yama.deals(oya);
+        List<ITehai> tehais = yama.deals(oya);
+        playerSpaceManager.setState(tehais, PlayerDefaultSpace::setTehai);
         // 重算向听
         for (int i = 0; i < playerSize; i++) {
             calcPlayerSyaten(i);
@@ -283,11 +278,10 @@ public class GameCore implements IGameCore {
      * 重置对局状态
      */
     private void resetKyokuStatus() {
+        // 重置对局状态
+        playerSpaceManager.resetKyokuState();
         // 玩家手牌，由牌山初始化
-        tehais = null;
         for (int i = 0; i < playerSize; i++) {
-            // 牌河
-            haiRivers[i].clear();
             // 重置玩家隐藏状态
             playerHides[i].reset();
         }
@@ -344,7 +338,7 @@ public class GameCore implements IGameCore {
         gameState.requireForDraw();
         gameState = GameState.WAIT_TEHAI_ACTION;
 
-        ITehai tehai = tehais.get(position);
+        ITehai tehai = getTehai(position);
         IHai hai = null;
         switch (drawFrom) {
             case YAMA:
@@ -380,19 +374,19 @@ public class GameCore implements IGameCore {
         gameState = GameState.WAIT_RIVER_ACTION;
 
         // 牌河增加该牌
-        IHaiRiver haiRiver = haiRivers[position];
+        IHaiRiver haiRiver = getHaiRiver(position);
         if (reach) {
             // 两立直，仅在第一巡同巡操作
-            boolean isDoubleReach = haiRiver.isEmpty() && haiRivers[position].isSameFirstJun();
+            boolean isDoubleReach = haiRiver.isEmpty() && haiRiver.isSameFirstJun();
             haiRiver.reach(hai, isDoubleReach);
             // 设置同巡状态
-            haiRivers[position].setSameJun(true);
+            haiRiver.setSameJun(true);
         } else {
             haiRiver.kiri(hai);
         }
 
         // 手牌切掉该牌
-        ITehai tehai = tehais.get(position);
+        ITehai tehai = getTehai(position);
         boolean handKiri = tehai.kiri(hai);
 
         // 计算向听
@@ -409,7 +403,7 @@ public class GameCore implements IGameCore {
     public void reach2(int[] increaseAndDecrease) {
         gameState.requireKyokuStarted();
         // 更新分数
-        this.playerPoints = increaseAndDecrease;
+        this.playerSpaceManager.setState(increaseAndDecrease, PlayerPublicSpace::setPlayerPoint);
         // 增加场供
         kyotaku++;
         // 日志处理
@@ -443,8 +437,8 @@ public class GameCore implements IGameCore {
         gameState.requireWaitRiverAction();
         gameState = GameState.WAIT_TEHAI_ACTION;
 
-        ITehai tehai = tehais.get(position);
-        IHaiRiver fromRiver = haiRivers[fromPosition];
+        ITehai tehai = getTehai(position);
+        IHaiRiver fromRiver = getHaiRiver(fromPosition);
         IHai nakiHai = fromRiver.naki(position, NakiEnum.CHII);
         tehai.chii(nakiHai, selfHai1, selfHai2);
         // 移除同巡标识
@@ -472,8 +466,8 @@ public class GameCore implements IGameCore {
         gameState.requireWaitRiverAction();
         gameState = GameState.WAIT_TEHAI_ACTION;
 
-        ITehai tehai = tehais.get(position);
-        IHaiRiver fromRiver = haiRivers[fromPosition];
+        ITehai tehai = getTehai(position);
+        IHaiRiver fromRiver = getHaiRiver(fromPosition);
         IHai nakiHai = fromRiver.naki(position, NakiEnum.PON);
 
         tehai.pon(nakiHai, redFirst, RivalEnum.calc(position, fromPosition));
@@ -501,8 +495,8 @@ public class GameCore implements IGameCore {
         gameState.requireWaitRiverAction();
         gameState = GameState.WAIT_RIVER_ACTION;
 
-        ITehai tehai = tehais.get(position);
-        IHaiRiver fromRiver = haiRivers[fromPosition];
+        ITehai tehai = getTehai(position);
+        IHaiRiver fromRiver = getHaiRiver(fromPosition);
         IHai nakiHai = fromRiver.naki(position, NakiEnum.KAN);
         tehai.minkan(nakiHai, RivalEnum.calc(position, fromPosition));
         // 移除同巡标识
@@ -529,7 +523,7 @@ public class GameCore implements IGameCore {
         gameState.requireWaitTehaiAction();
         gameState = GameState.WAIT_RIVER_ACTION;
 
-        ITehai tehai = tehais.get(position);
+        ITehai tehai = getTehai(position);
         tehai.kakan(hai);
         // 计算向听
         calcCurrentPlayerSyaten();
@@ -553,7 +547,7 @@ public class GameCore implements IGameCore {
         gameState.requireWaitTehaiAction();
         gameState = GameState.WAIT_RIVER_ACTION;
 
-        ITehai tehai = tehais.get(position);
+        ITehai tehai = getTehai(position);
         tehai.annkan(hai);
         // 计算第一巡同巡
         setSameFirstJun(position, position);
@@ -575,7 +569,7 @@ public class GameCore implements IGameCore {
         gameState.requireWaitTehaiAction();
         gameState = GameState.WAIT_RIVER_ACTION;
 
-        ITehai tehai = tehais.get(position);
+        ITehai tehai = getTehai(position);
         tehai.kita(hai);
         // 计算第一巡同巡
         setSameFirstJun(position, position);
@@ -606,7 +600,7 @@ public class GameCore implements IGameCore {
         gameState.requireKyokuStarted();
 
         // 更新分数
-        this.playerPoints = increaseAndDecrease;
+        this.playerSpaceManager.setState(increaseAndDecrease, PlayerPublicSpace::setPlayerPoint);
         // 供托清空
         this.kyotaku = 0;
         // 本场实际值清空
@@ -632,7 +626,7 @@ public class GameCore implements IGameCore {
         gameState.requireKyokuStarted();
         gameState = GameState.KYOKU_END;
         // 更新分数
-        this.playerPoints = increaseAndDecrease;
+        this.playerSpaceManager.setState(increaseAndDecrease, PlayerPublicSpace::setPlayerPoint);
         // 流局类型
         kyokuEndEnum = ryuukyoku.isHalfway() ? KyokuEndEnum.HALF_RYUUKYOKU : KyokuEndEnum.RYUUKYOKU;
         // 日志处理
@@ -666,7 +660,7 @@ public class GameCore implements IGameCore {
      */
     @Override
     public IPlayer getPlayer() {
-        return players.get(position);
+        return getPlayer(position);
     }
 
     /**
@@ -674,7 +668,7 @@ public class GameCore implements IGameCore {
      */
     @Override
     public IPlayer getPlayer(int position) {
-        return players.get(position);
+        return playerSpaceManager.getState(position, PlayerDefaultSpace::getSelf);
     }
 
     /**
@@ -684,7 +678,7 @@ public class GameCore implements IGameCore {
      */
     @Override
     public void setPlayers(List<IPlayer> players) {
-        this.players = players;
+        playerSpaceManager.setState(players, PlayerDefaultSpace::setSelf);
     }
 
     /**
@@ -729,7 +723,10 @@ public class GameCore implements IGameCore {
      */
     @Override
     public int[] getPlayerPoints() {
-        return this.playerPoints;
+        return playerSpaceManager.getDefaultSpaces() //
+                .stream() //
+                .mapToInt(PlayerPublicSpace::getPlayerPoint) //
+                .toArray();
     }
 
     /**
@@ -739,7 +736,7 @@ public class GameCore implements IGameCore {
      */
     @Override
     public void setPlayerPoints(int[] playerPoints) {
-        this.playerPoints = playerPoints;
+        playerSpaceManager.setState(playerPoints, PlayerPublicSpace::setPlayerPoint);
     }
 
     /**
@@ -747,7 +744,7 @@ public class GameCore implements IGameCore {
      */
     @Override
     public ITehai getTehai() {
-        return tehais.get(position);
+        return getTehai(position);
     }
 
     /**
@@ -757,7 +754,7 @@ public class GameCore implements IGameCore {
      */
     @Override
     public ITehai getTehai(int position) {
-        return tehais.get(position);
+        return playerSpaceManager.getState(position, PlayerDefaultSpace::getTehai);
     }
 
     /**
@@ -765,7 +762,10 @@ public class GameCore implements IGameCore {
      */
     @Override
     public List<ITehai> getTehais() {
-        return tehais;
+        return playerSpaceManager.getDefaultSpaces() //
+                .stream() //
+                .map(PlayerDefaultSpace::getTehai) //
+                .collect(Collectors.toList());
     }
 
     /**
@@ -773,7 +773,7 @@ public class GameCore implements IGameCore {
      */
     @Override
     public IHaiRiver getHaiRiver() {
-        return haiRivers[position];
+        return getHaiRiver(position);
     }
 
     /**
@@ -783,7 +783,7 @@ public class GameCore implements IGameCore {
      */
     @Override
     public IHaiRiver getHaiRiver(int position) {
-        return haiRivers[position];
+        return playerSpaceManager.getState(position, PlayerPublicSpace::getHaiRiver);
     }
 
     /**
@@ -791,7 +791,10 @@ public class GameCore implements IGameCore {
      */
     @Override
     public List<IHaiRiver> getHaiRivers() {
-        return Arrays.asList(haiRivers);
+        return playerSpaceManager.getDefaultSpaces()
+                .stream() //
+                .map(PlayerPublicSpace::getHaiRiver) //
+                .collect(Collectors.toList());
     }
 
     /**
@@ -929,7 +932,9 @@ public class GameCore implements IGameCore {
      */
     @Override
     public List<Boolean> getReachs() {
-        return Arrays.stream(haiRivers) //
+        return playerSpaceManager.getDefaultSpaces() //
+                .stream() //
+                .map(PlayerPublicSpace::getHaiRiver) //
                 .map(IHaiRiver::isReach) //
                 .collect(Collectors.toList());
     }
@@ -939,7 +944,9 @@ public class GameCore implements IGameCore {
      */
     @Override
     public List<Boolean> getSameRounds() {
-        return Arrays.stream(haiRivers) //
+        return playerSpaceManager.getDefaultSpaces() //
+                .stream() //
+                .map(PlayerPublicSpace::getHaiRiver) //
                 .map(IHaiRiver::isSameJun) //
                 .collect(Collectors.toList());
     }
@@ -985,9 +992,7 @@ public class GameCore implements IGameCore {
      */
     @Override
     public void breakSameJun() {
-        for (int i = 0; i < playerSize; i++) {
-            haiRivers[i].setSameJun(false);
-        }
+        playerSpaceManager.foreach(s -> s.getHaiRiver().setSameJun(false));
     }
 
     @Override
@@ -1075,12 +1080,13 @@ public class GameCore implements IGameCore {
         KazeEnum fromKaze = KazeEnum.jiKaze(fromPosition, oya);
         KazeEnum startKaze = fromPosition == actionPosition ? fromKaze : KazeEnum.next(fromKaze);
         int startPlayer = KazeEnum.getKazePlayer(startKaze.getOrder(), oya);
-        if (!haiRivers[startPlayer].isEmpty() || !haiRivers[startPlayer].isSameFirstJun()) {
+        IHaiRiver startPlayerRiver = getHaiRiver(startPlayer);
+        if (!startPlayerRiver.isEmpty() || !startPlayerRiver.isSameFirstJun()) {
             return;
         }
         for (int i = startKaze.getOrder(); i < playerSize; i++) {
             int p = KazeEnum.getKazePlayer(i, oya);
-            haiRivers[p].setSameFirstJun(false);
+            getHaiRiver(p).setSameFirstJun(false);
         }
     }
 

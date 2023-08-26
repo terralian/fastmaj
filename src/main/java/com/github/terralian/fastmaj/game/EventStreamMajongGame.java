@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.github.terralian.fastmaj.game.log.IGameLogger;
 import com.github.terralian.fastmaj.player.IPlayer;
+import com.github.terralian.fastmaj.player.space.IPlayerSpaceManager;
+import com.github.terralian.fastmaj.player.space.PlayerSpaceManager;
 
 /**
  * @author Terra.Lian
@@ -26,7 +28,8 @@ public class EventStreamMajongGame extends EventMajongGame {
     public EventStreamMajongGame(List<? extends IPlayer> players, GameConfig gameConfig, GameComponent gameComponent) {
         this(gameConfig, null, gameComponent, new GameEventQueue());
         IGameLogger logger = gameComponent.getChainGameLoggerBuilder().build();
-        this.gameCore = new GameCore((List<IPlayer>) players, gameConfig, gameComponent.getYamaWorker(),
+        IPlayerSpaceManager playerSpaceManager = new PlayerSpaceManager(players);
+        this.gameCore = new GameCore(playerSpaceManager, gameConfig, gameComponent.getYamaWorker(),
                 gameComponent.getSyatenCalculator(), logger);
     }
 

@@ -63,10 +63,10 @@ public class PrintGameLogger implements IGameLogger {
         System.out.println("==============================================");
         System.out.println(MessageFormat.format("对局开始：{0}{1}局，庄家：玩家{1}", bakaze, oya + 1));
         System.out.println("配牌:");
-        System.out.println("玩家1:" + EncodeMark.encode(haipais.get(0)) + " 向听数：" + gameCore.getPlayerHide(0).getSyaten());
-        System.out.println("玩家2:" + EncodeMark.encode(haipais.get(1)) + " 向听数：" + gameCore.getPlayerHide(1).getSyaten());
-        System.out.println("玩家3:" + EncodeMark.encode(haipais.get(2)) + " 向听数：" + gameCore.getPlayerHide(2).getSyaten());
-        System.out.println("玩家4:" + EncodeMark.encode(haipais.get(3)) + " 向听数：" + gameCore.getPlayerHide(3).getSyaten());
+        System.out.println("玩家1:" + EncodeMark.encode(haipais.get(0)) + " 向听数：" + gameCore.getSyaten(0));
+        System.out.println("玩家2:" + EncodeMark.encode(haipais.get(1)) + " 向听数：" + gameCore.getSyaten(1));
+        System.out.println("玩家3:" + EncodeMark.encode(haipais.get(2)) + " 向听数：" + gameCore.getSyaten(2));
+        System.out.println("玩家4:" + EncodeMark.encode(haipais.get(3)) + " 向听数：" + gameCore.getSyaten(3));
         System.out.println("---");
     }
 
@@ -106,7 +106,7 @@ public class PrintGameLogger implements IGameLogger {
                 gameCore.getYamaCountdown(), //
                 position + 1, //
                 hai.toIdString(), //
-                gameCore.getPlayerHide(position).getSyaten(), //
+                gameCore.getSyaten(position), //
                 gameCore.getActionCount()
         );
         System.out.println(message);
@@ -126,7 +126,7 @@ public class PrintGameLogger implements IGameLogger {
                 handKiri ? "手切" : "模切", //
                 hai.toIdString(), //
                 reach ? "(立直)" : "", //
-                gameCore.getPlayerHide(position).getSyaten(), //
+                gameCore.getSyaten(position), //
                 gameCore.getActionCount()
         );
         System.out.println(message);
@@ -243,7 +243,8 @@ public class PrintGameLogger implements IGameLogger {
     }
 
     @Override
-    public void ron(int position, int fromPosition, List<IYaku> yakus, int ban, int fu, int score, int[] increaseAndDecrease) {
+    public void ron(int position, int fromPosition, List<IYaku> yakus, int ban, int fu, int score,
+            int[] increaseAndDecrease) {
         if (!shortKyokuSummary) {
             System.out.println("--------------------------------------------");
         }

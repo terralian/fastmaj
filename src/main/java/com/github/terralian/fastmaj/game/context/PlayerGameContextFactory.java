@@ -45,8 +45,8 @@ public class PlayerGameContextFactory {
                 .setTehaiLocks(CollectionUtil.mapToList(gameCore.getTehais(), ITehai::getLock))
                 .setPosition(position) //
                 .setJikaze(KazeEnum.jiKaze(position, gameCore.getOya())) //
-                .setFuriten(gameCore.getPlayerHide().isFuriten()) //
-                .setSyaten(gameCore.getPlayerHide().getSyaten()) //
+                .setFuriten(gameCore.isFuriten(position)) //
+                .setSyaten(gameCore.getSyaten(position)) //
                 .setTehai(gameCore.getTehai(position)) //
                 .setLastTehaiActionType(lastActionType) //
                 .setLastRiverAction(gameCore.getLastRiverAction()) //

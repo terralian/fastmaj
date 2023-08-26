@@ -286,18 +286,6 @@ public interface IGameCore {
     List<IHaiRiver> getHaiRivers();
 
     /**
-     * 当前玩家的隐藏状态
-     */
-    PlayerHideStatus getPlayerHide();
-
-    /**
-     * 获取某个的隐藏状态
-     *
-     * @param position 玩家的坐席
-     */
-    PlayerHideStatus getPlayerHide(int position);
-
-    /**
      * 获取总对局数
      */
     int getRound();
@@ -387,6 +375,20 @@ public interface IGameCore {
      * 获取玩家是否同巡标识
      */
     List<Boolean> getSameRounds();
+
+    /**
+     * 获取某个玩家当前的向听数
+     *
+     * @param position 玩家坐席
+     */
+    int getSyaten(int position);
+
+    /**
+     * 某个玩家是否处于振听状态
+     *
+     * @param position 玩家坐席
+     */
+    boolean isFuriten(int position);
 
     // --------------------------------------------------------
     // 持有，但是仅在外部使用的部分，用于值的传播

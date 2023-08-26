@@ -7,11 +7,10 @@ import com.github.terralian.fastmaj.agari.IPointCalculator;
 import com.github.terralian.fastmaj.agari.PointCalculator;
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
-import com.github.terralian.fastmaj.game.PlayerHideStatus;
 
 /**
  * 荒牌流局
- * 
+ *
  * @author terra.lian
  */
 public class NormalRyuukyokuResolver implements IRyuukyokuResolver {
@@ -36,15 +35,14 @@ public class NormalRyuukyokuResolver implements IRyuukyokuResolver {
         int[] playerPoints = gameCore.getPlayerPoints();
         Set<Integer> tenpais = new HashSet<>();
         for (int i = 0; i < gameCore.getPlayerSize(); i++) {
-            PlayerHideStatus playerHides = gameCore.getPlayerHide(i);
-            if (playerHides.getSyaten() <= 0) {
+            if (gameCore.getSyaten(i) <= 0) {
                 tenpais.add(i);
             }
         }
         pointCalculator.ryuukyokuTransfer(tenpais, 1000, playerPoints);
         gameCore.ryuukyoku(this, playerPoints);
         // 看是否连庄
-        gameCore.setRenchan(gameCore.getPlayerHide(gameCore.getOya()).getSyaten() <= 0, false);
+        gameCore.setRenchan(gameCore.getSyaten(gameCore.getOya()) <= 0, false);
     }
 
     @Override

@@ -10,7 +10,7 @@ import com.github.terralian.fastmaj.river.IHaiRiver;
 
 /**
  * 流局满贯
- * 
+ *
  * @author terra.lian
  */
 public class ManganRyuukyokuResolver implements IRyuukyokuResolver {
@@ -40,7 +40,7 @@ public class ManganRyuukyokuResolver implements IRyuukyokuResolver {
 
     /**
      * 存在一个牌河，没有被鸣牌，且所有的弃牌都是幺九牌
-     * 
+     *
      * @param haiRiver 牌河
      */
     private boolean isRyuukyokuMangan(IHaiRiver haiRiver) {
@@ -74,7 +74,7 @@ public class ManganRyuukyokuResolver implements IRyuukyokuResolver {
         }
         gameCore.ryuukyoku(this, playerPoints);
         // 庄家听牌则连庄
-        boolean isOyaRenchan = gameCore.getPlayerHide(gameCore.getOya()).getSyaten() == 0;
+        boolean isOyaRenchan = gameCore.getSyaten(gameCore.getOya()) == 0;
         gameCore.setRenchan(isOyaRenchan, false);
     }
 

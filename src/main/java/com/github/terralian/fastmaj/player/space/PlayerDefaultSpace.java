@@ -90,7 +90,9 @@ public class PlayerDefaultSpace extends PlayerPublicSpace implements IPlayerPriv
      */
     public void resetKyokuState() {
         this.setTehaiLock(null);
-        this.setHaiRiver(null);
+        if (this.getHaiRiver() != null) {
+            this.getHaiRiver().clear();
+        }
         this.setReach(false);
         this.setLastTehaiActionType(null);
         this.setLastRiverActionType(null);

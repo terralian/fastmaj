@@ -2,6 +2,8 @@ package com.github.terralian.fastmaj.player.space;
 
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * 玩家空间管理器
@@ -29,12 +31,43 @@ public interface IPlayerSpaceManager {
     <T> void setState(T[] data, BiConsumer<PlayerDefaultSpace, T> consumer);
 
     /**
+     * 为所有玩家统一设置某项的值
+     *
+     * @param data 数据
+     * @param consumer 消费者
+     */
+    void setState(int[] data, BiConsumer<PlayerDefaultSpace, Integer> consumer);
+
+    /**
+     * 获取某个玩家的某个属性
+     *
+     * @param position 玩家坐席
+     * @param mapper 键值获取
+     * @param <T> 值类型
+     */
+    <T> T getState(int position, Function<PlayerDefaultSpace, T> mapper);
+
+    /**
+     * 为所有玩家统一设置某项的值
+     *
+     * @param consumer 数据
+     * @param consumer 消费者
+     * @param <T> 值类型
+     */
+    <T> void foreach(Consumer<PlayerDefaultSpace> consumer);
+
+    /**
      * 获取某个玩家的玩家空间
      *
      * @param position 玩家坐席
      * @apiNote 该接口获取的数据为实际数据的引用，对该数据的修改也会反馈到内部中。
      */
     PlayerDefaultSpace getDefaultSpace(int position);
+
+    /**
+     * 获取所有玩家的玩家空间
+     */
+    List<PlayerDefaultSpace> getDefaultSpaces();
 
     /**
      * 复制一份某位玩家的玩家默认空间

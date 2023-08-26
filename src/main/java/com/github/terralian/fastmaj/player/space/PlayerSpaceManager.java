@@ -3,6 +3,8 @@ package com.github.terralian.fastmaj.player.space;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 import com.github.terralian.fastmaj.player.IPlayer;
 
@@ -43,7 +45,7 @@ public class PlayerSpaceManager implements IPlayerSpaceManager {
      *
      * @param players 玩家接口
      */
-    public PlayerSpaceManager(List<IPlayer> players) {
+    public PlayerSpaceManager(List<? extends IPlayer> players) {
         this(players.size());
         for (int i = 0; i < players.size(); i++) {
             playerDefaultSpaces.get(i).setSelf(players.get(i));
@@ -65,8 +67,32 @@ public class PlayerSpaceManager implements IPlayerSpaceManager {
     }
 
     @Override
+    public void setState(int[] data, BiConsumer<PlayerDefaultSpace, Integer> consumer) {
+        for (int i = 0; i < data.length; i++) {
+            consumer.accept(playerDefaultSpaces.get(i), data[i]);
+        }
+    }
+
+    @Override
+    public <T> void foreach(Consumer<PlayerDefaultSpace> consumer) {
+        for (PlayerDefaultSpace playerDefaultSpace : playerDefaultSpaces) {
+            consumer.accept(playerDefaultSpace);
+        }
+    }
+
+    @Override
+    public <T> T getState(int position, Function<PlayerDefaultSpace, T> mapper) {
+        return mapper.apply(playerDefaultSpaces.get(position));
+    }
+
+    @Override
     public PlayerDefaultSpace getDefaultSpace(int position) {
         return playerDefaultSpaces.get(position);
+    }
+
+    @Override
+    public List<PlayerDefaultSpace> getDefaultSpaces() {
+        return playerDefaultSpaces;
     }
 
     @Override

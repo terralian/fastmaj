@@ -7,6 +7,7 @@ import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.log.ChainGameLoggerBuilder;
 import com.github.terralian.fastmaj.game.log.IGameLogger;
 import com.github.terralian.fastmaj.game.log.PrintGameLogger;
+import com.github.terralian.fastmaj.player.space.PlayerSpaceManager;
 import com.github.terralian.fastmaj.tehai.FastSyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.yama.IYamaWorker;
@@ -14,13 +15,11 @@ import com.github.terralian.fastmaj.yama.worker.common.SimpleRandomYamaWorker;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.assertEquals;
 
 /**
  * {@link GameCore}的测试类
- * 
+ *
  * @author terra.lian
  */
 public class GameCoreTest {
@@ -40,7 +39,7 @@ public class GameCoreTest {
         IGameLogger gameLogger = ChainGameLoggerBuilder.newBuilder() //
                 .addLogger(new PrintGameLogger()) //
                 .build();
-        IGameCore gameCore = new GameCore(new ArrayList<>(), config, yamaWorker, syatenCalculator, gameLogger);
+        IGameCore gameCore = new GameCore(new PlayerSpaceManager(4), config, yamaWorker, syatenCalculator, gameLogger);
         gameCore.startGame();
         assertEquals(KazeEnum.DON, gameCore.getBakaze());
         assertEquals(0, gameCore.getHonba());
@@ -59,7 +58,7 @@ public class GameCoreTest {
         IGameLogger gameLogger = ChainGameLoggerBuilder.newBuilder() //
                 .addLogger(new PrintGameLogger()) //
                 .build();
-        IGameCore gameCore = new GameCore(new ArrayList<>(), config, yamaWorker, syatenCalculator, gameLogger);
+        IGameCore gameCore = new GameCore(new PlayerSpaceManager(4), config, yamaWorker, syatenCalculator, gameLogger);
         gameCore.startGame();
         assertEquals(0, gameCore.nextKyoku());
     }
@@ -70,7 +69,7 @@ public class GameCoreTest {
         IGameLogger gameLogger = ChainGameLoggerBuilder.newBuilder() //
                 .addLogger(new PrintGameLogger()) //
                 .build();
-        IGameCore gameCore = new GameCore(new ArrayList<>(), config, yamaWorker, syatenCalculator, gameLogger);
+        IGameCore gameCore = new GameCore(new PlayerSpaceManager(4), config, yamaWorker, syatenCalculator, gameLogger);
         gameCore.nextKyoku();
     }
 }

@@ -79,6 +79,7 @@ public abstract class AbstractTenhouSpecialSamplePaifuTest extends AbstractTenho
 
         simulate_run_game("2014050821gm-0041-0000-a1298f1a&tw=2.mjlog", true);
         simulate_run_game("2014050911gm-0041-0000-01181f16&tw=0.mjlog", true);
+        // 东一局4本场，有多个立直棒及本场分
         simulate_run_game("2014051313gm-0041-0000-c47daaf7&tw=2.mjlog", true);
         simulate_run_game("2014051511gm-0041-0000-a29f5b7b&tw=1.mjlog", true);
         simulate_run_game("2014052604gm-0041-0000-dc1795af&tw=3.mjlog", true);

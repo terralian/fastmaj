@@ -37,7 +37,7 @@ public class GameEndAction implements IGameAction, ISystemGameEventHandler {
     public void doAction(GameConfig config, IGameCore gameCore) {
         // 剩余场供处理
         int[] playerPoints = gameCore.getPlayerPoints();
-        calculator.gameEndRyuukyoku(gameCore.getKyotaku(), gameCore.getPlayerPoints());
+        calculator.gameEndRyuukyoku(gameCore.getKyotaku(), playerPoints);
         gameCore.endGame(playerPoints);
     }
 

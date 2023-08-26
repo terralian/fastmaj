@@ -298,11 +298,6 @@ public interface IGameCore {
     PlayerHideStatus getPlayerHide(int position);
 
     /**
-     * 获取所有隐藏状态
-     */
-    List<PlayerHideStatus> getPlayerHides();
-
-    /**
      * 获取总对局数
      */
     int getRound();

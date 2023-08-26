@@ -1,6 +1,5 @@
 package com.github.terralian.fastmaj.game;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -126,10 +125,6 @@ public class GameCore implements IGameCore {
     // 玩家区
     // -------------------------------------
     /**
-     * 玩家隐藏状态
-     */
-    private PlayerHideStatus[] playerHides;
-    /**
      * 日志处理器
      */
     private IGameLogger gameLogger;
@@ -181,13 +176,10 @@ public class GameCore implements IGameCore {
         actionCount = 0;
 
         playerSpaceManager.resetGameState();
-        // 初始化玩家隐藏状态
-        playerHides = new PlayerHideStatus[playerSize];
         for (int i = 0; i < playerSize; i++) {
             PlayerDefaultSpace playerSpace = playerSpaceManager.getDefaultSpace(i);
             playerSpace.setPlayerPoint(gameConfig.getStartPoint());
             playerSpace.setHaiRiver(new HaiRiver(i));
-            playerHides[i] = new PlayerHideStatus();
         }
         // 初始化对局状态
         resetKyokuStatus();
@@ -280,11 +272,6 @@ public class GameCore implements IGameCore {
     private void resetKyokuStatus() {
         // 重置对局状态
         playerSpaceManager.resetKyokuState();
-        // 玩家手牌，由牌山初始化
-        for (int i = 0; i < playerSize; i++) {
-            // 重置玩家隐藏状态
-            playerHides[i].reset();
-        }
         // 是否连庄设置为false
         renchan = false;
         // 最近玩家操作清空
@@ -802,7 +789,7 @@ public class GameCore implements IGameCore {
      */
     @Override
     public PlayerHideStatus getPlayerHide() {
-        return playerHides[position];
+        return getPlayerHide(position);
     }
 
     /**
@@ -810,15 +797,10 @@ public class GameCore implements IGameCore {
      */
     @Override
     public PlayerHideStatus getPlayerHide(int position) {
-        return playerHides[position];
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<PlayerHideStatus> getPlayerHides() {
-        return Arrays.asList(playerHides);
+        PlayerDefaultSpace playerSpace = playerSpaceManager.getDefaultSpace(position);
+        PlayerHideStatus hideStatus = new PlayerHideStatus();
+        hideStatus.setSyaten(playerSpace.getSyaten());
+        return hideStatus;
     }
 
     /**
@@ -1103,6 +1085,6 @@ public class GameCore implements IGameCore {
      * @param p 玩家坐席
      */
     private void calcPlayerSyaten(int p) {
-        playerHides[p].setSyaten(syatenCalculator.calcMin(getTehai(p).getHand()));
+        playerSpaceManager.getDefaultSpace(p).setSyaten(syatenCalculator.calcMin(getTehai(p).getHand()));
     }
 }

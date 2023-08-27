@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
- * 玩家的游戏上下文
+ * 玩家的游戏上下文，包含游戏信息及当前玩家可见的自身信息及其他玩家的公开信息
  *
  * @author terra.lian
  */

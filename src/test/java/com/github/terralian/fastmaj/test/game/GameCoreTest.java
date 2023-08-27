@@ -42,7 +42,7 @@ public class GameCoreTest {
         IGameCore gameCore = new GameCore(new PlayerSpaceManager(4), config, yamaWorker, syatenCalculator, gameLogger);
         gameCore.startGame();
         assertEquals(KazeEnum.DON, gameCore.getBakaze());
-        assertEquals(0, gameCore.getHonba());
+        assertEquals(0, gameCore.getDisplayHonba());
         assertEquals(0, gameCore.getKyotaku());
         assertEquals(-1, gameCore.getOya());
         assertEquals(4, gameCore.getPlayerSize());

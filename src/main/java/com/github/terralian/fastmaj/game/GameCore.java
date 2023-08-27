@@ -801,7 +801,7 @@ public class GameCore implements IGameCore {
      * 获取本场数（展示值）
      */
     @Override
-    public int getHonba() {
+    public int getDisplayHonba() {
         return honba[1];
     }
 

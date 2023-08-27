@@ -1,6 +1,5 @@
 package com.github.terralian.fastmaj.player.space;
 
-import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.tehai.ITehai;
 
 /**
@@ -9,11 +8,6 @@ import com.github.terralian.fastmaj.tehai.ITehai;
  * @author Terra.Lian
  */
 public interface IPlayerPrivateSpace extends IPlayerSpace {
-
-    /**
-     * 表示玩家本人，返回一个可以进行事件处理的玩家接口
-     */
-    IPlayer getSelf();
 
     /**
      * 玩家的手牌信息

@@ -805,12 +805,6 @@ public class GameCore implements IGameCore {
         return honba[1];
     }
 
-    @Override
-    public void setHonba(int honba) {
-        if (honba < 0) throw new IllegalArgumentException("本场数需要 >= 0 : " + honba);
-        this.honba[0] = this.honba[1] = this.honba[2] = honba;
-    }
-
     /**
      * 获取本场数（实际值）
      */

@@ -214,11 +214,8 @@ public class GameCore implements IGameCore {
 
         // 对局数增加
         round += 1;
-        // 第一局时，不进行庄家切换操作
-        if (round < 0) {
-        }
-        // 连庄或者下一玩家坐庄
-        else if (!renchan) {
+        // 非第一局时，连庄或者下一玩家坐庄
+        if (round >= 0 && !renchan) {
             oya++;
             // 当前庄家已经超过人数时，需要切换到下一位庄家
             if (oya >= playerSize) {

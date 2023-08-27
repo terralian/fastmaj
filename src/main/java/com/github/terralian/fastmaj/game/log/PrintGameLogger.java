@@ -102,7 +102,7 @@ public class PrintGameLogger implements IGameLogger {
         String message = MessageFormat.format("[{7}] {0}{1}局({2}本场) [{3}] 玩家{4} 摸牌 {5} 向听数:{6}", //
                 gameCore.getBakaze(), //
                 gameCore.getOya() + 1, //
-                gameCore.getHonba(), //
+                gameCore.getDisplayHonba(), //
                 gameCore.getYamaCountdown(), //
                 position + 1, //
                 hai.toIdString(), //
@@ -120,7 +120,7 @@ public class PrintGameLogger implements IGameLogger {
         String message = MessageFormat.format("[{9}] {0}{1}局({2}本场) [{3}] 玩家{4} {5} {6}{7} 向听数:{8}", //
                 gameCore.getBakaze(), //
                 gameCore.getOya() + 1, //
-                gameCore.getHonba(), //
+                gameCore.getDisplayHonba(), //
                 gameCore.getYamaCountdown(), //
                 position + 1, //
                 handKiri ? "手切" : "模切", //
@@ -148,7 +148,7 @@ public class PrintGameLogger implements IGameLogger {
         String message = MessageFormat.format("[{9}] {0}{1}局({2}本场) [{3}] 玩家{4}从玩家{5}吃{6}(搭子: {7}{8})", //
                 gameCore.getBakaze(), //
                 gameCore.getOya() + 1, //
-                gameCore.getHonba(), //
+                gameCore.getDisplayHonba(), //
                 gameCore.getYamaCountdown(), //
                 position + 1, //
                 fromPosition + 1, //
@@ -168,7 +168,7 @@ public class PrintGameLogger implements IGameLogger {
         String message = MessageFormat.format("[{7}] {0}{1}局({2}本场) [{3}] 玩家{4}从玩家{5}碰{6}", //
                 gameCore.getBakaze(), //
                 gameCore.getOya() + 1, //
-                gameCore.getHonba(), //
+                gameCore.getDisplayHonba(), //
                 gameCore.getYamaCountdown(), //
                 position + 1, //
                 fromPosition + 1, //
@@ -185,7 +185,7 @@ public class PrintGameLogger implements IGameLogger {
         String message = MessageFormat.format("[{7}] {0}{1}局({2}本场) [{3}] 玩家{4}从玩家{5}杠{6}", //
                 gameCore.getBakaze(), //
                 gameCore.getOya() + 1, //
-                gameCore.getHonba(), //
+                gameCore.getDisplayHonba(), //
                 gameCore.getYamaCountdown(), //
                 position + 1, //
                 fromPosition + 1, //
@@ -202,7 +202,7 @@ public class PrintGameLogger implements IGameLogger {
         String message = MessageFormat.format("[{6}] {0}{1}局({2}本场) [{3}] 玩家{4}加杠{5}", //
                 gameCore.getBakaze(), //
                 gameCore.getOya() + 1, //
-                gameCore.getHonba(), //
+                gameCore.getDisplayHonba(), //
                 gameCore.getYamaCountdown(), //
                 position + 1, //
                 kanHai, //
@@ -218,7 +218,7 @@ public class PrintGameLogger implements IGameLogger {
         String message = MessageFormat.format("[{6}] {0}{1}局({2}本场) [{3}] 玩家{4}暗杠{5}", //
                 gameCore.getBakaze(), //
                 gameCore.getOya() + 1, //
-                gameCore.getHonba(), //
+                gameCore.getDisplayHonba(), //
                 gameCore.getYamaCountdown(), //
                 position + 1, //
                 annkanHai, //
@@ -234,7 +234,7 @@ public class PrintGameLogger implements IGameLogger {
         String message = MessageFormat.format("[{5}] {0}{1}局({2}本场) [{3}] 玩家{4}拔北", //
                 gameCore.getBakaze(), //
                 gameCore.getOya() + 1, //
-                gameCore.getHonba(), //
+                gameCore.getDisplayHonba(), //
                 gameCore.getYamaCountdown(), //
                 position + 1, //
                 hai, //
@@ -251,7 +251,7 @@ public class PrintGameLogger implements IGameLogger {
         String message = MessageFormat.format("[{9}] {0}{1}局({2}本场) 玩家{3}从玩家{4}荣和点{5}({6}番 {7}符) 分数：{8}", //
                 gameCore.getBakaze(), //
                 gameCore.getOya() + 1, //
-                gameCore.getHonba(), //
+                gameCore.getDisplayHonba(), //
                 position + 1, //
                 fromPosition + 1, //
                 score,
@@ -273,7 +273,7 @@ public class PrintGameLogger implements IGameLogger {
         System.out.println(MessageFormat.format("[{8}] {0}{1}局({2}本场) 玩家{3}自摸{4}点({5}番 {6}符) 分数：{7}", //
                 gameCore.getBakaze(), //
                 gameCore.getOya() + 1, //
-                gameCore.getHonba(), //
+                gameCore.getDisplayHonba(), //
                 position + 1, //
                 String.valueOf(score), //
                 ban,  //
@@ -292,7 +292,7 @@ public class PrintGameLogger implements IGameLogger {
         System.out.println(MessageFormat.format("[{5}] {0}{1}局({2}本场) 流局：{3} 分数：{4}", //
                 gameCore.getBakaze(), //
                 gameCore.getOya() + 1, //
-                gameCore.getHonba(), //
+                gameCore.getDisplayHonba(), //
                 ryuukyokuName, //
                 StringUtil.join(",", increaseAndDecrease), //
                 gameCore.getActionCount()

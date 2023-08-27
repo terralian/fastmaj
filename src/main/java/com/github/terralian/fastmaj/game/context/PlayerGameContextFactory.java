@@ -34,7 +34,7 @@ public class PlayerGameContextFactory {
                 .setRound(gameCore.getRound()) //
                 .setActionCount(gameCore.getActionCount()) //
                 .setBakaze(gameCore.getBakaze()) //
-                .setHonba(gameCore.getHonba()) //
+                .setHonba(gameCore.getDisplayHonba()) //
                 .setRealHonba(gameCore.getRealHonba()) //
                 .setKyotaku(gameCore.getKyotaku()) //
                 .setOya(gameCore.getOya()) //

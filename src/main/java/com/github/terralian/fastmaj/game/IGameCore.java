@@ -305,13 +305,6 @@ public interface IGameCore {
     int getHonba();
 
     /**
-     * 设置当前的本场数，将会同时设置实际值与展示值
-     *
-     * @param honba 本场数
-     */
-    void setHonba(int honba);
-
-    /**
      * 获取本场数的实际值，本场数的展示值和实际值仅在多人荣和时存在差异。
      * <p/>
      * 当荣和数大于1时，仅有第一位荣和者会计算增加本场棒，

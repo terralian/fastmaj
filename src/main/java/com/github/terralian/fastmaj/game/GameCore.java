@@ -391,12 +391,13 @@ public class GameCore implements IGameCore {
     /**
      * 从玩家的牌河吃一张牌
      *
+     * @param position
      * @param fromPosition 被吃牌的玩家
      * @param selfHai1 自家的搭子1
      * @param selfHai2 自家的搭子2
      */
     @Override
-    public IHai chii(int fromPosition, IHai selfHai1, IHai selfHai2) {
+    public IHai chii(int position, int fromPosition, IHai selfHai1, IHai selfHai2) {
         gameState.requireWaitRiverAction();
         gameState = GameState.WAIT_TEHAI_ACTION;
 
@@ -425,7 +426,7 @@ public class GameCore implements IGameCore {
      * @param redFirst 红宝牌做搭子优先
      */
     @Override
-    public IHai pon(int fromPosition, boolean redFirst) {
+    public IHai pon(int position, int fromPosition, boolean redFirst) {
         gameState.requireWaitRiverAction();
         gameState = GameState.WAIT_TEHAI_ACTION;
 
@@ -454,7 +455,7 @@ public class GameCore implements IGameCore {
      * @param fromPosition 被杠的玩家
      */
     @Override
-    public IHai minkan(int fromPosition) {
+    public IHai minkan(int position, int fromPosition) {
         gameState.requireWaitRiverAction();
         gameState = GameState.WAIT_RIVER_ACTION;
 
@@ -482,7 +483,7 @@ public class GameCore implements IGameCore {
      * @param hai 操作的牌
      */
     @Override
-    public void kakan(IHai hai) {
+    public void kakan(int position, IHai hai) {
         gameState.requireWaitTehaiAction();
         gameState = GameState.WAIT_RIVER_ACTION;
 
@@ -506,7 +507,7 @@ public class GameCore implements IGameCore {
      * @param hai 暗杠的牌
      */
     @Override
-    public void annkan(IHai hai) {
+    public void annkan(int position, IHai hai) {
         gameState.requireWaitTehaiAction();
         gameState = GameState.WAIT_RIVER_ACTION;
 
@@ -528,7 +529,7 @@ public class GameCore implements IGameCore {
      * @param hai 拔北的牌
      */
     @Override
-    public void kita(IHai hai) {
+    public void kita(int position, IHai hai) {
         gameState.requireWaitTehaiAction();
         gameState = GameState.WAIT_RIVER_ACTION;
 
@@ -622,14 +623,6 @@ public class GameCore implements IGameCore {
      * {@inheritDoc}
      */
     @Override
-    public IPlayer getPlayer() {
-        return getPlayer(position);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public IPlayer getPlayer(int position) {
         return playerSpaceManager.getState(position, PlayerDefaultSpace::getSelf);
     }
@@ -700,14 +693,6 @@ public class GameCore implements IGameCore {
     @Override
     public void setPlayerPoints(int[] playerPoints) {
         playerSpaceManager.setState(playerPoints, PlayerPublicSpace::setPlayerPoint);
-    }
-
-    /**
-     * 获取当前玩家的手牌
-     */
-    @Override
-    public ITehai getTehai() {
-        return getTehai(position);
     }
 
     /**
@@ -861,18 +846,6 @@ public class GameCore implements IGameCore {
                 .stream() //
                 .map(PlayerPublicSpace::getHaiRiver) //
                 .map(IHaiRiver::isReach) //
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * 获取玩家是否同巡标识
-     */
-    @Override
-    public List<Boolean> getSameRounds() {
-        return playerSpaceManager.getDefaultSpaces() //
-                .stream() //
-                .map(PlayerPublicSpace::getHaiRiver) //
-                .map(IHaiRiver::isSameJun) //
                 .collect(Collectors.toList());
     }
 

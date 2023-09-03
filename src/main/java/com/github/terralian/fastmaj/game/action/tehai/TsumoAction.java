@@ -33,7 +33,7 @@ public class TsumoAction extends AgariAction implements ITehaiAction {
         // 当前玩家坐席
         int position = actionParam.getPosition();
         // 玩家的手牌
-        ITehai tehai = gameCore.getTehai();
+        ITehai tehai = gameCore.getTehai(position);
         // 根据当前玩家是否立直获取手牌
         List<IHai> doraHais = gameCore.getDoras();
         List<IHai> uraDoraHais = gameCore.getHaiRiver().isReach() ? gameCore.getUraDoras() : new ArrayList<>();

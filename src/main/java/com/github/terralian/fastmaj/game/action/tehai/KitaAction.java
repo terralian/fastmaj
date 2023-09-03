@@ -20,10 +20,10 @@ public class KitaAction implements ITehaiAction {
 
     @Override
     public KyokuState doAction(TehaiActionEvent actionParam, IGameCore gameCore, GameConfig gameOptions) {
-        if (!gameCore.getTehai().canKita()) {
+        if (!gameCore.getTehai(actionParam.getPosition()).canKita()) {
             throw new IllegalArgumentException("手牌不能操作拔北");
         }
-        gameCore.kita(actionParam.getIfHai());
+        gameCore.kita(actionParam.getPosition(), actionParam.getIfHai());
         return KyokuState.CONTINUE;
     }
 

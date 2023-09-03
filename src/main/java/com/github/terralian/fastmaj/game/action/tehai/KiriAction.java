@@ -21,10 +21,10 @@ public class KiriAction implements ITehaiAction {
 
     @Override
     public KyokuState doAction(TehaiActionEvent actionParam, IGameCore gameCore, GameConfig gameOptions) {
-        if (!gameCore.getTehai().canKiri(actionParam.getIfHai())) {
+        if (!gameCore.getTehai(actionParam.getPosition()).canKiri(actionParam.getIfHai())) {
             throw new IllegalArgumentException("参数错误，玩家" + (actionParam.getPosition() + 1) //
-                    + "的手牌不能进行模切操作：" + actionParam.getIfHai() + " 当前玩家手牌：" + gameCore.getTehai()
-                    .getHand());
+                    + "的手牌不能进行模切操作：" + actionParam.getIfHai() + " 当前玩家手牌："
+                    + gameCore.getTehai(actionParam.getPosition()).getHand());
         }
         gameCore.kiri(actionParam.getIfHai(), false);
         return KyokuState.CONTINUE;

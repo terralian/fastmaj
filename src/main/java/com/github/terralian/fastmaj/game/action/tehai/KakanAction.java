@@ -25,7 +25,7 @@ public class KakanAction implements ITehaiAction {
         if (!gameCore.getTehai(actionParam.getPosition()).canKakan(actionParam.getIfHai())) {
             throw new IllegalArgumentException("手牌不可基于参数牌操作加杠：" + actionParam.getIfHai());
         }
-        gameCore.kakan(actionParam.getIfHai());
+        gameCore.kakan(actionParam.getPosition(), actionParam.getIfHai());
         return KyokuState.CONTINUE;
     }
 

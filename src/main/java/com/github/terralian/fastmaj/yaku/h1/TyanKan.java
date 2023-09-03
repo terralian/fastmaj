@@ -2,11 +2,14 @@ package com.github.terralian.fastmaj.yaku.h1;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
+import com.github.terralian.fastmaj.game.event.river.RonEvent;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
+import com.github.terralian.fastmaj.player.space.PlayerPublicSpace;
 import com.github.terralian.fastmaj.tehai.ITehai;
+import com.github.terralian.fastmaj.util.Assert;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
-import com.github.terralian.fastmaj.yaku.meta.RequestContextYaku;
 import com.github.terralian.fastmaj.yaku.meta.RonYaku;
 
 /**
@@ -22,13 +25,19 @@ import com.github.terralian.fastmaj.yaku.meta.RonYaku;
 public class TyanKan implements IYaku {
 
     @Override
-    public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
-        if (holder == null || !holder.isRon() || holder.getLastTehaiActionType() == null) {
+    public boolean match(ITehai tehai, DivideInfo divide, IPlayerGameContext holder) {
+        if (holder == null || !holder.isEndByRon()) {
             return false;
         }
-        // 当荣和时，在加杠和暗杠会出现抢杠（暗杠特指国士，虽然计抢杠，但是国士无视非普通役，所以这里不计）
-        return holder.getLastTehaiActionType() == TehaiActionType.ANNKAN // 暗杠
-                || holder.getLastTehaiActionType() == TehaiActionType.KAKAN;
+        RonEvent ronEvent = (RonEvent) holder.getSpace().getLastAction();
+
+        int fromPosition = ronEvent.getFrom();
+        PlayerPublicSpace publicSpace = holder.getPublicSpace(fromPosition);
+        TehaiActionEvent tehaiActionEvent = publicSpace.getLastTehaiAction();
+        Assert.notNull(tehaiActionEvent, "荣和情况下，对手必有一个手牌动作");
+
+        return tehaiActionEvent.getEventType() == TehaiActionType.ANNKAN //
+                || tehaiActionEvent.getEventType() == TehaiActionType.KAKAN;
     }
 
     @Override

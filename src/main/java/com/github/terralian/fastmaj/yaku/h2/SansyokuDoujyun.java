@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.encode.EncodeMark;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
@@ -21,7 +21,7 @@ import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
 public class SansyokuDoujyun implements IYaku {
 
     @Override
-    public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
+    public boolean match(ITehai tehai, DivideInfo divide, IPlayerGameContext holder) {
         if (divide == null || divide.getAllShunzuFirst().size() < 3) {
             return false;
         }

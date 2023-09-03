@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.h1.Bakaze;
@@ -116,7 +116,7 @@ public class YakuMatcher implements IYakuMatcher {
     }
 
     @Override
-    public List<IYaku> match(ITehai tehai, DivideInfo divideInfo, PlayerGameContext context) {
+    public List<IYaku> match(ITehai tehai, DivideInfo divideInfo, IPlayerGameContext context) {
         List<IYaku> yakus = new ArrayList<>();
         if (tehai.getAll().stream().anyMatch(IHai::isJiHai)) {
             matchCollectYaku(yakus, jihaiYakus, tehai, divideInfo, context);
@@ -136,7 +136,7 @@ public class YakuMatcher implements IYakuMatcher {
         }
         if (context != null) {
             matchCollectYaku(yakus, requestContextYakus, tehai, divideInfo, context);
-            if (context.isRon()) {
+            if (context.isEndByRon()) {
                 matchCollectYaku(yakus, ronYakus, tehai, divideInfo, context);
             }
         }
@@ -260,7 +260,7 @@ public class YakuMatcher implements IYakuMatcher {
      * @param context 游戏上下文
      */
     private void matchCollectYaku(List<IYaku> container, List<IYaku> currentYaku, ITehai tehai, DivideInfo divideInfo
-            , PlayerGameContext context) {
+            , IPlayerGameContext context) {
         for (IYaku yaku : currentYaku) {
             if (yaku.match(tehai, divideInfo, context)) {
                 container.add(yaku);

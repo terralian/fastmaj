@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.yaku.h13;
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.game.GameConfig;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.player.RivalEnum;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.ITehaiLock;
@@ -22,7 +22,7 @@ import com.github.terralian.fastmaj.yaku.meta.JihaiYaku;
 public class Daisangen implements IYakuman, IYakuBlame {
 
     @Override
-    public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
+    public boolean match(ITehai tehai, DivideInfo divide, IPlayerGameContext holder) {
         // 中发白每个都大于3
         int[] value34 = Encode34.toEncode34(tehai.getAll());
         return value34[Encode34.HAKU] >= 3 && value34[Encode34.HATU] >= 3 && value34[Encode34.TYUN] >= 3;

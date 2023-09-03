@@ -47,7 +47,7 @@ public class TiiHoTest {
         assertTrue(result);
 
         // 荣和
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);
 

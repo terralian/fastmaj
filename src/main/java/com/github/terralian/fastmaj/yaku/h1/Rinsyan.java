@@ -1,14 +1,15 @@
 package com.github.terralian.fastmaj.yaku.h1;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
-import com.github.terralian.fastmaj.game.action.river.RiverActionType;
-import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
-import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
+import com.github.terralian.fastmaj.game.event.ActionEvent;
+import com.github.terralian.fastmaj.game.event.DrawEvent;
+import com.github.terralian.fastmaj.game.event.system.SystemEventType;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
 import com.github.terralian.fastmaj.yaku.meta.RequestContextYaku;
+import com.github.terralian.fastmaj.yama.DrawFrom;
 
 /**
  * 岭上开花
@@ -19,24 +20,16 @@ import com.github.terralian.fastmaj.yaku.meta.RequestContextYaku;
 public class Rinsyan implements IYaku {
 
     @Override
-    public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
-        if (holder == null || holder.isRon()) {
+    public boolean match(ITehai tehai, DivideInfo divide, IPlayerGameContext holder) {
+        if (holder == null || holder.isEndByRon()) {
             return false;
         }
-        // 先判定是否明杠
-        RiverActionEvent riverAction = holder.getLastRiverAction();
-        if (riverAction != null && riverAction.getPosition() == holder.getPosition()) {
-            if (riverAction.getEventType() == RiverActionType.MINKAN) {
-                return true;
-            }
-        }
-        // 再判定是否暗杠，加杠
-        TehaiActionType tehaiAction = holder.getLastTehaiActionType();
-        if (tehaiAction == null) {
+        ActionEvent lastAction = holder.getSpace().getLastAction();
+        if (lastAction == null || lastAction.getEventType() != SystemEventType.DRAW) {
             return false;
         }
-        return tehaiAction == TehaiActionType.ANNKAN // 暗杠
-                || tehaiAction == TehaiActionType.KAKAN;
+        DrawEvent drawEvent = (DrawEvent) lastAction;
+        return drawEvent.getDrawFrom() == DrawFrom.RINSYAN;
     }
 
     @Override

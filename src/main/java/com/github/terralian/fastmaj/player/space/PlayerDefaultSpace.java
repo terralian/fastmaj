@@ -1,5 +1,9 @@
 package com.github.terralian.fastmaj.player.space;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import com.github.terralian.fastmaj.game.event.ActionEvent;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
@@ -44,31 +48,57 @@ public class PlayerDefaultSpace extends PlayerPublicSpace implements IPlayerPriv
     private boolean furiten = false;
 
     /**
-     * 上一个动作
+     * 玩家的当局动作序列，每个新动作会放在队列的最前面
      */
-    private ActionEvent lastAction;
+    private List<ActionEvent> actionEventList = new LinkedList<>();
 
     /**
-     * 设置手牌信息，并会同时取出副露信息放到公开空间
+     * 玩家动作事件记录到动作序列
      *
-     * @param tehai 手牌
+     * @param actionEvent 动作事件
      */
-    public void setTehai(ITehai tehai) {
-        this.tehai = tehai;
-        this.setTehaiLock(this.tehai == null ? null : tehai.getLock());
+    public void addAction(ActionEvent actionEvent) {
+        actionEventList.add(0, actionEvent);
+
+        // 公开空间覆盖上一个动作类型，可通过该动作判定一些役种
+        if (actionEvent instanceof TehaiActionEvent)
+            this.setLastTehaiAction(((TehaiActionEvent) actionEvent));
+        else if (actionEvent instanceof RiverActionEvent)
+            this.setLastRiverAction(((RiverActionEvent) actionEvent));
     }
 
     /**
-     * 设置上一个动作，并同时公开上一个动作类型（手牌/牌河）
+     * 增加假设的动作，使得可以根据动作进行一些判定
      *
-     * @param lastAction 上一个动作
+     * @param actionEvent 动作
      */
-    public void setLastAction(ActionEvent lastAction) {
-        this.lastAction = lastAction;
-        if (lastAction instanceof TehaiActionEvent)
-            this.setLastTehaiActionType(((TehaiActionEvent) lastAction).getEventType());
-        else
-            this.setLastRiverActionType(((RiverActionEvent) lastAction).getEventType());
+    public void addIfAction(ActionEvent actionEvent) {
+        actionEventList.add(0, actionEvent);
+    }
+
+    /**
+     * 移除假设的动作
+     */
+    public void removeIfAction() {
+        actionEventList.remove(0);
+    }
+
+    /**
+     * 获取上一个动作
+     */
+    public ActionEvent getLastAction() {
+        return actionEventList.get(0);
+    }
+
+    /**
+     * 获取上上个动作
+     *
+     * @return {@link ActionEvent} | null
+     */
+    public ActionEvent getSecondLastAction() {
+        return actionEventList.size() >= 1 //
+                ? actionEventList.get(1)
+                : null;
     }
 
     @Override
@@ -79,8 +109,7 @@ public class PlayerDefaultSpace extends PlayerPublicSpace implements IPlayerPriv
             defaultSpace.setTehai(tehai.deepClone());
             defaultSpace.setSyaten(syaten);
             defaultSpace.setFuriten(furiten);
-            // TODO
-            //defaultSpace.setLastAction(lastAction);
+            defaultSpace.setActionEventList(new ArrayList<>(actionEventList));
         }
         super.copyTo(playerSpace);
     }
@@ -94,15 +123,15 @@ public class PlayerDefaultSpace extends PlayerPublicSpace implements IPlayerPriv
             this.getHaiRiver().clear();
         }
         this.setReach(false);
-        this.setLastTehaiActionType(null);
-        this.setLastRiverActionType(null);
+        this.setLastTehaiAction(null);
+        this.setLastRiverAction(null);
         this.setOya(false);
         this.setJikaze(null);
 
         this.tehai = null;
         this.syaten = MAX_SYATEN;
         this.furiten = false;
-        this.lastAction = null;
+        this.actionEventList.clear();
     }
 
     /**

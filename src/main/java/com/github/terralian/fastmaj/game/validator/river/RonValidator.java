@@ -10,8 +10,10 @@ import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.event.river.RonEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.hai.IHai;
+import com.github.terralian.fastmaj.player.space.PlayerDefaultSpace;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.IYuukouhaiCalculator;
@@ -72,12 +74,21 @@ public class RonValidator implements IRiverActionValidator {
             return true;
         }
         // 尝试为其设置荣标识，来匹配役种
-        boolean isRon = context.isRon();
-        context.setRon(true);
+        boolean isEndByRon = context.isEndByRon();
+        context.setEndByRon(true);
+
+        RonEvent ronEvent = new RonEvent()
+                .setFrom(rivalTehaiAction.getPosition())
+                .setPosition(position)
+                .setFromHai(rivalTehaiAction.getIfHai());
+        PlayerDefaultSpace defaultSpace = context.getSpace();
+        defaultSpace.addIfAction(ronEvent);
+
         // 弃牌，得判断手牌是否有役
         List<IYaku> yakus = ronYakuMatcher.match(tehai, rivalTehaiAction.getIfHai(), context);
         // 还原标识
-        context.setRon(isRon);
+        context.setEndByRon(isEndByRon);
+        defaultSpace.removeIfAction();
 
         return !yakus.isEmpty();
     }

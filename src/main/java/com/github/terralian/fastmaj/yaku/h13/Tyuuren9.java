@@ -2,7 +2,7 @@ package com.github.terralian.fastmaj.yaku.h13;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.encode.Encode34;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
@@ -17,7 +17,7 @@ import com.github.terralian.fastmaj.yaku.meta.MenchanYaku;
 public class Tyuuren9 extends Tyuuren {
 
     @Override
-    public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
+    public boolean match(ITehai tehai, DivideInfo divide, IPlayerGameContext holder) {
         if (divide == null || !divide.isTyuuren() || tehai.isNaki() || tehai.isAnnkan()) {
             return false;
         }

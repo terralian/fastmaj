@@ -193,7 +193,7 @@ public class YakuMatcherTest {
     @Test
     public void testWithContext() {
         PlayerGameContext gameContext = PlayerGameContextFactory.buildByNormal(1);
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         // 第一巡非同巡，否则会变成地和
         gameContext.getHaiRivers().forEach(k -> k.setSameFirstJun(false));
 
@@ -214,7 +214,7 @@ public class YakuMatcherTest {
 
         // 海底
         gameContext.setYamaCountdown(0);
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         gameContext.setLastDrawFrom(DrawFrom.YAMA);
         tehai = EncodeMark.toTehai("123456m56799p11z");
         tehai.pon(HaiPool.p(9), RivalEnum.BOTTOM);
@@ -224,7 +224,7 @@ public class YakuMatcherTest {
 
         // 河底
         gameContext.setYamaCountdown(0);
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         gameContext.setLastTehaiActionType(TehaiActionType.KIRI);
         tehai = EncodeMark.toTehai("123456m56799p11z");
         tehai.pon(HaiPool.p(9), RivalEnum.BOTTOM);
@@ -234,7 +234,7 @@ public class YakuMatcherTest {
 
         // 一发，（立直）
         gameContext.setYamaCountdown(50);
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         gameContext.getHaiRivers().forEach(k -> {
             k.setSameJun(true);
             k.reach(HaiPool.random());
@@ -246,7 +246,7 @@ public class YakuMatcherTest {
 
         // 立直
         gameContext.setYamaCountdown(50);
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         gameContext.getHaiRivers().forEach(k -> {
             k.setSameJun(false);
             k.reach(HaiPool.random());
@@ -258,7 +258,7 @@ public class YakuMatcherTest {
 
         // 岭上
         gameContext.setYamaCountdown(50);
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
 
         gameContext.setLastTehaiActionType(TehaiActionType.ANNKAN);
         gameContext.getHaiRivers().forEach(k -> k.clear());
@@ -272,7 +272,7 @@ public class YakuMatcherTest {
         // 第一巡非同巡，否则会变成地和
         gameContext.getHaiRivers().forEach(k -> k.setSameFirstJun(false));
         gameContext.setYamaCountdown(50);
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         gameContext.setLastTehaiActionType(null);
         tehai = EncodeMark.toTehai("123456m567999p11z");
         yakus = yakuMatcher.match(tehai, CollectionUtil.newArrayList(), gameContext);
@@ -281,7 +281,7 @@ public class YakuMatcherTest {
 
         // 抢杠
         gameContext.setYamaCountdown(50);
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         gameContext.setLastTehaiActionType(TehaiActionType.KAKAN);
         gameContext.getHaiRivers().forEach(k -> k.clear());
         gameContext.getHaiRivers().forEach(k -> k.setSameFirstJun(false));
@@ -293,7 +293,7 @@ public class YakuMatcherTest {
         // 两立直
         gameContext = PlayerGameContextFactory.buildByNormal(0);
         gameContext.getHaiRiver().reach(HaiPool.p(1));
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         gameContext.getHaiRivers().forEach(k -> {
             k.setSameFirstJun(true);
             k.setSameJun(false);
@@ -353,7 +353,7 @@ public class YakuMatcherTest {
         // 设置上一个动作为暗杠
         gameContext.setLastTehaiActionType(TehaiActionType.ANNKAN);
         // 非荣和
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         divideInfos = tehaiAgariDivider.divide(tehai);
         yakus = yakuMatcher.match(tehai, divideInfos, gameContext);
         assertEquals(5, yakus.size());
@@ -367,7 +367,7 @@ public class YakuMatcherTest {
             k.kiri(HaiPool.random());
         });
         // 非荣和
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         // 设置上一个动作为暗杠
         gameContext.setLastTehaiActionType(TehaiActionType.ANNKAN);
         // 场风南

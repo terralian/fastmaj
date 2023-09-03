@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 
 /**
@@ -28,7 +28,7 @@ public interface IYakuMatcher {
      * @param divideInfo 分割信息
      * @param context 玩家游戏上下文
      */
-    List<IYaku> match(ITehai tehai, DivideInfo divideInfo, PlayerGameContext context);
+    List<IYaku> match(ITehai tehai, DivideInfo divideInfo, IPlayerGameContext context);
 
     /**
      * 匹配役种，返回最大的役种匹配结果
@@ -37,7 +37,7 @@ public interface IYakuMatcher {
      * @param divideInfos 分割信息
      * @param context 玩家游戏上下文
      */
-    default List<IYaku> match(ITehai tehai, List<DivideInfo> divideInfos, PlayerGameContext context) {
+    default List<IYaku> match(ITehai tehai, List<DivideInfo> divideInfos, IPlayerGameContext context) {
         // 匹配单个的情况下，调用单个匹配方法
         if (divideInfos.size() == 1) {
             return match(tehai, divideInfos.get(0), context);

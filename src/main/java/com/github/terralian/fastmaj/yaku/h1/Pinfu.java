@@ -5,14 +5,13 @@ import java.util.List;
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.encode.EncodeMark;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
 import com.github.terralian.fastmaj.yaku.meta.MenchanYaku;
-import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
 
 
 /**
@@ -25,7 +24,7 @@ import com.github.terralian.fastmaj.yaku.meta.ShunzuYaku;
 @MenchanYaku
 public class Pinfu implements IYaku {
 
-    public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
+    public boolean match(ITehai tehai, DivideInfo divide, IPlayerGameContext holder) {
         IHai agariHai = tehai.getDrawHai();
         // 平和不能副露暗刻
         if (tehai.isNaki() || tehai.isAnnkan() || divide == null || agariHai == null) {
@@ -47,7 +46,7 @@ public class Pinfu implements IYaku {
         if (jantou.isJiHai()) {
             if (holder == null //
                     || (holder.getBakaze() != null && jantou.getValue() == Encode34.toEncode34(holder.getBakaze())) //
-                    || (holder.jikaze() != null && jantou.getValue() == Encode34.toEncode34(holder.jikaze())) //
+                    || (holder.getJikaze() != null && jantou.getValue() == Encode34.toEncode34(holder.getJikaze())) //
                     || jantou.isSanGenHai()) {
                 return false;
             }

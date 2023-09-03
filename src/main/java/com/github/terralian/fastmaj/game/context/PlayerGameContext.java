@@ -130,7 +130,7 @@ public class PlayerGameContext implements IPlayerGameContext {
     /**
      * 是否荣和
      */
-    private boolean isRon = false;
+    private boolean endByRon = false;
     /**
      * 最近玩家的手牌动作
      */
@@ -186,13 +186,6 @@ public class PlayerGameContext implements IPlayerGameContext {
      */
     public KazeEnum jikaze() {
         return jikaze;
-    }
-
-    /**
-     * 是否荣和
-     */
-    public boolean isRon() {
-        return isRon;
     }
 
     /**

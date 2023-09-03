@@ -17,7 +17,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
-public class DrawEvent implements SystemGameEvent {
+public class DrawEvent implements SystemGameEvent, ActionEvent {
 
     /**
      * 摸牌玩家坐席

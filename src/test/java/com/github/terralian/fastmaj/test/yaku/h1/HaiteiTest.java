@@ -1,16 +1,15 @@
 package com.github.terralian.fastmaj.test.yaku.h1;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h1.Haitei;
 import com.github.terralian.fastmaj.yama.DrawFrom;
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * 海底摸月测试
@@ -34,25 +33,25 @@ public class HaiteiTest {
         gameContext.setLastDrawFrom(DrawFrom.YAMA);
 
         // 最后一枚，非荣和
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         gameContext.setYamaCountdown(0);
         result = yaku.match(tehai, divide, gameContext);
         assertTrue(result);
 
         // 最后一枚，荣和
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         gameContext.setYamaCountdown(0);
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);
 
         // 非最后一枚，非荣和
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         gameContext.setYamaCountdown(1);
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);
 
         // 非最后一枚，荣和
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         gameContext.setYamaCountdown(1);
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);
@@ -73,13 +72,13 @@ public class HaiteiTest {
         gameContext.setLastDrawFrom(DrawFrom.RINSYAN);
 
         // 最后一枚，非荣和
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         gameContext.setYamaCountdown(0);
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);
 
         // 最后一枚，荣和
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         gameContext.setYamaCountdown(0);
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);

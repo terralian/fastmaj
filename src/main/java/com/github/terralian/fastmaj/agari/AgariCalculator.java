@@ -116,7 +116,7 @@ public class AgariCalculator implements IAgariCalculator {
         // 玩家坐席
         int position = context.getPosition();
         // 匹配役种
-        List<IYaku> matchYakus = yakuMatcher.match(tehai, divideInfo, (PlayerGameContext) context); // TODO 修改为IPlayerGameContext
+        List<IYaku> matchYakus = yakuMatcher.match(tehai, divideInfo, (PlayerGameContext) context);
         // 比如三色同顺时，123m11223344p123s，在分割为11p雀头，234p顺子时会无役
         if (EmptyUtil.isEmpty(matchYakus)) {
             return NOT_AGARI;

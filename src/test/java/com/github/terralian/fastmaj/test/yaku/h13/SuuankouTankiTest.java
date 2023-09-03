@@ -97,7 +97,7 @@ public class SuuankouTankiTest {
                 .addAnnkan("8p")
                 .addOne("3s")
                 .get();
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         gameContext.setAgariHai(HaiPool.s(3));
         List<DivideInfo> divideInfos = tehaiAgariDivider.divide(tehai);
         boolean res = yaku.match(tehai, divideInfos.get(0), gameContext);

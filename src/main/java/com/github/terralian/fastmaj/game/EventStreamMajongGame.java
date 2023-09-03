@@ -8,6 +8,8 @@ import com.github.terralian.fastmaj.player.space.IPlayerSpaceManager;
 import com.github.terralian.fastmaj.player.space.PlayerSpaceManager;
 
 /**
+ * 以事件驱动的流式麻将游戏，当调用{@link #startGame()}后，将会自动进行至游戏结束
+ *
  * @author Terra.Lian
  */
 public class EventStreamMajongGame extends EventMajongGame {
@@ -24,7 +26,6 @@ public class EventStreamMajongGame extends EventMajongGame {
      * @param gameConfig 游戏配置
      * @param gameComponent 游戏组件
      */
-    @SuppressWarnings("unchecked")
     public EventStreamMajongGame(List<? extends IPlayer> players, GameConfig gameConfig, GameComponent gameComponent) {
         this(gameConfig, null, gameComponent, new GameEventQueue());
         IGameLogger logger = gameComponent.getChainGameLoggerBuilder().build();
@@ -37,7 +38,7 @@ public class EventStreamMajongGame extends EventMajongGame {
     public void startGame() {
         super.startGame();
         do {
-            next();
+            nextEvent();
         } while (!isGameEnd());
     }
 }

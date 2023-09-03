@@ -353,11 +353,6 @@ public interface IGameCore {
     int getYamaCountdown();
 
     /**
-     * 获取最近一枚牌的摸牌来源
-     */
-    DrawFrom getLastDrawFrom();
-
-    /**
      * 获取种子（牌山）
      */
     String getSeed();

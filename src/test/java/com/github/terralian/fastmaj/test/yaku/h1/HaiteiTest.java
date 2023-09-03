@@ -5,7 +5,6 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h1.Haitei;
-import com.github.terralian.fastmaj.yama.DrawFrom;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
@@ -13,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * 海底摸月测试
- * 
+ *
  * @author terra.lian
  */
 public class HaiteiTest {
@@ -30,7 +29,7 @@ public class HaiteiTest {
         // 结果
         boolean result = false;
         // 从牌山自摸
-        gameContext.setLastDrawFrom(DrawFrom.YAMA);
+        // gameContext.setLastDrawFrom(DrawFrom.YAMA);
 
         // 最后一枚，非荣和
         gameContext.setEndByRon(false);
@@ -69,7 +68,7 @@ public class HaiteiTest {
         // 结果
         boolean result = false;
         // 从牌山自摸
-        gameContext.setLastDrawFrom(DrawFrom.RINSYAN);
+        // gameContext.setLastDrawFrom(DrawFrom.RINSYAN);
 
         // 最后一枚，非荣和
         gameContext.setEndByRon(false);

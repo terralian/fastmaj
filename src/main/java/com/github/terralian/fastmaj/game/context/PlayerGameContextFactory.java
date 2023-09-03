@@ -46,7 +46,6 @@ public class PlayerGameContextFactory {
                 .setFuriten(gameCore.isFuriten(position)) //
                 .setSyaten(gameCore.getSyaten(position)) //
                 .setTehai(gameCore.getTehai(position)) //
-                .setLastDrawFrom(gameCore.getLastDrawFrom()) //
                 .setSpace(playerSpaceManager.cloneDefaultSpace(position)) //
                 .setPublicSpaces(playerSpaceManager.clonePublicSpace(position)) //
         ;

@@ -73,12 +73,5 @@ public class TehaiActionRequestEventHandler implements ISystemGameEventHandler {
 
         // 动作执行完成后，作为上一轮的手牌动作
         gameCore.setLastTehaiAction(tehaiActionEvent);
-
-        // 清除上一轮牌河动作缓存
-        // 当无人鸣牌时，相当于无效操作
-        // 当有人鸣牌时，相当于在其鸣牌后，即将打一枚牌时清空鸣牌动作
-        // 此时已经经过了流局、摸牌判定，上一轮的牌河动作已经失去作用
-        // 放在这里也是最兼容回放的做法（回放没有流程判定，鸣牌后就是弃牌操作）
-        gameCore.setLastRiverAction(null);
     }
 }

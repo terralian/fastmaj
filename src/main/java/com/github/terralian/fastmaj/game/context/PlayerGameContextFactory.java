@@ -51,7 +51,6 @@ public class PlayerGameContextFactory {
                 .setSyaten(gameCore.getSyaten(position)) //
                 .setTehai(gameCore.getTehai(position)) //
                 .setLastTehaiActionType(lastActionType) //
-                .setLastRiverAction(gameCore.getLastRiverAction()) //
                 .setLastDrawFrom(gameCore.getLastDrawFrom()) //
                 .setSpace(playerSpaceManager.cloneDefaultSpace(position)) //
                 .setPublicSpaces(playerSpaceManager.clonePublicSpace(position)) //

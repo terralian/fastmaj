@@ -114,7 +114,5 @@ public class RiverActionRequestEventHandler implements ISystemGameEventHandler {
                 eventQueue.addNormal(action);
             }
         }
-
-        gameCore.setLastRiverAction(firstAction);
     }
 }

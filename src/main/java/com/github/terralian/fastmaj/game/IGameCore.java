@@ -2,7 +2,6 @@ package com.github.terralian.fastmaj.game;
 
 import java.util.List;
 
-import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.game.log.IGameLogger;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyoku;
@@ -426,18 +425,6 @@ public interface IGameCore {
      * 获取最近玩家的手牌动作
      */
     TehaiActionEvent getLastTehaiAction();
-
-    /**
-     * 设置最近的一个牌河动作（不包含荣和）
-     *
-     * @param action 牌河动作
-     */
-    void setLastRiverAction(RiverActionEvent action);
-
-    /**
-     * 获取最近的一个牌河动作（不包含荣和）
-     */
-    RiverActionEvent getLastRiverAction();
 
     /**
      * 获取游戏核心的日志处理器

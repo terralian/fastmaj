@@ -10,7 +10,6 @@ import com.github.terralian.fastmaj.agari.ITehaiAgariDivider;
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
-import com.github.terralian.fastmaj.game.event.river.RonEvent;
 import com.github.terralian.fastmaj.player.space.IPlayerSpaceManager;
 import com.github.terralian.fastmaj.player.space.PlayerSpaceManager;
 import com.github.terralian.fastmaj.tehai.ITehai;
@@ -41,12 +40,10 @@ public class FuCalculatorTest {
     public void test() {
         IPlayerSpaceManager spaceManager = new PlayerSpaceManager(4);
         PlayerGameContext context = new PlayerGameContext();
-        context.setLastPlayerPosition(1);
         context.setPublicSpaces(spaceManager.clonePublicSpace(1));
 
         // 当前上下文在模拟荣和设置下，使用的是事件判定比较麻烦
-        Consumer<Boolean> ronSetter = (isRon) ->
-                context.getPublicSpace(context.getLastPlayerPosition()).setLastRiverAction(isRon ? new RonEvent() : null);
+        Consumer<Boolean> ronSetter = context::setEndByRon;
 
         // 平和自摸
         ITehai tehai = EncodeMark.toTehai("23567m12223789s1m");

@@ -1006,6 +1006,11 @@ public class GameCore implements IGameCore {
         this.gameLogger = gameLogger;
     }
 
+    @Override
+    public IPlayerSpaceManager getPlayerSpaceManager() {
+        return playerSpaceManager;
+    }
+
     // --------------------------------------------------------
     // 其他
     // --------------------------------------------------------

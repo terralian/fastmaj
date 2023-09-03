@@ -1,13 +1,14 @@
 package com.github.terralian.fastmaj.agari;
 
+import java.util.List;
+
 import com.github.terralian.fastmaj.encode.Encode34;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.ITehaiLock;
 import com.github.terralian.fastmaj.yaku.h1.Pinfu;
-
-import java.util.List;
 
 /**
  * 符数计算，在和牌时计算符数，会校验向听数，即仅在和牌时才能计算符数
@@ -23,7 +24,7 @@ public class FuCalculator implements IFuCalculator {
     }
 
     @Override
-    public int compute(ITehai tehai, IHai agariHai, List<DivideInfo> divideInfos, PlayerGameContext context) {
+    public int compute(ITehai tehai, IHai agariHai, List<DivideInfo> divideInfos, IPlayerGameContext context) {
         int fu = 0;
         for (DivideInfo divideInfo : divideInfos) {
             fu = Math.max(fu, compute(tehai, agariHai, divideInfo, context));
@@ -32,7 +33,7 @@ public class FuCalculator implements IFuCalculator {
     }
 
     @Override
-    public int compute(ITehai tehai, IHai agariHai, DivideInfo divideInfo, PlayerGameContext context) {
+    public int compute(ITehai tehai, IHai agariHai, DivideInfo divideInfo, IPlayerGameContext context) {
         // 【特殊】七对子 固定为25符
         if (divideInfo.isTiitoitu()) {
             return 25;
@@ -41,14 +42,14 @@ public class FuCalculator implements IFuCalculator {
         // 底符20符
         int fu = 20;
         // 是否荣和
-        boolean ron = context.isRon();
+        boolean ron = context.isEndByRon();
         // 门前荣和10符
         if (ron && !tehai.isNaki()) {
             fu += 10;
         }
 
         // 【特殊】平和自摸固定20符，若荣和加10符
-        if (pinfu.match(tehai, divideInfo, context)) {
+        if (pinfu.match(tehai, divideInfo, (PlayerGameContext) context)) {  // TODO 修改为IPlayerGameContext
             return fu;
         }
 
@@ -115,11 +116,11 @@ public class FuCalculator implements IFuCalculator {
 
     /**
      * 获取风符（自风，场风2符，连风牌再+2符）
-     * 
+     *
      * @param jantou 雀头牌
      * @param context 玩家游戏上下文
      */
-    private int getJantouKazeFu(IHai jantou, PlayerGameContext context) {
+    private int getJantouKazeFu(IHai jantou, IPlayerGameContext context) {
         int fu = 0;
         if (Encode34.equals(jantou, context.getBakaze()))
             fu += 2;

@@ -5,7 +5,6 @@ import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.tehai.ITehai;
-import com.github.terralian.fastmaj.util.Assert;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -65,8 +64,6 @@ public class PlayerDefaultSpace extends PlayerPublicSpace implements IPlayerPriv
      * @param lastAction 上一个动作
      */
     public void setLastAction(ActionEvent lastAction) {
-        Assert.notNull(lastAction, "上一个动作不能为空");
-
         this.lastAction = lastAction;
         if (lastAction instanceof TehaiActionEvent)
             this.setLastTehaiActionType(((TehaiActionEvent) lastAction).getEventType());
@@ -82,7 +79,8 @@ public class PlayerDefaultSpace extends PlayerPublicSpace implements IPlayerPriv
             defaultSpace.setTehai(tehai.deepClone());
             defaultSpace.setSyaten(syaten);
             defaultSpace.setFuriten(furiten);
-            defaultSpace.setLastAction(lastAction);
+            // TODO
+            //defaultSpace.setLastAction(lastAction);
         }
         super.copyTo(playerSpace);
     }

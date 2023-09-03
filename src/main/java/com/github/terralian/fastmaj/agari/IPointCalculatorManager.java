@@ -2,7 +2,7 @@ package com.github.terralian.fastmaj.agari;
 
 import java.util.List;
 
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 
@@ -27,5 +27,5 @@ public interface IPointCalculatorManager {
      * @param context 游戏上下文
      */
     void dispatchTransfer(ITehai tehai, Integer fromPlayer, List<IYaku> matchYakus, int han, int fu, int[] playerPoints,
-            PlayerGameContext context);
+            IPlayerGameContext context);
 }

@@ -1,8 +1,8 @@
 package com.github.terralian.fastmaj.agari;
 
-import java.util.Arrays;
 import java.util.List;
 
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
@@ -78,7 +78,7 @@ public class AgariCalculator implements IAgariCalculator {
     @Override
     public AgariInfo calculate(ITehai tehai, IHai agariHai, Integer fromPlayer, List<IHai> doraHais,
             List<IHai> uraDoraHais,
-            PlayerGameContext context) {
+            IPlayerGameContext context) {
         int position = context.getPosition();
         // 使用和了分割器对手牌进行分割，分割的结果更容易进行和了役种匹配
         List<DivideInfo> divideInfos = agariDivider.divide(tehai, position != fromPlayer, agariHai);
@@ -112,11 +112,11 @@ public class AgariCalculator implements IAgariCalculator {
     private AgariInfo calculateSingleDivide(ITehai tehai, IHai agariHai, DivideInfo divideInfo, Integer fromPlayer,
             List<IHai> doraHais,
             List<IHai> uraDoraHais,
-            PlayerGameContext context) {
+            IPlayerGameContext context) {
         // 玩家坐席
         int position = context.getPosition();
         // 匹配役种
-        List<IYaku> matchYakus = yakuMatcher.match(tehai, divideInfo, context);
+        List<IYaku> matchYakus = yakuMatcher.match(tehai, divideInfo, (PlayerGameContext) context); // TODO 修改为IPlayerGameContext
         // 比如三色同顺时，123m11223344p123s，在分割为11p雀头，234p顺子时会无役
         if (EmptyUtil.isEmpty(matchYakus)) {
             return NOT_AGARI;
@@ -128,12 +128,12 @@ public class AgariCalculator implements IAgariCalculator {
         // 计算符数
         int fu = fuCalculator.compute(tehai, agariHai, divideInfo, context);
         // 玩家的点数
-        int[] playerPoints = Arrays.copyOf(context.getPlayerPoints(), context.getPlayerPoints().length);
+        int[] playerPoints = context.copyPlayerPoints();
         // 点数转移
         pointCalculatorManager.dispatchTransfer(tehai, fromPlayer, matchYakus, han, fu, playerPoints, context);
         // 返回和了信息
         return new AgariInfo() //
-                .setScore(playerPoints[position] - context.getPlayerPoints()[position]) //
+                .setScore(playerPoints[position] - context.getPublicSpace(position).getPlayerPoint()) //
                 .setFu(fu) //
                 .setBan(han) //
                 .setYakus(matchYakus) //

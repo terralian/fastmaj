@@ -5,6 +5,7 @@ import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.hai.HaiPool;
+import com.github.terralian.fastmaj.player.space.IPlayerSpaceManager;
 import com.github.terralian.fastmaj.river.HaiRiver;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.TehaiLock;
@@ -29,6 +30,7 @@ public class PlayerGameContextFactory {
         TehaiActionType lastActionType = gameCore.getLastTehaiAction() == null //
                 ? null //
                 : gameCore.getLastTehaiAction().getEventType();
+        IPlayerSpaceManager playerSpaceManager = gameCore.getPlayerSpaceManager();
         context.setGameConfig(config) //
                 .setPlayerSize(gameCore.getPlayerSize()) //
                 .setRound(gameCore.getRound()) //
@@ -51,6 +53,9 @@ public class PlayerGameContextFactory {
                 .setLastTehaiActionType(lastActionType) //
                 .setLastRiverAction(gameCore.getLastRiverAction()) //
                 .setLastDrawFrom(gameCore.getLastDrawFrom()) //
+                .setSpace(playerSpaceManager.cloneDefaultSpace(position)) //
+                .setPublicSpaces(playerSpaceManager.clonePublicSpace(position)) //
+                .setLastPlayerPosition(gameCore.getPosition())
         ;
         // 和了信息没有记录到上下文
 

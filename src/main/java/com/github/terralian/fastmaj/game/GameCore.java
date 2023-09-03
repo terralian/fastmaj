@@ -106,11 +106,6 @@ public class GameCore implements IGameCore {
      */
     private KyokuEndEnum kyokuEndEnum;
 
-    /**
-     * 最近一枚牌的摸牌来源，开始时为空
-     */
-    private DrawFrom lastDrawFrom;
-
     // -------------------------------------
     // 玩家区
     // -------------------------------------
@@ -261,7 +256,6 @@ public class GameCore implements IGameCore {
         playerSpaceManager.resetKyokuState();
         // 是否连庄设置为false
         renchan = false;
-        lastDrawFrom = null;
         // 动作数设置0
         actionCount = 0;
         // 清空对局结束类型
@@ -327,8 +321,6 @@ public class GameCore implements IGameCore {
         gameLogger.draw(position, hai, drawFrom);
         // 动作数增加
         actionCount++;
-        // 记录摸牌来源
-        lastDrawFrom = drawFrom;
 
         return hai;
     }
@@ -850,14 +842,6 @@ public class GameCore implements IGameCore {
     @Override
     public int getYamaCountdown() {
         return yama.getCountdown();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DrawFrom getLastDrawFrom() {
-        return lastDrawFrom;
     }
 
     /**

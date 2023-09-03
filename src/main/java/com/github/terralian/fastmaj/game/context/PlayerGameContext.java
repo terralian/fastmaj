@@ -10,7 +10,6 @@ import com.github.terralian.fastmaj.player.space.PlayerPublicSpace;
 import com.github.terralian.fastmaj.river.IHaiRiver;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.ITehaiLock;
-import com.github.terralian.fastmaj.yama.DrawFrom;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -129,10 +128,6 @@ public class PlayerGameContext implements IPlayerGameContext {
      * 是否荣和
      */
     private boolean endByRon = false;
-    /**
-     * 最近一名玩家的最佳一次摸牌来源
-     */
-    private DrawFrom lastDrawFrom;
 
     // -------------------------------------------
     // 玩家空间

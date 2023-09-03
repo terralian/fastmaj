@@ -32,7 +32,7 @@ public class AnnkanAction implements ITehaiAction {
         if (!gameCore.getTehai(actionParam.getPosition()).canAnnkan(annkanHai)) {
             throw new IllegalArgumentException("手牌不可基于参数牌操作暗杠：" + annkanHai.toString());
         }
-        gameCore.annkan(annkanHai);
+        gameCore.annkan(actionParam.getPosition(), annkanHai);
         // 对局未结束
         return KyokuState.CONTINUE;
     }

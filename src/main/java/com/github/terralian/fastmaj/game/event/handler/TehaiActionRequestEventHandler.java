@@ -70,8 +70,5 @@ public class TehaiActionRequestEventHandler implements ISystemGameEventHandler {
         tehaiAction.doAction(tehaiActionEvent, gameCore, gameConfig);
         // 发出对应事件
         eventQueue.addPriority(tehaiActionEvent);
-
-        // 动作执行完成后，作为上一轮的手牌动作
-        gameCore.setLastTehaiAction(tehaiActionEvent);
     }
 }

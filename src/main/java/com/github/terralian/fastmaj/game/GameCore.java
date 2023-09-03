@@ -3,7 +3,6 @@ package com.github.terralian.fastmaj.game;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.game.log.IGameLogger;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyoku;
 import com.github.terralian.fastmaj.hai.IHai;
@@ -107,10 +106,6 @@ public class GameCore implements IGameCore {
      */
     private KyokuEndEnum kyokuEndEnum;
 
-    /**
-     * 最近的手牌动作
-     */
-    private TehaiActionEvent lastTehaiAction;
     /**
      * 最近一枚牌的摸牌来源，开始时为空
      */
@@ -266,8 +261,6 @@ public class GameCore implements IGameCore {
         playerSpaceManager.resetKyokuState();
         // 是否连庄设置为false
         renchan = false;
-        // 最近玩家操作清空
-        lastTehaiAction = null;
         lastDrawFrom = null;
         // 动作数设置0
         actionCount = 0;
@@ -956,22 +949,6 @@ public class GameCore implements IGameCore {
     @Override
     public KyokuEndEnum getKyoKuEndType() {
         return kyokuEndEnum;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void setLastTehaiAction(TehaiActionEvent action) {
-        this.lastTehaiAction = action;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public TehaiActionEvent getLastTehaiAction() {
-        return lastTehaiAction;
     }
 
     @Override

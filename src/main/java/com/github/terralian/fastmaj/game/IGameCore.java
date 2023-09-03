@@ -2,7 +2,6 @@ package com.github.terralian.fastmaj.game;
 
 import java.util.List;
 
-import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.game.log.IGameLogger;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyoku;
 import com.github.terralian.fastmaj.hai.IHai;
@@ -413,18 +412,6 @@ public interface IGameCore {
      * 获取对局结束类型
      */
     KyokuEndEnum getKyoKuEndType();
-
-    /**
-     * 设置最近玩家的手牌动作
-     *
-     * @param action 手牌动作
-     */
-    void setLastTehaiAction(TehaiActionEvent action);
-
-    /**
-     * 获取最近玩家的手牌动作
-     */
-    TehaiActionEvent getLastTehaiAction();
 
     /**
      * 获取游戏核心的日志处理器

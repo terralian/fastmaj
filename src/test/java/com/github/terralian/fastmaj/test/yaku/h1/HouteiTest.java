@@ -1,7 +1,6 @@
 package com.github.terralian.fastmaj.test.yaku.h1;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
-import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
@@ -30,7 +29,7 @@ public class HouteiTest {
         // 结果
         boolean result = false;
         // 最后的手牌动作是模切
-        gameContext.setLastTehaiActionType(TehaiActionType.KIRI);
+        // gameContext.setLastTehaiActionType(TehaiActionType.KIRI);
 
         // 最后一枚，非荣和
         gameContext.setEndByRon(false);

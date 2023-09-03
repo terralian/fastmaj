@@ -3,7 +3,6 @@ package com.github.terralian.fastmaj.game.context;
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.KazeEnum;
-import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.player.space.IPlayerSpaceManager;
 import com.github.terralian.fastmaj.river.HaiRiver;
@@ -27,9 +26,6 @@ public class PlayerGameContextFactory {
      */
     public static PlayerGameContext buildByGameCore(int position, GameConfig config, IGameCore gameCore) {
         PlayerGameContext context = new PlayerGameContext();
-        TehaiActionType lastActionType = gameCore.getLastTehaiAction() == null //
-                ? null //
-                : gameCore.getLastTehaiAction().getEventType();
         IPlayerSpaceManager playerSpaceManager = gameCore.getPlayerSpaceManager();
         context.setGameConfig(config) //
                 .setPlayerSize(gameCore.getPlayerSize()) //
@@ -50,7 +46,6 @@ public class PlayerGameContextFactory {
                 .setFuriten(gameCore.isFuriten(position)) //
                 .setSyaten(gameCore.getSyaten(position)) //
                 .setTehai(gameCore.getTehai(position)) //
-                .setLastTehaiActionType(lastActionType) //
                 .setLastDrawFrom(gameCore.getLastDrawFrom()) //
                 .setSpace(playerSpaceManager.cloneDefaultSpace(position)) //
                 .setPublicSpaces(playerSpaceManager.clonePublicSpace(position)) //
@@ -84,7 +79,6 @@ public class PlayerGameContextFactory {
                 .setFuriten(false) //
                 .setSyaten(13) //
                 .setTehai(null) //
-                .setLastTehaiActionType(null) //
         ;
         return context;
     }

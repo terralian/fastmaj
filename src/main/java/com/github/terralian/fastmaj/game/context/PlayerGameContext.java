@@ -4,8 +4,6 @@ import java.util.List;
 
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.KazeEnum;
-import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
-import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.player.space.PlayerDefaultSpace;
 import com.github.terralian.fastmaj.player.space.PlayerPublicSpace;
@@ -131,14 +129,6 @@ public class PlayerGameContext implements IPlayerGameContext {
      * 是否荣和
      */
     private boolean endByRon = false;
-    /**
-     * 最近玩家的手牌动作
-     */
-    private TehaiActionType lastTehaiActionType;
-    /**
-     * 最近玩家的牌河动作
-     */
-    private RiverActionEvent lastRiverAction;
     /**
      * 最近一名玩家的最佳一次摸牌来源
      */

@@ -8,6 +8,7 @@ import com.github.terralian.fastmaj.game.log.IGameLogger;
 import com.github.terralian.fastmaj.game.ryuuky.IRyuukyoku;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.player.IPlayer;
+import com.github.terralian.fastmaj.player.space.IPlayerSpaceManager;
 import com.github.terralian.fastmaj.river.IHaiRiver;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
@@ -449,4 +450,9 @@ public interface IGameCore {
      * @param gameLogger 游戏日志处理器
      */
     void setGameLogger(IGameLogger gameLogger);
+
+    /**
+     * 获取玩家空间管理器
+     */
+    IPlayerSpaceManager getPlayerSpaceManager();
 }

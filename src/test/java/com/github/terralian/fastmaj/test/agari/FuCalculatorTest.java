@@ -1,6 +1,7 @@
 package com.github.terralian.fastmaj.test.agari;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.agari.FuCalculator;
@@ -8,7 +9,10 @@ import com.github.terralian.fastmaj.agari.IFuCalculator;
 import com.github.terralian.fastmaj.agari.ITehaiAgariDivider;
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.game.KazeEnum;
+import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.player.space.IPlayerSpaceManager;
+import com.github.terralian.fastmaj.player.space.PlayerSpaceManager;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.TehaiBuilder;
 import com.github.terralian.fastmaj.third.mjscore.MjscoreAdapter;
@@ -35,19 +39,27 @@ public class FuCalculatorTest {
 
     @Test
     public void test() {
+        IPlayerSpaceManager spaceManager = new PlayerSpaceManager(4);
         PlayerGameContext context = new PlayerGameContext();
+        context.setLastPlayerPosition(1);
+        context.setPublicSpaces(spaceManager.clonePublicSpace(1));
+
+        // 当前上下文在模拟荣和设置下，使用的是事件判定比较麻烦
+        Consumer<Boolean> ronSetter = (isRon) -> {
+            context.getPublicSpace(context.getLastPlayerPosition()).setLastRiverActionType(isRon ? RiverActionType.RON : null);
+        };
 
         // 平和自摸
         ITehai tehai = EncodeMark.toTehai("23567m12223789s1m");
         List<DivideInfo> divideInfos = agariDivider.divide(tehai);
-        context.setRon(false);
+        ronSetter.accept(false);
         int fu = fuCalculator.compute(tehai, tehai.getDrawHai(), divideInfos, context);
         assertEquals(20, fu);
 
         // 非平和自摸
         tehai = EncodeMark.toTehai("56m33p456678s444z4m");
         divideInfos = agariDivider.divide(tehai);
-        context.setRon(false);
+        ronSetter.accept(false);
         fu = fuCalculator.compute(tehai, tehai.getDrawHai(), divideInfos, context);
         assertEquals(30, fu);
 
@@ -55,21 +67,21 @@ public class FuCalculatorTest {
         // 底符20，幺九暗刻8，边张2，自摸2 -> 32 进位 40符
         tehai = EncodeMark.toTehai("067m44678999p89s7s");
         divideInfos = agariDivider.divide(tehai);
-        context.setRon(false);
+        ronSetter.accept(false);
         fu = fuCalculator.compute(tehai, tehai.getDrawHai(), divideInfos, context);
         assertEquals(40, fu);
 
         // 单骑特例
         tehai = EncodeMark.toTehai("2223340m444p456s3m");
         divideInfos = agariDivider.divide(tehai);
-        context.setRon(false);
+        ronSetter.accept(false);
         fu = fuCalculator.compute(tehai, tehai.getDrawHai(), divideInfos, context);
         assertEquals(40, fu);
 
         // 双碰荣和跳符
         tehai = EncodeMark.toTehai("12356788m56799p8m");
         divideInfos = agariDivider.divide(tehai);
-        context.setRon(true);
+        ronSetter.accept(true);
         fu = fuCalculator.compute(tehai, tehai.getDrawHai(), divideInfos, context);
         assertEquals(40, fu);
 
@@ -81,7 +93,7 @@ public class FuCalculatorTest {
                 .addOne("1p") //
                 .get();
         divideInfos = agariDivider.divide(tehai);
-        context.setRon(false);
+        ronSetter.accept(false);
         fu = fuCalculator.compute(tehai, tehai.getDrawHai(), divideInfos, context);
         assertEquals(40, fu);
 
@@ -93,7 +105,7 @@ public class FuCalculatorTest {
                 .addOne("5m") //
                 .get();
         divideInfos = agariDivider.divide(tehai);
-        context.setRon(false);
+        ronSetter.accept(false);
         fu = fuCalculator.compute(tehai, tehai.getDrawHai(), divideInfos, context);
         assertEquals(30, fu);
 
@@ -104,7 +116,7 @@ public class FuCalculatorTest {
                 .addOne("8m") //
                 .get();
         divideInfos = agariDivider.divide(tehai);
-        context.setRon(true);
+        ronSetter.accept(true);
         context.setBakaze(KazeEnum.DON);
         context.setJikaze(KazeEnum.DON);
         fu = fuCalculator.compute(tehai, tehai.getDrawHai(), divideInfos, context);

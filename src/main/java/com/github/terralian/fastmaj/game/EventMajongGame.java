@@ -1,5 +1,6 @@
 package com.github.terralian.fastmaj.game;
 
+import com.github.terralian.fastmaj.game.event.ActionEvent;
 import com.github.terralian.fastmaj.game.event.GameEvent;
 import com.github.terralian.fastmaj.game.event.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.system.GameStartEvent;
@@ -65,6 +66,11 @@ public class EventMajongGame implements IEventMajongGame {
     @Override
     public GameEvent next() {
         GameEvent gameEvent = eventQueue.next();
+        // 缓存上一个动作
+        if (gameEvent instanceof ActionEvent) {
+            ActionEvent actionEvent = (ActionEvent) gameEvent;
+            gameCore.getPlayerSpaceManager().getDefaultSpace(actionEvent.getPosition()).setLastAction(actionEvent);
+        }
         IGameEventHandler gameEventHandler = gameEventHandlerManager.get(gameEvent);
         Assert.notNull(gameEventHandler, "未找到事件对应的处理器，请检查游戏创建器：" + gameEvent);
         gameEventHandler.handle(gameEvent, gameCore, gameConfig, eventQueue);

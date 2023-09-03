@@ -7,6 +7,8 @@ import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.hai.IHai;
+import com.github.terralian.fastmaj.player.space.PlayerDefaultSpace;
+import com.github.terralian.fastmaj.player.space.PlayerPublicSpace;
 import com.github.terralian.fastmaj.river.IHaiRiver;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.ITehaiLock;
@@ -23,7 +25,7 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class PlayerGameContext {
+public class PlayerGameContext implements IPlayerGameContext {
 
     // --------------------------------------------
     // 游戏定义
@@ -57,15 +59,15 @@ public class PlayerGameContext {
     /**
      * 本场数（展示值）
      */
-    private Integer honba;
+    private int honba;
     /**
      * 本场数（实际值）
      */
-    private Integer realHonba;
+    private int realHonba;
     /**
      * 场供
      */
-    private Integer kyotaku;
+    private int kyotaku;
     /**
      * 当前庄家
      */
@@ -141,6 +143,25 @@ public class PlayerGameContext {
      * 最近一名玩家的最佳一次摸牌来源
      */
     private DrawFrom lastDrawFrom;
+
+    // -------------------------------------------
+    // 玩家空间
+    // -------------------------------------------
+
+    /**
+     * 你的玩家空间（包含私有空间信息）
+     */
+    private PlayerDefaultSpace space;
+
+    /**
+     * 所有玩家的公开空间信息
+     */
+    private List<PlayerPublicSpace> publicSpaces;
+
+    /**
+     * 最后一个玩家的坐席
+     */
+    private int lastPlayerPosition;
 
     // -------------------------------------------
     // 快捷方法

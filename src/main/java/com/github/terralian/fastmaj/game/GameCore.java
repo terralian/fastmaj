@@ -106,11 +106,8 @@ public class GameCore implements IGameCore {
      */
     private KyokuEndEnum kyokuEndEnum;
 
-    // -------------------------------------
-    // 玩家区
-    // -------------------------------------
     /**
-     * 日志处理器
+     * 日志处理器，TODO 日志框架感觉需要和核心拆分，在外部处理
      */
     private IGameLogger gameLogger;
 

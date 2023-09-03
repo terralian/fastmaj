@@ -74,6 +74,7 @@ public interface IGameCore {
     /**
      * 当前玩家切一张手牌
      *
+     * @param position 操作的玩家
      * @param hai 要切的牌，通过id比较
      * @param reach 是否立直
      * @return 是否手切（true手切，false模切）
@@ -99,7 +100,7 @@ public interface IGameCore {
     /**
      * 从玩家的牌河吃一张牌
      *
-     * @param position
+     * @param position 操作的玩家
      * @param fromPosition 被吃牌的玩家
      * @param selfHai1 自家的搭子1
      * @param selfHai2 自家的搭子2
@@ -109,6 +110,7 @@ public interface IGameCore {
     /**
      * 从玩家的牌河碰一张牌
      *
+     * @param position 操作的玩家
      * @param fromPosition 被碰牌的玩家
      * @param redFirst 红宝牌做搭子优先
      */
@@ -117,6 +119,7 @@ public interface IGameCore {
     /**
      * 从玩家的牌河明杠一张牌
      *
+     * @param position 操作的玩家
      * @param fromPosition 被杠的玩家
      */
     IHai minkan(int position, int fromPosition);
@@ -124,6 +127,7 @@ public interface IGameCore {
     /**
      * 当前玩家加杠
      *
+     * @param position 操作的玩家
      * @param hai 操作的牌
      */
     void kakan(int position, IHai hai);
@@ -135,6 +139,7 @@ public interface IGameCore {
      * <p/>
      * 当需要增加新宝牌时，可以调用{@link #nextDoraDisplay()}
      *
+     * @param position 操作的玩家
      * @param hai 暗杠的牌
      */
     void annkan(int position, IHai hai);
@@ -142,6 +147,7 @@ public interface IGameCore {
     /**
      * 拔北
      *
+     * @param position 操作的玩家
      * @param hai 拔北的牌
      */
     void kita(int position, IHai hai);

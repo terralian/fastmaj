@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.ITehaiLock;
@@ -49,7 +48,7 @@ public class FuCalculator implements IFuCalculator {
         }
 
         // 【特殊】平和自摸固定20符，若荣和加10符
-        if (pinfu.match(tehai, divideInfo, (PlayerGameContext) context)) {  // TODO 修改为IPlayerGameContext
+        if (pinfu.match(tehai, divideInfo, context)) {
             return fu;
         }
 

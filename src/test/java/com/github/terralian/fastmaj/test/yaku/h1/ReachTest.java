@@ -1,21 +1,20 @@
 package com.github.terralian.fastmaj.test.yaku.h1;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
-import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
+import com.github.terralian.fastmaj.game.context.PlayerGameContextHelper;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h1.Reach;
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * {@link Reach}立直测试
- * 
+ *
  * @author terra.lian
  */
 public class ReachTest {
@@ -24,7 +23,7 @@ public class ReachTest {
     public void test() {
         IYaku yaku = new Reach();
         // 立直仅需要场况
-        PlayerGameContext gameContext = PlayerGameContextFactory.buildByNormal(0);
+        PlayerGameContext gameContext = PlayerGameContextHelper.buildByNormal(0);
         // 不需要手牌
         ITehai tehai = null;
         // 不需要手牌分割
@@ -40,7 +39,7 @@ public class ReachTest {
         assertTrue(result);
 
         // // 没有人立直
-        gameContext = PlayerGameContextFactory.buildByNormal(0);
+        gameContext = PlayerGameContextHelper.buildByNormal(0);
         gameContext.getHaiRiver().chain() //
                 .kiri(HaiPool.random()) //
                 .kiri(HaiPool.random());
@@ -48,7 +47,7 @@ public class ReachTest {
         assertFalse(result);
 
         // 自己和多人立直
-        gameContext = PlayerGameContextFactory.buildByNormal(0);
+        gameContext = PlayerGameContextHelper.buildByNormal(0);
         gameContext.getHaiRiver().chain() //
                 .kiri(HaiPool.random()) //
                 .reach(HaiPool.random());
@@ -63,7 +62,7 @@ public class ReachTest {
 
         // 自己没有立直，其他人立直了
         // 自己和多人立直
-        gameContext = PlayerGameContextFactory.buildByNormal(0);
+        gameContext = PlayerGameContextHelper.buildByNormal(0);
         gameContext.getHaiRiver().chain() //
                 .kiri(HaiPool.random()) //
                 .kiri(HaiPool.random());
@@ -74,7 +73,7 @@ public class ReachTest {
         assertFalse(result);
 
         // 自己的坐席是其他情况
-        gameContext = PlayerGameContextFactory.buildByNormal(1);
+        gameContext = PlayerGameContextHelper.buildByNormal(1);
         gameContext.getHaiRiver().chain() //
                 .kiri(HaiPool.random()) //
                 .reach(HaiPool.random());
@@ -82,7 +81,7 @@ public class ReachTest {
         assertTrue(result);
 
         // 自己的坐席是其他情况
-        gameContext = PlayerGameContextFactory.buildByNormal(2);
+        gameContext = PlayerGameContextHelper.buildByNormal(2);
         gameContext.getHaiRiver().chain() //
                 .kiri(HaiPool.random()) //
                 .reach(HaiPool.random());
@@ -90,7 +89,7 @@ public class ReachTest {
         assertTrue(result);
 
         // 自己的坐席是其他情况
-        gameContext = PlayerGameContextFactory.buildByNormal(3);
+        gameContext = PlayerGameContextHelper.buildByNormal(3);
         gameContext.getHaiRiver().chain() //
                 .kiri(HaiPool.random()) //
                 .reach(HaiPool.random());
@@ -105,7 +104,7 @@ public class ReachTest {
     public void doubleReachTest() {
         IYaku yaku = new Reach();
         // 立直仅需要场况
-        PlayerGameContext gameContext = PlayerGameContextFactory.buildByNormal(0);
+        PlayerGameContext gameContext = PlayerGameContextHelper.buildByNormal(0);
         // 不需要手牌
         ITehai tehai = null;
         // 不需要手牌分割

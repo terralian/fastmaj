@@ -1,22 +1,21 @@
 package com.github.terralian.fastmaj.test.yaku.h1;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
-
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
-import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
+import com.github.terralian.fastmaj.game.context.PlayerGameContextHelper;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.NakiEnum;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h1.Iipatu;
+import org.junit.Test;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * {@link Iipatu}测试
- * 
+ *
  * @author terra.lian
  */
 public class IipatuTest {
@@ -27,7 +26,7 @@ public class IipatuTest {
         // 不需要手牌分割
         DivideInfo divide = null;
         // 需要场况信息
-        PlayerGameContext gameContext = PlayerGameContextFactory.buildByNormal(0);
+        PlayerGameContext gameContext = PlayerGameContextHelper.buildByNormal(0);
         // 手牌，和手牌无关的役
         ITehai tehai = null;
         // 结果

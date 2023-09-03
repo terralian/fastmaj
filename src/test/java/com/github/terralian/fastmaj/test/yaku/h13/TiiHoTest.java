@@ -2,7 +2,7 @@ package com.github.terralian.fastmaj.test.yaku.h13;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
-import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
+import com.github.terralian.fastmaj.game.context.PlayerGameContextHelper;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.river.HaiRiver;
 import com.github.terralian.fastmaj.tehai.ITehai;
@@ -26,7 +26,7 @@ public class TiiHoTest {
     public void test() {
         IYaku yaku = new TiiHo();
         // 纯场况役
-        PlayerGameContext gameContext = PlayerGameContextFactory.buildByNormal(0);
+        PlayerGameContext gameContext = PlayerGameContextHelper.buildByNormal(0);
         // 需要手牌
         ITehai tehai = new Tehai();
         // 不需要手牌分割

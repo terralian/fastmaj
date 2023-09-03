@@ -7,7 +7,7 @@ import com.github.terralian.fastmaj.agari.ITehaiAgariDivider;
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
-import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
+import com.github.terralian.fastmaj.game.context.PlayerGameContextHelper;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.player.RivalEnum;
 import com.github.terralian.fastmaj.tehai.ITehai;
@@ -190,7 +190,7 @@ public class YakuMatcherTest {
      */
     @Test
     public void testWithContext() {
-        PlayerGameContext gameContext = PlayerGameContextFactory.buildByNormal(1);
+        PlayerGameContext gameContext = PlayerGameContextHelper.buildByNormal(1);
         gameContext.setEndByRon(true);
         // 第一巡非同巡，否则会变成地和
         gameContext.getHaiRivers().forEach(k -> k.setSameFirstJun(false));
@@ -289,7 +289,7 @@ public class YakuMatcherTest {
         assertTrue(yakus.get(0).getClass() == TyanKan.class);
 
         // 两立直
-        gameContext = PlayerGameContextFactory.buildByNormal(0);
+        gameContext = PlayerGameContextHelper.buildByNormal(0);
         gameContext.getHaiRiver().reach(HaiPool.p(1));
         gameContext.setEndByRon(true);
         gameContext.getHaiRivers().forEach(k -> {
@@ -311,7 +311,7 @@ public class YakuMatcherTest {
     @SuppressWarnings("unchecked")
     @Test
     public void mutiYakuTest() {
-        PlayerGameContext gameContext = PlayerGameContextFactory.buildByNormal(0);
+        PlayerGameContext gameContext = PlayerGameContextHelper.buildByNormal(0);
 
         // 立直一发自摸，清一色，一气，一杯口，平和
         gameContext.getHaiRivers().forEach(k -> {
@@ -406,7 +406,7 @@ public class YakuMatcherTest {
      */
     @Test
     public void yakumanTest() {
-        PlayerGameContext gameContext = PlayerGameContextFactory.buildByNormal(0);
+        PlayerGameContext gameContext = PlayerGameContextHelper.buildByNormal(0);
 
         // 绿一色
         ITehai tehai = EncodeMark.toTehai("22233344466s6z");
@@ -422,7 +422,7 @@ public class YakuMatcherTest {
      * 性能测试
      */
     public void performance_test() {
-        PlayerGameContext gameContext = PlayerGameContextFactory.buildByNormal(0);
+        PlayerGameContext gameContext = PlayerGameContextHelper.buildByNormal(0);
         // 立直一发自摸，清一色，一气，一杯口，平和
         gameContext.getHaiRivers().forEach(k -> {
             k.clear();

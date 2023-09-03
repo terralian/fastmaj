@@ -14,7 +14,7 @@ public class TsumoValidator implements ITehaiActionValidator {
     @Override
     public boolean resolveAction(int position, GameConfig gameConfig, IGameCore gameCore) {
         // 只需要手牌已经完成和了动作
-        // 若存在番缚，这个还需要增加校验（或者写个新类），后面再考虑
+        // 若存在番缚，这个还需要增加校验（或者写个新类），后面再考虑 TODO
         return gameCore.getSyaten(position) < 0;
     }
 

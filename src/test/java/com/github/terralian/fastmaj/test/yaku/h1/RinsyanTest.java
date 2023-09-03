@@ -32,37 +32,37 @@ public class RinsyanTest {
         boolean result = false;
 
         // 非荣和，暗杠岭上
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         gameContext.setLastTehaiActionType(TehaiActionType.ANNKAN);
         result = yaku.match(tehai, divide, gameContext);
         assertTrue(result);
 
         // 荣和，暗杠岭上（被人抢杠）
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         gameContext.setLastTehaiActionType(TehaiActionType.ANNKAN);
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);
 
         // 非荣和，加杠岭上
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         gameContext.setLastTehaiActionType(TehaiActionType.KAKAN);
         result = yaku.match(tehai, divide, gameContext);
         assertTrue(result);
 
         // 荣和，加杠岭上
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         gameContext.setLastTehaiActionType(TehaiActionType.KAKAN);
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);
 
         // 非荣和，其他操作和了
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         gameContext.setLastTehaiActionType(TehaiActionType.KIRI);
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);
 
         // 无最后玩家的操作信息，非岭上
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         gameContext.setLastTehaiActionType(null);
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);

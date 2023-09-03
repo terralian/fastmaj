@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.encode.EncodeMark;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.hai.HaiTypeEnum;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
@@ -22,7 +22,7 @@ import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
 public class SansyokuDoupon implements IYaku {
 
     @Override
-    public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
+    public boolean match(ITehai tehai, DivideInfo divide, IPlayerGameContext holder) {
         // 手牌存在3种花色不同点数相同的刻子或杠子
         // 则通过乘法计算求模计算即可（每个点数 * 在手牌内的所有花色定义）
         Map<Integer, Integer> map = new HashMap<>(4);

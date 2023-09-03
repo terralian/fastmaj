@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.yaku;
 import java.util.Collection;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 
 /**
@@ -24,7 +24,7 @@ public interface IYaku {
      * @param divide 和牌分割，手牌少数情况下有多种分割
      * @param gameContext 玩家对局数据容器
      */
-    boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext gameContext);
+    boolean match(ITehai tehai, DivideInfo divide, IPlayerGameContext gameContext);
 
     /**
      * 获取役的名称（如：门前清自摸）

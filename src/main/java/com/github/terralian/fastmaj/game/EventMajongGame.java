@@ -69,7 +69,7 @@ public class EventMajongGame implements IEventMajongGame {
         // 缓存上一个动作
         if (gameEvent instanceof ActionEvent) {
             ActionEvent actionEvent = (ActionEvent) gameEvent;
-            gameCore.getPlayerSpaceManager().getDefaultSpace(actionEvent.getPosition()).setLastAction(actionEvent);
+            gameCore.getPlayerSpaceManager().getDefaultSpace(actionEvent.getPosition()).addAction(actionEvent);
         }
         IGameEventHandler gameEventHandler = gameEventHandlerManager.get(gameEvent);
         Assert.notNull(gameEventHandler, "未找到事件对应的处理器，请检查游戏创建器：" + gameEvent);

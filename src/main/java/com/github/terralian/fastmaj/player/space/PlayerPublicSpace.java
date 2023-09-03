@@ -1,8 +1,8 @@
 package com.github.terralian.fastmaj.player.space;
 
 import com.github.terralian.fastmaj.game.KazeEnum;
-import com.github.terralian.fastmaj.game.action.river.RiverActionType;
-import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
+import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
+import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.river.IHaiRiver;
 import com.github.terralian.fastmaj.tehai.ITehaiLock;
 import lombok.Data;
@@ -53,11 +53,11 @@ public class PlayerPublicSpace extends PlayerStaticSpace {
     /**
      * 玩家的最近一个手牌动作，不包含摸牌
      */
-    private TehaiActionType lastTehaiActionType;
+    private TehaiActionEvent lastTehaiAction;
     /**
      * 玩家的最近一个牌河动作
      */
-    private RiverActionType lastRiverActionType;
+    private RiverActionEvent lastRiverAction;
 
     @Override
     public void copyTo(IPlayerSpace playerSpace) {
@@ -69,8 +69,8 @@ public class PlayerPublicSpace extends PlayerStaticSpace {
             publicSpace.setHaiRiver(haiRiver); // TODO
             publicSpace.setReach(reach);
             publicSpace.setJikaze(jikaze);
-            publicSpace.setLastTehaiActionType(lastTehaiActionType);
-            publicSpace.setLastRiverActionType(lastRiverActionType);
+            publicSpace.setLastTehaiAction(lastTehaiAction);
+            publicSpace.setLastRiverAction(lastRiverAction);
         }
         super.copyTo(playerSpace);
     }

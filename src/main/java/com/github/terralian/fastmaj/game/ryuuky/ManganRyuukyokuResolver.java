@@ -18,7 +18,7 @@ public class ManganRyuukyokuResolver implements IRyuukyokuResolver {
     /**
      * 分数计算器
      */
-    private IPointCalculator pointCalculator;
+    private final IPointCalculator pointCalculator;
 
     /**
      * 初始化构建流满计算器
@@ -35,7 +35,7 @@ public class ManganRyuukyokuResolver implements IRyuukyokuResolver {
         }
         // 没被鸣牌，且全都是幺九
         List<IHaiRiver> haiRivers = gameCore.getHaiRivers();
-        return haiRivers.stream().anyMatch(k -> isRyuukyokuMangan(k));
+        return haiRivers.stream().anyMatch(this::isRyuukyokuMangan);
     }
 
     /**

@@ -36,24 +36,24 @@ public class TsumoTest {
         ITehaiLock lock = tehai.getLock();
 
         // 非荣和，非鸣牌
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         result = yaku.match(tehai, divide, gameContext);
         assertTrue(result);
 
         // 荣和，非鸣牌
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
 
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);
 
         // 非荣和，鸣牌
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         lock.pon(HaiPool.m(1), RivalEnum.BOTTOM);
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);
 
         // 荣和，鸣牌
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);
     }

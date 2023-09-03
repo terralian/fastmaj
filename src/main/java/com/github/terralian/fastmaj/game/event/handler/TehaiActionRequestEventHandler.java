@@ -11,7 +11,6 @@ import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.game.context.PlayerGameContextFactory;
 import com.github.terralian.fastmaj.game.event.GameEvent;
-import com.github.terralian.fastmaj.game.event.IGameEventHandler;
 import com.github.terralian.fastmaj.game.event.system.SystemEventType;
 import com.github.terralian.fastmaj.game.event.system.TehaiActionRequestEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
@@ -69,9 +68,8 @@ public class TehaiActionRequestEventHandler implements ISystemGameEventHandler {
             throw new IllegalStateException("该手牌处理动作无法执行，动作管理器获取该动作为空：" + actionType);
         }
         tehaiAction.doAction(tehaiActionEvent, gameCore, gameConfig);
-        // 执行对应事件
-        IGameEventHandler eventHandler = (IGameEventHandler) tehaiAction;
-        eventHandler.handle(tehaiActionEvent, gameCore, gameConfig, eventQueue);
+        // 发出对应事件
+        eventQueue.addPriority(tehaiActionEvent);
 
         // 动作执行完成后，作为上一轮的手牌动作
         gameCore.setLastTehaiAction(tehaiActionEvent);

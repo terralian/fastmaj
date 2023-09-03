@@ -1,7 +1,7 @@
 package com.github.terralian.fastmaj.yaku.hn;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.meta.BountyYaku;
@@ -21,7 +21,7 @@ public class NormalDora implements IYaku {
     }
 
     @Override
-    public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext gameContext) {
+    public boolean match(ITehai tehai, DivideInfo divide, IPlayerGameContext gameContext) {
         // 仅通过自构建，而不能通过匹配
         return false;
     }

@@ -1,7 +1,7 @@
 package com.github.terralian.fastmaj.yaku.h1;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
@@ -17,7 +17,7 @@ import com.github.terralian.fastmaj.yaku.meta.NonJihaiYaku;
 public class Tanyaotyu implements IYaku {
 
     @Override
-    public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
+    public boolean match(ITehai tehai, DivideInfo divide, IPlayerGameContext holder) {
         for (IHai hai : tehai.getAll()) {
             if (hai.isYaotyuHai()) {
                 return false;

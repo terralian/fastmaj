@@ -2,7 +2,7 @@ package com.github.terralian.fastmaj.yaku.h13;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.game.GameConfig;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.player.RivalEnum;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.ITehaiLock;
@@ -21,7 +21,7 @@ import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
 public class Suukanzu implements IYakuman, IYakuBlame {
 
     @Override
-    public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
+    public boolean match(ITehai tehai, DivideInfo divide, IPlayerGameContext holder) {
         ITehaiLock tehaiLock = tehai.getLock();
         return tehaiLock.kanzuSize() == 4;
     }

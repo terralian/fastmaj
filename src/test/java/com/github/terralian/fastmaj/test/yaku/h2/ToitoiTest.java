@@ -54,21 +54,21 @@ public class ToitoiTest {
         assertTrue(result);
 
         // 四暗刻，自摸
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         tehai = EncodeMark.toTehai("111333555777m22p");
         divideInfos = tehaiAgariDivider.divide(tehai);
         result = yaku.match(tehai, divideInfos.get(0), gameContext);
         assertFalse(result);
 
         // 四暗刻听牌，非单骑荣和
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         tehai = EncodeMark.toTehai("11133355577m22p7m");
         divideInfos = tehaiAgariDivider.divide(tehai);
         result = yaku.match(tehai, divideInfos.get(0), gameContext);
         assertTrue(result);
 
         // 四暗刻单骑
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         tehai = EncodeMark.toTehai("111333555777m22p");
         divideInfos = tehaiAgariDivider.divide(tehai);
         result = yaku.match(tehai, divideInfos.get(0), gameContext);

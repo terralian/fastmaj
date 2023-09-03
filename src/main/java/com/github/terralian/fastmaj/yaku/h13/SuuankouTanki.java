@@ -2,7 +2,7 @@ package com.github.terralian.fastmaj.yaku.h13;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.encode.Encode34;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYakuman;
@@ -18,7 +18,7 @@ import com.github.terralian.fastmaj.yaku.meta.KozuYaku;
 public class SuuankouTanki implements IYakuman {
 
     @Override
-    public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
+    public boolean match(ITehai tehai, DivideInfo divide, IPlayerGameContext holder) {
         // 不能副露
         if (tehai.isNaki()) {
             return false;

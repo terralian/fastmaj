@@ -33,25 +33,25 @@ public class HouteiTest {
         gameContext.setLastTehaiActionType(TehaiActionType.KIRI);
 
         // 最后一枚，非荣和
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         gameContext.setYamaCountdown(0);
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);
 
         // 最后一枚，荣和
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         gameContext.setYamaCountdown(0);
         result = yaku.match(tehai, divide, gameContext);
         assertTrue(result);
 
         // 非最后一枚，非荣和
-        gameContext.setRon(false);
+        gameContext.setEndByRon(false);
         gameContext.setYamaCountdown(1);
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);
 
         // 非最后一枚，荣和
-        gameContext.setRon(true);
+        gameContext.setEndByRon(true);
         gameContext.setYamaCountdown(1);
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);

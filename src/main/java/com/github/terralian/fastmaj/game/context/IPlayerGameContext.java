@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.KazeEnum;
-import com.github.terralian.fastmaj.game.action.river.RiverActionType;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.player.space.PlayerDefaultSpace;
 import com.github.terralian.fastmaj.player.space.PlayerPublicSpace;
@@ -65,6 +64,13 @@ public interface IPlayerGameContext {
      * 当前庄家
      */
     int getOya();
+
+    /**
+     * 是否是庄家
+     */
+    default boolean isOya() {
+        return getOya() == getPosition();
+    }
 
     /**
      * 获取牌山剩余数量
@@ -180,13 +186,11 @@ public interface IPlayerGameContext {
     }
 
     // --------------------------------------------
-    // 计算信息
+    // 结束信息
     // --------------------------------------------
 
     /**
      * 是否荣和
      */
-    default boolean isEndByRon() {
-        return getPublicSpace(getLastPlayerPosition()).getLastRiverActionType() == RiverActionType.RON;
-    }
+    boolean isEndByRon();
 }

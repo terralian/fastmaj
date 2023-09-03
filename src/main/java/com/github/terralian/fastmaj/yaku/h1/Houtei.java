@@ -2,7 +2,10 @@ package com.github.terralian.fastmaj.yaku.h1;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
 import com.github.terralian.fastmaj.game.action.tehai.TehaiActionType;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
+import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
+import com.github.terralian.fastmaj.game.event.river.RonEvent;
+import com.github.terralian.fastmaj.player.space.PlayerDefaultSpace;
+import com.github.terralian.fastmaj.player.space.PlayerPublicSpace;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
@@ -19,10 +22,17 @@ import com.github.terralian.fastmaj.yaku.meta.RonYaku;
 public class Houtei implements IYaku {
 
     @Override
-    public boolean match(ITehai tehai, DivideInfo divide, PlayerGameContext holder) {
-        // 海底，河底，抢杠
-        TehaiActionType tehaiActionType = holder.getLastTehaiActionType();
-        return holder.getYamaCountdown() == 0 && holder.isRon() && tehaiActionType == TehaiActionType.KIRI;
+    public boolean match(ITehai tehai, DivideInfo divide, IPlayerGameContext holder) {
+        //海底
+        if (holder == null || holder.getYamaCountdown() > 0 || !holder.isEndByRon()) {
+            return false;
+        }
+        // 非抢杠
+        PlayerDefaultSpace defaultSpace = holder.getSpace();
+        RonEvent lastAction = (RonEvent) defaultSpace.getLastAction();
+        int fromPosition = lastAction.getFrom();
+        PlayerPublicSpace publicSpace = holder.getPublicSpace(fromPosition);
+        return publicSpace.getLastTehaiAction().getEventType() == TehaiActionType.KIRI;
     }
 
     @Override

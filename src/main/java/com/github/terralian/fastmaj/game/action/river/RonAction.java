@@ -48,7 +48,7 @@ public class RonAction extends AgariAction implements IRiverAction {
 
         // 组装对手的游戏上下文
         PlayerGameContext context = PlayerGameContextFactory.buildByGameCore(position, gameConfig, gameCore);
-        context.setRon(true);
+        context.setEndByRon(true);
         context.setAgariHai(rivalActionHai);
         // 获取宝牌，若对手立直，包括里宝牌
         List<IHai> doraHais = gameCore.getDoras();

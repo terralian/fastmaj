@@ -29,7 +29,6 @@ public class DrawAction implements IGameAction, ISystemGameEventHandler {
     @Override
     public void handle(GameEvent gameEvent, IGameCore gameCore, GameConfig gameConfig, IGameEventQueue eventQueue) {
         DrawEvent drawEvent = (DrawEvent) gameEvent;
-        gameCore.switchPlayer(drawEvent.getPosition());
         gameCore.draw(drawEvent.getPosition(), drawEvent.getDrawFrom());
         eventQueue.addNormal(new TehaiActionRequestEvent(drawEvent.getPosition(), drawEvent));
     }

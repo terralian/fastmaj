@@ -12,7 +12,7 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
 
 /**
  * {@link ChainGameLogger}用于需要多个打印器的场景，每个打印器处理不同的日志处理需求
- * 
+ *
  * @author terra.lian
  * @since 2022-10-28
  */
@@ -25,7 +25,7 @@ class ChainGameLogger implements IGameLogger {
 
     /**
      * 构建一个链式日志处理器
-     * 
+     *
      * @param loggers 日志处理器集合
      */
     public ChainGameLogger(List<IGameLogger> loggers) {
@@ -124,7 +124,8 @@ class ChainGameLogger implements IGameLogger {
     }
 
     @Override
-    public void ron(int position, int fromPosition, List<IYaku> yakus, int ban, int fu, int score, int[] increaseAndDecrease) {
+    public void ron(int position, int fromPosition, List<IYaku> yakus, int ban, int fu, int score,
+            int[] increaseAndDecrease) {
         for (IGameLogger logger : loggers) {
             logger.ron(position, fromPosition, yakus, ban, fu, score, increaseAndDecrease);
         }
@@ -141,13 +142,6 @@ class ChainGameLogger implements IGameLogger {
     public void ryuukyoku(String ryuukyokuName, int[] increaseAndDecrease) {
         for (IGameLogger logger : loggers) {
             logger.ryuukyoku(ryuukyokuName, increaseAndDecrease);
-        }
-    }
-
-    @Override
-    public void switchPlayer(int prevPlayer, int nextPlayer) {
-        for (IGameLogger logger : loggers) {
-            logger.switchPlayer(prevPlayer, nextPlayer);
         }
     }
 

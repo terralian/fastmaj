@@ -26,7 +26,7 @@ public class KiriAction implements ITehaiAction {
                     + "的手牌不能进行模切操作：" + actionParam.getIfHai() + " 当前玩家手牌："
                     + gameCore.getTehai(actionParam.getPosition()).getHand());
         }
-        gameCore.kiri(actionParam.getIfHai(), false);
+        gameCore.kiri(actionParam.getPosition(), actionParam.getIfHai(), false);
         return KyokuState.CONTINUE;
     }
 

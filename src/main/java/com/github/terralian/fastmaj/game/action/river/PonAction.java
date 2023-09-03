@@ -36,7 +36,6 @@ public class PonAction implements IRiverAction {
     public void handle(GameEvent gameEvent, IGameCore gameCore, GameConfig gameConfig, IGameEventQueue eventQueue) {
         RiverActionEvent riverActionEvent = (RiverActionEvent) gameEvent;
         int position = riverActionEvent.getPosition();
-        gameCore.switchPlayer(position);
         doAction(riverActionEvent, gameConfig, gameCore);
 
         // 请求一次切牌动作

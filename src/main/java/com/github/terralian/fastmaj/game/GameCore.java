@@ -94,9 +94,9 @@ public class GameCore implements IGameCore {
      */
     protected Integer kyotaku;
     /**
-     * 当前玩家的坐席
+     * 最后操作的玩家坐席
      */
-    protected int position;
+    protected int lastPlayerPosition;
     /**
      * 是否连庄
      */
@@ -212,7 +212,7 @@ public class GameCore implements IGameCore {
         honba[0] = honba[1] = honba[2] == 0 ? 0 : honba[1] + 1;
         honba[2] = 0;
         // 庄家是最早出牌人
-        position = oya;
+        lastPlayerPosition = oya;
         // 其他状态重置
         resetKyokuStatus();
         // 初始化牌山
@@ -262,32 +262,6 @@ public class GameCore implements IGameCore {
         kyokuEndEnum = null;
     }
 
-    @Override
-    public void nextPlayer() {
-        int nextPosition = position + 1;
-        if (position + 1 >= playerSize) {
-            nextPosition = 0;
-        }
-        // 日志处理
-        gameLogger.switchPlayer(this.position, nextPosition);
-
-        this.position = nextPosition;
-    }
-
-    /**
-     * 切换当前操作玩家
-     *
-     * @param position 玩家坐席
-     */
-    @Override
-    public void switchPlayer(int position) {
-        gameState.requireGameStarted();
-        // 日志处理
-        gameLogger.switchPlayer(this.position, position);
-
-        this.position = position;
-    }
-
     /**
      * 当前玩家摸一枚手牌
      * <p/>
@@ -316,11 +290,13 @@ public class GameCore implements IGameCore {
         tehai.draw(hai);
 
         // 重算向听
-        calcCurrentPlayerSyaten();
+        calcCurrentPlayerSyaten(position);
         // 日志处理
         gameLogger.draw(position, hai, drawFrom);
         // 动作数增加
         actionCount++;
+        // 最后操作的玩家记录
+        lastPlayerPosition = position;
 
         return hai;
     }
@@ -332,7 +308,7 @@ public class GameCore implements IGameCore {
      * @return 是否手切（true手切，false模切）
      */
     @Override
-    public boolean kiri(IHai hai, boolean reach) {
+    public boolean kiri(int position, IHai hai, boolean reach) {
         gameState.requireWaitTehaiAction();
         gameState = GameState.WAIT_RIVER_ACTION;
 
@@ -353,11 +329,13 @@ public class GameCore implements IGameCore {
         boolean handKiri = tehai.kiri(hai);
 
         // 计算向听
-        calcCurrentPlayerSyaten();
+        calcCurrentPlayerSyaten(position);
         // 日志处理
         gameLogger.kiri(position, hai, reach, handKiri);
         // 动作数增加
         actionCount++;
+        // 最后操作的玩家记录
+        lastPlayerPosition = position;
 
         return handKiri;
     }
@@ -410,11 +388,13 @@ public class GameCore implements IGameCore {
         // 计算第一巡同巡
         setSameFirstJun(fromPosition, position);
         // 计算向听
-        calcCurrentPlayerSyaten();
+        calcCurrentPlayerSyaten(position);
         // 日志处理
         gameLogger.chii(position, fromPosition, nakiHai, selfHai1, selfHai2);
         // 动作数增加
         actionCount++;
+        // 最后操作的玩家记录
+        lastPlayerPosition = position;
 
         return nakiHai;
     }
@@ -440,11 +420,13 @@ public class GameCore implements IGameCore {
         // 计算第一巡同巡
         setSameFirstJun(fromPosition, position);
         // 计算向听
-        calcCurrentPlayerSyaten();
+        calcCurrentPlayerSyaten(position);
         // 日志处理
         gameLogger.pon(position, fromPosition, nakiHai);
         // 动作数增加
         actionCount++;
+        // 最后操作的玩家记录
+        lastPlayerPosition = position;
 
         return nakiHai;
     }
@@ -468,11 +450,13 @@ public class GameCore implements IGameCore {
         // 计算第一巡同巡
         setSameFirstJun(fromPosition, position);
         // 计算向听
-        calcCurrentPlayerSyaten();
+        calcCurrentPlayerSyaten(position);
         // 日志处理
         gameLogger.minkan(position, fromPosition, nakiHai);
         // 动作数增加
         actionCount++;
+        // 最后操作的玩家记录
+        lastPlayerPosition = position;
 
         return nakiHai;
     }
@@ -490,11 +474,13 @@ public class GameCore implements IGameCore {
         ITehai tehai = getTehai(position);
         tehai.kakan(hai);
         // 计算向听
-        calcCurrentPlayerSyaten();
+        calcCurrentPlayerSyaten(position);
         // 日志处理
         gameLogger.kakan(position, hai);
         // 动作数增加
         actionCount++;
+        // 最后操作的玩家记录
+        lastPlayerPosition = position;
     }
 
     /**
@@ -516,11 +502,13 @@ public class GameCore implements IGameCore {
         // 计算第一巡同巡
         setSameFirstJun(position, position);
         // 计算向听
-        calcCurrentPlayerSyaten();
+        calcCurrentPlayerSyaten(position);
         // 日志处理
         gameLogger.annkan(position, hai);
         // 动作数增加
         actionCount++;
+        // 最后操作的玩家记录
+        lastPlayerPosition = position;
     }
 
     /**
@@ -538,11 +526,13 @@ public class GameCore implements IGameCore {
         // 计算第一巡同巡
         setSameFirstJun(position, position);
         // 计算向听
-        calcCurrentPlayerSyaten();
+        calcCurrentPlayerSyaten(position);
         // 日志处理
         gameLogger.kita(position, hai);
         // 动作数增加
         actionCount++;
+        // 最后操作的玩家记录
+        lastPlayerPosition = position;
     }
 
     /**
@@ -578,6 +568,8 @@ public class GameCore implements IGameCore {
             kyokuEndEnum = KyokuEndEnum.RON;
             gameLogger.ron(agariPosition, fromPosition, yakus, ban, fu, score, increaseAndDecrease);
         }
+        // 最后操作的玩家记录
+        lastPlayerPosition = agariPosition;
     }
 
     /**
@@ -671,7 +663,6 @@ public class GameCore implements IGameCore {
     @Override
     public void setOya(int oya) {
         this.oya = oya;
-        this.position = oya;
     }
 
     /**
@@ -714,14 +705,6 @@ public class GameCore implements IGameCore {
                 .stream() //
                 .map(PlayerDefaultSpace::getTehai) //
                 .collect(Collectors.toList());
-    }
-
-    /**
-     * 获取当前玩家的牌河
-     */
-    @Override
-    public IHaiRiver getHaiRiver() {
-        return getHaiRiver(position);
     }
 
     /**
@@ -799,8 +782,8 @@ public class GameCore implements IGameCore {
      * 获取当前操作的玩家坐席
      */
     @Override
-    public int getPosition() {
-        return this.position;
+    public int getLastPlayerPosition() {
+        return this.lastPlayerPosition;
     }
 
     /**
@@ -939,7 +922,7 @@ public class GameCore implements IGameCore {
         // 剩余牌数：
         sb.append("剩余牌数").append(yama.getCountdown()).append(", ");
         // 当前回合
-        sb.append("当前玩家:").append(position).append("]");
+        sb.append("最后玩家：").append(lastPlayerPosition).append("]");
 
 
         return sb.toString();
@@ -972,9 +955,9 @@ public class GameCore implements IGameCore {
     }
 
     /**
-     * 重新计算当前玩家的向听数
+     * 重新计算当前玩家的向听数，TODO，需要当局缓存来降低计算
      */
-    private void calcCurrentPlayerSyaten() {
+    private void calcCurrentPlayerSyaten(int position) {
         calcPlayerSyaten(position);
     }
 

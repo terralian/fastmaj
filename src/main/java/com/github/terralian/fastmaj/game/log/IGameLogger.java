@@ -12,7 +12,7 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
 
 /**
  * 游戏日志/牌谱处理器，该接口用于游戏内各种事件发生时，进行日志记录打印或者整理为牌谱文件。
- * 
+ *
  * @author terra.lian
  * @since 2022-10-28
  */
@@ -161,7 +161,8 @@ public interface IGameLogger {
      * @param score 和了点数
      * @param increaseAndDecrease 玩家的分数更新
      */
-    default void ron(int position, int fromPosition, List<IYaku> yaku, int ban, int fu, int score, int[] increaseAndDecrease) {
+    default void ron(int position, int fromPosition, List<IYaku> yaku, int ban, int fu, int score,
+            int[] increaseAndDecrease) {
     }
 
     /**
@@ -189,15 +190,6 @@ public interface IGameLogger {
     // ------------------------------------------------
     // 系统事件
     // ------------------------------------------------
-
-    /**
-     * 手牌处理动作执行玩家切换
-     *
-     * @param prevPlayer 上一个玩家
-     * @param nextPlayer 下一个玩家
-     */
-    default void switchPlayer(int prevPlayer, int nextPlayer) {
-    }
 
     /**
      * 增加新的宝牌指示牌

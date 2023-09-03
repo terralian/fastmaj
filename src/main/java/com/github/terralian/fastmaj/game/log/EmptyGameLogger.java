@@ -12,7 +12,7 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
 
 /**
  * 空的游戏日志记录器，
- * 
+ *
  * @author terra.lian
  * @since 2022-10-28
  */
@@ -32,7 +32,8 @@ public class EmptyGameLogger implements IGameLogger {
     /**
      * 不可构造
      */
-    private EmptyGameLogger() {}
+    private EmptyGameLogger() {
+    }
 
     @Override
     public void gameStart(List<IPlayer> players, IGameCore gameCore) {
@@ -100,7 +101,8 @@ public class EmptyGameLogger implements IGameLogger {
     }
 
     @Override
-    public void ron(int position, int fromPosition, List<IYaku> yakus, int ban, int fu, int score, int[] increaseAndDecrease) {
+    public void ron(int position, int fromPosition, List<IYaku> yakus, int ban, int fu, int score,
+            int[] increaseAndDecrease) {
 
     }
 
@@ -111,11 +113,6 @@ public class EmptyGameLogger implements IGameLogger {
 
     @Override
     public void ryuukyoku(String ryuukyokuName, int[] increaseAndDecrease) {
-
-    }
-
-    @Override
-    public void switchPlayer(int prevPlayer, int nextPlayer) {
 
     }
 

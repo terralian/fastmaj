@@ -7,7 +7,7 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 
 /**
  * 加杠动作可执行判断
- * 
+ *
  * @author terra.lian
  */
 public class KakanValidator implements ITehaiActionValidator {
@@ -17,7 +17,7 @@ public class KakanValidator implements ITehaiActionValidator {
         // 需要牌山还有可摸的牌
         // 宝牌数需要小于5，即没有人操作开四杠
         // 立直时不会存在暗杠的情况
-        if (gameCore.getYamaCountdown() <= 0 || gameCore.getDoraDisplays().size() >= 5 || gameCore.getHaiRiver().isReach()) {
+        if (gameCore.getYamaCountdown() <= 0 || gameCore.getDoraDisplays().size() >= 5 || gameCore.getHaiRiver(position).isReach()) {
             return false;
         }
         ITehai tehai = gameCore.getTehai(position);

@@ -34,7 +34,6 @@ public class MinKanAction implements IRiverAction {
     public void handle(GameEvent gameEvent, IGameCore gameCore, GameConfig gameConfig, IGameEventQueue eventQueue) {
         RiverActionEvent riverActionEvent = (RiverActionEvent) gameEvent;
         int position = riverActionEvent.getPosition();
-        gameCore.switchPlayer(position);
         doAction(riverActionEvent, gameConfig, gameCore);
 
         DoraAddRule doraAddRule = gameConfig.getNewDoraByMinkanRule();

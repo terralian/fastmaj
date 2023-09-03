@@ -60,18 +60,6 @@ public interface IGameCore {
     void endKyoku();
 
     /**
-     * 切换到下一位操作玩家
-     */
-    void nextPlayer();
-
-    /**
-     * 切换当前操作玩家到指定玩家
-     *
-     * @param position 玩家坐席
-     */
-    void switchPlayer(int position);
-
-    /**
      * 当前玩家摸一枚手牌
      * <p/>
      * 可以从牌山或者王牌区摸一张牌，若从王牌区摸牌，<b>并不会自动增加新的宝牌</b>，这是由于不同规则新宝牌的时机并不一致。
@@ -90,7 +78,7 @@ public interface IGameCore {
      * @param reach 是否立直
      * @return 是否手切（true手切，false模切）
      */
-    boolean kiri(IHai hai, boolean reach);
+    boolean kiri(int position, IHai hai, boolean reach);
 
     /**
      * 立直（步骤2）玩家在{@link #kiri}动作后，放上一根立直棒
@@ -259,11 +247,6 @@ public interface IGameCore {
     List<ITehai> getTehais();
 
     /**
-     * 获取当前玩家的牌河
-     */
-    IHaiRiver getHaiRiver();
-
-    /**
      * 获取某个玩家的牌河
      *
      * @param position 玩家的坐席
@@ -321,7 +304,7 @@ public interface IGameCore {
     /**
      * 获取当前操作的玩家坐席
      */
-    int getPosition();
+    int getLastPlayerPosition();
 
     /**
      * 获取所有宝牌指示牌

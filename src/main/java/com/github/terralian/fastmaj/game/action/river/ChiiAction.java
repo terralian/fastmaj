@@ -40,7 +40,6 @@ public class ChiiAction implements IRiverAction {
     @Override
     public void handle(GameEvent gameEvent, IGameCore gameCore, GameConfig gameConfig, IGameEventQueue eventQueue) {
         RiverActionEvent riverActionEvent = (RiverActionEvent) gameEvent;
-        gameCore.switchPlayer(riverActionEvent.getPosition());
         doAction(riverActionEvent, gameConfig, gameCore);
 
         int position = riverActionEvent.getPosition();

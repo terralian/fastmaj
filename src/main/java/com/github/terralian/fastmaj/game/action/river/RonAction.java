@@ -73,7 +73,6 @@ public class RonAction extends AgariAction implements IRiverAction {
     @Override
     public void handle(GameEvent gameEvent, IGameCore gameCore, GameConfig gameConfig, IGameEventQueue eventQueue) {
         RiverActionEvent riverActionEvent = (RiverActionEvent) gameEvent;
-        gameCore.switchPlayer(riverActionEvent.getPosition());
         doAction(riverActionEvent, gameConfig, gameCore);
         // 产生对局结束优先事件
         eventQueue.addPriority(new KyokuEndEvent());

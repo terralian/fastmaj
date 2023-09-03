@@ -300,10 +300,6 @@ public class PrintGameLogger implements IGameLogger {
     }
 
     @Override
-    public void switchPlayer(int prevPlayer, int nextPlayer) {
-    }
-
-    @Override
     public void nextDoraDisplay(IHai doraDisplay) {
         if (shortKyokuSummary) {
             return;

@@ -62,7 +62,7 @@ public class TehaiActionRequestEventHandler implements ISystemGameEventHandler {
         }
 
         // 执行玩家动作
-        tehaiActionEvent.setPosition(gameCore.getLastPlayerPosition());
+        tehaiActionEvent.setPosition(requestEvent.getPosition());
         ITehaiAction tehaiAction = playerActionManager.getTehaiAction(tehaiActionEvent.getEventType());
         if (tehaiAction == null) {
             throw new IllegalStateException("该手牌处理动作无法执行，动作管理器获取该动作为空：" + actionType);

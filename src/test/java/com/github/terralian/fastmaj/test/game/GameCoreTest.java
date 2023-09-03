@@ -47,7 +47,6 @@ public class GameCoreTest {
         assertEquals(-1, gameCore.getOya());
         assertEquals(4, gameCore.getPlayerSize());
         assertEquals(config.getStartPoint().intValue(), gameCore.getPlayerPoints()[0]);
-        assertEquals(0, gameCore.getLastPlayerPosition());
         // 未开始对局
         assertEquals(-1, gameCore.getRound());
     }

@@ -302,11 +302,6 @@ public interface IGameCore {
     void setKyotaku(int kyotaku);
 
     /**
-     * 获取当前操作的玩家坐席
-     */
-    int getLastPlayerPosition();
-
-    /**
      * 获取所有宝牌指示牌
      */
     List<IHai> getDoraDisplays();

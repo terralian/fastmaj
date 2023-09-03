@@ -55,7 +55,6 @@ public class PlayerGameContextFactory {
                 .setLastDrawFrom(gameCore.getLastDrawFrom()) //
                 .setSpace(playerSpaceManager.cloneDefaultSpace(position)) //
                 .setPublicSpaces(playerSpaceManager.clonePublicSpace(position)) //
-                .setLastPlayerPosition(gameCore.getPosition())
         ;
         // 和了信息没有记录到上下文
 

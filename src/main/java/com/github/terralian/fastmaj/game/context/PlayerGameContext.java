@@ -158,11 +158,6 @@ public class PlayerGameContext implements IPlayerGameContext {
      */
     private List<PlayerPublicSpace> publicSpaces;
 
-    /**
-     * 最后一个玩家的坐席
-     */
-    private int lastPlayerPosition;
-
     // -------------------------------------------
     // 快捷方法
     // -------------------------------------------

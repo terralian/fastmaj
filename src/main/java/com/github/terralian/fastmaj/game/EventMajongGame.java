@@ -43,7 +43,7 @@ public class EventMajongGame implements IEventMajongGame {
     }
 
     /**
-     * 启动一局游戏，给队列发送一个游戏开始的事件，后续通过{@link #next()}进行控制
+     * 启动一局游戏，给队列发送一个游戏开始的事件，后续通过{@link #nextEvent()}进行控制
      *
      * @throws IllegalStateException 若游戏已开始，则抛出该异常
      */
@@ -64,7 +64,7 @@ public class EventMajongGame implements IEventMajongGame {
      * 执行游戏的下一步，执行前需要调用{@link #isGameEnd()}进行游戏结束判定
      */
     @Override
-    public GameEvent next() {
+    public GameEvent nextEvent() {
         GameEvent gameEvent = eventQueue.next();
         // 缓存上一个动作
         if (gameEvent instanceof ActionEvent) {
@@ -77,5 +77,16 @@ public class EventMajongGame implements IEventMajongGame {
         return gameEvent;
     }
 
-
+    /**
+     * 执行到下一个动作事件，跳过系统事件，并返回被执行的事件
+     */
+    @Override
+    public ActionEvent nextActionEvent() {
+        while (true) {
+            GameEvent gameEvent = nextEvent();
+            if (gameEvent instanceof ActionEvent) {
+                return (ActionEvent) gameEvent;
+            }
+        }
+    }
 }

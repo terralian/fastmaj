@@ -47,7 +47,7 @@ public class RiverActionRequestEventHandler implements ISystemGameEventHandler {
         List<RiverActionEvent> actions = new ArrayList<>();
         for (int i = 0; i < gameConfig.getPlayerSize(); i++) {
             // 跳过当前处理手牌的玩家
-            if (gameCore.getLastPlayerPosition() == i) {
+            if (fromEvent.getPosition() == i) {
                 continue;
             }
 
@@ -62,7 +62,7 @@ public class RiverActionRequestEventHandler implements ISystemGameEventHandler {
 
             // 为玩家执行动作，校验该动作合法，并加入到集合
             IPlayer player = gameCore.getPlayer(i);
-            RiverActionEvent nakiAction = player.nakiOrRon(gameCore.getLastPlayerPosition(), fromEvent.getEventType(),
+            RiverActionEvent nakiAction = player.nakiOrRon(fromEvent.getPosition(), fromEvent.getEventType(),
                     enableActions, playerGameContext);
             // 玩家跳过执行
             if (nakiAction == null || nakiAction.getEventType() == RiverActionType.SKIP) {
@@ -72,7 +72,9 @@ public class RiverActionRequestEventHandler implements ISystemGameEventHandler {
                 throw new IllegalStateException("玩家" + (i + 1) + "不可执行的牌河动作：" + nakiAction.getEventType());
             }
             // 设置无需由玩家设置的项
-            nakiAction.setFromHai(fromEvent.getIfHai()).setPosition(i).setFrom(gameCore.getLastPlayerPosition());
+            nakiAction.setFromHai(fromEvent.getIfHai()) //
+                    .setPosition(i) //
+                    .setFrom(fromEvent.getPosition());
             actions.add(nakiAction);
         }
 

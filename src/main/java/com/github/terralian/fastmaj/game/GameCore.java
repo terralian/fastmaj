@@ -779,14 +779,6 @@ public class GameCore implements IGameCore {
     }
 
     /**
-     * 获取当前操作的玩家坐席
-     */
-    @Override
-    public int getLastPlayerPosition() {
-        return this.lastPlayerPosition;
-    }
-
-    /**
      * 获取所有宝牌指示牌
      */
     @Override

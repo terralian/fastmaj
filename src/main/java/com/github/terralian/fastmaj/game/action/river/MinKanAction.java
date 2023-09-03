@@ -19,10 +19,10 @@ public class MinKanAction implements IRiverAction {
 
     @Override
     public void doAction(RiverActionEvent value, GameConfig gameConfig, IGameCore gameCore) {
-        if (!gameCore.getTehai().canMinkan(value.getFromHai())) {
+        if (!gameCore.getTehai(value.getPosition()).canMinkan(value.getFromHai())) {
             throw new IllegalArgumentException("手牌不可基于参数牌操作明杠：" + value.getFromHai());
         }
-        gameCore.minkan(value.getFrom());
+        gameCore.minkan(value.getPosition(), value.getFrom());
     }
 
     @Override

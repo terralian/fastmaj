@@ -22,7 +22,7 @@ public class ReachAction implements ITehaiAction {
 
     @Override
     public KyokuState doAction(TehaiActionEvent actionParam, IGameCore gameCore, GameConfig gameOptions) {
-        if (!gameCore.getTehai().canKiri(actionParam.getIfHai())) {
+        if (!gameCore.getTehai(actionParam.getPosition()).canKiri(actionParam.getIfHai())) {
             throw new IllegalArgumentException("参数错误，参数牌不能进行模切操作：" + actionParam.getIfHai());
         }
         gameCore.kiri(actionParam.getIfHai(), true);

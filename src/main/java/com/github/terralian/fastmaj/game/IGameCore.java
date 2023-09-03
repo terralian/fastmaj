@@ -111,11 +111,12 @@ public interface IGameCore {
     /**
      * 从玩家的牌河吃一张牌
      *
+     * @param position
      * @param fromPosition 被吃牌的玩家
      * @param selfHai1 自家的搭子1
      * @param selfHai2 自家的搭子2
      */
-    IHai chii(int fromPosition, IHai selfHai1, IHai selfHai2);
+    IHai chii(int position, int fromPosition, IHai selfHai1, IHai selfHai2);
 
     /**
      * 从玩家的牌河碰一张牌
@@ -123,21 +124,21 @@ public interface IGameCore {
      * @param fromPosition 被碰牌的玩家
      * @param redFirst 红宝牌做搭子优先
      */
-    IHai pon(int fromPosition, boolean redFirst);
+    IHai pon(int position, int fromPosition, boolean redFirst);
 
     /**
      * 从玩家的牌河明杠一张牌
      *
      * @param fromPosition 被杠的玩家
      */
-    IHai minkan(int fromPosition);
+    IHai minkan(int position, int fromPosition);
 
     /**
      * 当前玩家加杠
      *
      * @param hai 操作的牌
      */
-    void kakan(IHai hai);
+    void kakan(int position, IHai hai);
 
     /**
      * 当前玩家操作暗杠
@@ -148,14 +149,14 @@ public interface IGameCore {
      *
      * @param hai 暗杠的牌
      */
-    void annkan(IHai hai);
+    void annkan(int position, IHai hai);
 
     /**
      * 拔北
      *
      * @param hai 拔北的牌
      */
-    void kita(IHai hai);
+    void kita(int position, IHai hai);
 
     /**
      * 和了，包含自摸和荣和
@@ -194,11 +195,6 @@ public interface IGameCore {
      * 玩家人数
      */
     int getPlayerSize();
-
-    /**
-     * 获取当前玩家
-     */
-    IPlayer getPlayer();
 
     /**
      * 获取玩家
@@ -249,11 +245,6 @@ public interface IGameCore {
      * @param currentPlayerPoints 当前玩家的分数
      */
     void setPlayerPoints(int[] currentPlayerPoints);
-
-    /**
-     * 获取当前玩家的手牌
-     */
-    ITehai getTehai();
 
     /**
      * 获取某个玩家的手牌
@@ -361,11 +352,6 @@ public interface IGameCore {
      * 获取玩家是否立直标识
      */
     List<Boolean> getReachs();
-
-    /**
-     * 获取玩家是否同巡标识
-     */
-    List<Boolean> getSameRounds();
 
     /**
      * 获取某个玩家当前的向听数

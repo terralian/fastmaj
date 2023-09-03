@@ -29,7 +29,7 @@ public class ChiiAction implements IRiverAction {
         if (!tehai.canKiri(selfHais[0]) || !tehai.canKiri(selfHais[1])) {
             throw new IllegalArgumentException("参数错误，不能操作");
         }
-        gameCore.chii(chiiEvent.getFrom(), selfHais[0], selfHais[1]);
+        gameCore.chii(chiiEvent.getPosition(), chiiEvent.getFrom(), selfHais[0], selfHais[1]);
     }
 
     @Override

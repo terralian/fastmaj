@@ -103,7 +103,7 @@ public abstract class AbstractTenhouSpecialSamplePaifuTest extends AbstractTenho
         simulate_run_game("2019050400gm-00a9-0000-8c08e32a&tw=3.mjlog", true);
         simulate_run_game("2019110302gm-00a9-0000-473e5852&tw=3.mjlog", true);
 
-        simulate_run_game("2021041720gm-00a9-0000-f3b19e15&tw=3.mjlog", false);
+        simulate_run_game("2021041720gm-00a9-0000-f3b19e15&tw=3.mjlog", true);
         simulate_run_game("2021010917gm-0089-0000-d9225d74&tw=1.mjlog", true);
         simulate_run_game("2021100323gm-00a9-0000-d0ac1302&tw=1.mjlog", true);
     }
@@ -114,7 +114,7 @@ public abstract class AbstractTenhouSpecialSamplePaifuTest extends AbstractTenho
     @Test
     public void tenhou_2009_old_paifu_support_test() throws Exception {
         // 旧版牌山和新版存在一丢丢差异
-        simulate_run_game("2009072917gm-0061-0000-85a7478c&tw=3.mjlog", false);
+        simulate_run_game("2009072917gm-0061-0000-85a7478c&tw=3.mjlog", true);
         // 旧版岭上区和新版的顺序不一致
         simulate_run_game("2009072918gm-0061-0000-e6e91672&tw=0.mjlog", true);
         // 饼参加了一场无红宝牌

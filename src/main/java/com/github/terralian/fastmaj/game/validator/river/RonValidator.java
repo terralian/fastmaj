@@ -1,10 +1,9 @@
 package com.github.terralian.fastmaj.game.validator.river;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import com.github.terralian.fastmaj.agari.IRonYakuMatcher;
-import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.action.river.RiverActionType;
@@ -16,7 +15,6 @@ import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.player.space.PlayerDefaultSpace;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
-import com.github.terralian.fastmaj.tehai.IYuukouhaiCalculator;
 import com.github.terralian.fastmaj.yaku.IYaku;
 
 /**
@@ -29,10 +27,6 @@ import com.github.terralian.fastmaj.yaku.IYaku;
 public class RonValidator implements IRiverActionValidator {
 
     /**
-     * 有效牌计算器
-     */
-    private final IYuukouhaiCalculator yuukouhaiCalculator;
-    /**
      * 向听计算器
      */
     private final ISyatenCalculator syatenCalculator;
@@ -41,10 +35,8 @@ public class RonValidator implements IRiverActionValidator {
      */
     private final IRonYakuMatcher ronYakuMatcher;
 
-    public RonValidator(ISyatenCalculator syatenCalculator, IYuukouhaiCalculator yuukouhaiCalculator,
-            IRonYakuMatcher ronYakuMatcher) {
+    public RonValidator(ISyatenCalculator syatenCalculator, IRonYakuMatcher ronYakuMatcher) {
         this.syatenCalculator = syatenCalculator;
-        this.yuukouhaiCalculator = yuukouhaiCalculator;
         this.ronYakuMatcher = ronYakuMatcher;
     }
 
@@ -56,10 +48,12 @@ public class RonValidator implements IRiverActionValidator {
         if (gameCore.getSyaten(position) > 0 || gameCore.isFuriten(position)) {
             return false;
         }
-        // 听的牌是这几枚
+        // 有效牌计算
+        // 把牌加入到手牌中，需要使得向听数 = 和了
         ITehai tehai = gameCore.getTehai(position);
-        Set<IHai> agariHais = yuukouhaiCalculator.calcMin(tehai);
-        if (!Encode34.contains(agariHais, rivalTehaiAction.getIfHai())) {
+        List<IHai> hais = new ArrayList<>(tehai.getHand());
+        hais.add(rivalTehaiAction.getIfHai());
+        if (syatenCalculator.calcMin(hais) >= 0) {
             return false;
         }
         // 抢暗杠

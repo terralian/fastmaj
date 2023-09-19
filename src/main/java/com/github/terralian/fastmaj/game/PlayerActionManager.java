@@ -80,7 +80,8 @@ public class PlayerActionManager implements IPlayerActionManager {
     }
 
     @Override
-    public boolean validateTehaiAction(TehaiActionType actionType, int position, GameConfig gameConfig, IGameCore gameCore) {
+    public boolean validateTehaiAction(TehaiActionType actionType, int position, GameConfig gameConfig,
+            IGameCore gameCore) {
         ITehaiActionValidator validator = tehaiActionValidatorMap.get(actionType);
         if (validator == null) {
             throw new IllegalArgumentException("动作未启用");
@@ -99,8 +100,9 @@ public class PlayerActionManager implements IPlayerActionManager {
     }
 
     @Override
-    public Set<RiverActionType> validateRiverActions(int position, TehaiActionEvent rivalTehaiAction, GameConfig gameConfig,
-                                                     IGameCore gameCore, PlayerGameContext context) {
+    public Set<RiverActionType> validateRiverActions(int position, TehaiActionEvent rivalTehaiAction,
+            GameConfig gameConfig,
+            IGameCore gameCore, PlayerGameContext context) {
         Set<RiverActionType> enables = new HashSet<>();
         for (IRiverActionValidator validator : riverActionValidatorMap.values()) {
             if (validator.resolveAction(position, rivalTehaiAction, gameConfig, gameCore, context)) {
@@ -111,8 +113,9 @@ public class PlayerActionManager implements IPlayerActionManager {
     }
 
     @Override
-    public boolean validateRiverAction(RiverActionType actionType, int position, TehaiActionEvent rivalTehaiAction, GameConfig gameConfig,
-                                       IGameCore gameCore, PlayerGameContext context) {
+    public boolean validateRiverAction(RiverActionType actionType, int position, TehaiActionEvent rivalTehaiAction,
+            GameConfig gameConfig,
+            IGameCore gameCore, PlayerGameContext context) {
         IRiverActionValidator validator = riverActionValidatorMap.get(actionType);
         if (validator == null) {
             throw new IllegalArgumentException("动作未启用");
@@ -170,7 +173,6 @@ public class PlayerActionManager implements IPlayerActionManager {
         riverActionValidatorMap.put(RiverActionType.CHII, new ChiiValidator());
         riverActionValidatorMap.put(RiverActionType.MINKAN, new MinKanValidator());
         riverActionValidatorMap.put(RiverActionType.PON, new PonValidator());
-        riverActionValidatorMap.put(RiverActionType.RON, new RonValidator(gameComponent.getSyatenCalculator(),
-                gameComponent.getYuukouhaiCalculator(), gameComponent.getRonYakuMatcher()));
+        riverActionValidatorMap.put(RiverActionType.RON, new RonValidator(gameComponent.getSyatenCalculator(), gameComponent.getRonYakuMatcher()));
     }
 }

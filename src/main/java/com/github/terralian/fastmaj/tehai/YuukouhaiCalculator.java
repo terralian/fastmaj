@@ -12,11 +12,10 @@ import com.github.terralian.fastmaj.hai.IHai;
 
 /**
  * 有效牌计算器的默认实现
- * <p>
- * TODO 看看怎么优化，每次都遍历所有情况太过于昂贵
  *
  * @author terra.lian
- * @see <a href= "https://web.archive.org/web/20190402234201/http://cmj3.web.fc2.com/index.htm#yuukou">麻雀C言語プログラム集</a>
+ * @see <a href=
+ *         "https://web.archive.org/web/20190402234201/http://cmj3.web.fc2.com/index.htm#yuukou">麻雀C言語プログラム集</a>
  */
 public class YuukouhaiCalculator implements IYuukouhaiCalculator {
 
@@ -26,14 +25,16 @@ public class YuukouhaiCalculator implements IYuukouhaiCalculator {
     private final ISyatenCalculator syatenCalculator;
 
     /**
-     * 构建有效牌计算实例
+     * 采用{@link FastSyatenCalculator}计算器，构建有效牌计算实例
      */
     public YuukouhaiCalculator() {
         this.syatenCalculator = new FastSyatenCalculator();
     }
 
     /**
-     * 构建有效牌计算实例
+     * 使用传入的向听计算器构建有效牌计算实例
+     *
+     * @param syatenCalculator 向听计算器
      */
     public YuukouhaiCalculator(ISyatenCalculator syatenCalculator) {
         this.syatenCalculator = syatenCalculator;

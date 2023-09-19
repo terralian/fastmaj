@@ -3,7 +3,6 @@ package com.github.terralian.fastmaj.agari;
 import java.util.List;
 
 import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
-import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.util.Assert;
@@ -116,7 +115,7 @@ public class AgariCalculator implements IAgariCalculator {
         // 玩家坐席
         int position = context.getPosition();
         // 匹配役种
-        List<IYaku> matchYakus = yakuMatcher.match(tehai, divideInfo, (PlayerGameContext) context);
+        List<IYaku> matchYakus = yakuMatcher.match(tehai, divideInfo, context);
         // 比如三色同顺时，123m11223344p123s，在分割为11p雀头，234p顺子时会无役
         if (EmptyUtil.isEmpty(matchYakus)) {
             return NOT_AGARI;

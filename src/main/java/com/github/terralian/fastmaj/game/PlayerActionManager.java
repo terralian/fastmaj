@@ -70,7 +70,7 @@ public class PlayerActionManager implements IPlayerActionManager {
 
     @Override
     public Set<TehaiActionType> validateTehaiActions(int position, GameConfig gameConfig, IGameCore gameCore) {
-        Set<TehaiActionType> enables = new HashSet<>();
+        Set<TehaiActionType> enables = new HashSet<>(); // TODO 工厂类优化
         for (ITehaiActionValidator validator : tehaiActionValidatorMap.values()) {
             if (validator.resolveAction(position, gameConfig, gameCore)) {
                 enables.add(validator.getTehaiActionType());
@@ -103,7 +103,7 @@ public class PlayerActionManager implements IPlayerActionManager {
     public Set<RiverActionType> validateRiverActions(int position, TehaiActionEvent rivalTehaiAction,
             GameConfig gameConfig,
             IGameCore gameCore, PlayerGameContext context) {
-        Set<RiverActionType> enables = new HashSet<>();
+        Set<RiverActionType> enables = new HashSet<>(); // TODO 可以使用工厂模式获取SET，500万次new的消耗还是可观的
         for (IRiverActionValidator validator : riverActionValidatorMap.values()) {
             if (validator.resolveAction(position, rivalTehaiAction, gameConfig, gameCore, context)) {
                 enables.add(validator.getRiverActionType());

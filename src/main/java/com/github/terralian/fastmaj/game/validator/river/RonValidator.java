@@ -1,6 +1,5 @@
 package com.github.terralian.fastmaj.game.validator.river;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.github.terralian.fastmaj.agari.IRonYakuMatcher;
@@ -51,9 +50,9 @@ public class RonValidator implements IRiverActionValidator {
         // 有效牌计算
         // 把牌加入到手牌中，需要使得向听数 = 和了
         ITehai tehai = gameCore.getTehai(position);
-        List<IHai> hais = new ArrayList<>(tehai.getHand());
+        List<IHai> hais = tehai.getHand();
         hais.add(rivalTehaiAction.getIfHai());
-        if (syatenCalculator.calcMin(hais) >= 0) {
+        if (syatenCalculator.calcMin(hais) >= 0 || hais.remove(hais.size() - 1) == null) {
             return false;
         }
         // 抢暗杠
@@ -71,13 +70,14 @@ public class RonValidator implements IRiverActionValidator {
         boolean isEndByRon = context.isEndByRon();
         context.setEndByRon(true);
 
-        RonEvent ronEvent = new RonEvent()
+        RonEvent ronEvent = new RonEvent() // TODO 工厂类优化
                 .setFrom(rivalTehaiAction.getPosition())
                 .setPosition(position)
                 .setFromHai(rivalTehaiAction.getIfHai());
         PlayerDefaultSpace defaultSpace = context.getSpace();
         defaultSpace.addIfAction(ronEvent);
 
+        // TODO 判定缓存化
         // 弃牌，得判断手牌是否有役
         List<IYaku> yakus = ronYakuMatcher.match(tehai, rivalTehaiAction.getIfHai(), context);
         // 还原标识

@@ -44,7 +44,7 @@ public class RiverActionRequestEventHandler implements ISystemGameEventHandler {
         RiverActionRequestEvent requestEvent = (RiverActionRequestEvent) gameEvent;
         TehaiActionEvent fromEvent = requestEvent.getFromEvent();
         // 循环所有玩家，获取其可执行动作集合
-        List<RiverActionEvent> actions = new ArrayList<>();
+        List<RiverActionEvent> actions = new ArrayList<>(); // TODO 工厂类优化
         for (int i = 0; i < gameConfig.getPlayerSize(); i++) {
             // 跳过当前处理手牌的玩家
             if (fromEvent.getPosition() == i) {
@@ -107,14 +107,12 @@ public class RiverActionRequestEventHandler implements ISystemGameEventHandler {
             eventQueue.addPriority(new Ron3RyuukyokuCheckEvent());
         }
         for (RiverActionEvent action : actions) {
-            if (firstAction.getEventType() != action.getEventType()) {
+            if (firstAction.getEventType() != action.getEventType())
                 break;
-            }
-            if (isRon) {
+            if (isRon)
                 eventQueue.addPriority(action);
-            } else {
+            else
                 eventQueue.addNormal(action);
-            }
         }
     }
 }

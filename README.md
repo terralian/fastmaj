@@ -1,4 +1,5 @@
 # fastmaj
+
 A Richii Mahjong game core simulator for redevelop or AI training
 
 本项目包含一个java实现的日式立直麻将的游戏核心，提供完整游戏流程，役种判定，向听计算等实现接口，可用于二次开发或者作为AI训练环境。该项目没有UI界面，采用单线程进行游戏模拟。
@@ -25,3 +26,6 @@ A Richii Mahjong game core simulator for redevelop or AI training
 
 当前代码经过3个天凤位的全牌谱测试，还有部分规则没有支持，如包牌逻辑，天和时的复合役满等，可用做参考。
 
+### 代办
+
+- [ ] 使用事件工厂类代替new，复用所有默认事件，减小创建对象的消耗

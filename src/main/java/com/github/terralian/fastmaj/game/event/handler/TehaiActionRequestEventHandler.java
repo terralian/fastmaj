@@ -51,7 +51,7 @@ public class TehaiActionRequestEventHandler implements ISystemGameEventHandler {
 
         // 请求玩家动作
         IPlayer player = gameCore.getPlayer(position);
-        PlayerGameContext playerGameContext = PlayerGameContextFactory.buildByGameCore(position, gameConfig, gameCore);
+        PlayerGameContext playerGameContext = PlayerGameContextFactory.buildByGameCore(position, gameConfig, gameCore); // TODO 工厂类优化
         TehaiActionEvent tehaiActionEvent = player.drawHai(tehai, enableActions, playerGameContext);
 
         TehaiActionType actionType = tehaiActionEvent.getEventType();

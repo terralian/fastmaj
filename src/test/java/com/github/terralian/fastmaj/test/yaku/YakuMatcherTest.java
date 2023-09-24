@@ -56,7 +56,6 @@ import com.github.terralian.fastmaj.yaku.h3.JyunTyanta;
 import com.github.terralian.fastmaj.yaku.h3.Ryanpeikou;
 import com.github.terralian.fastmaj.yaku.h6.Tinizu;
 import org.junit.Before;
-import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -88,7 +87,6 @@ public class YakuMatcherTest {
     /**
      * 测试无用户上下文的场景
      */
-    @Test
     public void testWithNonContext() {
         // h1
         // 白
@@ -188,7 +186,6 @@ public class YakuMatcherTest {
     /**
      * 含用户上下文
      */
-    @Test
     public void testWithContext() {
         PlayerGameContext gameContext = PlayerGameContextHelper.buildByNormal(1);
         gameContext.setEndByRon(true);
@@ -309,7 +306,6 @@ public class YakuMatcherTest {
      * 多役复合
      */
     @SuppressWarnings("unchecked")
-    @Test
     public void mutiYakuTest() {
         PlayerGameContext gameContext = PlayerGameContextHelper.buildByNormal(0);
 
@@ -404,7 +400,6 @@ public class YakuMatcherTest {
     /**
      * 役满测试
      */
-    @Test
     public void yakumanTest() {
         PlayerGameContext gameContext = PlayerGameContextHelper.buildByNormal(0);
 

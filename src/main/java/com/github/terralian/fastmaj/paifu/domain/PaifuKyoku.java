@@ -74,7 +74,7 @@ public class PaifuKyoku {
     /**
      * 该对局的所有动作
      */
-    private List<PaifuAction> actions;
+    private List<ActionEvent> actions;
 
     /**
      * 是否是（东/南）某局. 如东4局，那么isEqual(KazeEnum.Don, 4)

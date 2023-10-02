@@ -24,5 +24,8 @@ public class TenhouPaifuHelperTest {
 
         res = TenhouPaifuHelper.getRawId("2011012516gm-00a9-0000");
         Assert.assertNull(res);
+
+        res = TenhouPaifuHelper.getRawId("mjlog_pf4-20_n1/2011012516gm-00a9-0000-6e60e3de&tw=2.mjlog");
+        Assert.assertEquals("2011012516gm-00a9-0000-6e60e3de", res);
     }
 }

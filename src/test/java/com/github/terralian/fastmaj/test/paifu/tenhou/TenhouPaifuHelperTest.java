@@ -13,22 +13,22 @@ public class TenhouPaifuHelperTest {
 
     @Test
     public void testGetRawId() {
-        String res = TenhouPaifuHelper.getRawId("2011012516gm-00a9-0000-6e60e3de&tw=2.mjlog");
+        String res = TenhouPaifuHelper.getPaifuId("2011012516gm-00a9-0000-6e60e3de&tw=2.mjlog");
         Assert.assertEquals("2011012516gm-00a9-0000-6e60e3de", res);
 
-        res = TenhouPaifuHelper.getRawId("2011012516gm-00a9-0000-6e60e3de&tw=2");
+        res = TenhouPaifuHelper.getPaifuId("2011012516gm-00a9-0000-6e60e3de&tw=2");
         Assert.assertEquals("2011012516gm-00a9-0000-6e60e3de", res);
 
-        res = TenhouPaifuHelper.getRawId("2011012516gm-00a9-0000-6e60e3de");
+        res = TenhouPaifuHelper.getPaifuId("2011012516gm-00a9-0000-6e60e3de");
         Assert.assertEquals("2011012516gm-00a9-0000-6e60e3de", res);
 
-        res = TenhouPaifuHelper.getRawId("2011012516gm-00a9-0000");
+        res = TenhouPaifuHelper.getPaifuId("2011012516gm-00a9-0000");
         Assert.assertNull(res);
 
-        res = TenhouPaifuHelper.getRawId("mjlog_pf4-20_n1/2011012516gm-00a9-0000-6e60e3de&tw=2.mjlog");
+        res = TenhouPaifuHelper.getPaifuId("mjlog_pf4-20_n1/2011012516gm-00a9-0000-6e60e3de&tw=2.mjlog");
         Assert.assertEquals("2011012516gm-00a9-0000-6e60e3de", res);
 
-        res = TenhouPaifuHelper.getRawId("mjlog_pf4-20_n8/20070305gm-00c1-0000-407cdfbb&tw=1.mjlog");
+        res = TenhouPaifuHelper.getPaifuId("mjlog_pf4-20_n8/20070305gm-00c1-0000-407cdfbb&tw=1.mjlog");
         Assert.assertEquals("20070305gm-00c1-0000-407cdfbb", res);
     }
 }

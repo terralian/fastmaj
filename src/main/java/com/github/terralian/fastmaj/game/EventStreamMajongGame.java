@@ -10,7 +10,7 @@ import com.github.terralian.fastmaj.player.space.PlayerSpaceManager;
 /**
  * 以事件驱动的流式麻将游戏，当调用{@link #startGame()}后，将会自动进行至游戏结束
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class EventStreamMajongGame extends EventMajongGame {
 

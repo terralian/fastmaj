@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.game.event.system;
 /**
  * 游戏结束判定事件
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class GameEndCheckEvent implements SystemGameEvent {
 

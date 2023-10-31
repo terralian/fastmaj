@@ -11,7 +11,7 @@ import com.github.terralian.fastmaj.player.IPlayer;
 /**
  * 对{@link EventStreamMajongGame}进行天凤牌谱冒烟测试
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class EventStreamMajongGameTenhouPaifuTest extends AbstractTenhouSpecialSamplePaifuTest {
 

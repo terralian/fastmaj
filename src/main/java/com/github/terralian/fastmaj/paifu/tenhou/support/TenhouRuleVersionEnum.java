@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.paifu.tenhou.support;
 /**
  * 天凤规则版本
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public enum TenhouRuleVersionEnum {
 

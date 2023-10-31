@@ -14,7 +14,7 @@ import com.github.terralian.fastmaj.yaku.IYakuBlame;
  * <p/>
  * 若存在包牌役，即使在复合役满的情况下，包牌的玩家也需要支付所有点数。
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class AllBlameYakuPointCalculator implements IBlameYakuPointCalculator {
 

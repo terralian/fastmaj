@@ -5,7 +5,7 @@ import java.io.InputStream;
 /**
  * 输入流的牌谱源
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class InputSource implements IPaifuSource {
 

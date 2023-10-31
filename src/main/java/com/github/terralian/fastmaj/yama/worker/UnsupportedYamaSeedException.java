@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.yama.worker;
 /**
  * 不支持的牌山种子类型异常
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class UnsupportedYamaSeedException extends RuntimeException {
 

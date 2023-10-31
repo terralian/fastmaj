@@ -6,7 +6,7 @@ import com.github.terralian.fastmaj.game.event.IGameEventHandler;
 /**
  * {@link IGameEventHandlerManager} 管理器，提供对事件处理器的初始化及调度
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface IGameEventHandlerManager {
 

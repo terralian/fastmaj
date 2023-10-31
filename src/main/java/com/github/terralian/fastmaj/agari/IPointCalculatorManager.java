@@ -11,7 +11,7 @@ import com.github.terralian.fastmaj.yaku.IYaku;
  * 因此，当前存在基于通常规则计算{@link IPointCalculator}，也有基于包牌规则计算的{@link IBlameYakuPointCalculator}，
  * 所以需要一个接口根据规则及当前的状态集来调度不同的分数计算器，实现一个完整的分数计算逻辑。
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface IPointCalculatorManager {
 

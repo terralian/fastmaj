@@ -34,7 +34,7 @@ import com.github.terralian.fastmaj.game.validator.GameEndValidator;
 /**
  * {@link IGameEventHandlerManager}默认实现
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class GameEventHandlerManager implements IGameEventHandlerManager {
 

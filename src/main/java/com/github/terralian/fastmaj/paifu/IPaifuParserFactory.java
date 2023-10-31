@@ -4,6 +4,10 @@ import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
 
 /**
  * 牌谱解析器工厂接口，提供可便捷构建牌谱解析器的方式
+ *
+ * @author terra.lian
+ * @see IPaifuParser
+ * @see PaifuGame
  */
 public interface IPaifuParserFactory {
 

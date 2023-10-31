@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 /**
  * 牌河动作请求事件
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 @Data
 @AllArgsConstructor

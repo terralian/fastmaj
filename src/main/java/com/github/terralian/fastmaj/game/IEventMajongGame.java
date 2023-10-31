@@ -7,7 +7,7 @@ import com.github.terralian.fastmaj.game.event.GameEvent;
  * 使用事件驱动的麻将游戏，在{@link #isGameEnd()}之前，循环执行{@link #nextEvent()}或者{@link #nextActionEvent()}
  * 即可一步步推进游戏进行。
  *
- * @author Terra.Lian
+ * @author terra.lian
  * @see EventMajongGame
  * @see EventStreamMajongGame
  */

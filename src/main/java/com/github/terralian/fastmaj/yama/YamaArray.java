@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.yama;
 /**
  * 牌山数组实例
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class YamaArray implements IYamaArray {
 

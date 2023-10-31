@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.game;
 /**
  * 对局结束类型
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public enum KyokuEndEnum {
 

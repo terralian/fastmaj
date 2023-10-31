@@ -13,7 +13,7 @@ import com.github.terralian.fastmaj.game.ryuuky.IRyuukyokuResolverManager;
 /**
  * 对局结束判定事件处理器，判定当前局是否中途流局或者荒牌流局
  *
- * @author Terra.Lian
+ * @author terra.lian
  * @apiNote 荣和或者自摸的结束校验不通过该类，而是直接发起对局结束事件
  * @see KyokuEndCheckEvent
  */

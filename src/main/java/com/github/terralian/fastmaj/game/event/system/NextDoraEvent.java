@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.game.event.system;
 /**
  * 下一枚Dora事件
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class NextDoraEvent implements SystemGameEvent {
 

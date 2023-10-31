@@ -5,7 +5,7 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 /**
  * 玩家私有空间信息，这些空间仅对玩家可见
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface IPlayerPrivateSpace extends IPlayerSpace {
 

@@ -17,7 +17,7 @@ import lombok.EqualsAndHashCode;
  * <p/>
  * 与逻辑无关，规则部分的值初始化需要由外部进行设置，如自风，是否庄家等。
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

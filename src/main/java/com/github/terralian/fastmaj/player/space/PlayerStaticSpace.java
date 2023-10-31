@@ -6,7 +6,7 @@ import lombok.Data;
 /**
  * 玩家的静态信息空间，这些信息在游戏开始前就已固定，整个游戏生命内不会进行更改
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 @Data
 public class PlayerStaticSpace implements IPlayerSpace {

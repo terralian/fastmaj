@@ -9,7 +9,7 @@ import com.github.terralian.fastmaj.game.event.system.RyuukyokuEvent;
 import com.github.terralian.fastmaj.game.event.system.SystemEventType;
 
 /**
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class RyuukyokuEventHandler implements ISystemGameEventHandler {
 

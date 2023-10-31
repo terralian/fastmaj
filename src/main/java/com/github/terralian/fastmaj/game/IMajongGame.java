@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.game;
 /**
  * 麻将游戏
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface IMajongGame {
 

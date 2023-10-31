@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * @author Terra.Lian
+ * @author terra.lian
  */
 @AllArgsConstructor
 @Getter

@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.game.option;
 /**
  * 包牌规则
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public enum YakuBlameRule {
 

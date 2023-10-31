@@ -9,7 +9,7 @@ import com.github.terralian.fastmaj.game.IMajongGame;
 import com.github.terralian.fastmaj.player.IPlayer;
 
 /**
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class EventStreamMajongGameTenhouPaifuPackageTest extends AbstractTenhouPaifuPackageTest {
 

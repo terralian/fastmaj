@@ -10,7 +10,7 @@ import com.github.terralian.fastmaj.game.event.system.SystemEventType;
 /**
  * 游戏开始事件处理器
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class GameStartEventHandler implements ISystemGameEventHandler {
 

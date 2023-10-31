@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 /**
  * 摸牌结果事件
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 @Data
 @Accessors(chain = true)

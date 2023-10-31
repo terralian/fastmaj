@@ -6,7 +6,7 @@ import java.util.zip.GZIPInputStream;
 /**
  * 经过GZIP压缩的牌谱，如天凤牌谱默认使用了GZIP压缩传输。
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class GZIPSource implements IPaifuSource {
 

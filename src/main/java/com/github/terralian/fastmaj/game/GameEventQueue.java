@@ -7,7 +7,7 @@ import com.github.terralian.fastmaj.game.event.GameEvent;
 /**
  * 游戏事件队列的默认实现，采用{@link ArrayDeque}数组双端队列作为容器
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class GameEventQueue implements IGameEventQueue {
 

@@ -10,7 +10,7 @@ import com.github.terralian.fastmaj.util.CollectionUtil;
 /**
  * {@link IPlayerGameContext}帮助类
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public abstract class PlayerGameContextHelper {
 

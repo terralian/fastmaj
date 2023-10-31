@@ -13,7 +13,7 @@ import com.github.terralian.fastmaj.tehai.ITehai;
 /**
  * 玩家游戏上下文
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface IPlayerGameContext {
 

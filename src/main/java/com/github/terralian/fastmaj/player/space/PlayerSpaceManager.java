@@ -11,7 +11,7 @@ import com.github.terralian.fastmaj.player.IPlayer;
 /**
  * 玩家空间管理器的默认实现
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class PlayerSpaceManager implements IPlayerSpaceManager {
 

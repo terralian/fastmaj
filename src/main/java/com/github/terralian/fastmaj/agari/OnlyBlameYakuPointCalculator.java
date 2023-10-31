@@ -17,7 +17,7 @@ import com.github.terralian.fastmaj.yaku.IYakuBlame;
  * <p/>
  * 包牌者仅需要支付包牌役的分数，在复合役满中，非包牌的役的部分分数按通常规则处理
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class OnlyBlameYakuPointCalculator extends AllBlameYakuPointCalculator {
 

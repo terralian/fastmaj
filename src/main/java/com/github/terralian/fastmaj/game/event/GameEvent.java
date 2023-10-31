@@ -5,7 +5,7 @@ package com.github.terralian.fastmaj.game.event;
  * <p/>
  * 事件一般通过队列有序生产消费，每种事件一般都有与其一一对应的处理器，这些处理器将会消费事件；
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface GameEvent extends GameEventBase {
 }

@@ -14,7 +14,7 @@ import com.github.terralian.fastmaj.yaku.IYakuBlame;
  * 关于本场棒的支付，虽然有规则为非包牌者支付，但是由于天凤和雀魂都采取包牌者支付，以及没有看过规则实例，
  * 这里先仅使用本场棒也由包牌者支付的规则。
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface IBlameYakuPointCalculator {
 

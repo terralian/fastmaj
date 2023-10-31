@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.yama;
 /**
  * 牌山数组接口
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface IYamaArray {
 

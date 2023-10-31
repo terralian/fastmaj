@@ -22,7 +22,7 @@ import com.github.terralian.fastmaj.util.Assert;
 /**
  * 玩家请求动作事件处理器，调用玩家接口请求一次动作，并根据动作执行
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class TehaiActionRequestEventHandler implements ISystemGameEventHandler {
 

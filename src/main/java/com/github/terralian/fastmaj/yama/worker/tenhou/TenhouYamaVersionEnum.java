@@ -1,7 +1,7 @@
 package com.github.terralian.fastmaj.yama.worker.tenhou;
 
 /**
- * @author Terra.Lian
+ * @author terra.lian
  */
 public enum TenhouYamaVersionEnum {
 

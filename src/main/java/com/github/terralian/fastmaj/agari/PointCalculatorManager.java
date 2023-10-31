@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * @author Terra.Lian
+ * @author terra.lian
  */
 @Getter
 @Setter

@@ -9,7 +9,7 @@ import com.github.terralian.fastmaj.tehai.ITehai;
  * <p/>
  * 该译名的来源，包牌在日文中可以称为（責任払い），而Blame意为责备。这里使用该词来指代包牌。
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface IYakuBlame extends IYaku {
 

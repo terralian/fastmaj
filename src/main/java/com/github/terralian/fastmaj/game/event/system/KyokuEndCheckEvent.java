@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.game.event.system;
 /**
  * 对局结束确认事件
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class KyokuEndCheckEvent implements SystemGameEvent {
 

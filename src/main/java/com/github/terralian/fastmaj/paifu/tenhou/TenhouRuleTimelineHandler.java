@@ -13,7 +13,7 @@ import com.github.terralian.fastmaj.util.EmptyUtil;
 /**
  * 天凤牌谱的规则推断处理器
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class TenhouRuleTimelineHandler implements IRuleTimelineHandler {
 

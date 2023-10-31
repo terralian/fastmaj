@@ -28,7 +28,7 @@ import org.junit.Before;
 import static org.junit.Assert.assertEquals;
 
 /**
- * @author Terra.Lian
+ * @author terra.lian
  */
 public abstract class AbstractTenhouPaifuTest {
 

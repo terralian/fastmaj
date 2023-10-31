@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.game.event.system;
 import com.github.terralian.fastmaj.game.event.DefaultGameEvent;
 
 /**
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface SystemGameEvent extends DefaultGameEvent {
 

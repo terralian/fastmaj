@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.game.event;
 /**
  * 系统默认定义的事件
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface DefaultGameEvent extends GameEvent {
 

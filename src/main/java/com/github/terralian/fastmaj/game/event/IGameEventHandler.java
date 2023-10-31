@@ -9,7 +9,7 @@ import com.github.terralian.fastmaj.game.IGameEventQueue;
  * <p/>
  * 事件处理器需要根据事件的内容修改游戏内核的属性信息，又需要根据内核的状态或者计算的结果产生新的状态。
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface IGameEventHandler extends GameEventBase {
 

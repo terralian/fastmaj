@@ -9,7 +9,7 @@ import com.github.terralian.fastmaj.game.event.system.SystemEventType;
 /**
  * 破坏同巡状态事件处理器
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class BreakSameJunEventHandler implements ISystemGameEventHandler {
 

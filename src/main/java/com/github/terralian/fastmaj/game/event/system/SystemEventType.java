@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * 系统事件类型
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 @Getter
 @AllArgsConstructor

@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.player.space;
 /**
  * 玩家空间基类，为多种玩家空间
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface IPlayerSpace {
 

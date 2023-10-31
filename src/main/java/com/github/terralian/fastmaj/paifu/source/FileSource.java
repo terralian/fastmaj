@@ -7,7 +7,7 @@ import java.nio.file.Files;
 /**
  * 通过文件解析源
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class FileSource implements IPaifuSource {
 

@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 /**
  * 玩家手牌动作请求事件，请求玩家执行一个手牌动作
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 @Data
 @NoArgsConstructor

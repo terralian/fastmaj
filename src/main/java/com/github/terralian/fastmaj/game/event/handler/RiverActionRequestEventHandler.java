@@ -21,7 +21,7 @@ import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.player.RivalEnum;
 
 /**
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class RiverActionRequestEventHandler implements ISystemGameEventHandler {
 

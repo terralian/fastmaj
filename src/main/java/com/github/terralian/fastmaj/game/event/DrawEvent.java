@@ -11,7 +11,7 @@ import lombok.experimental.Accessors;
 /**
  * 摸牌事件（请求）
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 @Data
 @Accessors(chain = true)

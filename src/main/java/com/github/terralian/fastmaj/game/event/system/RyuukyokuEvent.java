@@ -6,7 +6,7 @@ import lombok.Getter;
 /**
  * 流局事件
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 @Getter
 public class RyuukyokuEvent implements SystemGameEvent {

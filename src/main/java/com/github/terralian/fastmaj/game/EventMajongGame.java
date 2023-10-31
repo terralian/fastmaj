@@ -11,7 +11,7 @@ import lombok.Setter;
 /**
  * 以事件驱动的麻将游戏实例
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 @Getter
 @Setter

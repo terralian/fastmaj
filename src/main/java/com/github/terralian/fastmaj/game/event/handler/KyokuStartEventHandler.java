@@ -11,7 +11,7 @@ import com.github.terralian.fastmaj.yama.DrawFrom;
 /**
  * 对局开始事件
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class KyokuStartEventHandler implements ISystemGameEventHandler {
 

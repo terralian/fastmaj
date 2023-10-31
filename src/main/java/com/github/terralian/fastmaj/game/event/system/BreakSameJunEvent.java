@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.game.event.system;
 /**
  * 破一发事件
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class BreakSameJunEvent implements SystemGameEvent {
 

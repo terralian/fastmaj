@@ -6,7 +6,7 @@ import com.github.terralian.fastmaj.game.event.system.SystemEventType;
 /**
  * 系统事件处理器
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface ISystemGameEventHandler extends IDefaultGameEventHandler {
 

@@ -6,7 +6,7 @@ import java.io.InputStream;
 /**
  * 字符串的牌谱数据源
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class StringSource implements IPaifuSource {
 

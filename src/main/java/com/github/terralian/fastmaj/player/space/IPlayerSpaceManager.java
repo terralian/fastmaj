@@ -8,7 +8,7 @@ import java.util.function.Function;
 /**
  * 玩家空间管理器
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface IPlayerSpaceManager {
 

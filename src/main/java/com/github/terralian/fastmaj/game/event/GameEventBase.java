@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.game.event;
 /**
  * 游戏事件基类，其实现两有事件本身及事件处理器两类，这两类都通过同一定义编码进行关联。
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface GameEventBase {
 

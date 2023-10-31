@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.game.event.system;
 /**
  * 三家和了校验
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class Ron3RyuukyokuCheckEvent implements SystemGameEvent {
 

@@ -6,7 +6,7 @@ import lombok.Data;
 /**
  * 放置立直棒事件，扣取玩家1000点数
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 @Data
 @AllArgsConstructor

@@ -6,6 +6,7 @@ import com.github.terralian.fastmaj.paifu.source.IPaifuSource;
  * 游戏牌谱解析器，用于解析游戏牌谱文件，该接口会将解析的内容调用对应的分析器
  *
  * @author terra.lian
+ * @see IPaifuParserFactory
  */
 public interface IPaifuParser<T> {
 

@@ -10,7 +10,7 @@ import java.io.InputStream;
  * <p/>
  * 若需要进行多个牌谱的ZIP压缩包解析、或者文件夹下所有牌谱解析，需要通过单个遍历执行.
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public interface IPaifuSource {
 

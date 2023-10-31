@@ -8,7 +8,7 @@ import com.github.terralian.fastmaj.game.event.system.ReachSetEvent;
 import com.github.terralian.fastmaj.game.event.system.SystemEventType;
 
 /**
- * @author Terra.Lian
+ * @author terra.lian
  */
 public class ReachSetEventHandler implements ISystemGameEventHandler {
 

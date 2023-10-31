@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
  * <p/>
  * 该空间包含了游戏开始前的玩家静态信息{@link PlayerStaticSpace} 以及会随游戏进行发生变动的动态信息组合而成。
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 @Data
 @EqualsAndHashCode(callSuper = true)

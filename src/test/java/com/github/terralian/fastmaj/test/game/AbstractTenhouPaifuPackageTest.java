@@ -19,7 +19,7 @@ import org.junit.Test;
 /**
  * 使用天凤位的牌谱集进行牌谱测试
  *
- * @author Terra.Lian
+ * @author terra.lian
  */
 public abstract class AbstractTenhouPaifuPackageTest extends AbstractTenhouPaifuTest {
 

@@ -5,8 +5,8 @@ import java.util.List;
 import com.github.terralian.fastmaj.game.context.IPlayerGameContext;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
-import com.github.terralian.fastmaj.util.Assert;
-import com.github.terralian.fastmaj.util.EmptyUtil;
+import com.github.terralian.fastmaj.util.AssertHelper;
+import com.github.terralian.fastmaj.util.EmptyHelper;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.IYakuMatcher;
 import com.github.terralian.fastmaj.yaku.hn.NormalDora;
@@ -81,7 +81,7 @@ public class AgariCalculator implements IAgariCalculator {
         int position = context.getPosition();
         // 使用和了分割器对手牌进行分割，分割的结果更容易进行和了役种匹配
         List<DivideInfo> divideInfos = agariDivider.divide(tehai, position != fromPlayer, agariHai);
-        Assert.notEmpty(divideInfos, "手牌进行和了分割失败，请确认当前手牌是否尚未和了?");
+        AssertHelper.notEmpty(divideInfos, "手牌进行和了分割失败，请确认当前手牌是否尚未和了?");
 
         // 仅有单个分割的情况（大多数）
         AgariInfo bestAgariInfo = calculateSingleDivide(tehai, agariHai, divideInfos.get(0), fromPlayer, doraHais, uraDoraHais, context);
@@ -93,7 +93,7 @@ public class AgariCalculator implements IAgariCalculator {
             }
         }
         // 判定是否匹配正确
-        Assert.isTrue(bestAgariInfo != NOT_AGARI, "未从手牌分割匹配到任意一个启和役，请检查");
+        AssertHelper.isTrue(bestAgariInfo != NOT_AGARI, "未从手牌分割匹配到任意一个启和役，请检查");
 
         return bestAgariInfo;
     }
@@ -117,7 +117,7 @@ public class AgariCalculator implements IAgariCalculator {
         // 匹配役种
         List<IYaku> matchYakus = yakuMatcher.match(tehai, divideInfo, context);
         // 比如三色同顺时，123m11223344p123s，在分割为11p雀头，234p顺子时会无役
-        if (EmptyUtil.isEmpty(matchYakus)) {
+        if (EmptyHelper.isEmpty(matchYakus)) {
             return NOT_AGARI;
         }
         // 为役种增加悬赏役
@@ -150,7 +150,7 @@ public class AgariCalculator implements IAgariCalculator {
      */
     protected void addDoraYaku(List<IYaku> yakus, ITehai tehai, List<IHai> doraHais, List<IHai> uraDoraHais) {
         // 役满的话，不计悬赏
-        if (EmptyUtil.isNotEmpty(yakus) && yakus.get(0).isYakuman()) {
+        if (EmptyHelper.isNotEmpty(yakus) && yakus.get(0).isYakuman()) {
             return;
         }
 

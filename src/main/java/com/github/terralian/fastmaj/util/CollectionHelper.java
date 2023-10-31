@@ -27,7 +27,7 @@ import java.util.stream.Stream;
  *
  * @author terra.lian
  */
-public abstract class CollectionUtil {
+public abstract class CollectionHelper {
 
     // ArrayList
 
@@ -162,7 +162,7 @@ public abstract class CollectionUtil {
      * @param list 集合
      */
     public static <E> E getFirstElement(List<E> list) {
-        return EmptyUtil.isEmpty(list) ? null : list.get(0);
+        return EmptyHelper.isEmpty(list) ? null : list.get(0);
     }
 
     /**
@@ -172,7 +172,7 @@ public abstract class CollectionUtil {
      * @param set 集合
      */
     public static <E> E getFirstElement(Set<E> set) {
-        return EmptyUtil.isEmpty(set) ? null : set.iterator().next();
+        return EmptyHelper.isEmpty(set) ? null : set.iterator().next();
     }
 
     /**
@@ -183,7 +183,7 @@ public abstract class CollectionUtil {
      * @param predicate 判断条件
      */
     public static <E> E getFirstElement(Collection<E> collection, Predicate<E> predicate) {
-        if (EmptyUtil.isNotEmpty(collection))
+        if (EmptyHelper.isNotEmpty(collection))
             for (E e : collection)
                 if (predicate.test(e))
                     return e;
@@ -203,7 +203,7 @@ public abstract class CollectionUtil {
      */
     @SafeVarargs
     public static <E> E getFirstElement(Collection<? extends E> collection, Predicate<E>... predicates) {
-        if (EmptyUtil.isNotEmpty(collection))
+        if (EmptyHelper.isNotEmpty(collection))
             for (Predicate<E> predicate : predicates)
                 for (E e : collection)
                     if (predicate.test(e))
@@ -237,7 +237,7 @@ public abstract class CollectionUtil {
      * @param consumer (元素) => {}
      */
     public static <E> void forEach(E[] list, Consumer<E> consumer) {
-        if (EmptyUtil.isNotEmpty(list))
+        if (EmptyHelper.isNotEmpty(list))
             for (E e : list)
                 consumer.accept(e);
     }
@@ -249,7 +249,7 @@ public abstract class CollectionUtil {
      * @param biConsumer (元素, 元素下标) => {}
      */
     public static <E> void forEach(E[] list, BiConsumer<E, Integer> biConsumer) {
-        if (EmptyUtil.isNotEmpty(list))
+        if (EmptyHelper.isNotEmpty(list))
             for (int i = 0; i < list.length; i++)
                 biConsumer.accept(list[i], i);
     }
@@ -261,7 +261,7 @@ public abstract class CollectionUtil {
      * @param consumer (元素) => {}
      */
     public static <E> void forEach(Collection<E> list, Consumer<E> consumer) {
-        if (EmptyUtil.isNotEmpty(list))
+        if (EmptyHelper.isNotEmpty(list))
             for (E e : list)
                 consumer.accept(e);
     }
@@ -273,7 +273,7 @@ public abstract class CollectionUtil {
      * @param biConsumer (元素, 元素下标) => {}
      */
     public static <E> void forEach(List<E> list, BiConsumer<E, Integer> biConsumer) {
-        if (EmptyUtil.isNotEmpty(list))
+        if (EmptyHelper.isNotEmpty(list))
             for (int i = 0; i < list.size(); i++)
                 biConsumer.accept(list.get(i), i);
     }
@@ -288,8 +288,8 @@ public abstract class CollectionUtil {
      */
     public static <K, V> Map<K, List<V>> groupBy(Collection<V> collection,
             Function<? super V, ? extends K> classifier) {
-        if (EmptyUtil.isNotEmpty(collection)) {
-            return collection.stream().collect(Collectors.toMap(classifier, CollectionUtil::newArrayList, (List<V> olds, List<V> news) -> {
+        if (EmptyHelper.isNotEmpty(collection)) {
+            return collection.stream().collect(Collectors.toMap(classifier, CollectionHelper::newArrayList, (List<V> olds, List<V> news) -> {
                 olds.addAll(news);
                 return olds;
             }));
@@ -324,7 +324,7 @@ public abstract class CollectionUtil {
             Function<? super E, ? extends K> keyMapper,
             Function<? super E, ? extends V> valueMapper) {
         Map<K, V> map = new HashMap<>();
-        if (EmptyUtil.isNotEmpty(collection)) {
+        if (EmptyHelper.isNotEmpty(collection)) {
             for (E e : collection) {
                 map.put(keyMapper.apply(e), valueMapper.apply(e));
             }
@@ -340,7 +340,7 @@ public abstract class CollectionUtil {
      * @param predicate 过滤条件
      */
     public static <E> List<E> filterToList(Collection<E> collection, Predicate<? super E> predicate) {
-        if (EmptyUtil.isNotEmpty(collection)) {
+        if (EmptyHelper.isNotEmpty(collection)) {
             return collection.stream().filter(predicate).collect(Collectors.toList());
         }
         return newArrayList();
@@ -354,7 +354,7 @@ public abstract class CollectionUtil {
      * @param predicate 过滤条件
      */
     public static <E> Set<E> filterToSet(Collection<E> collection, Predicate<? super E> predicate) {
-        if (EmptyUtil.isNotEmpty(collection)) {
+        if (EmptyHelper.isNotEmpty(collection)) {
             return collection.stream().filter(predicate).collect(Collectors.toSet());
         }
         return newHashSet();
@@ -368,7 +368,7 @@ public abstract class CollectionUtil {
      */
     public static <E, R> List<R> mapToList(Collection<? extends E> collection,
             Function<? super E, ? extends R> mapper) {
-        if (EmptyUtil.isNotEmpty(collection)) {
+        if (EmptyHelper.isNotEmpty(collection)) {
             return collection.stream().map(mapper).collect(Collectors.toList());
         }
         return newArrayList();
@@ -383,7 +383,7 @@ public abstract class CollectionUtil {
      * @param mapper 定义每个元素如何进行收集的接口
      */
     public static <E, R> List<R> mapToList(E[] collection, Function<? super E, ? extends R> mapper) {
-        if (EmptyUtil.isNotEmpty(collection)) {
+        if (EmptyHelper.isNotEmpty(collection)) {
             return mapToList(newArrayList(collection), mapper);
         }
         return newArrayList();
@@ -397,7 +397,7 @@ public abstract class CollectionUtil {
      */
     public static <E, R> List<R> mapDistinctToList(Collection<? extends E> collection,
             Function<? super E, ? extends R> mapper) {
-        if (EmptyUtil.isNotEmpty(collection)) {
+        if (EmptyHelper.isNotEmpty(collection)) {
             return collection.stream().map(mapper).distinct().collect(Collectors.toList());
         }
         return newArrayList();
@@ -412,7 +412,7 @@ public abstract class CollectionUtil {
      * @param mapper 定义每个元素如何进行收集的接口
      */
     public static <E, R> List<R> mapDistinctToList(E[] collection, Function<? super E, ? extends R> mapper) {
-        if (EmptyUtil.isNotEmpty(collection)) {
+        if (EmptyHelper.isNotEmpty(collection)) {
             return mapDistinctToList(newArrayList(collection), mapper);
         }
         return newArrayList();
@@ -427,7 +427,7 @@ public abstract class CollectionUtil {
      * @param mapper 字段获取方法
      */
     public static <E, R> Set<R> mapToSet(Collection<? extends E> collection, Function<? super E, ? extends R> mapper) {
-        if (EmptyUtil.isNotEmpty(collection)) {
+        if (EmptyHelper.isNotEmpty(collection)) {
             return collection.stream().map(mapper).collect(Collectors.toSet());
         }
         return newHashSet();
@@ -444,7 +444,7 @@ public abstract class CollectionUtil {
     public static <E, R> List<R> mapAllToList(Collection<? extends E> collection,
             Function<? super E, List<? extends R>> mapper) {
         List<R> list = newArrayList();
-        if (EmptyUtil.isNotEmpty(collection)) {
+        if (EmptyHelper.isNotEmpty(collection)) {
             forEach(collection, k -> list.addAll(mapper.apply(k)));
         }
         return list;
@@ -457,7 +457,7 @@ public abstract class CollectionUtil {
      * @param predicate 判断条件
      */
     public static <E> boolean anyMatch(Collection<E> collection, Predicate<? super E> predicate) {
-        if (EmptyUtil.isNotEmpty(collection)) {
+        if (EmptyHelper.isNotEmpty(collection)) {
             return collection.stream().anyMatch(predicate);
         }
         return false;
@@ -470,7 +470,7 @@ public abstract class CollectionUtil {
      * @param predicate 判断条件
      */
     public static <E> boolean anyMatch(E[] collection, Predicate<? super E> predicate) {
-        if (EmptyUtil.isNotEmpty(collection))
+        if (EmptyHelper.isNotEmpty(collection))
             for (E e : collection)
                 if (predicate.test(e))
                     return true;
@@ -484,7 +484,7 @@ public abstract class CollectionUtil {
      * @param predicate 判断条件
      */
     public static <E> boolean noneMatch(Collection<E> collection, Predicate<? super E> predicate) {
-        if (EmptyUtil.isNotEmpty(collection)) {
+        if (EmptyHelper.isNotEmpty(collection)) {
             return collection.stream().noneMatch(predicate);
         }
         return true;
@@ -499,7 +499,7 @@ public abstract class CollectionUtil {
      * @return 若集合为空返回null，否则根据比较器返回最佳的元素
      */
     public static <E> E best(Collection<? extends E> collection, BinaryOperator<E> compare) {
-        if (EmptyUtil.isEmpty(collection)) {
+        if (EmptyHelper.isEmpty(collection)) {
             return null;
         }
         Iterator<? extends E> i = collection.iterator();
@@ -526,7 +526,7 @@ public abstract class CollectionUtil {
      */
     @SafeVarargs
     public static <E> boolean in(E target, E... collect) {
-        if (EmptyUtil.isNotEmpty(collect)) {
+        if (EmptyHelper.isNotEmpty(collect)) {
             final Predicate<E> predicate = target == null ? Objects::isNull : target::equals;
             for (E e : collect)
                 if (predicate.test(e))
@@ -541,7 +541,7 @@ public abstract class CollectionUtil {
      * @param <E> 元素类型
      * @param target 目标
      * @param collect 集合
-     * @see CollectionUtil#in(Object, Object...)
+     * @see CollectionHelper#in(Object, Object...)
      */
     @SafeVarargs
     public static <E> boolean notIn(E target, E... collect) {
@@ -551,7 +551,7 @@ public abstract class CollectionUtil {
     /**
      * 根据条件去重，若存在重复，则以下标从小到大取其第一条数据作为返回值，使用如下：
      * <p/>
-     * persons = CollectionUtil.distinct(persons, k -> k.getName())
+     * persons = CollectionHelper.distinct(persons, k -> k.getName())
      * <p/>
      *
      * @param list 集合
@@ -575,7 +575,7 @@ public abstract class CollectionUtil {
      */
     public static <E> List<E> distinct(List<? extends E> list, Function<? super E, ?> keyMapper,
             BinaryOperator<E> mergeMapper) {
-        if (EmptyUtil.isNotEmpty(list)) {
+        if (EmptyHelper.isNotEmpty(list)) {
             LinkedHashMap<? super Object, E> linkedHashMap = new LinkedHashMap<>((int) (list.size() * 0.75));
             forEach(list, k -> {
                 Object key = keyMapper.apply(k);
@@ -600,7 +600,7 @@ public abstract class CollectionUtil {
      * @param comparator 排序方法
      */
     public static <K, V> Stream<Entry<K, V>> sort(Map<K, V> map, Comparator<? super Entry<K, V>> comparator) {
-        if (EmptyUtil.isNotEmpty(map)) {
+        if (EmptyHelper.isNotEmpty(map)) {
             return map.entrySet().stream().sorted(comparator);
         }
         return Stream.empty();
@@ -633,7 +633,7 @@ public abstract class CollectionUtil {
     public static <E> Partition<E> partitionBy(Collection<? extends E> collection, Predicate<? super E> predicate) {
         List<E> first = new ArrayList<>();
         List<E> second = new ArrayList<>();
-        if (EmptyUtil.isNotEmpty(collection)) {
+        if (EmptyHelper.isNotEmpty(collection)) {
             collection.forEach(k -> {
                 if (predicate.test(k)) {
                     first.add(k);
@@ -658,7 +658,7 @@ public abstract class CollectionUtil {
             Predicate<? super E> secondPredicate) {
         List<E> first = new ArrayList<>();
         List<E> second = new ArrayList<>();
-        if (EmptyUtil.isNotEmpty(collection)) {
+        if (EmptyHelper.isNotEmpty(collection)) {
             collection.forEach(k -> {
                 if (firstPredicate.test(k)) {
                     first.add(k);

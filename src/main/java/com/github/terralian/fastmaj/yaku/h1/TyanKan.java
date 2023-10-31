@@ -7,7 +7,7 @@ import com.github.terralian.fastmaj.game.event.river.RonEvent;
 import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.player.space.PlayerPublicSpace;
 import com.github.terralian.fastmaj.tehai.ITehai;
-import com.github.terralian.fastmaj.util.Assert;
+import com.github.terralian.fastmaj.util.AssertHelper;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.YakuNamePool;
 import com.github.terralian.fastmaj.yaku.meta.RonYaku;
@@ -34,7 +34,7 @@ public class TyanKan implements IYaku {
         int fromPosition = ronEvent.getFrom();
         PlayerPublicSpace publicSpace = holder.getPublicSpace(fromPosition);
         TehaiActionEvent tehaiActionEvent = publicSpace.getLastTehaiAction();
-        Assert.notNull(tehaiActionEvent, "荣和情况下，对手必有一个手牌动作");
+        AssertHelper.notNull(tehaiActionEvent, "荣和情况下，对手必有一个手牌动作");
 
         return tehaiActionEvent.getEventType() == TehaiActionType.ANNKAN //
                 || tehaiActionEvent.getEventType() == TehaiActionType.KAKAN;

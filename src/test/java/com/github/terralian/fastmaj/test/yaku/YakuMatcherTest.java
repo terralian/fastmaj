@@ -12,8 +12,8 @@ import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.player.RivalEnum;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.third.mjscore.MjscoreAdapter;
-import com.github.terralian.fastmaj.util.CollectionUtil;
-import com.github.terralian.fastmaj.util.EmptyUtil;
+import com.github.terralian.fastmaj.util.CollectionHelper;
+import com.github.terralian.fastmaj.util.EmptyHelper;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.IYakuMatcher;
 import com.github.terralian.fastmaj.yaku.YakuMatcher;
@@ -164,7 +164,7 @@ public class YakuMatcherTest {
     private void singleYakuTest(String tehaiMark, Class<?> yakuClass) {
         ITehai tehai = EncodeMark.toTehai(tehaiMark);
         List<DivideInfo> divideInfos = tehaiAgariDivider.divide(tehai);
-        List<IYaku> result = yakuMatcher.match(tehai, CollectionUtil.getFirstElement(divideInfos), null);
+        List<IYaku> result = yakuMatcher.match(tehai, CollectionHelper.getFirstElement(divideInfos), null);
         assertEquals(1, result.size());
         assertTrue(result.get(0).getClass() == yakuClass);
     }
@@ -177,7 +177,7 @@ public class YakuMatcherTest {
     private void zeroYakuTest(String tehaiMark) {
         ITehai tehai = EncodeMark.toTehai(tehaiMark);
         List<DivideInfo> divideInfos = tehaiAgariDivider.divide(tehai);
-        List<IYaku> result = yakuMatcher.match(tehai, CollectionUtil.getFirstElement(divideInfos), null);
+        List<IYaku> result = yakuMatcher.match(tehai, CollectionHelper.getFirstElement(divideInfos), null);
         assertEquals(0, result.size());
     }
 
@@ -195,7 +195,7 @@ public class YakuMatcherTest {
         // 场风
         gameContext.setBakaze(KazeEnum.DON);
         ITehai tehai = EncodeMark.toTehai("123456m567p11122z");
-        List<IYaku> yakus = yakuMatcher.match(tehai, CollectionUtil.newArrayList(), gameContext);
+        List<IYaku> yakus = yakuMatcher.match(tehai, CollectionHelper.newArrayList(), gameContext);
         assertEquals(1, yakus.size());
         assertTrue(yakus.get(0).getClass() == Bakaze.class);
 
@@ -203,7 +203,7 @@ public class YakuMatcherTest {
         gameContext.setBakaze(KazeEnum.DON);
         gameContext.setJikaze(KazeEnum.NAN);
         tehai = EncodeMark.toTehai("123456m567p11222z");
-        yakus = yakuMatcher.match(tehai, CollectionUtil.newArrayList(), gameContext);
+        yakus = yakuMatcher.match(tehai, CollectionHelper.newArrayList(), gameContext);
         assertEquals(1, yakus.size());
         assertTrue(yakus.get(0).getClass() == Jikaze.class);
 
@@ -213,7 +213,7 @@ public class YakuMatcherTest {
         // gameContext.setLastDrawFrom(DrawFrom.YAMA);
         tehai = EncodeMark.toTehai("123456m56799p11z");
         tehai.pon(HaiPool.p(9), RivalEnum.BOTTOM);
-        yakus = yakuMatcher.match(tehai, CollectionUtil.newArrayList(), gameContext);
+        yakus = yakuMatcher.match(tehai, CollectionHelper.newArrayList(), gameContext);
         assertEquals(1, yakus.size());
         assertTrue(yakus.get(0).getClass() == Haitei.class);
 
@@ -223,7 +223,7 @@ public class YakuMatcherTest {
         //gameContext.setLastTehaiActionType(TehaiActionType.KIRI);
         tehai = EncodeMark.toTehai("123456m56799p11z");
         tehai.pon(HaiPool.p(9), RivalEnum.BOTTOM);
-        yakus = yakuMatcher.match(tehai, CollectionUtil.newArrayList(), gameContext);
+        yakus = yakuMatcher.match(tehai, CollectionHelper.newArrayList(), gameContext);
         assertEquals(1, yakus.size());
         assertTrue(yakus.get(0).getClass() == Houtei.class);
 
@@ -235,7 +235,7 @@ public class YakuMatcherTest {
             k.reach(HaiPool.random());
         });
         tehai = EncodeMark.toTehai("123456m567999p11z");
-        yakus = yakuMatcher.match(tehai, CollectionUtil.newArrayList(), gameContext);
+        yakus = yakuMatcher.match(tehai, CollectionHelper.newArrayList(), gameContext);
         assertEquals(2, yakus.size());
         assertTrue(yakus.stream().anyMatch(k -> k.getClass() == Iipatu.class));
 
@@ -247,7 +247,7 @@ public class YakuMatcherTest {
             k.reach(HaiPool.random());
         });
         tehai = EncodeMark.toTehai("123456m567999p11z");
-        yakus = yakuMatcher.match(tehai, CollectionUtil.newArrayList(), gameContext);
+        yakus = yakuMatcher.match(tehai, CollectionHelper.newArrayList(), gameContext);
         assertEquals(1, yakus.size());
         assertTrue(yakus.get(0).getClass() == Reach.class);
 
@@ -259,7 +259,7 @@ public class YakuMatcherTest {
         gameContext.getHaiRivers().forEach(k -> k.clear());
         tehai = EncodeMark.toTehai("123456m56799p11z");
         tehai.pon(HaiPool.p(9), RivalEnum.BOTTOM);
-        yakus = yakuMatcher.match(tehai, CollectionUtil.newArrayList(), gameContext);
+        yakus = yakuMatcher.match(tehai, CollectionHelper.newArrayList(), gameContext);
         assertEquals(1, yakus.size());
         assertTrue(yakus.get(0).getClass() == Rinsyan.class);
 
@@ -270,7 +270,7 @@ public class YakuMatcherTest {
         gameContext.setEndByRon(false);
         //gameContext.setLastTehaiActionType(null);
         tehai = EncodeMark.toTehai("123456m567999p11z");
-        yakus = yakuMatcher.match(tehai, CollectionUtil.newArrayList(), gameContext);
+        yakus = yakuMatcher.match(tehai, CollectionHelper.newArrayList(), gameContext);
         assertEquals(1, yakus.size());
         assertTrue(yakus.get(0).getClass() == Tsumo.class);
 
@@ -281,7 +281,7 @@ public class YakuMatcherTest {
         gameContext.getHaiRivers().forEach(k -> k.clear());
         gameContext.getHaiRivers().forEach(k -> k.setSameFirstJun(false));
         tehai = EncodeMark.toTehai("123456m56799p11z9p");
-        yakus = yakuMatcher.match(tehai, CollectionUtil.newArrayList(), gameContext);
+        yakus = yakuMatcher.match(tehai, CollectionHelper.newArrayList(), gameContext);
         assertEquals(1, yakus.size());
         assertTrue(yakus.get(0).getClass() == TyanKan.class);
 
@@ -295,7 +295,7 @@ public class YakuMatcherTest {
             k.reach(HaiPool.random(), true);
         });
         tehai = EncodeMark.toTehai("123456m56799p11z9p");
-        yakus = yakuMatcher.match(tehai, CollectionUtil.newArrayList(), gameContext);
+        yakus = yakuMatcher.match(tehai, CollectionHelper.newArrayList(), gameContext);
         assertEquals(1, yakus.size());
         assertTrue(yakus.get(0).getClass() == DoubleReach.class);
     }
@@ -389,7 +389,7 @@ public class YakuMatcherTest {
      * @param expecteds 预期的役
      */
     private void assertYakus(List<IYaku> actuals, Class<? extends IYaku>... expecteds) {
-        assertTrue(EmptyUtil.isNotEmpty(actuals));
+        assertTrue(EmptyHelper.isNotEmpty(actuals));
         for (Class<?> yaku : expecteds) {
             assertTrue(actuals.stream().anyMatch(k -> k.getClass() == yaku));
         }

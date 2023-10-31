@@ -13,7 +13,7 @@ import java.util.zip.ZipFile;
 
 import com.github.terralian.fastmaj.encode.Encode34;
 import com.github.terralian.fastmaj.hai.IHai;
-import com.github.terralian.fastmaj.util.Assert;
+import com.github.terralian.fastmaj.util.AssertHelper;
 
 /**
  * 快速向听计算器
@@ -187,12 +187,12 @@ public class FastSyatenCalculator extends SyatenCalculator {
      */
     private static void loadSyatenIndexFile() throws IOException, ClassNotFoundException {
         URL indexUrl = FastSyatenCalculator.class.getClassLoader().getResource("syaten.zip");
-        Assert.notNull(indexUrl, "向听数索引压缩文件丢失");
+        AssertHelper.notNull(indexUrl, "向听数索引压缩文件丢失");
         String fileName = indexUrl.getPath();
         File file = new File(fileName);
         try (ZipFile zipFile = new ZipFile(file)) {
             Enumeration<? extends ZipEntry> entries = zipFile.entries();
-            Assert.isTrue(entries.hasMoreElements(), "向听数索引文件异常");
+            AssertHelper.isTrue(entries.hasMoreElements(), "向听数索引文件异常");
             ZipEntry zipEntry = entries.nextElement();
             try (ObjectInputStream oi = new ObjectInputStream(new BufferedInputStream(zipFile.getInputStream(zipEntry)))) {
                 IndexSerializable serializable = (IndexSerializable) oi.readObject();

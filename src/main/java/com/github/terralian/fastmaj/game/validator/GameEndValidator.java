@@ -12,7 +12,7 @@ import com.github.terralian.fastmaj.game.event.handler.ISystemGameEventHandler;
 import com.github.terralian.fastmaj.game.event.system.GameEndEvent;
 import com.github.terralian.fastmaj.game.event.system.KyokuStartEvent;
 import com.github.terralian.fastmaj.game.event.system.SystemEventType;
-import com.github.terralian.fastmaj.util.RankingUtil;
+import com.github.terralian.fastmaj.util.RankingHelper;
 
 /**
  * 游戏结束判定，用于 判定一局游戏是否已经结束。基于规则的不同，结束的条件也不同，大体功能如下：
@@ -90,7 +90,7 @@ public class GameEndValidator implements IGameValidator, ISystemGameEventHandler
         }
 
         // 东四或者南四这样的末局，当庄家分数超过结束线，并且排名第一则直接结束
-        int[] ranking = RankingUtil.calcRanking(playerPoints);
+        int[] ranking = RankingHelper.calcRanking(playerPoints);
         Integer endPointLine = gameConfig.getEndPointLine();
         if (playerPoints[oya] >= endPointLine && ranking[oya] == 1) {
             return true;

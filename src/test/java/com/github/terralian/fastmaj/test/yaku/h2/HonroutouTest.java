@@ -14,7 +14,7 @@ import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.third.mjscore.MjscoreAdapter;
-import com.github.terralian.fastmaj.util.CollectionUtil;
+import com.github.terralian.fastmaj.util.CollectionHelper;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h2.Honroutou;
 
@@ -73,7 +73,7 @@ public class HonroutouTest {
         // 国士无双，国士的牌没法分割
         tehai = EncodeMark.toTehai("19m19p19s12345677z");
         divideInfos = tehaiAgariDivider.divide(tehai);
-        result = yaku.match(tehai, CollectionUtil.getFirstElement(divideInfos), gameContext);
+        result = yaku.match(tehai, CollectionHelper.getFirstElement(divideInfos), gameContext);
         assertFalse(result);
     }
 }

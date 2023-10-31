@@ -16,7 +16,7 @@ import com.github.terralian.fastmaj.river.IHaiRiver;
 import com.github.terralian.fastmaj.tehai.ISyatenCalculator;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.NakiEnum;
-import com.github.terralian.fastmaj.util.Assert;
+import com.github.terralian.fastmaj.util.AssertHelper;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yama.DrawFrom;
 import com.github.terralian.fastmaj.yama.IYama;
@@ -242,7 +242,7 @@ public class GameCore implements IGameCore {
         // 对局结束
         gameLogger.kyokuEnd(round, getPlayerPoints());
 
-        Assert.notNull(kyokuEndEnum, "状态错误，当前对局结束类型不能为空，请确认是否未调用流局或者和了方法");
+        AssertHelper.notNull(kyokuEndEnum, "状态错误，当前对局结束类型不能为空，请确认是否未调用流局或者和了方法");
     }
 
     /**

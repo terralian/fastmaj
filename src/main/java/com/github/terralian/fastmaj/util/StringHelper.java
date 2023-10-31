@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  * 
  * @author terra.lian 
  */
-public abstract class StringUtil {
+public abstract class StringHelper {
 
     /** 空字符串 */
     public static final String EMPTY_STRING = "";
@@ -29,7 +29,7 @@ public abstract class StringUtil {
     }
 
     /**
-     * 将一个对象转换为String，若对象为空，则返回空字符串{@link StringUtil#EMPTY_STRING}
+     * 将一个对象转换为String，若对象为空，则返回空字符串{@link StringHelper#EMPTY_STRING}
      * 
      * @param object 对象
      */
@@ -43,7 +43,7 @@ public abstract class StringUtil {
      * @param value 字符串
      */
     public static String trim(String value) {
-        return EmptyUtil.isNotEmpty(value) ? value.trim() : value;
+        return EmptyHelper.isNotEmpty(value) ? value.trim() : value;
     }
 
     /**
@@ -53,7 +53,7 @@ public abstract class StringUtil {
      * @param maxLength 最大长度（如200 指字符串下标 0-199），超过该长度则进行省略
      */
     public static String ellipsis(String string, int maxLength) {
-        if (EmptyUtil.isEmpty(string) || string.length() <= maxLength) {
+        if (EmptyHelper.isEmpty(string) || string.length() <= maxLength) {
             return string;
         }
         return string.substring(0, maxLength - 1) + "...";
@@ -80,11 +80,11 @@ public abstract class StringUtil {
      * @return 若集合为空，返回null
      */
     public static String cat(Collection<String> strings) {
-        if (EmptyUtil.isEmpty(strings))
+        if (EmptyHelper.isEmpty(strings))
             return null;
         StringBuilder builder = new StringBuilder();
         for (String string : strings) {
-            if (EmptyUtil.isNotEmpty(string))
+            if (EmptyHelper.isNotEmpty(string))
                 builder.append(string);
         }
         return builder.toString();
@@ -97,11 +97,11 @@ public abstract class StringUtil {
      * @return 若集合为空，返回null
      */
     public static String cat(String... strings) {
-        if (EmptyUtil.isEmpty(strings))
+        if (EmptyHelper.isEmpty(strings))
             return null;
         StringBuilder builder = new StringBuilder();
         for (String string : strings) {
-            if (EmptyUtil.isNotEmpty(string))
+            if (EmptyHelper.isNotEmpty(string))
                 builder.append(string);
         }
         return builder.toString();
@@ -114,7 +114,7 @@ public abstract class StringUtil {
      * @param elements 需要拼接的字符
      */
     public static String join(Character delimiter, Character... elements) {
-        if (EmptyUtil.isEmpty(elements)) {
+        if (EmptyHelper.isEmpty(elements)) {
             return EMPTY_STRING;
         }
         StringBuilder builder = new StringBuilder(elements.length * 2 - 1);
@@ -147,7 +147,7 @@ public abstract class StringUtil {
      * @param elements 需要拼接的字符串
      */
     public static String join(CharSequence delimiter, CharSequence... elements) {
-        return EmptyUtil.isEmpty(elements) ? EMPTY_STRING : String.join(delimiter, elements);
+        return EmptyHelper.isEmpty(elements) ? EMPTY_STRING : String.join(delimiter, elements);
     }
 
     /**
@@ -157,7 +157,7 @@ public abstract class StringUtil {
      * @param elements 需要拼接的元素，会使用toString()转换为String
      */
     public static String join(CharSequence delimiter, Number... elements) {
-        if (EmptyUtil.isEmpty(elements)) {
+        if (EmptyHelper.isEmpty(elements)) {
             return EMPTY_STRING;
         }
         StringJoiner joiner = new StringJoiner(delimiter);
@@ -183,7 +183,7 @@ public abstract class StringUtil {
      * @param elements 集合
      */
     public static String join(CharSequence delimiter, Collection<?> elements) {
-        if (EmptyUtil.isEmpty(elements))
+        if (EmptyHelper.isEmpty(elements))
             return EMPTY_STRING;
         StringJoiner joiner = new StringJoiner(delimiter);
         for (Object cs : elements) {
@@ -199,7 +199,7 @@ public abstract class StringUtil {
      * @param elements 迭代器
      */
     public static String join(CharSequence delimiter, Iterator<?> elements) {
-        if (EmptyUtil.isEmpty(elements))
+        if (EmptyHelper.isEmpty(elements))
             return EMPTY_STRING;
         StringJoiner joiner = new StringJoiner(delimiter);
         joiner.add(toString(elements.next()));
@@ -228,7 +228,7 @@ public abstract class StringUtil {
      * @param string 字符串
      */
     public static String toLowerCaseFirstOne(String string) {
-        if (EmptyUtil.isEmpty(string) || Character.isLowerCase(string.charAt(0)))
+        if (EmptyHelper.isEmpty(string) || Character.isLowerCase(string.charAt(0)))
             return string;
         else {
             char[] chars = string.toCharArray();
@@ -243,7 +243,7 @@ public abstract class StringUtil {
      * @param string 字符串
      */
     public static String toUpperCaseFirstOne(String string) {
-        if (EmptyUtil.isEmpty(string) || Character.isUpperCase(string.charAt(0))) {
+        if (EmptyHelper.isEmpty(string) || Character.isUpperCase(string.charAt(0))) {
             return string;
         } else {
             char[] chars = string.toCharArray();
@@ -258,7 +258,7 @@ public abstract class StringUtil {
      * @param string 字符串
      */
     public static String underlineToCamelCase(String string) {
-        if (EmptyUtil.isEmpty(string)) {
+        if (EmptyHelper.isEmpty(string)) {
             return string;
         }
         char[] charArray = string.toCharArray();
@@ -283,7 +283,7 @@ public abstract class StringUtil {
      * @param string 字符串
      */
     public static String cameCaseToUnderline(String string) {
-        if (EmptyUtil.isEmpty(string)) {
+        if (EmptyHelper.isEmpty(string)) {
             return string;
         }
         char[] charArray = string.toCharArray();
@@ -326,7 +326,7 @@ public abstract class StringUtil {
      * @throws ArrayIndexOutOfBoundsException 当数组中参数不足时，该方法会抛出该异常
      */
     public static String format(String content, Object... args) {
-        if (EmptyUtil.isNotBlank(content) && EmptyUtil.isNotEmpty(args)) {
+        if (EmptyHelper.isNotBlank(content) && EmptyHelper.isNotEmpty(args)) {
             Function<Matcher, CharSequence> handler = (m) -> toString(args[Integer.parseInt(m.group("idx"))]);
             Matcher m = PLACE_HOLDER_PATTERN.matcher(content);
             StringBuilder sb = new StringBuilder();

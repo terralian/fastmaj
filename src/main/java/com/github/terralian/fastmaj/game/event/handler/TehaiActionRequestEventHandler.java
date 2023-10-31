@@ -17,7 +17,7 @@ import com.github.terralian.fastmaj.game.event.tehai.TehaiActionEvent;
 import com.github.terralian.fastmaj.game.validator.tehai.ITehaiActionValidator;
 import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.tehai.ITehai;
-import com.github.terralian.fastmaj.util.Assert;
+import com.github.terralian.fastmaj.util.AssertHelper;
 
 /**
  * 玩家请求动作事件处理器，调用玩家接口请求一次动作，并根据动作执行
@@ -47,7 +47,7 @@ public class TehaiActionRequestEventHandler implements ISystemGameEventHandler {
         ITehai tehai = gameCore.getTehai(position);
         // 判定可执行动作
         Set<TehaiActionType> enableActions = playerActionManager.validateTehaiActions(position, gameConfig, gameCore);
-        Assert.notEmpty(enableActions, "玩家无可用按钮，请检查动作判定器，一般至少切牌是可用的");
+        AssertHelper.notEmpty(enableActions, "玩家无可用按钮，请检查动作判定器，一般至少切牌是可用的");
 
         // 请求玩家动作
         IPlayer player = gameCore.getPlayer(position);

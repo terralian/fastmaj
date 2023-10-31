@@ -8,7 +8,7 @@ import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.option.YakuBlameRule;
 import com.github.terralian.fastmaj.player.RivalEnum;
 import com.github.terralian.fastmaj.tehai.ITehai;
-import com.github.terralian.fastmaj.util.Assert;
+import com.github.terralian.fastmaj.util.AssertHelper;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.IYakuBlame;
 
@@ -39,7 +39,7 @@ public class OnlyBlameYakuPointCalculator extends AllBlameYakuPointCalculator {
             if (yaku.isYakuBlame())
                 blameYakus.add((IYakuBlame) yaku);
         }
-        Assert.notEmpty(blameYakus, "需要匹配到包牌役才能使用IBlameYakuPointCalculator类计算");
+        AssertHelper.notEmpty(blameYakus, "需要匹配到包牌役才能使用IBlameYakuPointCalculator类计算");
 
         // 先计算包牌部分的役，并扣减所有底分
         for (IYakuBlame blameYaku : blameYakus) {
@@ -52,7 +52,7 @@ public class OnlyBlameYakuPointCalculator extends AllBlameYakuPointCalculator {
             basePoint -= blameBasePoint;
             // 在复合包牌情形下，若不启用复合役满，则仅会有一个役满点数生效，此时就会产生规则冲突。
             // 虽然可以多个包牌平分单个役满分数，暂时先不考虑这种实现。
-            Assert.isTrue(basePoint >= 0, "包牌点数总和超过了总点数，是否启用了四杠子包牌规则的同时，未启用复合役满规则?");
+            AssertHelper.isTrue(basePoint >= 0, "包牌点数总和超过了总点数，是否启用了四杠子包牌规则的同时，未启用复合役满规则?");
             // 单个包牌计算
             tsumoTransfer(position, oya, blameBasePoint, honba, kyotaku, playerPoints, rival);
             // 仅计算一次本场棒和供托
@@ -75,7 +75,7 @@ public class OnlyBlameYakuPointCalculator extends AllBlameYakuPointCalculator {
             if (yaku.isYakuBlame())
                 blameYakus.add((IYakuBlame) yaku);
         }
-        Assert.notEmpty(blameYakus, "需要匹配到包牌役才能使用IBlameYakuPointCalculator类计算");
+        AssertHelper.notEmpty(blameYakus, "需要匹配到包牌役才能使用IBlameYakuPointCalculator类计算");
         // 先计算包牌部分的役，并扣减所有底分
         for (IYakuBlame blameYaku : blameYakus) {
             RivalEnum rival = blameYaku.deduceBlameRival(tehai);
@@ -87,7 +87,7 @@ public class OnlyBlameYakuPointCalculator extends AllBlameYakuPointCalculator {
             basePoint -= blameBasePoint;
             // 在复合包牌情形下，若不启用复合役满，则仅会有一个役满点数生效，此时就会产生规则冲突。
             // 虽然可以多个包牌平分单个役满分数，暂时先不考虑这种实现。
-            Assert.isTrue(basePoint >= 0, "包牌点数总和超过了总点数，是否启用了四杠子包牌规则的同时，未启用复合役满规则?");
+            AssertHelper.isTrue(basePoint >= 0, "包牌点数总和超过了总点数，是否启用了四杠子包牌规则的同时，未启用复合役满规则?");
             // 单个包牌计算
             ronTransfer(position, rivalPlayer, oya, basePoint, honba, kyotaku, playerPoints, rival);
             // 仅计算一次本场棒和供托

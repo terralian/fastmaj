@@ -3,6 +3,7 @@ package com.github.terralian.fastmaj.test.yaku.h2;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import com.github.terralian.fastmaj.util.CollectionHelper;
 import org.junit.Test;
 
 import com.github.terralian.fastmaj.agari.DivideInfo;
@@ -10,7 +11,6 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.river.HaiRiver;
 import com.github.terralian.fastmaj.tehai.ITehai;
-import com.github.terralian.fastmaj.util.CollectionUtil;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h2.DoubleReach;
 
@@ -35,7 +35,7 @@ public class DoubleReachTest {
 
         // 第一巡立直
         gameContext.setPosition(0);
-        gameContext.setHaiRivers(CollectionUtil.newArrayList(new HaiRiver(0), new HaiRiver(1), new HaiRiver(2)));
+        gameContext.setHaiRivers(CollectionHelper.newArrayList(new HaiRiver(0), new HaiRiver(1), new HaiRiver(2)));
         gameContext.getHaiRivers().forEach(k -> k.setSameFirstJun(true));
         gameContext.getHaiRiver().reach(HaiPool.m(1), true);
         result = yaku.match(tehai, divide, gameContext);
@@ -43,7 +43,7 @@ public class DoubleReachTest {
 
         // 庄家暗杠
         gameContext.setPosition(1);
-        gameContext.setHaiRivers(CollectionUtil.newArrayList(new HaiRiver(0), new HaiRiver(1), new HaiRiver(2)));
+        gameContext.setHaiRivers(CollectionHelper.newArrayList(new HaiRiver(0), new HaiRiver(1), new HaiRiver(2)));
         gameContext.getHaiRivers().forEach(k -> k.setSameFirstJun(false));
         gameContext.getHaiRivers().get(1).reach(HaiPool.m(1));
         gameContext.getHaiRivers().get(1).reach(HaiPool.m(1));
@@ -52,7 +52,7 @@ public class DoubleReachTest {
 
         // 第二巡才立直
         gameContext.setPosition(1);
-        gameContext.setHaiRivers(CollectionUtil.newArrayList(new HaiRiver(0), new HaiRiver(1), new HaiRiver(2)));
+        gameContext.setHaiRivers(CollectionHelper.newArrayList(new HaiRiver(0), new HaiRiver(1), new HaiRiver(2)));
         gameContext.getHaiRivers().forEach(k -> k.setSameFirstJun(true));
         gameContext.getHaiRivers().get(1).chain() //
                 .kiri(HaiPool.m(1)) //

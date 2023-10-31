@@ -13,7 +13,7 @@ import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.third.mjscore.MjscoreAdapter;
-import com.github.terralian.fastmaj.util.CollectionUtil;
+import com.github.terralian.fastmaj.util.CollectionHelper;
 
 /**
  * 
@@ -36,7 +36,7 @@ public class MjscoreAdapterTest {
         tehai.annkan(HaiPool.m(8));
         tehai.draw(HaiPool.p(9));
         List<DivideInfo> divideInfos = agariDivider.divide(tehai, true, HaiPool.p(9));
-        assertEquals(1, CollectionUtil.size(divideInfos));
+        assertEquals(1, CollectionHelper.size(divideInfos));
         assertEquals(true, divideInfos.get(0).isIipeikou());
     }
 }

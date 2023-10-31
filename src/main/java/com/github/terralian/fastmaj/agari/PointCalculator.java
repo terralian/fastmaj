@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.github.terralian.fastmaj.game.GameConfig;
-import com.github.terralian.fastmaj.util.RankingUtil;
+import com.github.terralian.fastmaj.util.RankingHelper;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.IYakuman;
 
@@ -72,7 +72,7 @@ public class PointCalculator implements IPointCalculator {
         if (kyotaku == 0) {
             return;
         }
-        int[] ranking = RankingUtil.calcRanking(playerPoints);
+        int[] ranking = RankingHelper.calcRanking(playerPoints);
         for (int i = 0; i < playerPoints.length; i++) {
             if (ranking[i] == 1) {
                 playerPoints[i] += kyotaku * 1000;

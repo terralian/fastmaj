@@ -5,7 +5,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.concurrent.ThreadLocalRandom;
 
-import com.github.terralian.fastmaj.util.Assert;
+import com.github.terralian.fastmaj.util.AssertHelper;
 
 /**
  * 分布式高效有序 ID 生产黑科技(sequence)
@@ -67,9 +67,9 @@ public class Sequence {
      * @param datacenterId 序列号
      */
     public Sequence(long workerId, long datacenterId) {
-        Assert.isFalse(workerId > maxWorkerId || workerId < 0,
+        AssertHelper.isFalse(workerId > maxWorkerId || workerId < 0,
                 String.format("worker Id can't be greater than %d or less than 0", maxWorkerId));
-        Assert.isFalse(datacenterId > maxDatacenterId || datacenterId < 0,
+        AssertHelper.isFalse(datacenterId > maxDatacenterId || datacenterId < 0,
                 String.format("datacenter Id can't be greater than %d or less than 0", maxDatacenterId));
         this.workerId = workerId;
         this.datacenterId = datacenterId;

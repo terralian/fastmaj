@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.game.ryuuky;
 
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.game.IGameCore;
-import com.github.terralian.fastmaj.util.EmptyUtil;
+import com.github.terralian.fastmaj.util.EmptyHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class RyuukyokuResolverManager implements IRyuukyokuResolverManager {
      * @param ryuukyokuResolvers 流局判定集合
      */
     public RyuukyokuResolverManager(List<IRyuukyokuResolver> ryuukyokuResolvers) {
-        if (EmptyUtil.isEmpty(ryuukyokuResolvers)) {
+        if (EmptyHelper.isEmpty(ryuukyokuResolvers)) {
             throw new IllegalArgumentException("至少需要一个正常流局类用于结束当前对局");
         }
         this.ryuukyokuResolvers = new ArrayList<>(ryuukyokuResolvers);

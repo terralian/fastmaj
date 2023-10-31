@@ -9,7 +9,7 @@ import java.util.Map;
  * 
  * @author terra.lian 
  */
-public abstract class EmptyUtil {
+public abstract class EmptyHelper {
 
     /**
      * 判断字符串是否为空

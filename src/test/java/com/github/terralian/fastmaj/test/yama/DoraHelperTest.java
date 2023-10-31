@@ -7,7 +7,7 @@ import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.hai.HaiTypeEnum;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
-import com.github.terralian.fastmaj.util.CollectionUtil;
+import com.github.terralian.fastmaj.util.CollectionHelper;
 import com.github.terralian.fastmaj.yama.DoraHelper;
 import org.junit.Test;
 
@@ -81,7 +81,7 @@ public class DoraHelperTest {
      */
     @Test
     public void testGetDoraList() {
-        List<IHai> doras = DoraHelper.getDora(CollectionUtil.newArrayList(HaiPool.m(5), HaiPool.m(0)));
+        List<IHai> doras = DoraHelper.getDora(CollectionHelper.newArrayList(HaiPool.m(5), HaiPool.m(0)));
         assertEquals(6, doras.get(0).getLiteral());
         assertEquals(6, doras.get(1).getLiteral());
     }
@@ -93,30 +93,30 @@ public class DoraHelperTest {
     public void testCountDoraSize() {
         // 4麻
         ITehai tehai = EncodeMark.toTehai("1249m1479p7s1235z");
-        int doraSize = DoraHelper.countAllDoraSizeByDisplays(tehai, CollectionUtil.newArrayList(HaiPool.p(6)));
+        int doraSize = DoraHelper.countAllDoraSizeByDisplays(tehai, CollectionHelper.newArrayList(HaiPool.p(6)));
         assertEquals(1, doraSize);
 
         tehai = EncodeMark.toTehai("345789m40p11222s");
-        doraSize = DoraHelper.countAllDoraSizeByDisplays(tehai, CollectionUtil.newArrayList(HaiPool.p(6)));
+        doraSize = DoraHelper.countAllDoraSizeByDisplays(tehai, CollectionHelper.newArrayList(HaiPool.p(6)));
         assertEquals(1, doraSize);
 
         tehai = EncodeMark.toTehai("78m34789p440677s");
-        doraSize = DoraHelper.countAllDoraSizeByDisplays(tehai, CollectionUtil.newArrayList(HaiPool.p(6)));
+        doraSize = DoraHelper.countAllDoraSizeByDisplays(tehai, CollectionHelper.newArrayList(HaiPool.p(6)));
         assertEquals(2, doraSize);
         //
         tehai = EncodeMark.toTehai("1056m4678p34478s");
-        doraSize = DoraHelper.countAllDoraSizeByDisplays(tehai, CollectionUtil.newArrayList(HaiPool.m(9)));
+        doraSize = DoraHelper.countAllDoraSizeByDisplays(tehai, CollectionHelper.newArrayList(HaiPool.m(9)));
         assertEquals(2, doraSize);
         //
         tehai = EncodeMark.toTehai("067m122334p1167s2z");
-        doraSize = DoraHelper.countAllDoraSizeByDisplays(tehai, CollectionUtil.newArrayList(HaiPool.z(EncodeMark.DONG), HaiPool.s(2)));
+        doraSize = DoraHelper.countAllDoraSizeByDisplays(tehai, CollectionHelper.newArrayList(HaiPool.z(EncodeMark.DONG), HaiPool.s(2)));
         assertEquals(2, doraSize);
 
         // 3麻
         tehai = EncodeMark.toTehai("34p135567889s477z");
         tehai.kita(HaiPool.z(EncodeMark.BEI));
         tehai.draw(HaiPool.z(EncodeMark.NAN));
-        doraSize = DoraHelper.countAllDoraSizeByDisplays(tehai, CollectionUtil.newArrayList(HaiPool.z(EncodeMark.DONG)));
+        doraSize = DoraHelper.countAllDoraSizeByDisplays(tehai, CollectionHelper.newArrayList(HaiPool.z(EncodeMark.DONG)));
         assertEquals(2, doraSize);
     }
 }

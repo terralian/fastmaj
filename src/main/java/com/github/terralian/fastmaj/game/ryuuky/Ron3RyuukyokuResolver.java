@@ -11,7 +11,7 @@ import com.github.terralian.fastmaj.game.event.handler.ISystemGameEventHandler;
 import com.github.terralian.fastmaj.game.event.river.RiverActionEvent;
 import com.github.terralian.fastmaj.game.event.system.GameEndCheckEvent;
 import com.github.terralian.fastmaj.game.event.system.SystemEventType;
-import com.github.terralian.fastmaj.util.EmptyUtil;
+import com.github.terralian.fastmaj.util.EmptyHelper;
 
 /**
  * 三家和了，天凤使用的特殊规则，当一个对局中有3人同时荣和，做流局处理（非中途流局）需要看庄家是否听牌。
@@ -34,7 +34,7 @@ public class Ron3RyuukyokuResolver implements IRyuukyoku, ISystemGameEventHandle
             return false;
         }
         // 玩家无动作，或者没有3人
-        if (EmptyUtil.isEmpty(actions) || actions.size() < 3) {
+        if (EmptyHelper.isEmpty(actions) || actions.size() < 3) {
             return false;
         }
         // 玩家动作非荣和

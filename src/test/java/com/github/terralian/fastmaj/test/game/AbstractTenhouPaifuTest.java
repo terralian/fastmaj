@@ -21,7 +21,7 @@ import com.github.terralian.fastmaj.paifu.tenhou.TenhouRuleTimelineAdapter;
 import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.player.PaifuGameQueueReplayPlayerBuilder;
 import com.github.terralian.fastmaj.player.QueueReplayPlayer;
-import com.github.terralian.fastmaj.util.StringUtil;
+import com.github.terralian.fastmaj.util.StringHelper;
 import com.github.terralian.fastmaj.util.TestResourceUtil;
 import org.junit.Before;
 
@@ -120,7 +120,7 @@ public abstract class AbstractTenhouPaifuTest {
         public void kyokuEnd(int round, int[] expected) {
             int[] actual = this.allRound.get(round);
             if (enabledPrint) {
-                System.out.println("实际值：" + StringUtil.join(",", actual));
+                System.out.println("实际值：" + StringHelper.join(",", actual));
             }
             for (int i = 0; i < expected.length; i++) {
                 assertEquals(expected[i], (int) actual[i]);

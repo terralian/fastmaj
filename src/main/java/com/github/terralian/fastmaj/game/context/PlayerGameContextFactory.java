@@ -5,7 +5,7 @@ import com.github.terralian.fastmaj.game.IGameCore;
 import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.player.space.IPlayerSpaceManager;
 import com.github.terralian.fastmaj.tehai.ITehai;
-import com.github.terralian.fastmaj.util.CollectionUtil;
+import com.github.terralian.fastmaj.util.CollectionHelper;
 
 /**
  * {@link PlayerGameContext} 工厂类
@@ -37,7 +37,7 @@ public class PlayerGameContextFactory {
                 .setYamaCountdown(gameCore.getYamaCountdown()) //
                 .setDoraDisplays(gameCore.getDoraDisplays()) //
                 .setHaiRivers(gameCore.getHaiRivers()) //
-                .setTehaiLocks(CollectionUtil.mapToList(gameCore.getTehais(), ITehai::getLock))
+                .setTehaiLocks(CollectionHelper.mapToList(gameCore.getTehais(), ITehai::getLock))
                 .setPosition(position) //
                 .setJikaze(KazeEnum.jiKaze(position, gameCore.getOya())) //
                 .setFuriten(gameCore.isFuriten(position)) //

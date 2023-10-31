@@ -6,7 +6,7 @@ import java.util.Objects;
 import com.github.terralian.fastmaj.encode.EncodeMark;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.player.RivalEnum;
-import com.github.terralian.fastmaj.util.Assert;
+import com.github.terralian.fastmaj.util.AssertHelper;
 
 /**
  * 手牌建造者，用于便捷构建和操作{@link Tehai}
@@ -150,7 +150,7 @@ public class TehaiBuilder {
      */
     public TehaiBuilder addMenzu(String menzu) {
         List<IHai> hais = EncodeMark.toHai(menzu);
-        Assert.isTrue(hais.size() == 3, "面子需要仅为三枚牌组成：" + menzu);
+        AssertHelper.isTrue(hais.size() == 3, "面子需要仅为三枚牌组成：" + menzu);
         for (IHai hai : hais)
             tehai.draw(hai);
         return this;
@@ -175,7 +175,7 @@ public class TehaiBuilder {
      */
     public TehaiBuilder addChi(String chiHaiMark, String selfHaiMark) {
         List<IHai> selfHais = EncodeMark.toHai(selfHaiMark);
-        Assert.isTrue(selfHais.size() == 2, "搭子需要仅为2枚牌组成：" + selfHaiMark);
+        AssertHelper.isTrue(selfHais.size() == 2, "搭子需要仅为2枚牌组成：" + selfHaiMark);
 
         IHai chiHai = EncodeMark.toHaiOne(chiHaiMark);
         for (IHai hai : selfHais) {
@@ -193,7 +193,7 @@ public class TehaiBuilder {
      */
     public TehaiBuilder chi(String chiHaiMark, String selfHaiMark) {
         List<IHai> selfHais = EncodeMark.toHai(selfHaiMark);
-        Assert.isTrue(selfHais.size() == 2, "搭子需要仅为2枚牌组成：" + selfHaiMark);
+        AssertHelper.isTrue(selfHais.size() == 2, "搭子需要仅为2枚牌组成：" + selfHaiMark);
         IHai chiHai = EncodeMark.toHaiOne(chiHaiMark);
         tehai.chii(chiHai, selfHais.get(0), selfHais.get(1));
         return this;

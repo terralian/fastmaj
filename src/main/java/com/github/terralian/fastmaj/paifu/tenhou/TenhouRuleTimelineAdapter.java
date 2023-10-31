@@ -3,7 +3,7 @@ package com.github.terralian.fastmaj.paifu.tenhou;
 import com.github.terralian.fastmaj.game.GameConfig;
 import com.github.terralian.fastmaj.paifu.IRuleTimelineAdapter;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
-import com.github.terralian.fastmaj.util.EmptyUtil;
+import com.github.terralian.fastmaj.util.EmptyHelper;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -33,7 +33,7 @@ public class TenhouRuleTimelineAdapter implements IRuleTimelineAdapter {
     @Override
     public void adaptConfig(GameConfig gameConfig, PaifuGame paifuGame, String... params) {
         // 没有文件名无法推断
-        if (EmptyUtil.isEmpty(params)) {
+        if (EmptyHelper.isEmpty(params)) {
             return;
         }
         String fileName = params[0];

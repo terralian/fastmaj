@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.github.terralian.fastmaj.hai.IHai;
-import com.github.terralian.fastmaj.util.StringUtil;
+import com.github.terralian.fastmaj.util.StringHelper;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -68,9 +68,9 @@ public class DivideInfo {
         StringBuilder builder = new StringBuilder("{");
 
         builder.append("雀头：").append(jantou).append(", ");
-        builder.append("刻子：[").append(StringUtil.join(",", allKanKozuFirst)).append("], ");
-        builder.append("暗刻：[").append(StringUtil.join(",", annkoFirst)).append("],");
-        builder.append("顺子：[").append(StringUtil.join(",", allShunzuFirst)).append("],");
+        builder.append("刻子：[").append(StringHelper.join(",", allKanKozuFirst)).append("], ");
+        builder.append("暗刻：[").append(StringHelper.join(",", annkoFirst)).append("],");
+        builder.append("顺子：[").append(StringHelper.join(",", allShunzuFirst)).append("],");
 
         builder.append("部分役：[");
         List<String> yakuNames = new ArrayList<>(4);

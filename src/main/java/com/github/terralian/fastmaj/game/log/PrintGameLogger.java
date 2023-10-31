@@ -9,9 +9,9 @@ import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.tehai.ITehai;
-import com.github.terralian.fastmaj.util.CollectionUtil;
-import com.github.terralian.fastmaj.util.RankingUtil;
-import com.github.terralian.fastmaj.util.StringUtil;
+import com.github.terralian.fastmaj.util.CollectionHelper;
+import com.github.terralian.fastmaj.util.RankingHelper;
+import com.github.terralian.fastmaj.util.StringHelper;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yama.DrawFrom;
 
@@ -81,7 +81,7 @@ public class PrintGameLogger implements IGameLogger {
 
     @Override
     public void gameEnd() {
-        int[] ranking = RankingUtil.calcRanking(gameCore.getPlayerPoints());
+        int[] ranking = RankingHelper.calcRanking(gameCore.getPlayerPoints());
         // 统计最终排名信息
         System.out.println("*** 游戏结束  ***");
         System.out.println("玩家1：第" + (ranking[0]) + "名 " + gameCore.getPlayerPoints()[0]);
@@ -137,7 +137,7 @@ public class PrintGameLogger implements IGameLogger {
         if (shortKyokuSummary) {
             return;
         }
-        System.out.println("当前分数:" + StringUtil.join(",", increaseAndDecrease));
+        System.out.println("当前分数:" + StringHelper.join(",", increaseAndDecrease));
     }
 
     @Override
@@ -257,11 +257,11 @@ public class PrintGameLogger implements IGameLogger {
                 score,
                 ban, //
                 fu, //
-                StringUtil.join(",", increaseAndDecrease), //
+                StringHelper.join(",", increaseAndDecrease), //
                 gameCore.getActionCount());
         System.out.println(message);
-        List<String> yakuNames = CollectionUtil.mapToList(yakus, IYaku::getName);
-        System.out.println(StringUtil.join(" ", yakuNames));
+        List<String> yakuNames = CollectionHelper.mapToList(yakus, IYaku::getName);
+        System.out.println(StringHelper.join(" ", yakuNames));
         System.out.println("--------------------------------------------");
     }
 
@@ -278,12 +278,12 @@ public class PrintGameLogger implements IGameLogger {
                 String.valueOf(score), //
                 ban,  //
                 fu, //
-                StringUtil.join(",", increaseAndDecrease), //
+                StringHelper.join(",", increaseAndDecrease), //
                 gameCore.getActionCount()
         ));
         System.out.println("手牌：" + EncodeMark.encode(gameCore.getTehai(position)));
-        List<String> yakuNames = CollectionUtil.mapToList(yakus, IYaku::getName);
-        System.out.println(StringUtil.join(" ", yakuNames));
+        List<String> yakuNames = CollectionHelper.mapToList(yakus, IYaku::getName);
+        System.out.println(StringHelper.join(" ", yakuNames));
         System.out.println("--------------------------------------------");
     }
 
@@ -294,7 +294,7 @@ public class PrintGameLogger implements IGameLogger {
                 gameCore.getOya() + 1, //
                 gameCore.getDisplayHonba(), //
                 ryuukyokuName, //
-                StringUtil.join(",", increaseAndDecrease), //
+                StringHelper.join(",", increaseAndDecrease), //
                 gameCore.getActionCount()
         ));
     }

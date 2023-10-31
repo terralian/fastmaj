@@ -9,7 +9,7 @@ import com.github.terralian.fastmaj.game.context.PlayerGameContext;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.TehaiBuilder;
 import com.github.terralian.fastmaj.third.mjscore.MjscoreAdapter;
-import com.github.terralian.fastmaj.util.CollectionUtil;
+import com.github.terralian.fastmaj.util.CollectionHelper;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h1.Iipeikou;
 import org.junit.Before;
@@ -94,7 +94,7 @@ public class IipeikouTest {
         divideInfos = tehaiAgariDivider.divide(finalTehai);
         assertTrue(divideInfos.size() > 1);
         divide = divideInfos.get(0);
-        result = CollectionUtil.anyMatch(divideInfos, k -> yaku.match(finalTehai, k, gameContext));
+        result = CollectionHelper.anyMatch(divideInfos, k -> yaku.match(finalTehai, k, gameContext));
         assertTrue(result);
 
         // 还没和牌

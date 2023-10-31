@@ -7,7 +7,7 @@ import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.river.HaiRiver;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.Tehai;
-import com.github.terralian.fastmaj.util.CollectionUtil;
+import com.github.terralian.fastmaj.util.CollectionHelper;
 import com.github.terralian.fastmaj.yaku.IYaku;
 import com.github.terralian.fastmaj.yaku.h13.TiiHo;
 import org.junit.Test;
@@ -37,7 +37,7 @@ public class TiiHoTest {
         // 自己是庄，没人打过牌
         gameContext.setPosition(0);
         gameContext.setOya(0);
-        gameContext.setHaiRivers(CollectionUtil.newArrayList(new HaiRiver(0), new HaiRiver(1), new HaiRiver(2)));
+        gameContext.setHaiRivers(CollectionHelper.newArrayList(new HaiRiver(0), new HaiRiver(1), new HaiRiver(2)));
         result = yaku.match(tehai, divide, gameContext);
         assertFalse(result);
 

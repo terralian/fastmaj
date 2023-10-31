@@ -14,7 +14,7 @@ import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.tehai.ITehai;
 import com.github.terralian.fastmaj.tehai.ITehaiLock;
-import com.github.terralian.fastmaj.util.CollectionUtil;
+import com.github.terralian.fastmaj.util.CollectionHelper;
 
 /**
  * 和了分割对mjscore的适配
@@ -143,7 +143,7 @@ public class MjscoreAdapter implements ITehaiAgariDivider {
         if (handShunzuFirst.size() < 2) {
             return;
         }
-        if (CollectionUtil.containsDuplicate(handShunzuFirst)) {
+        if (CollectionHelper.containsDuplicate(handShunzuFirst)) {
             agariDivide.setIipeikou(true);
         }
     }

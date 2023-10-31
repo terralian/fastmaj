@@ -5,7 +5,7 @@ import com.github.terralian.fastmaj.game.KazeEnum;
 import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.river.HaiRiver;
 import com.github.terralian.fastmaj.tehai.TehaiLock;
-import com.github.terralian.fastmaj.util.CollectionUtil;
+import com.github.terralian.fastmaj.util.CollectionHelper;
 
 /**
  * {@link IPlayerGameContext}帮助类
@@ -31,9 +31,9 @@ public abstract class PlayerGameContextHelper {
                 .setOya(0) //
                 .setPlayerPoints(new int[]{25000, 25000, 25000, 25000}) //
                 .setYamaCountdown(70) //
-                .setDoraDisplays(CollectionUtil.newArrayList(HaiPool.m(1))) //
-                .setHaiRivers(CollectionUtil.newArrayList(new HaiRiver(0), new HaiRiver(1), new HaiRiver(2), new HaiRiver(3))) //
-                .setTehaiLocks(CollectionUtil.newArrayList(new TehaiLock(), new TehaiLock(), new TehaiLock(), new TehaiLock()))
+                .setDoraDisplays(CollectionHelper.newArrayList(HaiPool.m(1))) //
+                .setHaiRivers(CollectionHelper.newArrayList(new HaiRiver(0), new HaiRiver(1), new HaiRiver(2), new HaiRiver(3))) //
+                .setTehaiLocks(CollectionHelper.newArrayList(new TehaiLock(), new TehaiLock(), new TehaiLock(), new TehaiLock()))
                 .setPosition(position) //
                 .setJikaze(KazeEnum.jiKaze(position, 0)) //
                 .setFuriten(false) //

@@ -1,4 +1,4 @@
-package com.github.terralian.fastmaj.paifu.parser.tenhou;
+package com.github.terralian.fastmaj.paifu.tenhou;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 
 import com.github.terralian.fastmaj.paifu.IPaifuParser;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
+import com.github.terralian.fastmaj.paifu.tenhou.handler.ITenhouPaifuParseHandler;
+import com.github.terralian.fastmaj.paifu.tenhou.handler.TenhouPaifuDecodeHandler;
 import com.github.terralian.fastmaj.paifu.source.IPaifuSource;
 import org.xml.sax.InputSource;
 

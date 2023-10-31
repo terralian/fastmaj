@@ -1,10 +1,9 @@
-package com.github.terralian.fastmaj.paifu.factory;
+package com.github.terralian.fastmaj.paifu.tenhou;
 
 import com.github.terralian.fastmaj.paifu.IPaifuParser;
 import com.github.terralian.fastmaj.paifu.IPaifuParserFactory;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
-import com.github.terralian.fastmaj.paifu.parser.tenhou.TenhouPaifuGameParseHandler;
-import com.github.terralian.fastmaj.paifu.parser.tenhou.TenhouPaifuParser;
+import com.github.terralian.fastmaj.paifu.tenhou.handler.TenhouPaifuGameParseHandler;
 
 /**
  * 天凤平台的{@link IPaifuParser}牌谱解析

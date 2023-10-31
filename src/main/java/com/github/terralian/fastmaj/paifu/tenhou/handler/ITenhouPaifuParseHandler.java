@@ -1,4 +1,6 @@
-package com.github.terralian.fastmaj.paifu.parser.tenhou;
+package com.github.terralian.fastmaj.paifu.tenhou.handler;
+
+import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuParser;
 
 import java.util.List;
 

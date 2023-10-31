@@ -1,4 +1,4 @@
-package com.github.terralian.fastmaj.paifu.parser.tenhou;
+package com.github.terralian.fastmaj.paifu.tenhou.handler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +23,7 @@ import com.github.terralian.fastmaj.hai.HaiPool;
 import com.github.terralian.fastmaj.hai.IHai;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
 import com.github.terralian.fastmaj.paifu.domain.PaifuKyoku;
+import com.github.terralian.fastmaj.paifu.tenhou.support.TenhouPaifuStringPool;
 import com.github.terralian.fastmaj.tehai.ITehai;
 
 /**

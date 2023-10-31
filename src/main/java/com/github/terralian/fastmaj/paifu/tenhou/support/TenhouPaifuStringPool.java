@@ -1,4 +1,4 @@
-package com.github.terralian.fastmaj.paifu.parser.tenhou;
+package com.github.terralian.fastmaj.paifu.tenhou.support;
 
 /**
  * 天凤牌谱相关的常量池

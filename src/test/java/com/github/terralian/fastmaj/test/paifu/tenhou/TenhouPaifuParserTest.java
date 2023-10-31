@@ -6,8 +6,8 @@ import com.github.terralian.fastmaj.paifu.IPaifuParser;
 import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
 import com.github.terralian.fastmaj.paifu.source.FileSource;
 import com.github.terralian.fastmaj.paifu.source.GZIPSource;
-import com.github.terralian.fastmaj.paifu.parser.tenhou.TenhouPaifuGameParseHandler;
-import com.github.terralian.fastmaj.paifu.parser.tenhou.TenhouPaifuParser;
+import com.github.terralian.fastmaj.paifu.tenhou.handler.TenhouPaifuGameParseHandler;
+import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuParser;
 import com.github.terralian.fastmaj.util.TestResourceUtil;
 import org.junit.Test;
 

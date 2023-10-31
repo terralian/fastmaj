@@ -1,4 +1,4 @@
-package com.github.terralian.fastmaj.paifu.parser.tenhou;
+package com.github.terralian.fastmaj.paifu.tenhou.support;
 
 /**
  * 天凤规则版本

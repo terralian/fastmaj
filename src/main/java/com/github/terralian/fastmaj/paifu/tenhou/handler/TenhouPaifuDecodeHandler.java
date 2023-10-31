@@ -1,4 +1,4 @@
-package com.github.terralian.fastmaj.paifu.parser.tenhou;
+package com.github.terralian.fastmaj.paifu.tenhou.handler;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.github.terralian.fastmaj.paifu.domain.SeedModeEnum;
+import com.github.terralian.fastmaj.paifu.tenhou.support.TenhouPaifuStringPool;
 import com.github.terralian.fastmaj.yama.IYamaArray;
 import com.github.terralian.fastmaj.yama.worker.UnsupportedYamaSeedException;
 import com.github.terralian.fastmaj.yama.worker.tenhou.TenhouYamaWorker;

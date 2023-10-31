@@ -1,4 +1,4 @@
-package com.github.terralian.fastmaj.paifu.parser.tenhou;
+package com.github.terralian.fastmaj.paifu.tenhou;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

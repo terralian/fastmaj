@@ -12,6 +12,7 @@ import java.util.regex.Pattern;
 
 /**
  * 天凤牌谱的规则适配器
+ * <p/>
  *
  * @author terra.lian
  */
@@ -22,6 +23,13 @@ public class TenhouRuleTimelineAdapter implements IRuleTimelineAdapter {
 
     private static final LocalDateTime TIME_POINT_A = LocalDateTime.of(2010, 6, 1, 7, 0);
 
+    /**
+     * 天凤规则适配
+     *
+     * @param gameConfig 规则
+     * @param paifuGame 解析后的牌谱
+     * @param params 参数为1个,当前牌谱的文件名,必填
+     */
     @Override
     public void adaptConfig(GameConfig gameConfig, PaifuGame paifuGame, String... params) {
         // 没有文件名无法推断

@@ -17,7 +17,7 @@ public interface IRuleTimelineAdapter {
      * 进行配置适配
      *
      * @param gameConfig 规则
-     * @param paifuGame 牌谱
+     * @param paifuGame 解析后的牌谱
      * @param params 更多的参数，由子类定义规则
      */
     void adaptConfig(GameConfig gameConfig, PaifuGame paifuGame, String... params);

@@ -235,8 +235,6 @@ public final class Menzu {
 
     /**
      * 鸣牌的来源玩家
-     *
-     * @param selfPosition 自身的坐席
      */
     public RivalEnum fromRival() {
         if (shape == SHAPE_NON) {

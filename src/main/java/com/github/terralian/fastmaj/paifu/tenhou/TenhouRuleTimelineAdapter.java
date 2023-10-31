@@ -1,21 +1,21 @@
 package com.github.terralian.fastmaj.paifu.tenhou;
 
+import com.github.terralian.fastmaj.game.GameConfig;
+import com.github.terralian.fastmaj.paifu.IRuleTimelineAdapter;
+import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
+import com.github.terralian.fastmaj.util.EmptyUtil;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.github.terralian.fastmaj.game.GameConfig;
-import com.github.terralian.fastmaj.paifu.IRuleTimelineHandler;
-import com.github.terralian.fastmaj.paifu.domain.PaifuGame;
-import com.github.terralian.fastmaj.util.EmptyUtil;
-
 /**
- * 天凤牌谱的规则推断处理器
+ * 天凤牌谱的规则适配器
  *
  * @author terra.lian
  */
-public class TenhouRuleTimelineHandler implements IRuleTimelineHandler {
+public class TenhouRuleTimelineAdapter implements IRuleTimelineAdapter {
 
     private static final Pattern TIME_PATTERN = Pattern.compile("([0-9]{10})gm-\\w{4}-[0-9]{4}");
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyyMMddHH");
@@ -23,7 +23,7 @@ public class TenhouRuleTimelineHandler implements IRuleTimelineHandler {
     private static final LocalDateTime TIME_POINT_A = LocalDateTime.of(2010, 6, 1, 7, 0);
 
     @Override
-    public void deduce(GameConfig gameConfig, PaifuGame paifuGame, String... params) {
+    public void adaptConfig(GameConfig gameConfig, PaifuGame paifuGame, String... params) {
         // 没有文件名无法推断
         if (EmptyUtil.isEmpty(params)) {
             return;

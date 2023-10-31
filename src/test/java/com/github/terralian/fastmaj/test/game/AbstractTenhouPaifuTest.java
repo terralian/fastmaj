@@ -17,7 +17,7 @@ import com.github.terralian.fastmaj.paifu.source.GZIPSource;
 import com.github.terralian.fastmaj.paifu.source.IPaifuSource;
 import com.github.terralian.fastmaj.paifu.tenhou.handler.TenhouPaifuGameParseHandler;
 import com.github.terralian.fastmaj.paifu.tenhou.TenhouPaifuParser;
-import com.github.terralian.fastmaj.paifu.tenhou.TenhouRuleTimelineHandler;
+import com.github.terralian.fastmaj.paifu.tenhou.TenhouRuleTimelineAdapter;
 import com.github.terralian.fastmaj.player.IPlayer;
 import com.github.terralian.fastmaj.player.PaifuGameQueueReplayPlayerBuilder;
 import com.github.terralian.fastmaj.player.QueueReplayPlayer;
@@ -34,12 +34,12 @@ public abstract class AbstractTenhouPaifuTest {
 
     protected IPaifuParser<PaifuGame> paifuParser;
 
-    protected TenhouRuleTimelineHandler ruleTimelineHandler;
+    protected TenhouRuleTimelineAdapter ruleTimelineHandler;
 
     @Before
     public void before() {
         paifuParser = new TenhouPaifuParser(new TenhouPaifuGameParseHandler());
-        ruleTimelineHandler = new TenhouRuleTimelineHandler();
+        ruleTimelineHandler = new TenhouRuleTimelineAdapter();
     }
 
     /**
@@ -81,7 +81,7 @@ public abstract class AbstractTenhouPaifuTest {
         }
         // 配置
         GameConfig gameConfig = GameConfig.useTenhou(paifuGame);
-        ruleTimelineHandler.deduce(gameConfig, paifuGame, simplePaifuName);
+        ruleTimelineHandler.adaptConfig(gameConfig, paifuGame, simplePaifuName);
 
         IMajongGame majongGame = createMajongGame(players, gameConfig, gameComponent);
         majongGame.startGame();
